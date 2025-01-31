@@ -48,12 +48,12 @@ h2 {
 ---
 
 
-## Open-Source
+## Foundations: Open-Source Data-Tools
 
 
 Unytics builds open-source tools to simplify data-platform engineering and empower SQL users.
 
-They are used as foundations for Data-Apps that generate value from data.
+Data-Tools make the foundations of Data-Apps that generate value from data.
 
 
 <div class="grid cards" markdown>
@@ -81,12 +81,12 @@ They are used as foundations for Data-Apps that generate value from data.
 ---
 
 
-## Why Unytics: generate value with Data-Apps
+## Generate value with Data-Apps
 
 
 ![paul's photo](https://cdn.prod.website-files.com/65538482a580fa3920393f87/66fa659a10b65f5ff1a6e7df_Paul-p-500.jpeg){ align=right style="border-radius: 100%; width: 300px;" }
 
-As Head of Data at [Nickel](https://nickel.eu), a fintech with 4 Millions customers, [Paul Marcombes](https://www.linkedin.com/in/paul-marcombes/) scaled data-organization from 3 to 200+ data-practitioners.
+As Head of Data at [Nickel](https://nickel.eu), a fintech with 4 Millions customers, [Paul Marcombes](https://www.linkedin.com/in/paul-marcombes/)  ([:material-linkedin:](https://www.linkedin.com/in/paul-marcombes/)) scaled data-organization from 3 to 200+ data-practitioners.
 
 His vision is to **empower data-analysts** to generate value with Data-Apps:
 
@@ -95,16 +95,15 @@ His vision is to **empower data-analysts** to generate value with Data-Apps:
 
     - **send 100+ Millions communications** to customers / year
     - **personnalize content** in mobile app based on customer behavior
-    - **trigger actions** by calling internal APIs from their Marchine-Learning algorithms.
+    - **trigger actions** by calling internal APIs from Marchine-Learning algorithms.
     - block suspicious payments based on **real-time fraud scoring**
     - perform **regulatory reports**
 
-    *Interested in data-apps to generate value?*
-    *[:octicons-arrow-right-24: book a call now](https://calendar.app.google/zu54nNMHLVw7jYWy8)*
+👉 ***Paul created Unytics so that any data-team can generate value with Data-Apps*** 🚀
 
-👉 ***Paul created Unytics to make any data-team generate value with Data-Apps*** 🚀
+*Interested in data-apps to generate value?*
+*[:octicons-arrow-right-24: book a call now](https://calendar.app.google/zu54nNMHLVw7jYWy8)*
 
-Follow him on [Linkedin :material-linkedin:](https://www.linkedin.com/in/paul-marcombes/)
 
 ---
 
