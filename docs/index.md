@@ -35,8 +35,7 @@ h2 {
 { style="text-align: center;" }
 
 
-*Build Data-Apps unifying*<br>
-*Batch and Real-Time Analytics*
+*builds Data-Apps for you*
 { style="text-align: center; color: var(--md-default-fg-color--light); font-size: 1.2em" }
 
 [Chat about Data-Apps :octicons-arrow-right-24:](https://calendar.app.google/zu54nNMHLVw7jYWy8){ .md-button }
@@ -52,7 +51,9 @@ h2 {
 ## Open-Source
 
 
-Unytics builds open-source projects to simplify data-platform engineering and empower SQL users:
+Unytics builds open-source tools to simplify data-platform engineering and empower SQL users.
+
+They are used as foundations for Data-Apps that generate value from data.
 
 
 <div class="grid cards" markdown>
@@ -80,34 +81,28 @@ Unytics builds open-source projects to simplify data-platform engineering and em
 ---
 
 
-## Why Unytics
+## Why Unytics: generate value with Data-Apps
 
-
-
-
-***From Head of Data to open-source Data-Apps builder***
 
 ![paul's photo](https://cdn.prod.website-files.com/65538482a580fa3920393f87/66fa659a10b65f5ff1a6e7df_Paul-p-500.jpeg){ align=right style="border-radius: 100%; width: 300px;" }
 
 As Head of Data at [Nickel](https://nickel.eu), a fintech with 4 Millions customers, [Paul Marcombes](https://www.linkedin.com/in/paul-marcombes/) scaled data-organization from 3 to 200+ data-practitioners.
 
-His vision is **to give data-power to data-analysts by making them autonomous on the whole data-chain**: from data-collection to data-algorithm-deployments
-
-👉 *he builds data apps for that*.
+His vision is to **empower data-analysts** to generate value with Data-Apps:
 
 !!! note ""
-    At Nickel, data-analysts are autonomous to (through SQL and configuration in these apps):
+    At Nickel, data-analysts are fully autonomous to:
 
-    - send 100+ Millions communications to customers every year
-    - personnalize content in mobile app based on customer behavior
-    - trigger actions by calling internal APIs from their Marchine-Learning algorithms.
-    - block suspicious payments based on real-time fraud scoring
-    - perform regulatory reports
+    - **send 100+ Millions communications** to customers / year
+    - **personnalize content** in mobile app based on customer behavior
+    - **trigger actions** by calling internal APIs from their Marchine-Learning algorithms.
+    - block suspicious payments based on **real-time fraud scoring**
+    - perform **regulatory reports**
 
     *Interested in data-apps to generate value?*
     *[:octicons-arrow-right-24: book a call now](https://calendar.app.google/zu54nNMHLVw7jYWy8)*
 
-👉 ***Paul created Unytics to expand this vision, beyond Nickel, to the worldwide data-community.*** 🚀
+👉 ***Paul created Unytics to make any data-team generate value with Data-Apps*** 🚀
 
 Follow him on [Linkedin :material-linkedin:](https://www.linkedin.com/in/paul-marcombes/)
 
