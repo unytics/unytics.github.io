@@ -10,6 +10,8 @@ theme:
     # - instant
     # - toc.integrate
     # - navigation.instant
+    - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.path
     - navigation.tracking
     - navigation.indexes
@@ -32,4 +34,8 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 nav:
   - Unytics: index.md
+  - BigFunctions: https://unytics.io/bigfunctions/
+  - AirByte-Serverless: https://github.com/unytics/airbyte_serverless
+  - Catalog-Builder: https://unytics.io/catalog_builder/
+  - Chat with us: https://calendar.app.google/zu54nNMHLVw7jYWy8
 plugins: []
