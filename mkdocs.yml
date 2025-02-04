@@ -4,7 +4,7 @@ theme:
   name: material
   # custom_dir: docs/theme_overrides
   logo: assets/unytics_logo.svg
-  favicon: assets/favicon.ico
+  favicon: /assets/favicon.ico
   features:
     - content.code.copy
     # - instant
