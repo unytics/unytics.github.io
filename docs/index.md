@@ -35,7 +35,7 @@ h2 {
 { style="text-align: center;" }
 
 
-*builds Data-Apps for you*
+*your partner for Data-Apps*
 { style="text-align: center; color: var(--md-default-fg-color--light); font-size: 1.2em" }
 
 [Chat about Data-Apps :octicons-arrow-right-24:](https://calendar.app.google/zu54nNMHLVw7jYWy8){ .md-button }
