@@ -24,9 +24,9 @@ This privacy policy explains how we handle the personal information you may prov
 
 Before using our Services or submitting any personal information to Unytics, please review this Privacy Policy carefully. By using our Services, you agree to the practices described in this Privacy Policy; if you do not agree to this Privacy Policy, please do not continue accessing the Site or otherwise using the Services.
 
-## 1. WHAT INFORMATION WE COLLECT
+## 1. What information we collect
 
-### Personal Information You Provide
+#### Personal Information You Provide
 
 We collect and are the controller of the following categories of personally identifiable information from you: 
 
@@ -35,7 +35,7 @@ We collect and are the controller of the following categories of personally iden
 - **Social Media Information:** We maintain a social media presence on platforms like Instagram, Facebook, Medium, Twitter, and LinkedIn ("**Social Media Pages**”). When you interact with us on social media, we may receive personal information that you provide or make available to us based on your settings, such as your contact details. In addition, the companies that host our Social Media Pages may provide us with aggregate information and analytics regarding the use of our Social Media Pages. 
 
 ‍
-### Non Personally Identifying Information
+#### Non Personally Identifying Information
 
 When you visit, use, and interact with our Services, we may collect and are the controller of the following categories of non-personally identifying information:
 
@@ -47,7 +47,7 @@ When you visit, use, and interact with our Services, we may collect and are the 
 
 
 
-### Personal Information We Process on Behalf of Our Customers
+#### Personal Information We Process on Behalf of Our Customers
 
 In order to provide our Solution, we process certain data on behalf of our customers. We process that data, including any personal information contained within it, pursuant to our agreements with our customers. We have no direct relationship with the individuals whose personal information we process in the course of providing our Service to our customers. If you are such an individual and have questions about the processing of your personal information or want to exercise one of your privacy rights, please contact the Unytics customer that you interact(ed) with directly.
 
@@ -56,7 +56,7 @@ In order to provide our Solution, we process certain data on behalf of our custo
 **Training Data:**  Unytics does not collect or use customer data to develop, improve, or train generalized artificial intelligence and/or machine learning models.  
 
 
-## 2. HOW WE USE THE INFORMATION WE COLLECT
+## 2. How we use the information we collect
 
 Your personal information is used for the following purposes:
 
@@ -91,7 +91,7 @@ Your personal information is used for the following purposes:
 - **Interest-Based Advertising:** We engage advertising partners, including third party advertising companies and social media companies, to display ads on the Service and other online services. These companies may use cookies and similar technologies to collect information about your interaction over time across the Service, our communications, and other online services, and use that information to serve online ads that they think will interest you. This is called interest-based advertising. We may also share information about our users with these companies to facilitate interest-based advertising to our or similar users (known as a "lookalike audience”) on other online platforms. You can learn more about your choices for limiting interest-based advertising in the Limit Online Tracking section below. 
 
 
-## 3. PERSONAL INFORMATION SHARING
+## 3. Personal information sharing
 
 We do not sell, rent, license, or lease your personal information to third parties. 
 
@@ -107,12 +107,12 @@ In certain circumstances, however, we may share personal information without fur
 **Community Sharing**: Open discourse is what makes our collaborative community so great, and we are committed to facilitating it. This means that many portions of our Community are open forums for innovative developments, ideas, and information; information you voluntarily provide in our Community will likely be public-facing and we are not controllers of that information once it is shared. We strive to respect the privacy of individual community members and will minimize the information required to participate. We will also strive to ensure our Community is built on tools that meet our data protection standards and offer user privacy settings wherever possible. However, we encourage you to be thoughtful as to how you interact with our Community tools, how you interact with others in our Community, and the information you share within the Community forums (for example, through creating a public profile, project contributions, comments, and blog posts). 
 
 
-## 4. PERSONAL INFORMATION RETENTION
+## 4. Personal information retention
 
 We keep personal information for as long as reasonably necessary for the purposes described in this Privacy Policy, while we have a business need to do so, or as required by law (e.g. for tax, legal, accounting, or other purposes), whichever is longer.
 
 
-## 5. YOUR CHOICES
+## 5. Your choices
 
 **Update Your Account Information:** You can contact us and request any updates or corrections needed to keep your personal information accurate, current, and complete. 
 
@@ -121,7 +121,7 @@ We keep personal information for as long as reasonably necessary for the purpose
 Please note, however, that if you use our Solution, you will continue to receive service-specific communications, such as account or usage alerts and billing information.
 
 
-## 6. YOUR RIGHTS
+## 6. Your rights
 
 We endeavor to provide the same data rights and protections to all of our users regardless of the jurisdiction in which they live. 
 
@@ -152,27 +152,27 @@ Additional information for our users in Europe and the United Kingdom:
 **Data Transfers.** Unytics is based in the EU and personal information about our users is stored on servers hosted in the EU. The storage of our users' personal information in the EU is necessary to perform the services as described in our Terms of Service. We may store some data on behalf of our customers. In that case, the customer decides the location of the storage.
 
 
-## 7. CHILDREN
+## 7. Children
 
 Our Service is not directed to children who are under the age of 18. Unytics does not knowingly collect personal information from children under the age of 18. If we learn that we have collected personal information from a child under the age of 18 without the consent of the child's parent or guardian as required by law, we will delete that information.
 
 
-## 8. LINKS TO OTHER WEBSITES
+## 8. Links to other websites
 
 The Service may contain links to other websites not operated or controlled by Unytics including social media services ("**Third Party Sites**”). The information that you share with Third Party Sites will be governed by the specific privacy policies and terms of service of the Third Party Sites and not by this Privacy Policy. By providing these links, we do not imply that we endorse or have reviewed these sites. Please contact the Third Party Sites directly for information on their privacy practices and policies. 
 
 
-## 9. SECURITY
+## 9. Security
 
 We have built our security program to include technical, organizational and physical safeguards designed to protect the personal information we collect. If you have any security-related questions or concerns, please contact our security team at contact@unytics.io.
 
 
-## 10. CHANGES TO THE PRIVACY POLICY
+## 10. Changes to the privacy policy
 
 The Service and our business may change from time to time. As a result we may change this Privacy Policy at any time. When we do we will post an updated version on this page unless another type of notice is required by applicable law. By continuing to use our Service or providing us with personal information after we have posted an updated Privacy Policy, or notified you by other means if applicable, you agree to the revised Privacy Policy and the practices described in it.
 
 
-## 11. CONTACT US
+## 11. Contact us
 
 If you have any questions about our Privacy Policy or information practices, please feel free to contact us at: contact@unytics.io.
 
