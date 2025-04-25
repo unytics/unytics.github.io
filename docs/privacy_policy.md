@@ -1,3 +1,17 @@
+---
+hide:
+  - navigation
+---
+
+<style>
+
+:root {
+--md-primary-fg-color: #c790af!important;
+--md-typeset-a-color: #a47791!important;
+}
+
+</style>
+
 # Privacy Policy
 
 ---
