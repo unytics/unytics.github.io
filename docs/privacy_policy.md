@@ -1,6 +1,8 @@
 # Privacy Policy
 
-Effective date April 25, 2025.
+---
+
+*Effective date April 25, 2025.*
 
 Welcome to the website (the "**Site**”) of Unytics. ("**Unytics**,” "**we**,” "**us**,” or "**our**”). Unytics is a data infrastructure company offering a hosted "Data-Apps solution" (the "**Solution**”) as well as open source projects and collaborative community (the "**Community**”), (collectively, including the Site, our "**Services**”). 
 
