@@ -352,6 +352,10 @@ header .container {
     position: relative;
 }
 
+#organizational-results .container {
+    padding-bottom: 5rem;
+}
+
 #organizational-results::before {
     content: '';
     position: absolute;
@@ -389,6 +393,11 @@ header .container {
     font-weight: 500;
     margin: 0;
     line-height: 1.6;
+}
+
+.case-study-label {
+    color: var(--primary-color);
+    font-weight: 600;
 }
 
 .achievements-accordion {
@@ -590,8 +599,12 @@ header .container {
 }
 
 /* Application Examples */
+#data-applications {
+    padding-top: 0;
+}
+
 .featured-work-subsection {
-    margin-top: 4rem;
+    margin-top: 0;
     text-align: center;
     padding: 4rem 0;
     background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('assets/hero_background.png');
