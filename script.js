@@ -60,4 +60,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Copy email to clipboard functionality
+    const copyEmailLinks = document.querySelectorAll('.copy-email');
+    const toast = document.getElementById('toast');
+
+    copyEmailLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = link.getAttribute('data-email');
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(email).then(() => {
+                // Show toast notification
+                toast.classList.add('show');
+
+                // Hide toast after 3 seconds
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }).catch(err => {
+                console.error('Failed to copy email: ', err);
+            });
+        });
+    });
 });
