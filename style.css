@@ -624,6 +624,43 @@ header .container {
     font-weight: 400;
 }
 
+.data-apps-intro {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2.5rem 3rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary-color);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.data-apps-intro p {
+    color: #cbd5e1;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.data-apps-intro p:first-child {
+    margin-bottom: 1.75rem;
+}
+
+.data-apps-intro p:first-child strong {
+    color: white;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.data-apps-intro p:not(:first-child) strong {
+    color: white;
+    font-weight: 600;
+}
+
+.data-apps-intro p:last-child {
+    margin-bottom: 0;
+}
+
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1087,5 +1124,26 @@ footer a:hover {
 
     .portfolio-item img {
         height: 200px;
+    }
+
+    .data-apps-intro {
+        padding: 1.75rem 1.5rem;
+        margin: 0 auto 3rem;
+    }
+
+    .data-apps-intro p {
+        font-size: 1.05rem;
+    }
+
+    .data-apps-intro p:first-child {
+        margin-bottom: 1.25rem;
+    }
+
+    .data-apps-intro p:first-child strong {
+        font-size: 1.15rem;
+    }
+
+    .data-apps-intro p:last-child {
+        font-size: 1rem;
     }
 }
