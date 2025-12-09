@@ -419,9 +419,25 @@ header .container {
 .featured-work-subsection {
     margin-top: 4rem;
     text-align: center;
+    padding: 4rem 0;
+    background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('assets/hero_background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: max(1rem, calc(50vw - 600px));
+    padding-right: max(1rem, calc(50vw - 600px));
 }
 
 .featured-work-subsection h3 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 3rem;
+    font-weight: 600;
+}
+
+.portfolio-content h3 {
     font-size: 1.8rem;
     color: var(--primary-color);
     margin-bottom: 1rem;
@@ -451,6 +467,26 @@ header .container {
     color: var(--primary-color);
     margin-bottom: 1rem;
     font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.linkedin-icon {
+    color: #0077b5;
+    transition: transform 0.2s ease, color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.linkedin-icon:hover {
+    transform: translateY(-2px);
+    color: #005885;
+}
+
+.linkedin-icon svg {
+    width: 28px;
+    height: 28px;
 }
 
 .values-intro-text p {
@@ -685,13 +721,15 @@ header .container {
 .portfolio-item {
     border-radius: var(--border-radius);
     overflow: hidden;
-    box-shadow: var(--shadow);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     background: white;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .portfolio-item:hover {
     transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .portfolio-item img {
@@ -820,6 +858,15 @@ footer a:hover {
         margin-right: calc(-50vw + 50%);
         padding-left: 1.5rem;
         padding-right: 1.5rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-item img {
+        height: auto;
+        max-height: 200px;
     }
 }
 
