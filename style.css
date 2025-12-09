@@ -315,6 +315,22 @@ header .container {
     margin-top: 3rem;
 }
 
+.cta-email {
+    color: #cbd5e1;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.cta-email a {
+    color: #60a5fa;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.cta-email a:hover {
+    color: white;
+}
+
 /* Case Study & Data Applications Sections */
 #organizational-results {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
