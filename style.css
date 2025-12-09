@@ -156,7 +156,12 @@ header .container {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    white-space: nowrap;
+    font-size: 0.95rem;
 }
 
 .nav-links a:not(.btn-primary):hover {
@@ -232,15 +237,11 @@ header .container {
     margin-bottom: 3rem;
 }
 
-.role-highlight h3 {
-    font-size: 1.8rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
 .role-highlight p {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     color: var(--secondary-color);
+    font-weight: 400;
+    margin: 0;
 }
 
 .growth-grid {
@@ -744,6 +745,10 @@ footer a:hover {
         font-size: 2.5rem;
     }
 
+    .hero-section {
+        padding-top: 100px;
+    }
+
     .nav-links {
         display: none;
     }
@@ -798,6 +803,23 @@ footer a:hover {
     .values-photo {
         width: 150px;
         height: 150px;
+    }
+
+    .impact-stats {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .testimonial-card {
+        padding: 1.5rem;
+    }
+
+    .achievements-accordion {
+        padding: 1.5rem;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
 }
 
