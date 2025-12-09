@@ -537,18 +537,6 @@ header .container {
     font-size: 1.05rem;
 }
 
-.impact-stats-standalone {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin-top: 2rem;
-    margin-bottom: 4rem;
-    padding: 1.5rem 2rem;
-    background: var(--bg-light);
-    border-radius: var(--border-radius);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
 .impact-stats {
     display: flex;
     justify-content: center;
@@ -622,19 +610,6 @@ header .container {
     color: white;
     margin-bottom: 3rem;
     font-weight: 600;
-}
-
-.featured-work-subsection .role-highlight {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    padding: 0;
-}
-
-.featured-work-subsection .role-highlight p {
-    color: #cbd5e1;
-    font-size: 1.25rem;
-    font-weight: 400;
 }
 
 .data-apps-intro {
@@ -724,11 +699,12 @@ header .container {
 }
 
 /* Testimonials Section */
-#testimonials h2 {
-    color: var(--text-white);
+.testimonial-heading {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
 }
 
-#organizational-results .testimonial-card {
+.testimonial-card {
     background: white;
     padding: 3rem;
     border-radius: 12px;
@@ -737,16 +713,6 @@ header .container {
     margin: 0 auto;
     position: relative;
     border: 1px solid rgba(37, 99, 235, 0.1);
-}
-
-.testimonial-card {
-    background: white;
-    padding: 3rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    max-width: 900px;
-    margin: 0 auto;
-    position: relative;
 }
 
 .testimonial-card::before {
@@ -1088,8 +1054,7 @@ footer a:hover {
         height: 150px;
     }
 
-    .impact-stats,
-    .impact-stats-standalone {
+    .impact-stats {
         flex-direction: column;
         gap: 2rem;
     }
