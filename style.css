@@ -449,18 +449,22 @@ header .container {
     background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('assets/hero_background.png');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     padding-left: max(1rem, calc(50vw - 600px));
     padding-right: max(1rem, calc(50vw - 600px));
 }
 
+.featured-work-subsection h2,
 .featured-work-subsection h3 {
     font-size: 2.5rem;
     color: white;
     margin-bottom: 3rem;
     font-weight: 600;
+}
+
+.featured-work-subsection .role-highlight p {
+    color: white;
 }
 
 .portfolio-grid {
