@@ -300,6 +300,27 @@ header .container {
 }
 
 /* Case Study & Data Applications Sections */
+#organizational-results {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    position: relative;
+}
+
+#organizational-results::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color) 0%, #60a5fa 100%);
+}
+
+#organizational-results h2 {
+    color: var(--text-color);
+    font-size: 2.75rem;
+    margin-bottom: 1rem;
+}
+
 .proven-impact-content {
     max-width: 1000px;
     margin: 0 auto;
@@ -308,77 +329,113 @@ header .container {
 .role-highlight {
     text-align: center;
     margin-bottom: 3rem;
+    padding: 2rem 3rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid var(--primary-color);
 }
 
 .role-highlight p {
-    font-size: 1.25rem;
-    color: var(--secondary-color);
-    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--text-color);
+    font-weight: 500;
     margin: 0;
+    line-height: 1.6;
 }
 
 .achievements-accordion {
-    background: var(--bg-light);
-    padding: 2rem;
-    border-radius: var(--border-radius);
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .achievements-accordion h3 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    font-size: 1.75rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.achievements-accordion h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), #60a5fa);
+    border-radius: 2px;
 }
 
 .accordion-item {
-    background: white;
-    border-radius: 0;
-    margin-bottom: 0;
+    background: var(--bg-light);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
 }
 
-.accordion-item:first-of-type {
-    border-top-left-radius: var(--border-radius);
-    border-top-right-radius: var(--border-radius);
+.accordion-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: rgba(37, 99, 235, 0.3);
 }
 
 .accordion-item:last-of-type {
-    border-bottom-left-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
-    border-bottom: none;
+    margin-bottom: 0;
 }
 
 .accordion-header {
     width: 100%;
-    padding: 1.25rem 1.5rem;
-    background: white;
+    padding: 1.5rem 1.75rem;
+    background: var(--bg-light);
     border: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.3s ease;
     text-align: left;
 }
 
 .accordion-header:hover {
-    background-color: var(--bg-light);
+    background-color: #e8f0fe;
+}
+
+.accordion-item.active .accordion-header {
+    background-color: white;
 }
 
 .accordion-title {
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--text-color);
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 .accordion-title::before {
     content: "✓";
-    color: var(--primary-color);
+    color: white;
+    background: linear-gradient(135deg, var(--primary-color), #60a5fa);
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
     flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
 }
 
 .accordion-icon {
@@ -386,28 +443,42 @@ header .container {
     color: var(--primary-color);
     font-weight: 300;
     transition: transform 0.3s ease;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .accordion-item.active .accordion-icon {
     transform: rotate(45deg);
+    background: var(--primary-color);
+    color: white;
 }
 
 .accordion-content {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease, padding 0.3s ease;
-    padding: 0 1.5rem;
+    padding: 0 1.75rem;
+    background: white;
 }
 
 .accordion-item.active .accordion-content {
     max-height: 500px;
-    padding: 0 1.5rem 1.25rem 1.5rem;
+    padding: 0 1.75rem 1.5rem 1.75rem;
+    border-top: 1px solid #e8f0fe;
 }
 
 .accordion-content p {
     color: var(--secondary-color);
-    line-height: 1.6;
+    line-height: 1.8;
     margin: 0;
+    padding-top: 1.5rem;
+    font-size: 1.05rem;
 }
 
 .impact-stats-standalone {
@@ -425,34 +496,50 @@ header .container {
 .impact-stats {
     display: flex;
     justify-content: center;
-    gap: 3rem;
+    gap: 2rem;
     margin-top: 0;
-    margin-bottom: 2rem;
-    padding: 1.5rem 2rem;
-    background: white;
-    border-radius: var(--border-radius);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.5rem;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .stat-item {
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    padding: 2rem 2.5rem;
+    background: linear-gradient(135deg, white 0%, #f8fafc 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+
+.stat-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+    border-color: var(--primary-color);
 }
 
 .stat-number {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #60a5fa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .stat-label {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--secondary-color);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 500;
+    letter-spacing: 0.08em;
+    font-weight: 600;
 }
 
 /* Application Examples */
@@ -529,6 +616,17 @@ header .container {
 /* Testimonials Section */
 #testimonials h2 {
     color: var(--text-white);
+}
+
+#organizational-results .testimonial-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .testimonial-card {
@@ -851,10 +949,35 @@ footer a:hover {
 
     .achievements-accordion {
         padding: 1.5rem;
-        margin-left: calc(-50vw + 50%);
-        margin-right: calc(-50vw + 50%);
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+    }
+
+    .role-highlight {
+        padding: 1.5rem;
+    }
+
+    .accordion-title {
+        font-size: 1rem;
+    }
+
+    .accordion-header {
+        padding: 1.25rem 1.25rem;
+    }
+
+    .accordion-content {
+        padding: 0 1.25rem;
+    }
+
+    .accordion-item.active .accordion-content {
+        padding: 0 1.25rem 1.25rem 1.25rem;
+    }
+
+    .stat-item {
+        padding: 1.5rem 2rem;
+        min-width: auto;
+    }
+
+    .stat-number {
+        font-size: 2rem;
     }
 
     .portfolio-grid {
