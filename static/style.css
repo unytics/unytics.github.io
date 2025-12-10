@@ -751,6 +751,9 @@ header .container {
     gap: 2rem;
     margin-top: 0;
     margin-bottom: 4rem;
+}
+
+.data-apps-stats {
     background: white;
     padding: 3rem 2rem;
     border-radius: 12px;
