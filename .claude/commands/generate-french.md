@@ -22,6 +22,11 @@ Translate the English website (index.html) to French:
    - Keep anchor links, class names, IDs, data attributes unchanged
    - Keep external links unchanged (calendar, LinkedIn, etc.)
 
-Translation style: Professional, business-appropriate French. Translate "Fractional Head of Data" as "Head of Data à temps partiel". Keep technical terms and names in English where appropriate.
+Translation style: Professional, business-appropriate French. Translate:
+- "Fractional Head of Data" as "Head of Data à temps partiel".
+- "Data Apps" as "Data Apps".
+- "Framework" as "Framework".
+
+Keep technical terms and names in English where appropriate.
 
 Note: Do NOT create /fr/404.html - GitHub Pages only supports one 404.html at root level.
