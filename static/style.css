@@ -746,15 +746,19 @@ header .container {
 }
 
 .impact-stats {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
     margin-top: 0;
     margin-bottom: 3rem;
     padding: 0;
     background: transparent;
     border-radius: 0;
     box-shadow: none;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: calc(50vw - 50%);
+    padding-right: calc(50vw - 50%);
 }
 
 .stat-item {
@@ -768,7 +772,6 @@ header .container {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     border: 2px solid #e2e8f0;
     transition: all 0.3s ease;
-    min-width: 200px;
 }
 
 .stat-item:hover {
@@ -778,7 +781,7 @@ header .container {
 }
 
 .stat-number {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 900;
     background: linear-gradient(135deg, var(--primary-color) 0%, #60a5fa 100%);
     -webkit-background-clip: text;
@@ -786,6 +789,10 @@ header .container {
     background-clip: text;
     line-height: 1;
     letter-spacing: -0.02em;
+}
+
+.stat-unit {
+    font-size: 1.2rem;
 }
 
 .stat-label {
@@ -898,6 +905,11 @@ header .container {
     font-size: 0.95rem;
     margin-bottom: 0;
     line-height: 1.6;
+}
+
+.impact-highlight {
+    color: var(--primary-color);
+    font-weight: 700;
 }
 
 /* Testimonials Section */
@@ -1372,7 +1384,7 @@ footer a:hover {
     }
 
     .stat-number {
-        font-size: 2.25rem;
+        font-size: 1.75rem;
     }
 
     .stat-item {
