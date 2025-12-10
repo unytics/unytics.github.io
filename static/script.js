@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Unytics landing page loaded');
-
     // Language detection and switching
     const STORAGE_KEY = 'unytics_language_preference';
-    const STORAGE_KEY_MANUAL = 'unytics_language_manual_choice';
     const currentLang = document.documentElement.lang || 'en';
 
     // Toast messages by language
@@ -21,15 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return localStorage.getItem(STORAGE_KEY);
     }
 
-    function hasManualChoice() {
-        return localStorage.getItem(STORAGE_KEY_MANUAL) === 'true';
-    }
-
-    function storeLanguage(lang, isManual = false) {
+    function storeLanguage(lang) {
         localStorage.setItem(STORAGE_KEY, lang);
-        if (isManual) {
-            localStorage.setItem(STORAGE_KEY_MANUAL, 'true');
-        }
     }
 
     function getLanguageUrl(targetLang) {
@@ -39,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentLang === 'en') {
                 return '/fr/' + currentHash;
             }
-        } else {
+        } else if (targetLang === 'en') {
             if (currentLang === 'fr') {
                 return '/' + currentHash;
             }
@@ -49,19 +39,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function autoDetectLanguage() {
-        if (hasManualChoice()) {
-            return;
-        }
-
         const storedLang = getStoredLanguage();
         const browserLang = getBrowserLanguage();
+
+        // Priority: stored preference > browser language
         const preferredLang = storedLang || browserLang;
 
-        if (preferredLang === 'fr' && currentLang === 'en') {
-            const frenchUrl = getLanguageUrl('fr');
-            if (frenchUrl) {
-                window.location.href = frenchUrl;
+        // If preferred language doesn't match current page, redirect
+        if (preferredLang !== currentLang) {
+            const targetUrl = getLanguageUrl(preferredLang);
+            if (targetUrl) {
+                storeLanguage(preferredLang);
+                window.location.href = targetUrl;
             }
+        } else {
+            // Always store the current language as preference
+            storeLanguage(currentLang);
         }
     }
 
@@ -77,7 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             btn.addEventListener('click', () => {
                 const targetLang = btn.getAttribute('data-lang');
-                storeLanguage(targetLang, true);
+
+                // Always store the language preference when user clicks
+                storeLanguage(targetLang);
 
                 const targetUrl = getLanguageUrl(targetLang);
                 if (targetUrl) {
@@ -87,9 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize language features
-    initLanguageSwitcher();
+    // Run auto-detection FIRST (before DOM manipulation)
     autoDetectLanguage();
+
+    // Then initialize language switcher buttons
+    initLanguageSwitcher();
 
     // Mobile menu toggle implementation
     const menuToggle = document.querySelector('.mobile-menu-toggle');
