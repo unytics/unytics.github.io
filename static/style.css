@@ -758,7 +758,7 @@ header .container {
 }
 
 .stat-number {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 900;
     background: linear-gradient(135deg, var(--primary-color) 0%, #60a5fa 100%);
     -webkit-background-clip: text;
@@ -1352,7 +1352,7 @@ footer a:hover {
     }
 
     .stat-number {
-        font-size: 3rem;
+        font-size: 2.25rem;
     }
 
     .stat-item {
