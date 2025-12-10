@@ -1028,7 +1028,7 @@ footer a:hover {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     h1 {
         font-size: 2.5rem;
     }
