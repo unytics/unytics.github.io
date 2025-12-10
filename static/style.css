@@ -1045,6 +1045,120 @@ header .container {
     font-size: 1.05rem;
 }
 
+/* Pricing Section */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.pricing-card {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1);
+    transform: translateY(-5px);
+}
+
+.pricing-card-featured {
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(37, 99, 235, 0.02) 100%);
+    position: relative;
+}
+
+.pricing-card-featured::before {
+    content: "Most Popular";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.pricing-header {
+    margin-bottom: 1.5rem;
+}
+
+.pricing-header h4 {
+    color: var(--text-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.pricing-rate {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+
+.pricing-rate .price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.pricing-rate .period {
+    font-size: 1rem;
+    color: var(--secondary-color);
+}
+
+.pricing-description {
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.pricing-features {
+    list-style: none;
+    margin-top: auto;
+}
+
+.pricing-features li {
+    padding: 0.75rem 0;
+    color: var(--text-color);
+    position: relative;
+    padding-left: 1.5rem;
+    line-height: 1.6;
+}
+
+.pricing-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.pricing-note {
+    background: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.pricing-note p {
+    margin: 0;
+    color: var(--secondary-color);
+    line-height: 1.6;
+}
+
 /* Tools Section */
 #tools h2 {
     color: white;
@@ -1363,6 +1477,24 @@ footer a:hover {
 
     .testimonial-card {
         padding: 1.5rem;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .pricing-card {
+        padding: 1.5rem;
+    }
+
+    .pricing-card-featured::before {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.75rem;
+    }
+
+    .pricing-note {
+        padding: 1rem;
     }
 
     .achievements-accordion {
