@@ -27,6 +27,12 @@
     <meta name="twitter:url" content="https://unytics.io/fr/">
     <meta name="twitter:title" content="Unytics - Head of Data à temps partiel & Data Apps">
     <meta name="twitter:description" content="Services de Head of Data à temps partiel pour faire évoluer votre équipe ou optimiser les performances. Data Apps à fort impact. Méthodes éprouvées pour faire passer l'organisation data de Nickel.">
+    <meta name="twitter:image" content="https://unytics.io/assets/unytics_social_image.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="https://unytics.io/assets/unytics_social_image.png">
+    <meta property="og:image:width" content="960">
+    <meta property="og:image:height" content="540">
 
     <!-- Additional SEO -->
     <meta name="author" content="Paul Marcombes">
@@ -36,10 +42,31 @@
     <link rel="stylesheet" href="../static/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Unytics",
+        "description": "Services de Head of Data à temps partiel pour faire évoluer votre équipe ou optimiser les performances. Applications de données à fort impact.",
+        "url": "https://unytics.io/fr/",
+        "founder": {
+            "@type": "Person",
+            "name": "Paul Marcombes",
+            "jobTitle": "Head of Data à temps partiel",
+            "sameAs": "https://linkedin.com/in/paul-marcombes/"
+        },
+        "areaServed": "Worldwide",
+        "serviceType": ["Conseil Data", "Head of Data à temps partiel", "Applications Data", "Développement Équipe Data"]
+    }
+    </script>
 </head>
 
 <body>
+    <a href="#services" class="skip-link">Aller au contenu principal</a>
     <header>
         <nav class="container">
             <a href="#" class="logo">Unytics</a>
@@ -202,7 +229,7 @@
                         <p>La vision de Paul d'une <strong>organisation hybride</strong> —où <strong>les outils centraux responsabilisent les analystes embarqués</strong>—n'est pas qu'une théorie ; ça fonctionne. Cela nous a permis de <strong>passer de 3 à 40 personnes data</strong> tout en maintenant des standards élevés et la gouvernance. Si vous cherchez un leader qui sait comment <strong>faire évoluer la culture data</strong> et <strong>donner aux équipes les moyens d'apporter une réelle valeur business</strong>, Paul est la personne qu'il vous faut."</p>
                     </div>
                     <div class="testimonial-author">
-                        <img src="../assets/benjamin_tabet.jpg" alt="Benjamin Tabet" class="author-photo">
+                        <img src="../assets/benjamin_tabet.jpg" alt="Benjamin Tabet" class="author-photo" loading="lazy">
                         <div class="author-info">
                             <h4>Benjamin Tabet</h4>
                             <p>Sr. Cloud Data Analyst | SQL - dbt - GCP (Freelance)</p>
@@ -284,7 +311,7 @@
             <div class="container">
                 <h2>À propos</h2>
                 <div class="values-intro">
-                    <img src="../assets/paul_photo.jpg" alt="Paul Marcombes" class="values-photo">
+                    <img src="../assets/paul_photo.jpg" alt="Paul Marcombes" class="values-photo" loading="lazy">
                     <div class="values-intro-text">
                         <h3>Bonjour, je suis Paul Marcombes
                             <a href="https://linkedin.com/in/paul-marcombes/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="Profil LinkedIn">
@@ -371,14 +398,21 @@
 
     <footer>
         <div class="container">
-            <p><a href="#" class="copy-email" data-email="contact@unytics.io">contact@unytics.io</a> |
-                <a href="https://www.linkedin.com/in/paul-marcombes" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                    </svg>
-                </a>
-            </p>
-            <p>&copy; 2025 Unytics. Tous droits réservés.</p>
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#services">Services</a>
+                    <a href="#organizational-results">Étude de cas</a>
+                    <a href="#data-applications">Data Apps</a>
+                    <a href="#about">À propos</a>
+                    <a href="#tools">Open Source</a>
+                </div>
+                <div class="footer-contact">
+                    <a href="#" class="copy-email" data-email="contact@unytics.io">contact@unytics.io</a>
+                    <a href="https://www.linkedin.com/in/paul-marcombes" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/unytics" target="_blank">GitHub</a>
+                </div>
+            </div>
+            <p class="footer-copyright">&copy; 2025 Unytics. Tous droits réservés.</p>
         </div>
     </footer>
 
