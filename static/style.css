@@ -655,6 +655,15 @@ header .container {
     color: white;
 }
 
+.cta-subtext {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    margin: -0.5rem 0 0 0;
+    text-align: center;
+    font-style: italic;
+    opacity: 0.9;
+}
+
 /* Light background override */
 .section:not(.bg-dark):not(.hero-bg) .cta-email {
     color: var(--secondary-color);
@@ -666,6 +675,10 @@ header .container {
 
 .section:not(.bg-dark):not(.hero-bg) .cta-email a:hover {
     color: var(--primary-dark);
+}
+
+.section:not(.bg-dark):not(.hero-bg) .cta-subtext {
+    color: var(--secondary-color);
 }
 
 /* Dark background inside featured-work-subsection */
