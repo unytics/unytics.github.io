@@ -292,6 +292,25 @@ header .container {
     font-weight: 500;
 }
 
+.pain-bridge {
+    max-width: 700px;
+    margin: 2.5rem auto 0;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    background: white;
+    border-radius: 8px;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+.pain-bridge strong {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
 /* Trusted By Section */
 .trusted-by-section {
     padding: 3rem 0;
@@ -1648,5 +1667,11 @@ footer a:hover {
     .footer-links,
     .footer-contact {
         justify-content: center;
+    }
+
+    .pain-bridge {
+        padding: 1.25rem 1.5rem;
+        font-size: 1rem;
+        margin: 2rem auto 0;
     }
 }
