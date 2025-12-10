@@ -334,6 +334,7 @@ header .container {
     color: #cbd5e1;
     font-size: 1rem;
     margin: 0;
+    text-align: center;
 }
 
 .cta-email a {
