@@ -237,6 +237,30 @@ header .container {
     color: var(--primary-color);
 }
 
+/* Pain Points Section */
+.pain-points {
+    max-width: 800px;
+    margin: 2rem auto 0;
+}
+
+.pain-points p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--secondary-color);
+}
+
+.pain-points p:before {
+    content: '✗';
+    position: absolute;
+    left: 0;
+    color: #dc2626;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
 /* Services Section */
 #services {
     position: relative;
