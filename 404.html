@@ -106,15 +106,29 @@
 <body>
     <div class="error-page">
         <h1 class="error-code">404</h1>
-        <p class="error-message">Page Not Found</p>
-        <p class="error-description">
+        <p class="error-message" data-fr="Page Non Trouvée">Page Not Found</p>
+        <p class="error-description" data-fr="Oups ! La page que vous recherchez n'existe pas. Elle a peut-être été déplacée ou supprimée.">
             Oops! The page you're looking for doesn't exist. It might have been moved or deleted.
         </p>
         <div class="error-actions">
-            <a href="/" class="error-btn error-btn-primary">Go to Homepage</a>
-            <a href="https://calendar.app.google/zu54nNMHLVw7jYWy8" class="error-btn error-btn-secondary">Book a Call</a>
+            <a href="/" class="error-btn error-btn-primary" data-fr="Aller à l'accueil">Go to Homepage</a>
+            <a href="https://calendar.app.google/zu54nNMHLVw7jYWy8" class="error-btn error-btn-secondary" data-fr="Réserver un appel">Book a Call</a>
         </div>
     </div>
+
+    <script>
+    (function() {
+        const isFrench = window.location.pathname.startsWith('/fr/') ||
+                        localStorage.getItem('unytics_language_preference') === 'fr';
+
+        if (isFrench) {
+            document.querySelectorAll('[data-fr]').forEach(el => {
+                el.textContent = el.getAttribute('data-fr');
+            });
+            document.querySelector('.error-btn-primary').href = '/fr/';
+        }
+    })();
+    </script>
 </body>
 
 </html>
