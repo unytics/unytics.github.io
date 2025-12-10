@@ -501,6 +501,42 @@ header .container {
     transform: translateX(4px);
 }
 
+/* Why Me Subsection */
+.why-me-subsection {
+    margin: 4rem 0 2rem;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.why-me-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.why-me-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.why-me-text h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.why-me-text p {
+    color: #cbd5e1;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
 .cta-container {
     display: flex;
     flex-direction: column;
@@ -1529,6 +1565,16 @@ footer a:hover {
 
     .pricing-note {
         padding: 1rem;
+    }
+
+    .why-me-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .why-me-photo {
+        width: 100px;
+        height: 100px;
     }
 
     .achievements-accordion {
