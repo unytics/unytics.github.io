@@ -54,6 +54,15 @@ The `.claude/commands/` directory contains workflow automation:
 - **`/download`**: Copies most recent file from Windows Downloads folder (`/mnt/c/Users/conta/Downloads/`) to `assets/`, with optional renaming
 - **`/generate-french`**: Translates English `index.html` to French with proper structure, paths, and metadata
 
+## Content Update Workflow
+
+**IMPORTANT**: When the user requests content updates to the website:
+1. **Always update the English version first** (`index.html` at root)
+2. **Then update the French version** (`fr/index.html`)
+3. Both versions must be kept in sync with equivalent translations
+
+This ensures both language versions stay consistent and up-to-date.
+
 ## Translation Guidelines
 
 When creating or updating French translations:
