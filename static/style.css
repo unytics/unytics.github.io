@@ -825,7 +825,7 @@ header .container {
     margin-top: 3rem;
     font-weight: 600;
     color: var(--primary-color);
-    text-align: left;
+    text-align: center;
 }
 
 .data-apps-intro {
@@ -923,6 +923,10 @@ header .container {
 .testimonial-heading {
     margin-top: 4rem;
     margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: center;
 }
 
 .testimonial-card {
