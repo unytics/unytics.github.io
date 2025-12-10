@@ -347,6 +347,32 @@ header .container {
     color: white;
 }
 
+/* Light background override */
+.section:not(.bg-dark):not(.hero-bg) .cta-email {
+    color: var(--secondary-color);
+}
+
+.section:not(.bg-dark):not(.hero-bg) .cta-email a {
+    color: var(--primary-color);
+}
+
+.section:not(.bg-dark):not(.hero-bg) .cta-email a:hover {
+    color: var(--primary-dark);
+}
+
+/* Dark background inside featured-work-subsection */
+.featured-work-subsection .cta-email {
+    color: #cbd5e1 !important;
+}
+
+.featured-work-subsection .cta-email a {
+    color: #60a5fa !important;
+}
+
+.featured-work-subsection .cta-email a:hover {
+    color: white !important;
+}
+
 /* Case Study & Data Applications Sections */
 #organizational-results {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
