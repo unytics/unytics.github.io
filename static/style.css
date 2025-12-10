@@ -959,6 +959,32 @@ header .container {
     line-height: 1.8;
 }
 
+.testimonial-full {
+    display: none;
+    margin-top: 1rem;
+}
+
+.testimonial-text.expanded .testimonial-full {
+    display: block;
+}
+
+.testimonial-expand {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    padding: 0;
+    text-decoration: underline;
+    font-style: normal;
+}
+
+.testimonial-expand:hover {
+    color: var(--primary-dark);
+}
+
 .testimonial-author {
     display: flex;
     align-items: center;
