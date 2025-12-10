@@ -284,6 +284,114 @@ header .container {
     font-weight: 500;
 }
 
+/* Trusted By Section */
+.trusted-by-section {
+    padding: 3rem 0;
+    background-color: white;
+    text-align: center;
+}
+
+.trusted-by-subsection {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.trusted-by-heading {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2.5rem;
+}
+
+.logo-grid {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    overflow: hidden;
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.logo-grid::before,
+.logo-grid::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.logo-grid::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-dark), transparent);
+}
+
+.logo-grid::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-dark), transparent);
+}
+
+.logo-grid-scroll {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    animation: scroll 30s linear infinite;
+    padding: 1rem 0;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.company-logo {
+    max-width: 140px;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    opacity: 0.8;
+    filter: brightness(0) invert(1);
+    transition: all 0.3s ease;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.company-logo:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .logo-grid {
+        gap: 3rem;
+    }
+
+    .logo-grid-scroll {
+        gap: 3rem;
+    }
+
+    .company-logo {
+        max-width: 100px;
+        max-height: 45px;
+    }
+
+    .logo-grid::before,
+    .logo-grid::after {
+        width: 50px;
+    }
+}
+
 /* Services Section */
 #services {
     position: relative;
@@ -620,9 +728,9 @@ header .container {
 .impact-stats {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 3rem;
     margin-top: 0;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
     padding: 0;
     background: transparent;
     border-radius: 0;
@@ -633,37 +741,39 @@ header .container {
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    padding: 2rem 2.5rem;
+    gap: 1rem;
+    padding: 3rem 3rem;
     background: linear-gradient(135deg, white 0%, #f8fafc 100%);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e2e8f0;
     transition: all 0.3s ease;
-    min-width: 180px;
+    min-width: 200px;
 }
 
 .stat-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.2);
     border-color: var(--primary-color);
 }
 
 .stat-number {
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-size: 4rem;
+    font-weight: 900;
     background: linear-gradient(135deg, var(--primary-color) 0%, #60a5fa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    line-height: 1;
+    letter-spacing: -0.02em;
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--secondary-color);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 /* Application Examples */
@@ -1242,7 +1352,12 @@ footer a:hover {
     }
 
     .stat-number {
-        font-size: 2rem;
+        font-size: 3rem;
+    }
+
+    .stat-item {
+        padding: 2rem 2rem;
+        min-width: 160px;
     }
 
     .portfolio-item img {
