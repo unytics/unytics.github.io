@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const STORAGE_KEY = 'unytics_language_preference';
     const currentLang = document.documentElement.lang || 'en';
 
-    // Toast messages by language
     const toastMessages = {
         en: "Email copied to clipboard!",
         fr: "Email copié dans le presse-papier !"
@@ -25,14 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function getLanguageUrl(targetLang) {
         const currentHash = window.location.hash;
 
-        if (targetLang === 'fr') {
-            if (currentLang === 'en') {
-                return '/fr/' + currentHash;
-            }
-        } else if (targetLang === 'en') {
-            if (currentLang === 'fr') {
-                return '/' + currentHash;
-            }
+        if (targetLang === 'fr' && currentLang === 'en') {
+            return '/fr/' + currentHash;
+        } else if (targetLang === 'en' && currentLang === 'fr') {
+            return '/' + currentHash;
         }
 
         return null;
@@ -41,11 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function autoDetectLanguage() {
         const storedLang = getStoredLanguage();
         const browserLang = getBrowserLanguage();
-
-        // Priority: stored preference > browser language
         const preferredLang = storedLang || browserLang;
 
-        // If preferred language doesn't match current page, redirect
         if (preferredLang !== currentLang) {
             const targetUrl = getLanguageUrl(preferredLang);
             if (targetUrl) {
@@ -53,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = targetUrl;
             }
         } else {
-            // Always store the current language as preference
             storeLanguage(currentLang);
         }
     }
@@ -70,8 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             btn.addEventListener('click', () => {
                 const targetLang = btn.getAttribute('data-lang');
-
-                // Always store the language preference when user clicks
                 storeLanguage(targetLang);
 
                 const targetUrl = getLanguageUrl(targetLang);
@@ -82,13 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Run auto-detection FIRST (before DOM manipulation)
     autoDetectLanguage();
-
-    // Then initialize language switcher buttons
     initLanguageSwitcher();
 
-    // Mobile menu toggle implementation
+    // Mobile menu toggle
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
 
@@ -110,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Close mobile menu when clicking a menu item
         const menuItems = navLinks.querySelectorAll('a');
         menuItems.forEach(item => {
             item.addEventListener('click', () => {
@@ -119,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Close mobile menu when clicking outside
         document.addEventListener('click', (e) => {
             if (navLinks.style.display === 'flex' && !navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
                 navLinks.style.display = 'none';
@@ -136,19 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const accordionItem = header.parentElement;
             const isActive = accordionItem.classList.contains('active');
 
-            // Close all accordion items
             document.querySelectorAll('.accordion-item').forEach(item => {
                 item.classList.remove('active');
             });
 
-            // Toggle current item
             if (!isActive) {
                 accordionItem.classList.add('active');
             }
         });
     });
 
-    // Copy email to clipboard functionality
+    // Copy email to clipboard
     const copyEmailLinks = document.querySelectorAll('.copy-email');
     const toast = document.getElementById('toast');
 
@@ -157,15 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const email = link.getAttribute('data-email');
 
-            // Copy to clipboard
             navigator.clipboard.writeText(email).then(() => {
-                // Set toast message based on current language
                 toast.textContent = toastMessages[currentLang] || toastMessages.en;
-
-                // Show toast notification
                 toast.classList.add('show');
 
-                // Hide toast after 3 seconds
                 setTimeout(() => {
                     toast.classList.remove('show');
                 }, 3000);
