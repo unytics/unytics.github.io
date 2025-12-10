@@ -115,6 +115,14 @@ p {
     background-color: var(--bg-light);
 }
 
+.bg-light .service-intro {
+    color: var(--text-color);
+}
+
+.bg-light h2 {
+    color: var(--text-color);
+}
+
 .text-white {
     color: var(--text-white);
 }
