@@ -1048,6 +1048,8 @@ header .container {
 .portfolio-accordion .accordion-content p {
     flex: 1;
     padding-top: 0;
+    text-align: left;
+    font-weight: 500;
 }
 
 .portfolio-accordion .accordion-item.active .accordion-content {
