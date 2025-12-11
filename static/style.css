@@ -899,7 +899,30 @@ header .container {
 }
 
 .portfolio-accordion .accordion-item {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.portfolio-accordion .accordion-item:first-child {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.portfolio-accordion .accordion-item:last-child {
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+/* Achievements Accordion Specific Styles */
+.achievements-accordion .accordion-item {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.achievements-accordion .accordion-item:first-child {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.achievements-accordion .accordion-item:last-child {
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
 .accordion-title-wrapper {
