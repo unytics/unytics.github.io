@@ -1832,6 +1832,21 @@ footer a:hover {
         font-size: 1rem;
     }
 
+    /* Portfolio accordion mobile fixes */
+    .portfolio-accordion .accordion-content {
+        flex-direction: column;
+    }
+
+    .portfolio-accordion .accordion-content img {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+    }
+
+    .portfolio-accordion .accordion-item.active .accordion-content {
+        max-height: 1000px;
+    }
+
     .footer-content {
         flex-direction: column;
         text-align: center;
