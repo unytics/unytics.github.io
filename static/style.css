@@ -882,7 +882,7 @@ header .container {
 .accordion-item.active .accordion-content {
     max-height: 500px;
     padding: 0 1.75rem 1.5rem 1.75rem;
-    border-top: 1px solid #e8f0fe;
+    border-top: 2px solid #cbd5e1;
 }
 
 .accordion-content p {
@@ -924,21 +924,28 @@ header .container {
 
 .portfolio-accordion .accordion-content {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
 }
 
 .portfolio-accordion .accordion-content img {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    margin: 0 auto;
+    flex-shrink: 0;
+}
+
+.portfolio-accordion .accordion-content p {
+    flex: 1;
+    padding-top: 0;
 }
 
 .portfolio-accordion .accordion-item.active .accordion-content {
     max-height: 800px;
+    padding: 1.5rem 1.75rem 1.5rem 1.75rem;
 }
 
 .impact-stats {
