@@ -811,7 +811,8 @@ header .container {
     border: none;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
+    gap: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
@@ -863,6 +864,8 @@ header .container {
     background: white;
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    align-self: center;
+    flex-shrink: 0;
 }
 
 .accordion-item.active .accordion-icon {
@@ -927,22 +930,44 @@ header .container {
 
 .accordion-title-wrapper {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .portfolio-accordion .accordion-title {
     font-weight: 600;
     font-size: 1.15rem;
     color: var(--text-color);
+}
+
+.portfolio-accordion .accordion-title::before {
+    display: none;
+}
+
+.app-icon {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
+    width: 48px;
+    align-self: stretch;
+    background: transparent;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.app-icon svg {
+    width: 28px;
+    height: 28px;
+    color: var(--primary-color);
 }
 
 .accordion-preview {
     color: var(--primary-color);
     font-size: 0.9rem;
     font-weight: 500;
-    margin: 0.25rem 0 0 2.75rem;
+    margin: 0.25rem 0 0 0;
 }
 
 .portfolio-accordion .accordion-content {
