@@ -812,6 +812,16 @@ header .container {
     border: none;
 }
 
+.case-study-label {
+    text-align: center;
+    color: var(--secondary-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
 .case-study-subtitle {
     text-align: center;
     color: var(--secondary-color);
