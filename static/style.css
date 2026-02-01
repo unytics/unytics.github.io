@@ -651,6 +651,14 @@ header .container {
     transform: translateX(4px);
 }
 
+.data-apps-intro .service-link {
+    color: var(--primary-color);
+}
+
+.data-apps-intro .service-link:hover {
+    color: var(--primary-dark);
+}
+
 /* Why Me Subsection */
 .why-me-subsection {
     margin: 4rem 0 2rem;
