@@ -1552,6 +1552,31 @@ header .container {
     font-size: 1.1rem;
 }
 
+.pricing-btn {
+    margin-top: 1.5rem;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pricing-email {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin: 0.75rem 0 0;
+    text-align: center;
+}
+
+.pricing-email a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.pricing-email a:hover {
+    color: var(--primary-dark);
+}
+
 .pricing-note {
     background: var(--bg-light);
     padding: 1.5rem;
