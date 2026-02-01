@@ -130,6 +130,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Testimonial carousel
+    const carouselDots = document.querySelectorAll('.carousel-dot');
+    const testimonialCards = document.querySelectorAll('.testimonial-slides .testimonial-card');
+
+    if (carouselDots.length > 0 && testimonialCards.length > 0) {
+        carouselDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.getAttribute('data-index'));
+
+                testimonialCards.forEach(card => card.classList.remove('active'));
+                carouselDots.forEach(d => d.classList.remove('active'));
+
+                testimonialCards[index].classList.add('active');
+                carouselDots[index].classList.add('active');
+            });
+        });
+    }
+
     // Copy email to clipboard
     const copyEmailLinks = document.querySelectorAll('.copy-email');
     const toast = document.getElementById('toast');
