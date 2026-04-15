@@ -13,6 +13,7 @@ from pathlib import Path
 import markdown
 
 ROOT = Path(__file__).resolve().parent
+SRC = ROOT / "src"
 SITE_URL = "https://unytics.io"
 BOOKING_URL = "https://outlook.office.com/bookwithme/user/af9126dab77a4875999901a41b929b48@audioptic.fr/meetingtype/ThLax7Qcxk24NOanCTiBWg2?anonymous&ismsaljsauthenabled&ep=mlink"
 
@@ -105,7 +106,7 @@ HOMEPAGE_CONFIG = {
         "og_type": "website",
         "hreflang_en": f"{SITE_URL}/",
         "hreflang_fr": f"{SITE_URL}/fr/",
-        "content_file": "homepage/en.html",
+        "content_file": "src/homepage/en.html",
         "output_file": "index.html",
         "head_extra": HOMEPAGE_EN_HEAD_EXTRA,
     },
@@ -116,7 +117,7 @@ HOMEPAGE_CONFIG = {
         "og_type": "website",
         "hreflang_en": f"{SITE_URL}/",
         "hreflang_fr": f"{SITE_URL}/fr/",
-        "content_file": "homepage/fr.html",
+        "content_file": "src/homepage/fr.html",
         "output_file": "fr/index.html",
         "head_extra": HOMEPAGE_FR_HEAD_EXTRA,
     },
@@ -185,7 +186,7 @@ def render_template(template: str, context: dict) -> str:
 
 def read_template() -> str:
     """Read the layout template."""
-    return (ROOT / "templates" / "layout.html").read_text(encoding="utf-8")
+    return (SRC / "templates" / "layout.html").read_text(encoding="utf-8")
 
 
 def build_homepage(lang: str, template: str) -> None:
@@ -367,9 +368,9 @@ def build_all() -> None:
         build_homepage(lang, template)
 
     # Discover English blog posts
-    en_md_files = sorted(ROOT.glob("blog/*.md"))
+    en_md_files = sorted(SRC.glob("blog/*.md"))
     if not en_md_files:
-        print("No blog posts found in blog/*.md")
+        print("No blog posts found in src/blog/*.md")
         return
 
     # Build blog posts
@@ -383,7 +384,7 @@ def build_all() -> None:
         en_posts.append(post_meta)
 
         # Build French version (required)
-        fr_md_path = ROOT / "blog" / "fr" / md_path.name
+        fr_md_path = SRC / "blog" / "fr" / md_path.name
         if not fr_md_path.exists():
             print(f"  ERROR: Missing French translation: {fr_md_path.relative_to(ROOT)}")
             sys.exit(1)
