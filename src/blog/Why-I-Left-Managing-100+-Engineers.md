@@ -6,7 +6,7 @@ date: 2026-04-10
 
 # Why I Left Managing 100+ Engineers to Build From Scratch Again
 
-After an incredible 6.5-year run at Nickel—scaling the data team from 3 to over 40 professionals and eventually leading a 100+ person engineering department—I recently made a major career shift. I left my salaried "manager of managers" role to launch my own independent data consultancy, Unytics, and step back into a hands-on management role at Optic 2000.
+After an incredible 6.5-year run at Nickel — scaling the data team from 3 to over 40 professionals and eventually leading a 100+ person engineering department — I recently made a major career shift. I left my salaried "manager of managers" role to launch my own independent data consultancy, Unytics, and step back into a hands-on management role at Optic 2000.
 
 When deciding what my next chapter would look like, I explored three very different paths. Here is why I chose the one I did, and what I've learned in my first few months building in the AI era.
 
@@ -20,13 +20,13 @@ But despite all of this, I realized something important: **I missed building**.
 
 
 ## Path 2: Founding a VC-Backed Startup
-To scratch that itch to build, I had started creating open-source tools as a side project. My initial intention when leaving Nickel was to use these tools—and the audience they generated—as the foundation for a software company.
+To scratch that itch to build, I had started creating open-source tools as a side project. My initial intention when leaving Nickel was to use these tools — and the audience they generated — as the foundation for a software company.
 
 However, after speaking with several founders, I realized the traditional startup path wasn't for me. I didn't want to raise venture capital (which often just feels like trading one boss for a board of them), I had no desire to relocate to the US, and frankly, I don't possess that specific entrepreneurial spirit of constantly hunting for random ideas with business potential just to iterate on them. I wanted to build solutions to problems I deeply understood.
 
 
 ## Path 3: The Independent "Hands-On" Builder (The Sweet Spot)
-That's when the opportunity arose to rebuild the data platform at Optic 2000 from scratch as a freelance Head of Data Platform. It was the perfect catalyst. It was a concrete first step out of the salaried world and into entrepreneurship—allowing me to sell my time and expertise while building the foundation for Unytics.
+That's when the opportunity arose to rebuild the data platform at Optic 2000 from scratch as a freelance Head of Data Platform. It was the perfect catalyst. It was a concrete first step out of the salaried world and into entrepreneurship — allowing me to sell my time and expertise while building the foundation for Unytics.
 
 So, I joined Optic 2000 to lead a tight-knit, highly focused team of four. Our mission? To rebuild the platform on modern technologies to empower mid-technical teams (like business analysts) with true autonomy.
 
@@ -36,7 +36,7 @@ For too long, data platform teams have defaulted to the "it's complicated" respo
 ## Building in the Claude Code Era
 Working on this new stack has been wildly fun, largely because we are starting from scratch in the era of AI coding agents.
 
-We are leveraging our past experiences to build a completely new platform in mere weeks. By getting my hands dirty again with a small team and relying heavily on Claude Code, we are operating at a prodigious pace—doing things I could never have executed previously.
+We are leveraging our past experiences to build a completely new platform in mere weeks. By getting my hands dirty again with a small team and relying heavily on Claude Code, we are operating at a prodigious pace — doing things I could never have executed previously.
 
 For example, we are taking the concept of "Data Platform as a Product" a step further. We have a unique entry point (a data portal) to answer any question about both the platform and the data itself. We've consolidated the full data stack into a single monorepo, taking YAML engineering to the next level.
 
@@ -46,6 +46,6 @@ The workflow is a game-changer. Previously, if an analysis required data we didn
 
 
 ## The Takeaway
-Living through this paradigm shift—where we guide the architecture and let AI write the code—feels incredible. Partner that with the benefits of a small, hands-on team at a lower management level (easy alignment, zero unnecessary meetings, pure focus), and productivity skyrockets.
+Living through this paradigm shift — where we guide the architecture and let AI write the code — feels incredible. Partner that with the benefits of a small, hands-on team at a lower management level (easy alignment, zero unnecessary meetings, pure focus), and productivity skyrockets.
 
 I'm excited to share more of what we are building, the modern architectures we are designing at Unytics, and the technical deep-dives of how AI is fundamentally changing data engineering. Stay tuned.
