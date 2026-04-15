@@ -83,7 +83,10 @@
         
         <article class="blog-post">
             <div class="container">
-                <a href="/blog/fr/" class="blog-back-link">&larr; Blog</a>
+                <div class="blog-post-topbar">
+                    <a href="/blog/fr/" class="blog-back-link">&larr; Blog</a>
+                    <button class="btn-secondary newsletter-open-btn">S'abonner à la Newsletter</button>
+                </div>
                 <div class="blog-post-header">
                     <p class='blog-post-date'>2026-04-10</p>
                     <h1>Pourquoi j'ai quitté la direction de 100+ ingénieurs pour tout reconstruire</h1>
@@ -112,6 +115,7 @@
 <p>Vivre ce changement de paradigme — où nous guidons l'architecture et laissons l'IA écrire le code — est incroyable. Associez cela aux avantages d'une petite équipe opérationnelle à un niveau de management plus bas (alignement facile, zéro réunion inutile, focus total), et la productivité explose.</p>
 <p>Je suis impatient de partager davantage sur ce que nous construisons, les architectures modernes que nous concevons chez Unytics, et les deep dives techniques sur la façon dont l'IA change fondamentalement l'ingénierie data. Restez connectés.</p>
                 </div>
+                <button class="btn-secondary newsletter-open-btn">S'abonner à la Newsletter</button>
             </div>
         </article>
     </main>
@@ -146,6 +150,14 @@
 
     <!-- Toast Notification -->
     <div id="toast" class="toast">Email copié dans le presse-papier !</div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletter-modal" class="newsletter-modal">
+        <div class="newsletter-modal-content">
+            <button class="newsletter-modal-close" aria-label="Close">&times;</button>
+            <iframe src="https://cdn.forms-content.sg-form.com/7a15104f-38d2-11f1-b0e1-1649d933d8bb" title="S'abonner à la Newsletter" scrolling="no"></iframe>
+        </div>
+    </div>
 
     <script src="/static/script.js"></script>
 </body>

@@ -83,7 +83,10 @@
         
         <article class="blog-post">
             <div class="container">
-                <a href="/blog/" class="blog-back-link">&larr; Blog</a>
+                <div class="blog-post-topbar">
+                    <a href="/blog/" class="blog-back-link">&larr; Blog</a>
+                    <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+                </div>
                 <div class="blog-post-header">
                     <p class='blog-post-date'>2026-04-10</p>
                     <h1>Why I Left Managing 100+ Engineers to Build From Scratch Again</h1>
@@ -112,6 +115,7 @@
 <p>Living through this paradigm shift — where we guide the architecture and let AI write the code — feels incredible. Partner that with the benefits of a small, hands-on team at a lower management level (easy alignment, zero unnecessary meetings, pure focus), and productivity skyrockets.</p>
 <p>I'm excited to share more of what we are building, the modern architectures we are designing at Unytics, and the technical deep-dives of how AI is fundamentally changing data engineering. Stay tuned.</p>
                 </div>
+                <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
             </div>
         </article>
     </main>
@@ -146,6 +150,14 @@
 
     <!-- Toast Notification -->
     <div id="toast" class="toast">Email copied to clipboard!</div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletter-modal" class="newsletter-modal">
+        <div class="newsletter-modal-content">
+            <button class="newsletter-modal-close" aria-label="Close">&times;</button>
+            <iframe src="https://cdn.forms-content.sg-form.com/aebe3f17-38d0-11f1-b0e1-1649d933d8bb" title="Subscribe to Newsletter" scrolling="no"></iframe>
+        </div>
+    </div>
 
     <script src="/static/script.js"></script>
 </body>
