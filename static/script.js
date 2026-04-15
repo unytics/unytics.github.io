@@ -160,6 +160,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Newsletter modal
+    const newsletterModal = document.getElementById('newsletter-modal');
+    if (newsletterModal) {
+        document.querySelectorAll('.newsletter-open-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                newsletterModal.classList.add('active');
+            });
+        });
+
+        newsletterModal.querySelector('.newsletter-modal-close').addEventListener('click', () => {
+            newsletterModal.classList.remove('active');
+        });
+
+        newsletterModal.addEventListener('click', (e) => {
+            if (e.target === newsletterModal) {
+                newsletterModal.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && newsletterModal.classList.contains('active')) {
+                newsletterModal.classList.remove('active');
+            }
+        });
+    }
+
     // Copy email to clipboard
     const copyEmailLinks = document.querySelectorAll('.copy-email');
     const toast = document.getElementById('toast');

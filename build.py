@@ -17,6 +17,11 @@ SRC = ROOT / "src"
 SITE_URL = "https://unytics.io"
 BOOKING_URL = "https://outlook.office.com/bookwithme/user/af9126dab77a4875999901a41b929b48@audioptic.fr/meetingtype/ThLax7Qcxk24NOanCTiBWg2?anonymous&ismsaljsauthenabled&ep=mlink"
 
+NEWSLETTER_FORM = {
+    "en": "https://cdn.forms-content.sg-form.com/aebe3f17-38d0-11f1-b0e1-1649d933d8bb",
+    "fr": "https://cdn.forms-content.sg-form.com/7a15104f-38d2-11f1-b0e1-1649d933d8bb",
+}
+
 I18N = {
     "en": {
         "lang": "en",
@@ -28,6 +33,8 @@ I18N = {
         "skip_link_text": "Skip to main content",
         "copyright_text": "All rights reserved.",
         "toast_text": "Email copied to clipboard!",
+        "newsletter_btn": "Subscribe to Newsletter",
+        "newsletter_form_url": NEWSLETTER_FORM["en"],
         "home_url": "/",
         "blog_index_url": "/blog/",
         "og_locale": "en_US",
@@ -45,6 +52,8 @@ I18N = {
         "skip_link_text": "Aller au contenu principal",
         "copyright_text": "Tous droits r\u00e9serv\u00e9s.",
         "toast_text": "Email copi\u00e9 dans le presse-papier !",
+        "newsletter_btn": "S'abonner \u00e0 la Newsletter",
+        "newsletter_form_url": NEWSLETTER_FORM["fr"],
         "home_url": "/fr/",
         "blog_index_url": "/blog/fr/",
         "og_locale": "fr_FR",
@@ -226,10 +235,14 @@ def build_post(md_path: Path, lang: str, template: str) -> dict:
     # Build article content
     back_label = "&larr; Blog" if lang == "en" else "&larr; Blog"
     date_display = date
+    newsletter_btn = i18n["newsletter_btn"]
     article_html = f"""
         <article class="blog-post">
             <div class="container">
-                <a href="{i18n['blog_index_url']}" class="blog-back-link">{back_label}</a>
+                <div class="blog-post-topbar">
+                    <a href="{i18n['blog_index_url']}" class="blog-back-link">{back_label}</a>
+                    <button class="btn-secondary newsletter-open-btn">{newsletter_btn}</button>
+                </div>
                 <div class="blog-post-header">
                     {"<p class='blog-post-date'>" + date_display + "</p>" if date_display else ""}
                     <h1>{title}</h1>
@@ -237,6 +250,7 @@ def build_post(md_path: Path, lang: str, template: str) -> dict:
                 <div class="blog-post-content">
                     {html_body}
                 </div>
+                <button class="btn-secondary newsletter-open-btn">{newsletter_btn}</button>
             </div>
         </article>"""
 
@@ -309,11 +323,13 @@ def build_blog_index(posts: list[dict], lang: str, template: str) -> None:
         )
 
     cards_html = "\n".join(cards)
+    newsletter_btn = i18n["newsletter_btn"]
 
     content = f"""
         <section class="blog-listing">
             <div class="container">
                 <h1>Blog</h1>
+                <button class="btn-secondary newsletter-open-btn">{newsletter_btn}</button>
                 <div class="blog-cards">
 {cards_html}
                 </div>
