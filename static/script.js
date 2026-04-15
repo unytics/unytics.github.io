@@ -22,8 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getLanguageUrl(targetLang) {
+        const path = window.location.pathname;
         const currentHash = window.location.hash;
 
+        // Blog pages: /blog/... <-> /blog/fr/...
+        if (path.startsWith('/blog/')) {
+            if (targetLang === 'fr' && currentLang === 'en') {
+                return path.replace('/blog/', '/blog/fr/') + currentHash;
+            } else if (targetLang === 'en' && currentLang === 'fr') {
+                return path.replace('/blog/fr/', '/blog/') + currentHash;
+            }
+            return null;
+        }
+
+        // Homepage: / <-> /fr/
         if (targetLang === 'fr' && currentLang === 'en') {
             return '/fr/' + currentHash;
         } else if (targetLang === 'en' && currentLang === 'fr') {
