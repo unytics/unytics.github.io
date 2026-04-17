@@ -3,9 +3,7 @@
 # ///
 """Build script for unytics.io — generates homepage + blog HTML from templates and markdown."""
 
-import glob
 import http.server
-import os
 import re
 import sys
 from pathlib import Path
@@ -29,6 +27,7 @@ I18N = {
         "nav_solutions": "Solutions",
         "nav_case_studies": "Case Studies",
         "nav_offers": "Offers",
+        "nav_about": "About Unytics",
         "nav_cta": "Free Data Call",
         "skip_link_text": "Skip to main content",
         "copyright_text": "All rights reserved.",
@@ -48,6 +47,7 @@ I18N = {
         "nav_solutions": "Solutions",
         "nav_case_studies": "Cas Clients",
         "nav_offers": "Offres",
+        "nav_about": "En savoir plus sur Unytics",
         "nav_cta": "Appel Data Gratuit",
         "skip_link_text": "Aller au contenu principal",
         "copyright_text": "Tous droits r\u00e9serv\u00e9s.",
@@ -62,6 +62,21 @@ I18N = {
         "fr_active": "active",
     },
 }
+
+
+def homepage_nav_links(i18n: dict) -> str:
+    return (
+        f'<li><a href="{i18n["home_url"]}#pain-points">{i18n["nav_pitfalls"]}</a></li>\n'
+        f'                <li><a href="{i18n["home_url"]}#services">{i18n["nav_solutions"]}</a></li>\n'
+        f'                <li><a href="{i18n["home_url"]}#data-applications">{i18n["nav_case_studies"]}</a></li>\n'
+        f'                <li><a href="{i18n["home_url"]}#about">{i18n["nav_offers"]}</a></li>\n'
+        f'                <li><a href="{i18n["blog_index_url"]}">Blog</a></li>'
+    )
+
+
+def blog_nav_links(i18n: dict) -> str:
+    return f'<li><a href="{i18n["home_url"]}">{i18n["nav_about"]}</a></li>'
+
 
 HOMEPAGE_EN_HEAD_EXTRA = """\
 <meta name="keywords" content="fractional head of data, fractional data leadership, data consulting, data apps, data team scaling, BigQuery, fraud prevention, self-service data platform, data leadership, scale-up, data engineering, serverless architecture">
@@ -160,7 +175,11 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
                     key, _, value = line.partition(":")
                     value = value.strip()
                     # Strip surrounding quotes
-                    if len(value) >= 2 and value[0] == value[-1] and value[0] in ('"', "'"):
+                    if (
+                        len(value) >= 2
+                        and value[0] == value[-1]
+                        and value[0] in ('"', "'")
+                    ):
                         value = value[1:-1]
                     metadata[key.strip()] = value
             body = parts[2].strip()
@@ -205,7 +224,12 @@ def build_homepage(lang: str, template: str) -> None:
 
     content = (ROOT / config["content_file"]).read_text(encoding="utf-8")
 
-    context = {**i18n, **config, "content": content}
+    context = {
+        **i18n,
+        **config,
+        "content": content,
+        "nav_links": homepage_nav_links(i18n),
+    }
     html = render_template(template, context)
 
     output_path = ROOT / config["output_file"]
@@ -240,7 +264,7 @@ def build_post(md_path: Path, lang: str, template: str) -> dict:
         <article class="blog-post">
             <div class="container">
                 <div class="blog-post-topbar">
-                    <a href="{i18n['blog_index_url']}" class="blog-back-link">{back_label}</a>
+                    <a href="{i18n["blog_index_url"]}" class="blog-back-link">{back_label}</a>
                     <button class="btn-secondary newsletter-open-btn">{newsletter_btn}</button>
                 </div>
                 <div class="blog-post-header">
@@ -274,6 +298,7 @@ def build_post(md_path: Path, lang: str, template: str) -> dict:
         "hreflang_fr": hreflang_fr,
         "content": article_html,
         "head_extra": "",
+        "nav_links": blog_nav_links(i18n),
     }
 
     html = render_template(template, context)
@@ -312,12 +337,14 @@ def build_blog_index(posts: list[dict], lang: str, template: str) -> None:
         else:
             post_url = f"/blog/fr/{post['slug']}/"
 
-        date_html = f'<p class="blog-card-date">{post["date"]}</p>' if post.get("date") else ""
+        date_html = (
+            f'<p class="blog-card-date">{post["date"]}</p>' if post.get("date") else ""
+        )
         desc_html = f"<p>{post['description']}</p>" if post.get("description") else ""
         cards.append(
             f"""                <a href="{post_url}" class="blog-card">
                     {date_html}
-                    <h2>{post['title']}</h2>
+                    <h2>{post["title"]}</h2>
                     {desc_html}
                 </a>"""
         )
@@ -360,6 +387,7 @@ def build_blog_index(posts: list[dict], lang: str, template: str) -> None:
         "hreflang_fr": hreflang_fr,
         "content": content,
         "head_extra": "",
+        "nav_links": blog_nav_links(i18n),
     }
 
     html = render_template(template, context)
@@ -402,7 +430,9 @@ def build_all() -> None:
         # Build French version (required)
         fr_md_path = SRC / "blog" / "fr" / md_path.name
         if not fr_md_path.exists():
-            print(f"  ERROR: Missing French translation: {fr_md_path.relative_to(ROOT)}")
+            print(
+                f"  ERROR: Missing French translation: {fr_md_path.relative_to(ROOT)}"
+            )
             sys.exit(1)
 
         fr_meta = build_post(fr_md_path, "fr", template)
@@ -420,7 +450,9 @@ def serve(port: int = 8000) -> None:
     """Start a local HTTP server."""
     import functools
 
-    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(ROOT))
+    handler = functools.partial(
+        http.server.SimpleHTTPRequestHandler, directory=str(ROOT)
+    )
     with http.server.HTTPServer(("", port), handler) as httpd:
         print(f"\nServing at http://localhost:{port}")
         print(f"  Homepage EN: http://localhost:{port}/")
@@ -448,7 +480,7 @@ def main() -> None:
                 port = int(args[port_idx])
         serve(port)
     else:
-        print(f"Usage: uv run build.py [serve [--port PORT]]")
+        print("Usage: uv run build.py [serve [--port PORT]]")
         sys.exit(1)
 
 
