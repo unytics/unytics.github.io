@@ -47,7 +47,7 @@ I18N = {
         "nav_solutions": "Solutions",
         "nav_case_studies": "Cas Clients",
         "nav_offers": "Offres",
-        "nav_about": "En savoir plus sur Unytics",
+        "nav_about": "A propos d'Unytics",
         "nav_cta": "Appel Data Gratuit",
         "skip_link_text": "Aller au contenu principal",
         "copyright_text": "Tous droits r\u00e9serv\u00e9s.",
