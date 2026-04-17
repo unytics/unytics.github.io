@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -E '\\\\.\\(html|css|js|json\\)$')"
+      "Bash(grep -E '\\\\.\\(html|css|js|json\\)$')",
+      "Bash(uv run *)"
     ]
   }
 }
