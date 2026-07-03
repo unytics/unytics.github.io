@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ticketing 2.0 Trap: Why the 2026 Data Platform Must Not Separate Curation and Analysis | Unytics Blog</title>
+    <meta name="description" content="Yesterday, I had the pleasure of presenting a talk entitled **"Building a Data Platform in 2026: What Changes, What Doesn't"**.">
+    <link rel="canonical" href="https://unytics.io/blog/the-ticketing-2-0-trap/">
+
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://unytics.io/blog/the-ticketing-2-0-trap/">
+    <link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/the-ticketing-2-0-trap/">
+    <link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/the-ticketing-2-0-trap/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://unytics.io/blog/the-ticketing-2-0-trap/">
+    <meta property="og:title" content="The Ticketing 2.0 Trap: Why the 2026 Data Platform Must Not Separate Curation and Analysis | Unytics Blog">
+    <meta property="og:description" content="Yesterday, I had the pleasure of presenting a talk entitled **"Building a Data Platform in 2026: What Changes, What Doesn't"**.">
+    <meta property="og:site_name" content="Unytics">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://unytics.io/blog/the-ticketing-2-0-trap/">
+    <meta name="twitter:title" content="The Ticketing 2.0 Trap: Why the 2026 Data Platform Must Not Separate Curation and Analysis | Unytics Blog">
+    <meta name="twitter:description" content="Yesterday, I had the pleasure of presenting a talk entitled **"Building a Data Platform in 2026: What Changes, What Doesn't"**.">
+    <meta name="twitter:image" content="https://unytics.io/assets/unytics_social_image.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="https://unytics.io/assets/unytics_social_image.png">
+    <meta property="og:image:width" content="960">
+    <meta property="og:image:height" content="540">
+
+    <!-- Additional SEO -->
+    <meta name="author" content="Paul Marcombes">
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-YHunZhK65WvaJpQXfwUD_.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
+    
+</head>
+
+<body>
+    <a href="#content" class="skip-link">Skip to main content</a>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Unytics</a>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">About Unytics</a></li>
+                <li><a href="https://unytics.io/book-meeting/" target="_blank" class="btn-primary">Free Data Call</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="content">
+        
+        <article class="blog-post">
+            <div class="container">
+                <div class="blog-post-topbar">
+                    <a href="/blog/" class="blog-back-link">&larr; Blog</a>
+                    <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+                </div>
+                <div class="blog-post-header">
+                    
+                    <h1>The Ticketing 2.0 Trap: Why the 2026 Data Platform Must Not Separate Curation and Analysis</h1>
+                </div>
+                <div class="blog-post-content">
+                    <p>Yesterday, I had the pleasure of presenting a talk entitled <strong>"Building a Data Platform in 2026: What Changes, What Doesn't"</strong>.</p>
+<p>After spending over six years building and scaling the data teams at Nickel, I've spent the last six months getting my hands dirty, rebuilding a complete platform from scratch. This brutal yet reinvigorating return to the field, right in the midst of the AI agent explosion, has given me a unique perspective on where our industry is heading.</p>
+<p>If there is one certainty that transcends trends and eras, it's this: <strong>the ultimate goal of a data platform remains strictly the same: to enable self-service within the company to unlock value from data.</strong> The end goal hasn't shifted an inch. However, the tools and the way we design team autonomy are shifting radically.</p>
+<p>Today, a very seductive narrative is starting to echo across our ecosystem. An idea that seems almost logical on the surface: <em>the data team will take care of providing perfectly prepared, cleaned, and certified data (via a semantic layer or datamarts), and the rest of the company will just have to analyze it.</em></p>
+<p>On paper, it's idyllic. In business reality, <strong>it's a golden trap.</strong> This approach is sub-optimal and risks reproducing the exact same organizational flaws we've been trying to destroy for the past ten years.</p>
+<p>Let me explain why, and how we can do much better.</p>
+<hr />
+<h2>The Illusion of Perfect Data</h2>
+<p>Don't get me wrong: the rise of <em>conversational analytics</em> backed by modern semantic layers (like tools such as Omni) is a true revolution. Being able to query certified data in natural language to instantly understand a drop in revenue in a specific region is a total game-changer for non-technical profiles. It's a fantastic achievement.</p>
+<p>But believing that a company's entire analytics scope can—and should—be confined to this ultra-secure perimeter is an illusion, for two fundamental reasons:</p>
+<ol>
+<li><strong>Value is hidden in the raw:</strong> A massive chunk of analytical value lies precisely in data that is <em>not yet</em> prepared or modeled. Weak signals, disruptive insights, and answers to complex questions almost always stem from exploring raw sources or unprecedented cross-references.</li>
+<li><strong>The omission of value:</strong> Restricting business teams solely to data validated by the central team means overlooking the majority of opportunities. It restricts your entire company's scope of possibilities to what your data team was able to anticipate and plan for.</li>
+</ol>
+<hr />
+<h2>Say No to "Ticketing 2.0"</h2>
+<p>By trying to "protect" business users by blocking their access to the rest of the platform, we are reinventing a bureaucracy we thought was long gone.</p>
+<p>Think back to the old days: business teams created Jira tickets for the data team to build them a dashboard. Self-service was supposed to break this bottleneck. If we adopt this new vision of a data team serving solely as a "curator," we fall straight into <strong>Ticketing 2.0</strong>: business teams will now create tickets to get a new column, a new table, or a join modification in the semantic model.</p>
+<p>We are simply moving the problem somewhere else.</p>
+<blockquote>
+<p><strong>Siloing the organization into two airtight blocks—those who prepare the data on one side, and those who analyze it on the other—inherently destroys the company's analytical capabilities.</strong></p>
+</blockquote>
+<p>Why? Because <strong>waiting kills the momentum of intuition.</strong> A significant portion of great business insights are uncovered entirely unexpectedly, at the exact moment you are digging into the data. It's by testing a hypothesis, spotting an anomaly, and instantly pivoting that you discover a flaw or an opportunity.</p>
+<p>If a business team has to log a ticket based on a mere hunch, and a technical team handles the preparation three days later on their own, serendipity vanishes. The technical team simply executes the request coldly, without understanding its subtle intent or the business context. The creative flow of analysis is broken.</p>
+<hr />
+<h2>The Target Architecture in 2026: The Two-Tool Model</h2>
+<p>To overcome this roadblock, we must rethink the platform not around data access rights, but around the users' <strong>technical background</strong>. In 2026, a modern, high-performing architecture is structured around two clear pillars:</p>
+<h3>1. Conversational Analytics (For business users without a technical background)</h3>
+<p>For employees with no appetite for coding, chat tools built on top of a semantic layer are perfect. They query trusted data with total autonomy. In this paradigm, dashboards don't disappear, but their role evolves: they are no longer static deliverables, but results generated and iterated on the fly through conversation. They remain essential for tracking recurring KPIs, but their maintenance drops to zero.</p>
+<h3>2. The "Shift Left" in a Mono-repo (For anyone with a technical background)</h3>
+<p>This is where the true breakthrough of 2026 lies. Instead of confining semi-technical profiles to restricted visualization tools, we need to bring them on board the data platform's Git mono-repo.</p>
+<p>Why is this possible today when it was a pipe dream yesterday? Thanks to development agents like <strong>Claude Code</strong>. The barrier to entry for engineering (understanding Git, dbt, complex file architectures) has collapsed.</p>
+<p>Anyone with a basic technical background can now conduct their analysis directly where the curation happens.</p>
+<p>Let's look back at my experience at Nickel: the 150 business users who used to write SQL on their own every month to run their analyses could today work directly in the mono-repo. Guided by an AI agent, they run their explorations and, in doing so, modify and enrich the underlying dbt models on the fly.</p>
+<p>This is exactly the collaborative approach we are experimenting with alongside Yoann Boudon (CDO of Optic 2000): it is now possible to iterate with Claude Code on a Streamlit application for a business need and, through this simple act of exploration, modify and push two dbt models into production. <strong>Analysis self-builds the platform.</strong></p>
+<hr />
+<h2>Conclusion: Merging Engineering and Analysis</h2>
+<p>Let's not let old centralizing habits dictate how we organize our modern platforms. Isolating engineering in an ivory tower of curation and restricting analysis to a pre-packaged data catalog is a sub-optimal model. It breeds frustration, spawns <em>Shadow Data</em>, and misses out on raw value.</p>
+<p>In 2026, technology finally offers us the opportunity to reconcile these two worlds. Let's empower technical and semi-technical profiles to enrich the platform at the exact moment they explore it. This is where true self-service lies, and this is how you build an authentically <em>data-driven</em> organization.</p>
+<hr />
+<p><em>This return to the field is a continuation of my global rebuilding process. If you want to understand why I chose to leave managing massive teams to return to this agile model, you can read my article <a href="https://unytics.io/blog/why-i-left-managing-100-engineers/">Why I Left Managing 100+ Engineers to Build From Scratch Again</a>. And to take a closer look at how tools like Claude Code are concretely transforming day-to-day analysis, discover my full exploration in <a href="https://unytics.io/blog/best-tool-for-deep-dive-analyses/">Why Claude Code in VSCode is a Game Changer for Data Analysis</a>.</em></p>
+                </div>
+                <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/#pain-points">Pitfalls</a>
+                    <a href="/#services">Solutions</a>
+                    <a href="/#data-applications">Case Studies</a>
+                    <a href="/#about">Offers</a>
+                    <a href="/blog/">Blog</a>
+                </div>
+                <div class="footer-contact">
+                    <a href="#" class="copy-email" data-email="contact@unytics.io">contact@unytics.io</a>
+                    <a href="https://www.linkedin.com/in/paul-marcombes" target="_blank" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/unytics" target="_blank" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <p class="footer-copyright">&copy; 2026 Unytics. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Email copied to clipboard!</div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletter-modal" class="newsletter-modal">
+        <div class="newsletter-modal-content">
+            <button class="newsletter-modal-close" aria-label="Close">&times;</button>
+            <iframe src="https://cdn.forms-content.sg-form.com/aebe3f17-38d0-11f1-b0e1-1649d933d8bb" title="Subscribe to Newsletter" scrolling="no"></iframe>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
