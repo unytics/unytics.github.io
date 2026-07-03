@@ -1,3 +1,9 @@
+---
+title: "The Ticketing 2.0 Trap: Why the 2026 Data Platform Must Not Separate Curation and Analysis"
+description: "The data team prepares, the business analyzes — it sounds idyllic. In reality, it's a golden trap that reproduces the exact organizational flaws we've spent ten years trying to destroy."
+date: 2026-07-03
+---
+
 # The Ticketing 2.0 Trap: Why the 2026 Data Platform Must Not Separate Curation and Analysis
 
 Yesterday, I had the pleasure of presenting a talk entitled **"Building a Data Platform in 2026: What Changes, What Doesn't"**.

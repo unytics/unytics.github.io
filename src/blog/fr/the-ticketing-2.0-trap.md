@@ -1,3 +1,8 @@
+---
+title: "Le piège du Ticketing 2.0 : Pourquoi la data platform de 2026 ne doit pas séparer curation et analyse"
+description: "L'équipe data prépare, le métier analyse — c'est idyllique sur le papier. En réalité, c'est un piège en or qui reproduit exactement les défauts organisationnels qu'on essaie de détruire depuis dix ans."
+date: 2026-07-03
+---
 
 # Le piège du Ticketing 2.0 : Pourquoi la data platform de 2026 ne doit pas séparer curation et analyse
 
