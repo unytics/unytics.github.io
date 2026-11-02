@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Independence at Optic 2000: Zero Proprietary BI, Interchangeable Infrastructure and AI of Your Choice | Unytics Blog</title>
+    <meta name="description" content="Changing cloud, BI or AI model without rebuilding everything: how we decoupled Optic 2000's data platform from its vendors, keeping all business logic in a single repository.">
+    <link rel="canonical" href="https://unytics.io/blog/optic-2000-independence/">
+
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://unytics.io/blog/optic-2000-independence/">
+    <link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/optic-2000-independence/">
+    <link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/optic-2000-independence/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://unytics.io/blog/optic-2000-independence/">
+    <meta property="og:title" content="Independence at Optic 2000: Zero Proprietary BI, Interchangeable Infrastructure and AI of Your Choice | Unytics Blog">
+    <meta property="og:description" content="Changing cloud, BI or AI model without rebuilding everything: how we decoupled Optic 2000's data platform from its vendors, keeping all business logic in a single repository.">
+    <meta property="og:site_name" content="Unytics">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://unytics.io/blog/optic-2000-independence/">
+    <meta name="twitter:title" content="Independence at Optic 2000: Zero Proprietary BI, Interchangeable Infrastructure and AI of Your Choice | Unytics Blog">
+    <meta name="twitter:description" content="Changing cloud, BI or AI model without rebuilding everything: how we decoupled Optic 2000's data platform from its vendors, keeping all business logic in a single repository.">
+    <meta name="twitter:image" content="https://unytics.io/assets/unytics_social_image.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="https://unytics.io/assets/unytics_social_image.png">
+    <meta property="og:image:width" content="960">
+    <meta property="og:image:height" content="540">
+
+    <!-- Additional SEO -->
+    <meta name="author" content="Paul Marcombes">
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-YHunZhK65WvaJpQXfwUD_.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
+    
+</head>
+
+<body>
+    <a href="#content" class="skip-link">Skip to main content</a>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Unytics</a>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">About Unytics</a></li>
+                <li><a href="https://unytics.io/book-meeting/" target="_blank" class="btn-primary">Free Data Call</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="content">
+        
+        <article class="blog-post">
+            <div class="container">
+                <div class="blog-post-topbar">
+                    <a href="/blog/" class="blog-back-link">&larr; Blog</a>
+                    <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+                </div>
+                <div class="blog-post-header">
+                    <p class='blog-post-date'>2026-11-02</p>
+                    <h1>Independence at Optic 2000: Zero Proprietary BI, Interchangeable Infrastructure and AI of Your Choice</h1>
+                </div>
+                <div class="blog-post-content">
+                    <p><strong>If you wanted to change cloud, BI tool or AI model tomorrow, how much would it cost you?</strong></p>
+<p>For most companies, the answer is a months-long migration: their business logic — sources, metrics, dashboards — is scattered across their vendors' tools.</p>
+<p>At <strong>Optic 2000</strong>, where I took over the data platform last January, we rebuilt the platform so that the answer is: not much. Here's how.</p>
+<hr />
+<h2>Lock-In Has Three Floors</h2>
+<p>When people talk about vendor dependency, they first think about infrastructure. Yet that's rarely where lock-in is the most expensive.</p>
+<ol>
+<li><strong>Infrastructure</strong> — the cloud, the warehouse. That's the floor everyone watches.</li>
+<li><strong>BI and metrics</strong> — often the stickiest lock-in. Your metric definitions live in a vendor's proprietary semantic model, and you pay a license for every employee who wants to look at a number. Changing clouds is a project; changing BI tools means rewriting every metric and every dashboard.</li>
+<li><strong>AI</strong> — a new floor, and the fastest-moving one. The best model changes every few months. Locking yourself into a single AI solution means missing the next ones.</li>
+</ol>
+<p>On every floor, we applied the same rule.</p>
+<hr />
+<h2>The Principle: Configuration Is an Asset, the Metal Is a Commodity</h2>
+<p>All of Optic 2000's business logic lives in <strong>a single Git repository</strong>: data sources, transformations, metric definitions, apps, schedules. It is described declaratively, in YAML and code, independently of the technology that runs it.</p>
+<p>For example, here is how we declare the needs of a processing function:</p>
+<pre><code class="language-yaml">compute:
+  cpu: 256
+  memory: 512
+  timeout: 300
+schedule: &quot;0 6 * * *&quot;
+</code></pre>
+<p>This file describes <em>what</em> we want. It says nothing about <em>how</em>: today it is deployed on AWS; tomorrow it could be deployed elsewhere without being modified.</p>
+<p>Vendors only provide the engine. The business logic — what has value and what is expensive to rebuild — stays with us.</p>
+<pre><code>┌────────────────────────────────────────────────────────┐
+│ AI: OpenWebUI, Claude, ChatGPT, Dust, local model      │  ← your choice
+├────────────────────────────────────────────────────────┤
+│ Usage: Streamlit apps, agents, MCP server              │  ← open
+├────────────────────────────────────────────────────────┤
+│ Business logic: sources, metrics, transformations      │  ← the asset, in one repo
+├────────────────────────────────────────────────────────┤
+│ Metal: AWS, S3, Snowflake, DuckDB                      │  ← interchangeable
+└────────────────────────────────────────────────────────┘
+</code></pre>
+<hr />
+<h2>Floor 1 — Interchangeable Infrastructure</h2>
+<p>We use AWS for compute, S3 for storage and Snowflake for the warehouse. But none of these choices is baked into the business logic.</p>
+<p>Take ingestion. Each source is described by a YAML file: its schema and its storage location. Today, this configuration drives Snowpipe, which loads the data into Snowflake. Tomorrow, the same file could drive a simple serverless function writing to DuckDB. <strong>The configuration doesn't change, and neither does the data: only the engine does.</strong></p>
+<p>Changing infrastructure vendors becomes a contained piece of work — rewriting a deployment module — rather than a platform migration.</p>
+<hr />
+<h2>Floor 2 — Zero Proprietary BI</h2>
+<p>We switched off the legacy BI tool without replacing it with another one.</p>
+<p>Our metrics are defined once, in a <strong>semantic layer</strong> that lives in the repository. Our dashboards are <strong>open-source Streamlit applications</strong> connected to that semantic layer. The result: no more per-seat licenses — giving a store manager access to their KPIs costs nothing extra — and apps that go beyond dashboards. <em>Dashboards are passive. Data Apps act.</em></p>
+<p>Our metrics don't depend on the warehouse either. Depending on the query, the semantic layer runs on Snowflake or on DuckDB, which loads a single store's data into memory to answer in milliseconds. Same definitions, two engines: concrete proof that our metrics aren't locked in anywhere.</p>
+<p>If every dashboard has to be coded, haven't we just recreated a ticket queue to the data team? No: 25 contributors vibe-code these apps, and many needs are handled directly by AI agents. I tell that story in <a href="https://unytics.io/blog/nobody-codes-by-hand/">Nobody Codes by Hand</a>.</p>
+<hr />
+<h2>Floor 3 — AI of Your Choice</h2>
+<p>The semantic layer is exposed through an <strong>MCP server</strong> (Model Context Protocol) — an open protocol that lets any AI assistant query our metrics.</p>
+<p>Internally, we use a single interface based on OpenWebUI. Stores can bring their own client — Claude, ChatGPT, Dust. Either way, the AI answers with certified figures, and <strong>each user only sees their own data</strong>.</p>
+<p>Above all, <strong>we can change AI client or model at any time</strong> without touching the metrics. When a better model comes out, we can adopt it without waiting for a vendor to integrate it.</p>
+<hr />
+<h2>Why a Single Repository Changes Everything</h2>
+<p>Having all the business logic in one place has effects that go beyond reversibility:</p>
+<ul>
+<li><strong>It belongs to the company.</strong> Versioned, auditable, readable — not scattered across the interfaces of five vendors.</li>
+<li><strong>One change, one place.</strong> Adding a source, transforming it, deriving a metric and displaying it in an app happens in a single Pull Request, consistent end to end.</li>
+<li><strong>AI agents see the whole platform.</strong> A coding agent reading the repository understands everything. That's what allowed us to go from 4 to 25 contributors, as I detail in <a href="https://unytics.io/blog/nobody-codes-by-hand/">Nobody Codes by Hand</a>.</li>
+</ul>
+<hr />
+<h2>What It Brings</h2>
+<ul>
+<li><strong>No per-seat tax:</strong> access to KPIs no longer costs a license per user — no more paying around €50 per person per month.</li>
+<li><strong>Tomorrow's AI without a migration:</strong> changing AI model or client doesn't touch the metrics.</li>
+<li><strong>A healthy balance of power with vendors:</strong> when you can leave, you negotiate differently.</li>
+<li><strong>No big-bang migrations:</strong> each building block can be replaced independently.</li>
+<li><strong>And speed:</strong> four major projects absorbed in ten months, while the team went from 6 to 4 people.</li>
+</ul>
+<hr />
+<h2>The Limits</h2>
+<ul>
+<li><strong>Our semantic layer is home-grown.</strong> It's code we maintain. We built it for performance (multiple backends) and for business-specific calculations, and we may revisit that choice as open standards mature.</li>
+<li><strong>We haven't left a vendor yet.</strong> Running our metrics on two engines shows that the decoupling works, but reversibility is something you prepare for — it's only truly proven when you leave.</li>
+</ul>
+<hr />
+<h2>Key Takeaways</h2>
+<p>Being independent doesn't mean doing without vendors. We use AWS, Snowflake and Claude, and we're happy with them. What matters is where your business logic lives: in your repository, as configuration and code — not inside a vendor's tool.</p>
+<p>Ask yourself the question about your own platform: if you wanted to change cloud, BI or AI model tomorrow, how long would it take?</p>
+<hr />
+<p><em>Your BI bill keeps growing, your stack locks you in, or you want to put AI on reliable data without tying yourself to a vendor? <a href="https://unytics.io/book-meeting/">Let's talk about it in a 30-minute data chat</a>.</em></p>
+                </div>
+                <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/#pain-points">Pitfalls</a>
+                    <a href="/#services">Solutions</a>
+                    <a href="/#data-applications">Case Studies</a>
+                    <a href="/#about">Offers</a>
+                    <a href="/blog/">Blog</a>
+                </div>
+                <div class="footer-contact">
+                    <a href="#" class="copy-email" data-email="contact@unytics.io">contact@unytics.io</a>
+                    <a href="https://www.linkedin.com/in/paul-marcombes" target="_blank" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/unytics" target="_blank" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <p class="footer-copyright">&copy; 2026 Unytics. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Email copied to clipboard!</div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletter-modal" class="newsletter-modal">
+        <div class="newsletter-modal-content">
+            <button class="newsletter-modal-close" aria-label="Close">&times;</button>
+            <iframe src="https://cdn.forms-content.sg-form.com/aebe3f17-38d0-11f1-b0e1-1649d933d8bb" title="Subscribe to Newsletter" scrolling="no"></iframe>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

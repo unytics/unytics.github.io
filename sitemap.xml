@@ -1,23 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <!-- English Homepage -->
   <url>
     <loc>https://unytics.io/</loc>
-    <lastmod>2025-12-10</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/"/>
   </url>
-
-  <!-- French Homepage -->
   <url>
     <loc>https://unytics.io/fr/</loc>
-    <lastmod>2025-12-10</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/fr/</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/nobody-codes-by-hand/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/nobody-codes-by-hand/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/nobody-codes-by-hand/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/nobody-codes-by-hand/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/fr/nobody-codes-by-hand/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/nobody-codes-by-hand/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/nobody-codes-by-hand/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/nobody-codes-by-hand/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/optic-2000-independence/</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/optic-2000-independence/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/optic-2000-independence/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/optic-2000-independence/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/fr/optic-2000-independence/</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/optic-2000-independence/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/optic-2000-independence/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/optic-2000-independence/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/the-ticketing-2-0-trap/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/the-ticketing-2-0-trap/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/the-ticketing-2-0-trap/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/the-ticketing-2-0-trap/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/fr/the-ticketing-2-0-trap/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/the-ticketing-2-0-trap/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/the-ticketing-2-0-trap/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/the-ticketing-2-0-trap/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/best-tool-for-deep-dive-analyses/</loc>
+    <lastmod>2026-04-17</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/best-tool-for-deep-dive-analyses/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/best-tool-for-deep-dive-analyses/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/best-tool-for-deep-dive-analyses/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/fr/best-tool-for-deep-dive-analyses/</loc>
+    <lastmod>2026-04-17</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/best-tool-for-deep-dive-analyses/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/best-tool-for-deep-dive-analyses/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/best-tool-for-deep-dive-analyses/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/why-i-left-managing-100-engineers/</loc>
+    <lastmod>2026-04-10</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/why-i-left-managing-100-engineers/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/why-i-left-managing-100-engineers/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/why-i-left-managing-100-engineers/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/fr/why-i-left-managing-100-engineers/</loc>
+    <lastmod>2026-04-10</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/why-i-left-managing-100-engineers/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/why-i-left-managing-100-engineers/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/why-i-left-managing-100-engineers/"/>
   </url>
 </urlset>

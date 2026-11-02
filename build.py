@@ -3,6 +3,7 @@
 # ///
 """Build script for unytics.io — generates homepage + blog HTML from templates and markdown."""
 
+import gzip
 import http.server
 import re
 import sys
@@ -402,6 +403,48 @@ def build_blog_index(posts: list[dict], lang: str, template: str) -> None:
     print(f"  {output_path.relative_to(ROOT)}")
 
 
+def build_sitemap(posts: list[dict]) -> None:
+    """Build sitemap.xml (and its gzipped copy referenced by sitemap_index.xml)."""
+    pages = [("/", "/fr/", "", "1.0"), ("/blog/", "/blog/fr/", "", "0.8")]
+    for post in sorted(posts, key=lambda p: p.get("date", ""), reverse=True):
+        slug = post["slug"]
+        pages.append((f"/blog/{slug}/", f"/blog/fr/{slug}/", post.get("date", ""), "0.7"))
+
+    urls = []
+    for en_path, fr_path, lastmod, priority in pages:
+        alternates = (
+            f'    <xhtml:link rel="alternate" hreflang="en" href="{SITE_URL}{en_path}"/>\n'
+            f'    <xhtml:link rel="alternate" hreflang="fr" href="{SITE_URL}{fr_path}"/>\n'
+            f'    <xhtml:link rel="alternate" hreflang="x-default" href="{SITE_URL}{en_path}"/>'
+        )
+        lastmod_xml = f"    <lastmod>{lastmod}</lastmod>\n" if lastmod else ""
+        for path in (en_path, fr_path):
+            urls.append(
+                f"  <url>\n"
+                f"    <loc>{SITE_URL}{path}</loc>\n"
+                f"{lastmod_xml}"
+                f"    <priority>{priority}</priority>\n"
+                f"{alternates}\n"
+                f"  </url>"
+            )
+
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+        '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+        + "\n".join(urls)
+        + "\n</urlset>\n"
+    )
+
+    sitemap_path = ROOT / "sitemap.xml"
+    sitemap_path.write_text(xml, encoding="utf-8", newline="\n")
+    print(f"  {sitemap_path.relative_to(ROOT)}")
+
+    gz_path = ROOT / "sitemap.xml.gz"
+    gz_path.write_bytes(gzip.compress(xml.encode("utf-8"), mtime=0))
+    print(f"  {gz_path.relative_to(ROOT)}")
+
+
 def build_all() -> None:
     """Build all pages: homepages + blog."""
     template = read_template()
@@ -442,6 +485,9 @@ def build_all() -> None:
     print("Building blog indexes...")
     build_blog_index(en_posts, "en", template)
     build_blog_index(fr_posts, "fr", template)
+
+    print("Building sitemap...")
+    build_sitemap(en_posts)
 
     print("Done!")
 
