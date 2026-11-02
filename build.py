@@ -444,6 +444,20 @@ def build_sitemap(posts: list[dict]) -> None:
     gz_path.write_bytes(gzip.compress(xml.encode("utf-8"), mtime=0))
     print(f"  {gz_path.relative_to(ROOT)}")
 
+    # Stamp our entry in sitemap_index.xml with the latest post date,
+    # leaving the other sitemaps (bigfunctions, static_bi) untouched
+    latest = max((p.get("date", "") for p in posts), default="")
+    if latest:
+        index_path = ROOT / "sitemap_index.xml"
+        index_xml = index_path.read_text(encoding="utf-8")
+        index_xml = re.sub(
+            r"(<loc>https://unytics\.io/sitemap\.xml\.gz</loc>)(\s*<lastmod>[^<]*</lastmod>)?",
+            rf"\1\n    <lastmod>{latest}</lastmod>",
+            index_xml,
+        )
+        index_path.write_text(index_xml, encoding="utf-8", newline="\n")
+        print(f"  {index_path.relative_to(ROOT)}")
+
 
 def build_all() -> None:
     """Build all pages: homepages + blog."""
