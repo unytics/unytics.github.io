@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Service Analytics: Why Your Business Teams Shouldn't Just Be AI Consumers (But Builders Too) | Unytics Blog</title>
+    <meta name="description" content="Conversational analytics and proactive feedback loops are transforming access to data. But in a company with complex operations, you need to go further: open the mono-repo to business teams so they become Builders of the platform and of their own operational applications.">
+    <link rel="canonical" href="https://unytics.io/blog/self-service-analytics-builders/">
+
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://unytics.io/blog/self-service-analytics-builders/">
+    <link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/self-service-analytics-builders/">
+    <link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/self-service-analytics-builders/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://unytics.io/blog/self-service-analytics-builders/">
+    <meta property="og:title" content="Self-Service Analytics: Why Your Business Teams Shouldn't Just Be AI Consumers (But Builders Too) | Unytics Blog">
+    <meta property="og:description" content="Conversational analytics and proactive feedback loops are transforming access to data. But in a company with complex operations, you need to go further: open the mono-repo to business teams so they become Builders of the platform and of their own operational applications.">
+    <meta property="og:site_name" content="Unytics">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://unytics.io/blog/self-service-analytics-builders/">
+    <meta name="twitter:title" content="Self-Service Analytics: Why Your Business Teams Shouldn't Just Be AI Consumers (But Builders Too) | Unytics Blog">
+    <meta name="twitter:description" content="Conversational analytics and proactive feedback loops are transforming access to data. But in a company with complex operations, you need to go further: open the mono-repo to business teams so they become Builders of the platform and of their own operational applications.">
+    <meta name="twitter:image" content="https://unytics.io/assets/unytics_social_image.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="https://unytics.io/assets/unytics_social_image.png">
+    <meta property="og:image:width" content="960">
+    <meta property="og:image:height" content="540">
+
+    <!-- Additional SEO -->
+    <meta name="author" content="Paul Marcombes">
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-YHunZhK65WvaJpQXfwUD_.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
+    
+</head>
+
+<body>
+    <a href="#content" class="skip-link">Skip to main content</a>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Unytics</a>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">About Unytics</a></li>
+                <li><a href="https://unytics.io/book-meeting/" target="_blank" class="btn-primary">Free Data Call</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="content">
+        
+        <article class="blog-post">
+            <div class="container">
+                <div class="blog-post-topbar">
+                    <a href="/blog/" class="blog-back-link">&larr; Blog</a>
+                    <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+                </div>
+                <div class="blog-post-header">
+                    <p class='blog-post-date'>2026-11-16</p>
+                    <h1>Self-Service Analytics: Why Your Business Teams Shouldn't Just Be AI Consumers (But Builders Too)</h1>
+                </div>
+                <div class="blog-post-content">
+                    <p><em>This article is the written version of the talk I gave at Forward Data Conference 2026: "The Analysis That Builds the Platform: Say Goodbye to Ticketing 2.0".</em></p>
+<p>Last June, Anthropic's Data team published a fascinating write-up on how they built their own internal <em>self-service analytics</em> with Claude. Their numbers alone sum up the challenge our entire industry faces in 2026.</p>
+<p>By plugging Claude "cold" straight into their otherwise very clean Data Warehouse, <strong>the rate of correct answers topped out at 21%</strong>. By building a rigorous four-layer <em>harness</em> — canonical tables, a semantic layer, documented <em>Skills</em> and automated validation — <strong>they pushed accuracy above 95%</strong>. But the most telling number comes next: just one month after launch, without continuous maintenance, <strong>their agent's accuracy had already dropped from 95% to 65%</strong> as schemas and the product naturally evolved. To stay on course, <strong>nearly 90% of Pull Requests</strong> touching a data model at Anthropic now include a <em>Skill</em> update in the same Git diff.</p>
+<p>A few weeks later, Olga Berezovsky published a widely shared analysis on her Substack (<em>"Self-Service Analytics Is Not Self-Service. But Don't Tell Anyone"</em>), highlighting one detail: to keep this machine running, Anthropic employs around <strong>30 data professionals — nearly 2% of the company's total headcount</strong>. Her conclusion: <em>"It takes a village of analysts"</em> to make AI-powered self-service work.</p>
+<p>Do you really need an army at the center? Not necessarily: today, cutting-edge teams are proving that with a well-designed AI feedback loop, 2 or 3 people are enough to serve an entire scale-up.</p>
+<p>And yet, looking at the current state of the art, I remain convinced that our ecosystem is stopping halfway. Everyone is trying to perfect the experience of business teams as <strong>conversational consumers</strong> (<em>Consumers</em>). At Optic 2000, we bet on going one step further: <strong>enabling business teams to become Builders of the platform and of their own operational applications.</strong></p>
+<hr />
+<h2>💬 Act 1: The State of the Art of "Context Engineering" — and Why It Works Remarkably Well</h2>
+<p>For fifteen years, data teams have pursued the same goal: break down silos and make business teams autonomous, because autonomy is a company's most powerful value lever.</p>
+<p>With <em>conversational analytics</em>, that dream has become tangible. And the most advanced teams have solved Anthropic's "21% accuracy" problem by industrializing three clearly distinct roles:</p>
+<ol>
+<li><strong>Data Platformers</strong>, who build the technical <em>harness</em> (the mono-repo, the MCP server, CI/CD, evals).</li>
+<li><strong>Builders (the Data team)</strong>, who model the data and maintain business context in the <em>harness</em>.</li>
+<li><strong>Consumers (business teams)</strong>, who query data in natural language through Claude, Slack or their BI tools.</li>
+</ol>
+<hr />
+<h3>🏆 The Excellence of the Proactive Model: Jolimoi, Gorgias, Photoroom...</h3>
+<p>Let's be completely honest: when pushed to its limit, this organization is remarkably effective.</p>
+<p>Look at what teams like <strong>Gorgias</strong> (where 83% of employees ask more than 1,000 questions a day thanks to <em>Context Engineering</em>) or <strong>Photoroom</strong> (where Juliette Duizabo explains how 3 Data people serve the whole company) are doing.</p>
+<p>In a software company or a 60–150 person scale-up without heavy physical operations, having 2 or 3 people in Data (those famous 2%) is perfectly reasonable. Especially when the central team moves from a reactive mode to an <strong>ultra-proactive feedback loop</strong> like at Jolimoi:</p>
+<table>
+<thead>
+<tr>
+<th>Building block of the proactive loop</th>
+<th>What it concretely changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Automatic capture of dead ends</strong></td>
+<td>As soon as a <em>Consumer</em> asks a question the MCP can't answer, the intent is logged automatically.</td>
+</tr>
+<tr>
+<td><strong>Proactive listening across the company</strong></td>
+<td>The system ingests public Slack channels and Google Meet transcripts to detect new business topics before a request is even made.</td>
+</tr>
+<tr>
+<td><strong>Automatic Pull Request generation</strong></td>
+<td>A daily digest creates Linear tickets and automatically opens dozens of Pull Requests a day to enrich the models and the semantic layer. The central team just has to review and approve.</td>
+</tr>
+</tbody>
+</table>
+<p>With that kind of velocity, let's be fair: for 90% of everyday analytical questions, friction almost entirely disappears and the loss of serendipity becomes very small. This is exactly the feedback loop approach we are putting in place at Optic 2000 for our <em>Consumer</em> users.</p>
+<p><strong>So if this model works so well, why do we claim a key piece of the puzzle is missing?</strong></p>
+<hr />
+<h2>⚠️ Act 2: What "All-Consumer" Doesn't Solve — Business Nuance and Taking Action</h2>
+<p>Most data teams today are trying to copy Alexis Blandin's model: a small, ultra-efficient central team that builds the <em>harness</em>, runs the feedback loop and keeps a monopoly on <em>building</em>.</p>
+<p>But as soon as you step outside a homogeneous SaaS company into a business with complex operations (like Optic 2000 with its 1,200 stores, logistics, finance, insurance partners, SAP and Salesforce), <strong>siloing the Builder role in Data and the Consumer role in the business reveals two major limits.</strong></p>
+<h3>1. A small central Data team will never master the nuances of every business process</h3>
+<p>At Optic 2000, we are <strong>8 full-time Data people</strong>: 4 on the Data Platform team and 4 on the BI team.</p>
+<p>Even with the best AI agents in the world, how could 8 people at the center claim to know in detail every accounting subtlety of SAP, every business rule of the store master data in Salesforce, and every financial exception across the network? It's an illusion. <strong>Business teams are the ones who know their data and their processes.</strong></p>
+<p>If you prevent analytically minded business people from being <em>Builders</em>:</p>
+<ul>
+<li>You lose a considerable amount of efficiency in back-and-forths where information gets distorted at every handoff (even with AI assistance) between the person who knows the business process and the person who validates the dbt model.</li>
+<li>During <strong>deep dives</strong> — where 80% of the value lies in exploring raw tables that haven't been modeled yet — the business analyst can't build the pipeline while exploring. They remain dependent on a round-trip with the central team (a <em>Ticketing 2.0</em>, automated by agents and feedback loops, sure, but still an intermediary).</li>
+</ul>
+<h3>2. Business teams don't just need analyses: they need to build applications that act</h3>
+<p>In the classic model, when you need real applications that go beyond analysis — for example operational tools with read and write access to SAP, Salesforce or Bitbucket — it's still the central team that has to build them on the business's behalf.</p>
+<p>Yet with <em>vibe-coding</em>, business teams now have the ability to create the tools that solve their daily operational friction themselves. They just need to be given the framework to do it.</p>
+<hr />
+<h2>🛠️ Act 3: The Optic 2000 Model — Complementing Conversational Analytics by Turning Business Teams into Builders</h2>
+<p>At Optic 2000, our conviction is simple: <strong>the Consumer approach in a conversational interface and the Builder approach in VS Code are not opposed — they complement each other.</strong></p>
+<ul>
+<li>We're obviously not going to ask an in-store optician or an operator who isn't comfortable with computers to open VS Code on our Git repository! For them, the <em>Consumer</em> conversational interface with a feedback loop is perfect.</li>
+<li>But limiting yourself to the <em>Consumer</em> approach keeps a glass ceiling in place. That's why our <strong>4 Data Platformers</strong> opened our Git mono-repo to our <strong>4 BI specialists</strong> and to <strong>around 20 Builders from business departments</strong> (financial controlling, finance, master data owners...), bringing the total to <strong>25 people actively building the platform</strong> — without a single one of them writing code by hand.</li>
+</ul>
+<hr />
+<h3>🎨 The 3 Spaces Where We "Vibe-Code" at Optic 2000</h3>
+<p>This complementarity takes shape in three distinct workspaces on our platform:</p>
+<table>
+<thead>
+<tr>
+<th>Vibe-Coding Space</th>
+<th>Who uses it?</th>
+<th>What happens there</th>
+<th>How the platform gets enriched</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Claude Desktop &amp; OpenWebUI (on an MCP server)</strong></td>
+<td><strong>Consumers</strong> (Stores, business users)</td>
+<td>Direct conversational analysis on the semantic layer with strict access-rights filtering.</td>
+<td><strong>Feedback loop (like at Alexis Blandin's)</strong>: you don't <em>build</em> while analyzing, but feedback generates PRs that improve the YAML.</td>
+</tr>
+<tr>
+<td><strong>2. Streamlit Data Apps (Playground &amp; embedded AI)</strong></td>
+<td><strong>Consumers &amp; advanced business users</strong></td>
+<td>Dashboards and operational apps on top of our SaaS tools. Some apps <strong>embed a conversational Claude agent</strong> to analyze the data on screen or generate your own dashboards (see below).</td>
+<td>Feedback loop today — and probably tomorrow the ability to trigger PRs directly from the agents embedded in Streamlit.</td>
+</tr>
+<tr>
+<td><strong>3. The Git Mono-repo in VS Code (with Claude Code)</strong></td>
+<td><strong>Builders (Business &amp; BI - ~24 people)</strong> &amp; <strong>Data Platformers (4 people)</strong></td>
+<td><strong>You build while you analyze</strong>. The business user explores raw data, pipes an ingestion, models in dbt, edits the semantic layer and vibe-codes Streamlit apps.</td>
+<td><strong>Full autonomy</strong>: the business user opens their Pull Request directly in the Git repo as part of their work.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>💡 Focus on Space 2: When Streamlit Apps Embed Conversational AI and Artifacts</h3>
+<p>Most of our Streamlit applications are dashboards vibe-coded in VS Code by business teams or the BI team. But several of them combine the best of structured applications and generative AI:</p>
+<ul>
+<li><strong>The financial statement augmented by a dedicated agent:</strong> A Streamlit app displays a store's financial statements. Right inside the app, a Claude agent is embedded with a hardcoded financial <em>system prompt</em>. The end user chats with Claude within the app to dig into their statements, test hypotheses and generate complementary HTML artifacts.</li>
+<li><strong>The Playground app ("Claude Dashboards"):</strong> We built a Streamlit app that acts as a generator and host for HTML artifacts. A <em>Consumer</em> vibe-codes their own dashboard there in playground mode, then saves it. The app now holds dozens of dashboards created by users themselves — durable, discoverable, shareable and all in one place.</li>
+<li><strong>The alert scheduling app:</strong> A Streamlit app that lets users configure and schedule automatic emails driven by the indicators from our metrics engine.</li>
+</ul>
+<hr />
+<h2>⚡ Act 4: Beyond Read-Only — Operational Applications Built on SAP, Salesforce and Git</h2>
+<p>When a business user becomes a <em>Builder</em> in VS Code, they don't just build analytical pipelines or read-only charts. They build <strong>operational applications that let them see AND act</strong> directly on the company's systems.</p>
+<p>Here are 6 concrete examples of apps vibe-coded at Optic 2000:</p>
+<table>
+<thead>
+<tr>
+<th>Vibe-Coded App</th>
+<th>Connected system</th>
+<th>Operational use (See &amp; Act)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Inconsistency Detection &amp; Correction</strong></td>
+<td><strong>Salesforce</strong></td>
+<td>Vibe-coded by the business owner of the store master data: the app detects anomalies in Salesforce, displays them clearly and lets the business <strong>fix the data directly in Salesforce</strong>.</td>
+</tr>
+<tr>
+<td><strong>2. Human-in-the-Loop Enrichment</strong></td>
+<td><strong>Salesforce</strong></td>
+<td>Algorithms compute enrichment proposals for the store master data. The Streamlit app provides the <em>Human-in-the-Loop</em> interface where the business reviews and approves before anything is written to Salesforce.</td>
+</tr>
+<tr>
+<td><strong>3. Operational business front-end</strong></td>
+<td><strong>SAP</strong></td>
+<td>A dedicated, custom front-end on top of SAP that offers clear views and runs specific operational processes without the complexity of the native SAP interface.</td>
+</tr>
+<tr>
+<td><strong>4. PR governance cockpit</strong></td>
+<td><strong>Bitbucket</strong></td>
+<td>A far more readable interface than Bitbucket to track all open Pull Requests, see at a glance who needs to review what, and check that all our requirements are met.</td>
+</tr>
+<tr>
+<td><strong>5. Visual Semantic Layer editor</strong></td>
+<td><strong>Git Repository</strong></td>
+<td>An interface on top of Git to visualize and edit the entire semantic layer with business validation, far easier to digest than raw YAML (and integrated with the PRs generated by our feedback loops).</td>
+</tr>
+<tr>
+<td><strong>6. Access rights manager</strong></td>
+<td><strong>Streamlit platform</strong></td>
+<td>A dedicated app to easily manage access permissions for every Streamlit application.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>🤔 Claude Artifacts vs Apps on Git: Where Will the Line Be Tomorrow?</h3>
+<p>A legitimate question arises: <em>"Tomorrow, artifacts generated in Claude or in a playground won't just be read-only charts. They're already durable and shareable, soon organizable like a Google Drive, and will be able to write directly to Salesforce or SAP via MCP connectors. Will we still need business teams to vibe-code Streamlit apps in VS Code and Git?"</em></p>
+<p>The answer won't be binary: it will be a <strong>continuum of mastery and control</strong>.</p>
+<ul>
+<li><strong>For lightweight, quick or exploratory needs:</strong> artifacts generated on the fly, saved and shared in a Drive-like space (or in our Streamlit Playground app) will be more than enough and unbeatable in velocity.</li>
+<li><strong>For business-critical processes:</strong> as soon as you need to write in bulk to SAP or Salesforce with complex upstream algorithms, enforce strict access governance, guarantee non-regression through CI tests and deploy on the company's secure infrastructure, <strong>you'll always want real code files versioned in Git and approved through Pull Requests</strong>.</li>
+</ul>
+<hr />
+<h2>🛡️ Act 5: The Architectural Secret — A Declarative Mono-Repo to Align 25 Builders</h2>
+<p>How do you let 25 people (4 Data Platform, 4 BI and around 20 business users) build in the same Git repository without anyone coding by hand and without creating chaos?</p>
+<p>It all relies on the <em>harness</em> built by the 4 Data Platformers in a <strong>single, 100% declarative mono-repo</strong>:</p>
+<ol>
+<li><strong>Only one way to do each thing:</strong> Whether it's ingesting data, creating a dbt model, adding a metric to the semantic layer (like at Anthropic, where 90% of PRs unify model and context) or deploying a Streamlit app on AWS via Terraform, there's only one declarative pattern. In VS Code, Claude Code sees the whole repository and faithfully reproduces our standards.</li>
+<li><strong>The analysis builds the platform (<em>Deep Dive &amp; Pipe</em>):</strong> Guided by our <em>Skills</em>, a business user exploring raw data in VS Code enriches the dbt model and the semantic layer as part of the same motion as their analysis.</li>
+<li><strong>Centralized PR review:</strong> The 4 Data Platformers keep final control by reviewing Pull Requests (helped by CI and our Bitbucket app) before anything goes to production.</li>
+<li><strong>Supporting business teams:</strong> One of the 4 Data Platformers is dedicated full-time to supporting business teams so they can make the most of the platform.</li>
+</ol>
+<hr />
+<h2>🎯 Conclusion: Open Your Harness to Business Teams</h2>
+<p><em>Conversational Analytics</em> combined with a proactive feedback loop is a major step forward. Small teams of 2 or 3 people like at Jolimoi or Photoroom demonstrate every day how much this approach transforms access to data for <em>Consumers</em>.</p>
+<p>But don't stop there. If your company has rich, complex operational processes, your central Data team — however brilliant — will never replace the intimate knowledge your business teams have of their own data and their own tools.</p>
+<p>Keep the conversational approach and lightweight artifacts for quick consumption. But <strong>open your mono-repo and VS Code to your business experts</strong>. The day your business teams stop merely asking a chatbot questions and become the <em>Builders</em> of the platform and of their own operational applications, you will finally have broken down data's last silo.</p>
+                </div>
+                <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/#pain-points">Pitfalls</a>
+                    <a href="/#services">Solutions</a>
+                    <a href="/#data-applications">Case Studies</a>
+                    <a href="/#about">Offers</a>
+                    <a href="/blog/">Blog</a>
+                </div>
+                <div class="footer-contact">
+                    <a href="#" class="copy-email" data-email="contact@unytics.io">contact@unytics.io</a>
+                    <a href="https://www.linkedin.com/in/paul-marcombes" target="_blank" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/unytics" target="_blank" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <p class="footer-copyright">&copy; 2026 Unytics. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Email copied to clipboard!</div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletter-modal" class="newsletter-modal">
+        <div class="newsletter-modal-content">
+            <button class="newsletter-modal-close" aria-label="Close">&times;</button>
+            <iframe src="https://cdn.forms-content.sg-form.com/aebe3f17-38d0-11f1-b0e1-1649d933d8bb" title="Subscribe to Newsletter" scrolling="no"></iframe>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
