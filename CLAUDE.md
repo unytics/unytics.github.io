@@ -80,6 +80,8 @@ Blog posts are written and edited in English in `src/blog/*.md`. French translat
 
 The build script requires a French translation for every English blog post — it will fail if one is missing.
 
+**Internal links only point to earlier posts**: a post never links to a post whose frontmatter `date` is later than its own, since that post isn't published yet when this one goes out. Check the target's `date:` before linking.
+
 ## Translation Guidelines
 
 When creating or updating French translations:

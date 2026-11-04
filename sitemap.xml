@@ -46,6 +46,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/self-service-analytics-builders/"/>
   </url>
   <url>
+    <loc>https://unytics.io/blog/one-name-one-definition/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/one-name-one-definition/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/one-name-one-definition/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/one-name-one-definition/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/fr/one-name-one-definition/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/one-name-one-definition/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/one-name-one-definition/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/one-name-one-definition/"/>
+  </url>
+  <url>
     <loc>https://unytics.io/blog/nobody-codes-by-hand/</loc>
     <lastmod>2026-11-03</lastmod>
     <priority>0.7</priority>
