@@ -1,12 +1,12 @@
 ---
-title: "Un nom, une définition : comment nous documentons 1 800 colonnes sans documenter un seul modèle dbt"
+title: "Un nom, une définition : comment nous documentons 1800 colonnes sans documenter un seul modèle dbt"
 description: "Chez Optic 2000, aucun modèle dbt ne décrit ses colonnes, et pourtant chacune a sa définition : elle est attachée au nom de la colonne et écrite une seule fois, dans un dictionnaire métier. Conventions de nommage, garde-fous pour les agents de code, data portal généré : comment une seule façon de nommer supprime la dérive des définitions."
 date: 2026-11-04
 ---
 
-# Un nom, une définition : comment nous documentons 1 800 colonnes sans documenter un seul modèle dbt
+# Un nom, une définition : comment nous documentons 1800 colonnes sans documenter un seul modèle dbt
 
-Chez Optic 2000, notre data platform compte plus de 350 modèles dbt et quelque 1 800 noms de colonnes. Chacun a sa définition, consultable par tous dans notre data portal et rangée par entité métier.
+Chez Optic 2000, notre data platform compte plus de 350 modèles dbt et quelque 1800 noms de colonnes. Chacun a sa définition, consultable par tous dans notre data portal et rangée par entité métier.
 
 Pourtant, ouvrez n'importe quel fichier YAML de nos modèles dbt : vous n'y trouverez pas une seule description de colonne.
 
@@ -106,7 +106,7 @@ La description du modèle dit ce que représente une ligne. Ce que signifie chaq
 
 Trois principes complètent la règle :
 
-* **Une entité est un domaine métier large** — client, produit, magasin —, jamais une table source, un fournisseur ou un agrégat. Une table de paramétrage qui ne fait que traduire un code en libellé n'est pas une entité : ses libellés rejoignent l'entité qu'ils décrivent. C'est ce qui garde le dictionnaire lisible à 1 800 colonnes.
+* **Une entité est un domaine métier large** — client, produit, magasin —, jamais une table source, un fournisseur ou un agrégat. Une table de paramétrage qui ne fait que traduire un code en libellé n'est pas une entité : ses libellés rejoignent l'entité qu'ils décrivent. C'est ce qui garde le dictionnaire lisible à 1800 colonnes.
 * **Une définition décrit le concept, pas sa fabrication.** Elle ne cite ni le nom technique d'un champ source ni un modèle dbt : `email_client` reste « l'adresse e-mail du client » le jour où l'on change de CRM ou de modèle.
 * **Le dictionnaire dit ce qu'une colonne signifie ; la couche sémantique dit comment l'agréger.** Le SQL des métriques vit dans notre couche sémantique, que je décrivais dans [cet article sur l'indépendance](https://unytics.io/blog/fr/optic-2000-independence/). Ses entités portent le nom d'une entité du dictionnaire et n'ont pas de description propre : elles héritent de la sienne. Un indicateur que personne ne matérialise, comme un panier moyen, n'existe que dans la couche sémantique ; le dictionnaire ne documente que des colonnes réelles.
 

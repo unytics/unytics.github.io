@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Un nom, une définition : comment nous documentons 1 800 colonnes sans documenter un seul modèle dbt | Unytics Blog</title>
+    <title>Un nom, une définition : comment nous documentons 1800 colonnes sans documenter un seul modèle dbt | Unytics Blog</title>
     <meta name="description" content="Chez Optic 2000, aucun modèle dbt ne décrit ses colonnes, et pourtant chacune a sa définition : elle est attachée au nom de la colonne et écrite une seule fois, dans un dictionnaire métier. Conventions de nommage, garde-fous pour les agents de code, data portal généré : comment une seule façon de nommer supprime la dérive des définitions.">
     <link rel="canonical" href="https://unytics.io/blog/fr/one-name-one-definition/">
 
@@ -16,7 +16,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://unytics.io/blog/fr/one-name-one-definition/">
-    <meta property="og:title" content="Un nom, une définition : comment nous documentons 1 800 colonnes sans documenter un seul modèle dbt | Unytics Blog">
+    <meta property="og:title" content="Un nom, une définition : comment nous documentons 1800 colonnes sans documenter un seul modèle dbt | Unytics Blog">
     <meta property="og:description" content="Chez Optic 2000, aucun modèle dbt ne décrit ses colonnes, et pourtant chacune a sa définition : elle est attachée au nom de la colonne et écrite une seule fois, dans un dictionnaire métier. Conventions de nommage, garde-fous pour les agents de code, data portal généré : comment une seule façon de nommer supprime la dérive des définitions.">
     <meta property="og:site_name" content="Unytics">
     <meta property="og:locale" content="fr_FR">
@@ -25,7 +25,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://unytics.io/blog/fr/one-name-one-definition/">
-    <meta name="twitter:title" content="Un nom, une définition : comment nous documentons 1 800 colonnes sans documenter un seul modèle dbt | Unytics Blog">
+    <meta name="twitter:title" content="Un nom, une définition : comment nous documentons 1800 colonnes sans documenter un seul modèle dbt | Unytics Blog">
     <meta name="twitter:description" content="Chez Optic 2000, aucun modèle dbt ne décrit ses colonnes, et pourtant chacune a sa définition : elle est attachée au nom de la colonne et écrite une seule fois, dans un dictionnaire métier. Conventions de nommage, garde-fous pour les agents de code, data portal généré : comment une seule façon de nommer supprime la dérive des définitions.">
     <meta name="twitter:image" content="https://unytics.io/assets/unytics_social_image.png">
 
@@ -85,10 +85,10 @@
                 </div>
                 <div class="blog-post-header">
                     <p class='blog-post-date'>2026-11-04</p>
-                    <h1>Un nom, une définition : comment nous documentons 1 800 colonnes sans documenter un seul modèle dbt</h1>
+                    <h1>Un nom, une définition : comment nous documentons 1800 colonnes sans documenter un seul modèle dbt</h1>
                 </div>
                 <div class="blog-post-content">
-                    <p>Chez Optic 2000, notre data platform compte plus de 350 modèles dbt et quelque 1 800 noms de colonnes. Chacun a sa définition, consultable par tous dans notre data portal et rangée par entité métier.</p>
+                    <p>Chez Optic 2000, notre data platform compte plus de 350 modèles dbt et quelque 1800 noms de colonnes. Chacun a sa définition, consultable par tous dans notre data portal et rangée par entité métier.</p>
 <p>Pourtant, ouvrez n'importe quel fichier YAML de nos modèles dbt : vous n'y trouverez pas une seule description de colonne.</p>
 <p>Ce n'est pas un oubli. C'est le cœur de notre approche : <strong>nous ne documentons pas les modèles, nous documentons les noms.</strong></p>
 <p>Dans un projet dbt classique, chaque modèle redécrit ses colonnes dans son fichier YAML. Le même identifiant client est décrit dans le staging, puis dans le modèle intermédiaire, puis dans le mart, puis dans l'export : quatre copies d'une même définition, écrites à des moments différents par des personnes différentes. Elles finissent toujours par diverger. Une correction n'est faite qu'à un endroit ; une nouvelle colonne arrive sans description, parce que remplir le YAML est une corvée ; et le jour où deux descriptions se contredisent, plus personne ne sait laquelle croire.</p>
@@ -159,7 +159,7 @@
 <p>La description du modèle dit ce que représente une ligne. Ce que signifie chaque colonne, le dictionnaire le dit déjà.</p>
 <p>Trois principes complètent la règle :</p>
 <ul>
-<li><strong>Une entité est un domaine métier large</strong> — client, produit, magasin —, jamais une table source, un fournisseur ou un agrégat. Une table de paramétrage qui ne fait que traduire un code en libellé n'est pas une entité : ses libellés rejoignent l'entité qu'ils décrivent. C'est ce qui garde le dictionnaire lisible à 1 800 colonnes.</li>
+<li><strong>Une entité est un domaine métier large</strong> — client, produit, magasin —, jamais une table source, un fournisseur ou un agrégat. Une table de paramétrage qui ne fait que traduire un code en libellé n'est pas une entité : ses libellés rejoignent l'entité qu'ils décrivent. C'est ce qui garde le dictionnaire lisible à 1800 colonnes.</li>
 <li><strong>Une définition décrit le concept, pas sa fabrication.</strong> Elle ne cite ni le nom technique d'un champ source ni un modèle dbt : <code>email_client</code> reste « l'adresse e-mail du client » le jour où l'on change de CRM ou de modèle.</li>
 <li><strong>Le dictionnaire dit ce qu'une colonne signifie ; la couche sémantique dit comment l'agréger.</strong> Le SQL des métriques vit dans notre couche sémantique, que je décrivais dans <a href="https://unytics.io/blog/fr/optic-2000-independence/">cet article sur l'indépendance</a>. Ses entités portent le nom d'une entité du dictionnaire et n'ont pas de description propre : elles héritent de la sienne. Un indicateur que personne ne matérialise, comme un panier moyen, n'existe que dans la couche sémantique ; le dictionnaire ne documente que des colonnes réelles.</li>
 </ul>
