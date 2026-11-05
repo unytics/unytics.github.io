@@ -43,6 +43,8 @@ schedule: "0 6 * * *"
 
 Terraform lit ce YAML et déploie le job sur AWS Lambda ou ECS Fargate. Personne ne touche à la console AWS, n'écrit de Terraform ni ne gère d'infrastructure.
 
+Séparer ainsi la configuration de la plomberie de déploiement est le socle d'une plateforme que 25 personnes peuvent modifier presque sans relecture ; je décris toute l'approche dans [Ennuyeusement simple](https://unytics.io/blog/fr/boringly-simple-data-platform/).
+
 ---
 
 ## Pourquoi la standardisation rend les agents de code fiables
