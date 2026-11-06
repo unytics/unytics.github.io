@@ -10,7 +10,7 @@ Dans [Personne ne code à la main](https://unytics.io/blog/fr/nobody-codes-by-ha
 
 Chaque modification passe toujours par une Pull Request validée par un humain. Mais dans la plupart d'entre elles, il ne nous reste presque rien à relire. Non pas parce que nous faisons davantage confiance aux agents qu'avant, mais parce que nous avons conçu la plateforme pour qu'une erreur soit presque impossible à exprimer dans une contribution.
 
-Notre plateforme est volontairement **ennuyeuse**. Ajouter une source de données, c'est écrire un fichier YAML. Déployer une fonction, c'est un fichier Python et quelques lignes de YAML. Publier une page d'app, c'est sortir un fichier d'un dossier. Tout ce qui est difficile — infrastructure, sécurité, déploiement, supervision — est écrit une fois, par l'équipe plateforme, dans ce que j'appellerai la **plomberie**. Les contributeurs n'ont jamais besoin d'y toucher, leurs agents non plus.
+Notre plateforme est volontairement **ennuyeuse**. Ajouter une source de données, c'est écrire un fichier YAML. Déployer une fonction, c'est un fichier Python et quelques lignes de YAML. Publier une data app, c'est sortir un fichier d'un dossier. Tout ce qui est difficile — infrastructure, sécurité, déploiement, supervision — est écrit une fois, par l'équipe plateforme, dans ce que j'appellerai la **plomberie**. Les contributeurs n'ont jamais besoin d'y toucher, leurs agents non plus.
 
 Cet article décrit les cinq principes qui font cet ennui, et ce qu'ils changent pour une équipe plateforme. Comme dans [Un nom, une définition](https://unytics.io/blog/fr/one-name-one-definition/), les détails techniques sont rangés dans des sections dépliables, pour ceux qui veulent les reproduire.
 
@@ -18,7 +18,7 @@ Cet article décrit les cinq principes qui font cet ennui, et ce qu'ils changent
 
 ## Pourquoi viser l'ennui
 
-Une data platform contient deux sortes de code. La **configuration** dit *de quoi* l'entreprise a besoin : telle source et ses tables, telle fonction et sa planification, tel rôle et ce qu'il peut lire, telle page et son propriétaire. La **plomberie** dit *comment* le déployer : permissions cloud, droits dans l'entrepôt, règles de load balancer, définitions de conteneurs, étapes de CI, alertes.
+Une data platform contient deux sortes de code. La **configuration** dit *de quoi* l'entreprise a besoin : telle source et ses tables, telle fonction et sa planification, tel rôle et ce qu'il peut lire, telle data app et son propriétaire. La **plomberie** dit *comment* le déployer : permissions cloud, droits dans l'entrepôt, règles de load balancer, définitions de conteneurs, étapes de CI, alertes.
 
 Dans la plupart des plateformes, les deux sont entremêlées. Ajouter une source, c'est copier un module Terraform, ajouter une permission cloud, brancher une notification, déclarer une alerte. Chaque contribution touche à la plomberie, donc chaque revue doit vérifier la plomberie : cette permission est-elle trop large ? Cette règle va-t-elle entrer en collision avec une autre ? L'alerte est-elle branchée ? C'est une revue de spécialiste. Elle ne passe pas à l'échelle de 25 contributeurs, encore moins de leurs agents, qui écriront volontiers une policy parfaitement plausible donnant accès à tous les buckets.
 
@@ -32,13 +32,13 @@ Les ingénieurs connaissent le conseil « choisir une technologie ennuyeuse » (
 
 ## Principe 1 : séparer la configuration de la plomberie
 
-Toute la plateforme est pilotée par une poignée de fichiers YAML. Terraform les lit et déploie, en boucle, tout ce qu'ils décrivent : personne n'écrit de Terraform pour ajouter une source, une fonction, une app ou un rôle.
+Toute la plateforme est pilotée par une poignée de fichiers YAML. Terraform les lit et déploie, en boucle, tout ce qu'ils décrivent : personne n'écrit de Terraform pour ajouter une source, une fonction, une app web ou un rôle.
 
 | Fichier de configuration | Ce que déclare un contributeur | Ce que déploie la plomberie |
 |---|---|---|
 | `load/<source>.yml` | les tables d'une source, leurs colonnes et les fichiers qui les alimentent | un schéma dans l'entrepôt, un stage, une table et un Snowpipe par table, la surveillance de la fraîcheur |
 | `functions.yml` | la planification ou le déclencheur d'une fonction, son timeout et sa mémoire | une fonction Lambda ou une tâche Fargate, sa planification ou son déclencheur, ses logs, ses alarmes et la détection de ses plantages |
-| `apps.yml` | la taille d'une app, et éventuellement ses chemins et son environnement | un service de conteneurs, sa règle de load balancer derrière l'authentification de l'entreprise, son health check et ses logs |
+| `apps.yml` | la taille d'une app web, et éventuellement ses chemins et son environnement | un service de conteneurs, sa règle de load balancer derrière l'authentification de l'entreprise, son health check et ses logs |
 | `snowflake_roles.yml` | un rôle : quels warehouses, quelles bases ou quels schémas, avec quels privilèges | tous les droits, sur les objets existants et futurs |
 | `snowflake_users.yml` | une personne : son email et ses rôles | un utilisateur dans l'entrepôt, son rôle par défaut et l'attribution de ses rôles |
 
@@ -80,8 +80,6 @@ Une fois la Pull Request mergée, le pipeline de déploiement fait le reste : la
 Relire une telle contribution, c'est relire une déclaration : une planification, une taille de mémoire, la description d'une table. Le relecteur ne vérifie pas si une permission cloud est trop large ou si un Snowpipe est branché sur la bonne notification : il n'y a ni permission ni Snowpipe dans le diff. Ils ont été relus une fois, quand la plomberie a été écrite, et ce sont les mêmes pour toutes les sources.
 
 Quand surgit un besoin que la configuration ne sait pas exprimer, nous ne faisons pas d'exception : **nous étendons la configuration, pour tout le monde, avec un champ optionnel.** Une fonction qui décompresse de grosses archives a besoin de plus de disque : `ephemeral_storage`. Une fonction qui appelle une API au rate limit strict ne doit jamais tourner plus de deux fois en même temps : `max_concurrency`. Une table rafraîchie une fois par semaine ne doit pas lever d'alerte de fraîcheur tous les jours : `max_staleness_hours`. Une source qui ne produit pas encore, ou qui est en panne le temps que son fournisseur la répare : `muted_until`, avec une date après laquelle la supervision reprend d'elle-même. Chaque champ a été ajouté une fois à la plomberie, et il est désormais à la disposition de tous les contributeurs, sans nouveau pattern à copier.
-
-Même une deuxième app, c'est de la configuration. L'app que nous servons à nos magasins n'est pas une base de code à part : c'est la même image que nos apps internes, déclarée une seconde fois dans `apps.yml` avec quelques variables d'environnement — un menu restreint à sa propre section, pas de pages en construction.
 
 Et l'accès à l'entrepôt, c'est aussi de la configuration. Les jeux de privilèges sont définis une fois, et chaque rôle les combine ; une personne, c'est un email et une liste de rôles. Aucun `GRANT` n'est jamais lancé à la main : un privilège manquant est ajouté au YAML et déployé comme tout le reste. Le fichier YAML *est* la politique d'accès — versionnée, lisible par tous, relue comme n'importe quel changement.
 
@@ -150,9 +148,9 @@ Chaque champ que remplit un contributeur est un champ qu'il peut mal remplir. No
 
 * **Où tourne une fonction.** Une fonction Lambda ne peut pas tourner plus de 15 minutes ni utiliser plus de 10 Go de mémoire. Nos fonctions déclarent leur `timeout` et leur `memory` ; quand elles demandent plus que ce que Lambda permet, la plomberie les déploie à la place en tâche Fargate planifiée — même fichier Python, même décorateur, même remontée des statuts. Il n'y a pas de champ `backend`, donc aucun backend ne peut contredire le timeout.
 * **Combien de CPU.** Fargate n'accepte que certaines paires de CPU et de mémoire. Déclarer le CPU ne serait qu'une occasion de déclarer une paire invalide : la plomberie choisit donc le plus petit CPU valide pour la mémoire demandée. Une tâche qui a besoin de plus de calcul demande plus de mémoire.
-* **Où vit une app.** L'URL d'une app, c'est son nom, et son health check a un chemin par défaut. Sa règle de load balancer a besoin d'une priorité, unique parmi toutes les apps. Personne ne la choisit, et ce n'est pas non plus le rang de l'app dans l'ordre alphabétique : ajouter une app décalerait toutes celles qui la suivent, et le load balancer refuse deux règles de même priorité, même un instant. Elle est déduite d'un hash du nom de l'app : ajouter ou retirer une app ne déplace jamais les autres.
+* **Où vit une app web.** L'URL d'une app web, c'est son nom, et son health check a un chemin par défaut. Sa règle de load balancer a besoin d'une priorité, unique parmi toutes les apps web. Personne ne la choisit, et ce n'est pas non plus son rang dans l'ordre alphabétique : ajouter une app web décalerait toutes celles qui la suivent, et le load balancer refuse deux règles de même priorité, même un instant. Elle est déduite d'un hash du nom : ajouter ou retirer une app web ne déplace jamais les autres.
 * **Comment s'appellent les choses.** Le schéma d'une source dans l'entrepôt porte le nom de son fichier YAML. Le nom d'utilisateur d'une personne dans l'entrepôt est déduit de son email, et son premier rôle est son rôle par défaut.
-* **Ce qu'affiche le menu.** Nos apps Streamlit n'ont pas de fichier de menu : le menu, c'est l'arborescence des dossiers. Une section est un dossier avec un court `_section.yml`, et chaque page déclare elle-même, dans son propre fichier, son titre, son icône, sa description et son propriétaire :
+* **Ce qu'affiche le menu.** Nos data apps — des tableaux de bord et de petits outils métier, chacune un seul fichier Python — sont listées dans un menu, mais il n'y a pas de fichier de menu : le menu, c'est l'arborescence des dossiers. Une section est un dossier avec un court `_section.yml`, et chaque data app déclare elle-même, dans son propre fichier, son titre, son icône, sa description et son propriétaire :
 
 ```python
 page.config(
@@ -163,7 +161,7 @@ page.config(
 )
 ```
 
-Ajouter une page, c'est ajouter un fichier ; supprimer le fichier retire la page du menu. Pas de liste centrale à mettre à jour, pas d'entrée de menu qui pointe vers une page disparue. Même publier, c'est déplacer un fichier : une nouvelle page démarre dans un dossier « en construction », que l'app servie à nos magasins n'affiche jamais ; elle y apparaît quand le fichier en sort.
+Ajouter une data app, c'est ajouter un fichier ; supprimer le fichier la retire du menu. Pas de liste centrale à mettre à jour, pas d'entrée de menu qui pointe vers une data app disparue. Même publier, c'est déplacer un fichier : une nouvelle data app démarre dans un dossier « en construction », que l'app web servie à nos magasins n'affiche jamais ; elle y apparaît quand le fichier en sort.
 
 La déduction a un second avantage : la plateforme peut évoluer sans que personne ne migre quoi que ce soit. Si les limites de Lambda changent demain, nous changeons une règle dans la plomberie, et chaque fonction atterrit là où elle doit au déploiement suivant.
 
@@ -171,13 +169,13 @@ La déduction a un second avantage : la plateforme peut évoluer sans que person
 
 ## Principe 3 : un seul endroit pour chaque type de logique
 
-La configuration règle la question de l'infrastructure. Mais les contributeurs écrivent aussi de la logique : des fonctions Python, des modèles SQL, des pages d'app. Là, la même idée prend une autre forme : **chaque type de logique a exactement un endroit où vivre**, et les frontières sont strictes.
+La configuration règle la question de l'infrastructure. Mais les contributeurs écrivent aussi de la logique : des fonctions Python, des modèles SQL, des data apps. Là, la même idée prend une autre forme : **chaque type de logique a exactement un endroit où vivre**, et les frontières sont strictes.
 
 * **Une fonction dépose sa source telle quelle.** Chaque champ que renvoie la source, sous le nom que lui donne la source, objets imbriqués et tableaux conservés entiers : ni renommage, ni filtre, ni aplatissement. Toute la transformation se fait dans dbt. Une extraction n'a rien à décider, et nulle part où cacher une règle métier.
 * **Les données n'entrent dans l'entrepôt que par un chemin.** Chaque source atterrit d'abord dans S3, et Snowpipe la charge : aucune fonction n'écrit jamais directement dans l'entrepôt. Chaque ligne brute remonte à son fichier, et n'importe quel chargement peut être rejoué.
-* **La logique métier vit dans dbt, les métriques dans la couche sémantique.** Un ratio est calculé par la couche sémantique comme un ratio de sommes, jamais moyenné dans une page. Les comparaisons d'une année sur l'autre — à quelle période comparer, quels magasins inclure — sont calculées par un seul moteur, à partir d'une règle écrite une fois dans les guides de notre portail data ; aucune page ni aucune requête ad hoc ne les recalcule. Même un agent qui répond à une question ad hoc interroge d'abord la couche sémantique, pour que ses chiffres soient ceux des apps.
+* **La logique métier vit dans dbt, les métriques dans la couche sémantique.** Un ratio est calculé par la couche sémantique comme un ratio de sommes, jamais moyenné dans une data app. Les comparaisons d'une année sur l'autre — à quelle période comparer, quels magasins inclure — sont calculées par un seul moteur, à partir d'une règle écrite une fois dans les guides de notre portail data ; aucune data app ni aucune requête ad hoc ne les recalcule. Même un agent qui répond à une question ad hoc interroge d'abord la couche sémantique, pour que ses chiffres soient ceux des data apps.
 * **Les définitions vivent dans le dictionnaire métier**, rattachées aux noms de colonnes, comme décrit dans [Un nom, une définition](https://unytics.io/blog/fr/one-name-one-definition/).
-* **L'apparence vit dans une charte graphique.** Les pages ne stylent pas elles-mêmes leurs cartes d'indicateurs ou leurs tableaux : elles appellent les helpers d'un module de charte graphique partagé, pour que des pages écrites par des personnes différentes ressemblent à une seule et même app.
+* **L'apparence vit dans une charte graphique.** Les data apps ne stylent pas elles-mêmes leurs cartes d'indicateurs ou leurs tableaux : elles appellent les helpers d'un module de charte graphique partagé, pour que des data apps écrites par des personnes différentes ressemblent à un seul et même produit.
 * **Les explications vivent à côté de ce qu'elles expliquent.** L'entrée d'une fonction dans `functions.yml` ne porte aucun commentaire explicatif : ce que la fonction extrait, pourquoi cette planification, comment fonctionne son chargement incrémental, tout cela va dans la docstring de son fichier Python, que le portail data publie sur la page de la fonction. La définition d'une métrique vit dans sa description, dans la couche sémantique, et le portail l'affiche.
 
 Quand chaque type de logique a un seul endroit, **un relecteur ne se demande plus *où* une chose devrait être, seulement *si* elle est juste.** Et un agent n'a jamais à choisir entre deux endroits : il n'y en a qu'un.
@@ -188,23 +186,23 @@ Quand chaque type de logique a un seul endroit, **un relecteur ne se demande plu
 
 Un contributeur ne devrait pas avoir à *penser* à la sécurité, au déploiement ni à la supervision. Quand quelque chose compte, c'est intégré à la plomberie, sans moyen d'y échapper — et **ce qui ne peut pas être oublié n'a pas besoin d'être vérifié.**
 
-### La sécurité à la porte, pas dans la page
+### La sécurité à la porte, pas dans chaque data app
 
-Nos apps sont derrière un load balancer qui exige l'authentification de l'entreprise avant qu'une seule requête ne les atteigne, et chaque app revérifie l'identité de l'utilisateur via une bibliothèque partagée. Un responsable de magasin ne voit que les chiffres de ses propres magasins, parce que le périmètre est appliqué par la couche sémantique, à partir de l'identité de l'utilisateur, pour toutes les pages à la fois — que la question vienne d'une app, d'une carte Teams ou d'un assistant IA via notre serveur MCP. Un contributeur qui construit une page ne peut pas oublier un contrôle de sécurité : il n'y en a aucun à écrire.
+Nos apps web sont derrière un load balancer qui exige l'authentification de l'entreprise avant qu'une seule requête ne les atteigne, et chacune revérifie l'identité de l'utilisateur via une bibliothèque partagée. Un responsable de magasin ne voit que les chiffres de ses propres magasins, parce que le périmètre est appliqué par la couche sémantique, à partir de l'identité de l'utilisateur, pour toutes les data apps à la fois — que la question vienne d'une data app, d'une carte Teams ou d'un assistant IA via notre serveur MCP. Un contributeur qui construit une data app ne peut pas oublier un contrôle de sécurité : il n'y en a aucun à écrire.
 
 Les agents sont logés à la même enseigne. Sur le poste d'un contributeur, l'agent se connecte à l'entrepôt avec le compte et les rôles du contributeur lui-même : l'agent d'un contributeur du marketing ne peut pas lire ce que le marketing ne peut pas lire.
 
 ### La configuration là où son propriétaire peut la changer
 
-**Mettez chaque élément de configuration là où son propriétaire peut le changer sans risque.** L'infrastructure a sa place dans du YAML relu. Qui peut ouvrir quelle page d'app, non : cela change souvent, et ce sont des managers qui en décident, pas des contributeurs. Nous avons d'abord déclaré les accès dans le fichier de chaque page, puis nous les avons complètement sortis du repository. Aujourd'hui, ils vivent dans une base de données, modifiée depuis une page « Permissions » par une poignée de managers. Une page dont l'accès n'a été donné à personne n'est ouverte qu'à son propriétaire et aux admins. Une demande d'accès arrive dans Teams avec un lien qui ouvre cette personne et cette app, et suggère les groupes qui lui donneraient l'accès en ouvrant le moins d'autres apps possible. Une Pull Request ne peut pas donner d'accès : aucun relecteur n'a donc à vérifier qui peut voir quoi.
+**Mettez chaque élément de configuration là où son propriétaire peut le changer sans risque.** L'infrastructure a sa place dans du YAML relu. Qui peut ouvrir quelle data app, non : cela change souvent, et ce sont des managers qui en décident, pas des contributeurs. Nous avons d'abord déclaré les accès dans le fichier de chaque data app, puis nous les avons complètement sortis du repository. Aujourd'hui, ils vivent dans une base de données, modifiée par une poignée de managers depuis une data app dédiée. Une data app dont l'accès n'a été donné à personne n'est ouverte qu'à son propriétaire et aux admins. Une demande d'accès arrive dans Teams avec un lien qui ouvre cette personne et cette data app, et suggère les groupes qui lui donneraient l'accès en ouvrant le moins d'autres data apps possible. Une Pull Request ne peut pas donner d'accès : aucun relecteur n'a donc à vérifier qui peut voir quoi.
 
 Il en va de même pour un paramètre qu'un opérateur doit pouvoir changer sans ingénieur : il va dans un stockage clé-valeur où il peut écrire, pas dans le code. Les secrets contiennent des identifiants, rien d'autre.
 
 ### Un seul chemin de déploiement
 
-Un merge sur main déclenche le seul chemin de déploiement. Selon les fichiers modifiés, le pipeline reconstruit ce qui doit l'être, dans un ordre fixe : l'infrastructure d'abord, puis les transformations de données, puis le code et les apps qui les lisent — le code n'est donc jamais livré avant les données qu'il attend. Même les définitions des métriques sont livrées avec les données : le run dbt les publie à côté des exports qu'il produit, et chaque app récupère la nouvelle version en quelques minutes.
+Un merge sur main déclenche le seul chemin de déploiement. Selon les fichiers modifiés, le pipeline reconstruit ce qui doit l'être, dans un ordre fixe : l'infrastructure d'abord, puis les transformations de données, puis le code et les apps web qui les lisent — le code n'est donc jamais livré avant les données qu'il attend. Même les définitions des métriques sont livrées avec les données : le run dbt les publie à côté des exports qu'il produit, et chaque data app récupère la nouvelle version en quelques minutes.
 
-Une Pull Request construit les modèles qu'elle modifie dans un schéma qui lui est propre, où relecteurs et agents peuvent les comparer à la production. Mais elle ne peut rien déployer, ni par accident ni volontairement : le cloud ne délivre d'identifiants de production qu'aux pipelines qui tournent sur main. Et quand une app se comporte mal après un déploiement, revenir en arrière tient en une ligne dans `apps.yml` : épingler son image sur le commit précédent.
+Une Pull Request construit les modèles qu'elle modifie dans un schéma qui lui est propre, où relecteurs et agents peuvent les comparer à la production. Mais elle ne peut rien déployer, ni par accident ni volontairement : le cloud ne délivre d'identifiants de production qu'aux pipelines qui tournent sur main. Et quand une app web se comporte mal après un déploiement, revenir en arrière tient en une ligne dans `apps.yml` : épingler son image sur le commit précédent.
 
 ### Une supervision intégrée à chaque fonction
 
@@ -222,10 +220,10 @@ Un contributeur obtient tout cela pour sa fonction sans en écrire une ligne.
 
 ## Principe 5 : mettre les règles là où travaille l'agent
 
-La configuration et la plomberie éliminent l'essentiel de la marge d'erreur. Ce qui reste — SQL, Python, pages d'app — est écrit par des agents. Pour cette partie, les règles doivent atteindre l'agent au moment où il agit, et la machine doit les vérifier.
+La configuration et la plomberie éliminent l'essentiel de la marge d'erreur. Ce qui reste — SQL, Python, data apps — est écrit par des agents. Pour cette partie, les règles doivent atteindre l'agent au moment où il agit, et la machine doit les vérifier.
 
-* **Des instructions à côté du code qu'elles régissent.** Un fichier d'instructions à la racine (`CLAUDE.md`, pour Claude Code) décrit la plateforme et ses règles non négociables. Chaque dossier principal — ingestion, fonctions, infrastructure, apps — a le sien, que l'agent charge quand il y travaille. Les règles propres à un type de fichier — YAML, Terraform, Python, Markdown — ne se chargent que quand l'agent touche un tel fichier. Le contexte de l'agent contient les règles de ce qu'il fait, pas tout le règlement.
-* **Un skill pour chaque type de tâche.** Avant de toucher à un modèle dbt, l'agent charge le skill dbt : couches, nommage, tests, style SQL, et une porte de sortie avant de rendre la main. De même pour les pages d'app et pour la charte graphique. Et les contributeurs publient en une seule commande : un skill commite leur travail, le pousse, ouvre la Pull Request avec ses relecteurs et en rédige la description — y compris ce qu'un relecteur ne doit pas manquer, comme l'arrêt d'une alimentation de données.
+* **Des instructions à côté du code qu'elles régissent.** Un fichier d'instructions à la racine (`CLAUDE.md`, pour Claude Code) décrit la plateforme et ses règles non négociables. Chaque dossier principal — ingestion, fonctions, infrastructure, apps web — a le sien, que l'agent charge quand il y travaille. Les règles propres à un type de fichier — YAML, Terraform, Python, Markdown — ne se chargent que quand l'agent touche un tel fichier. Le contexte de l'agent contient les règles de ce qu'il fait, pas tout le règlement.
+* **Un skill pour chaque type de tâche.** Avant de toucher à un modèle dbt, l'agent charge le skill dbt : couches, nommage, tests, style SQL, et une porte de sortie avant de rendre la main. De même pour les data apps et pour la charte graphique. Et les contributeurs publient en une seule commande : un skill commite leur travail, le pousse, ouvre la Pull Request avec ses relecteurs et en rédige la description — y compris ce qu'un relecteur ne doit pas manquer, comme l'arrêt d'une alimentation de données.
 * **Des contrôles à l'écriture.** Quand l'agent modifie le dictionnaire métier ou la couche sémantique, un hook relance leur contrôle et renvoie toute violation à l'agent, qui la corrige avant qu'un humain ne voie le diff — comme décrit dans [Un nom, une définition](https://unytics.io/blog/fr/one-name-one-definition/).
 
 <details>
@@ -235,12 +233,12 @@ La configuration et la plomberie éliminent l'essentiel de la marge d'erreur. Ce
 load/CLAUDE.md                     conventions d'ingestion
 functions/CLAUDE.md                conventions des fonctions
 infra/CLAUDE.md                    conventions d'infrastructure
-data_portal/CLAUDE.md              conventions des apps
+data_portal/CLAUDE.md              conventions des apps web
 .claude/rules/yml.md               chargé quand l'agent touche un fichier YAML
 .claude/rules/terraform.md         chargé quand il touche un fichier Terraform
 .claude/rules/python-standards.md  chargé quand il touche un fichier Python
 .claude/skills/dbt-model/          chargé avant de créer ou de modifier un modèle dbt
-.claude/skills/streamlit/          chargé avant de créer ou de modifier une page d'app
+.claude/skills/streamlit/          chargé avant de créer ou de modifier une data app
 .claude/skills/publish-pr/         commit, push et Pull Request en une seule commande
 .claude/skills/review-*/           revue d'une Pull Request, verdict MERGE ou NO MERGE
 .claude/settings.json              hooks</code></pre>
@@ -259,19 +257,13 @@ paths:
 
 ### Des règles sur les règles
 
-Les fichiers d'instructions dérivent comme toute documentation. Quelques méta-règles les gardent affûtés :
-
-* **Chaque correction devient une règle.** Quand nous corrigeons l'agent, il inscrit la leçon dans le bon fichier d'instructions avant de continuer, sous forme de règle, avec la raison technique qui la justifie. La même erreur ne se reproduit pas.
-* **Une règle, un seul endroit.** Une règle métier est écrite une fois, dans les guides du portail data, pour les humains comme pour les agents ; les instructions et les skills ne font qu'y renvoyer. Deux copies d'une règle finissent par se contredire, et l'agent suivra la mauvaise.
-* **Pas de chiffres réels dans les règles.** Un exemple tiré de données réelles — un taux de croissance, un panier, un nombre de magasins — se périme en un mois et transforme une règle juste en règle trompeuse. Les exemples utilisent des chiffres ronds et inventés.
-* **Le contributeur décide, l'agent signale.** Quand une instruction explicite d'un contributeur entre en conflit avec une convention, l'agent applique l'instruction et signale le conflit en une phrase, pour qu'un humain arbitre. Un agent qui « sait mieux » en silence produit le pire des bugs : un bug plausible.
-* **Les commentaires décrivent le code, pas son histoire.** Pas de « à la demande de… », pas de « temporaire, le temps de… », pas de « anciennement… » : l'histoire d'une décision a sa place dans la Pull Request, pas dans du code que les agents liront et copieront.
+Les fichiers d'instructions dérivent comme toute documentation. Deux méta-règles les gardent affûtés. **Chaque correction devient une règle** : quand nous corrigeons l'agent, il inscrit la leçon dans le bon fichier d'instructions, avec sa raison technique, avant de continuer, et la même erreur ne se reproduit pas. Et **chaque règle vit à un seul endroit** : une règle métier est écrite une fois, dans les guides du portail data, et les instructions ne font qu'y renvoyer, car deux copies finissent par se contredire et l'agent suit la mauvaise.
 
 ### Des règles apprises à la dure
 
 Plusieurs de nos règles les plus affûtées sont nées d'un incident. Volez-les sans scrupule :
 
-* **Ne jamais couper une alimentation encore lue.** Retirer la planification d'une fonction arrête d'un coup toutes les tables qu'elle alimente — et les lecteurs ne sont pas que des modèles dbt : certaines apps lisent directement des tables brutes. Cherchez dans tout le repository, basculez d'abord les lecteurs, puis coupez.
+* **Ne jamais couper une alimentation encore lue.** Retirer la planification d'une fonction arrête d'un coup toutes les tables qu'elle alimente — et les lecteurs ne sont pas que des modèles dbt : certaines data apps lisent directement des tables brutes. Cherchez dans tout le repository, basculez d'abord les lecteurs, puis coupez.
 * **Jamais de sourdine avec une coupure.** Mettre en sourdine l'alerte de fraîcheur d'une table au moment où l'on cesse de l'alimenter masque précisément le signal qui révélerait l'erreur.
 * **Un modèle ne lit que des données déjà en production.** L'ingestion part dans une première Pull Request, et les modèles qui la lisent dans une seconde, une fois les données arrivées.
 * **Pas d'écriture en production comme effet de bord d'un changement de code.** Une migration de données se lance après le déploiement du code qui en a besoin, sur un feu vert explicite, après un essai à blanc : jusque-là, la production lit encore l'ancien format.
@@ -281,7 +273,7 @@ Aucune de ces règles ne se voit dans un diff SQL. C'est précisément pour cela
 
 ### Des agents relecteurs avant les relecteurs humains
 
-Enfin, une contribution passe devant des agents relecteurs avant de passer devant nous. Deux skills de revue, l'un pour les modèles dbt, l'autre pour les pages d'app, lisent une Pull Request comme nous le ferions : les fichiers de règles sont leur checklist, et ils ne remontent que ce qui bloque — ce qui change un chiffre, un grain ou un nom de colonne, plante en production, touche aux droits d'accès ou à un fichier partagé par toutes les apps, ou fait doublon avec une page existante. Le style ne bloque jamais. Ils vérifient aussi les données : le relecteur dbt interroge les modèles construits par la Pull Request, et le relecteur des apps recalcule par des requêtes indépendantes les chiffres qu'affiche une page — les vrais bugs de nos revues d'apps passées ont tous été trouvés dans les données, pas dans le code. Si un contrôle ne peut pas tourner, le verdict n'est jamais un feu vert.
+Enfin, une contribution passe devant des agents relecteurs avant de passer devant nous. Deux skills de revue, l'un pour les modèles dbt, l'autre pour les data apps, lisent une Pull Request comme nous le ferions : les fichiers de règles sont leur checklist, et ils ne remontent que ce qui bloque — ce qui change un chiffre, un grain ou un nom de colonne, plante en production, touche aux droits d'accès ou à un fichier partagé par toutes les data apps, ou fait doublon avec une data app existante. Le style ne bloque jamais. Ils vérifient aussi les données : le relecteur dbt interroge les modèles construits par la Pull Request, et le relecteur des data apps recalcule par des requêtes indépendantes chaque chiffre qu'affiche la data app — les vrais bugs de nos revues de data apps passées ont tous été trouvés dans les données, pas dans le code. Si un contrôle ne peut pas tourner, le verdict n'est jamais un feu vert.
 
 Un verdict commence par un résumé en langage courant, écrit pour le contributeur, avant les détails techniques et les commentaires à poster sur la Pull Request (chiffres inventés) :
 
@@ -295,10 +287,6 @@ MERGE : NON, la carte « magasins actifs » affiche 120 magasins là où la déf
 4. Merger : NON.
 ```
 
-Nous ne les lançons même pas un par un. Une tournée de revue, lancée depuis une seule page, prend les Pull Requests ouvertes : elle règle les conflits de merge, relance la CI, exécute en parallèle les revues dbt et apps — plus une revue des conventions de tous les autres fichiers au regard de leurs instructions et de leurs règles — et affiche chaque verdict sous le titre de la Pull Request.
-
-Sur demande, un skill de recette teste les modèles d'une Pull Request comme le ferait un analyste métier — grain, valeurs manquantes, dimensions, mesures, réconciliation avec une référence — et publie son rapport, avec un verdict de merge, sur le portail data. Et pour les pages d'app, un script ouvre la page avant et après le changement dans un navigateur et compare les erreurs, les chiffres et les captures d'écran.
-
 L'approbation humaine ne disparaît pas. Chaque Pull Request est toujours validée par une personne, et les responsables métier répondent toujours de leur domaine : c'est la gouvernance, le sujet de [Personne ne code à la main](https://unytics.io/blog/fr/nobody-codes-by-hand/). Mais la validation repose désormais sur un verdict qui a déjà vérifié les conventions et les chiffres. Ce qui reste à l'humain, c'est la question qu'aucune machine ne peut trancher : est-ce la bonne chose à construire ?
 
 ---
@@ -306,8 +294,8 @@ L'approbation humaine ne disparaît pas. Chaque Pull Request est toujours valid�
 ## Ce que ça change
 
 * **La revue se réduit à ce qui compte.** La plupart des diffs sont des déclarations YAML et du code qui suit un pattern déjà vérifié par un agent relecteur. Nous lisons l'intention, pas la plomberie.
-* **Les agents font juste du premier coup.** Une plateforme ennuyeuse a un pattern par tâche. L'agent copie la dernière source, la dernière fonction, la dernière page — et il a raison.
-* **Les contributeurs construisent ce qu'ils connaissent.** Un contrôleur de gestion peut ajouter une source, un modèle et une page sans jamais entendre parler d'IAM, de VPC ou de droits dans l'entrepôt. Son expertise va dans la logique métier, là où nous en avons besoin.
+* **Les agents font juste du premier coup.** Une plateforme ennuyeuse a un pattern par tâche. L'agent copie la dernière source, la dernière fonction, la dernière data app — et il a raison.
+* **Les contributeurs construisent ce qu'ils connaissent.** Un contrôleur de gestion peut ajouter une source, un modèle et une data app sans jamais entendre parler d'IAM, de VPC ou de droits dans l'entrepôt. Son expertise va dans la logique métier, là où nous en avons besoin.
 * **La plomberie s'améliore pour tout le monde à la fois.** Quand nous améliorons la détection des plantages, resserrons un droit ou changeons une valeur par défaut, chaque fonction et chaque rôle en bénéficie au déploiement suivant. Personne ne migre son pipeline, parce que personne ne possède la plomberie d'un pipeline.
 * **L'infrastructure reste remplaçable.** Comme la configuration dit *quoi* et pas *comment*, passer une fonction de Lambda à Fargate — ou la plateforme chez un autre fournisseur — est un changement dans la plomberie, pas dans quarante contributions. C'est ce que je voulais dire, dans [mon article sur l'indépendance](https://unytics.io/blog/fr/optic-2000-independence/), par *la configuration est un actif, le métal est une commodité*.
 * **L'équipe plateforme devient une équipe produit.** Son produit, c'est la plomberie, les conventions et les agents relecteurs ; ses utilisateurs, ce sont les 25 contributeurs et leurs agents.
