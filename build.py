@@ -340,13 +340,23 @@ def build_blog_index(posts: list[dict], lang: str, template: str) -> None:
         else:
             post_url = f"/blog/fr/{post['slug']}/"
 
-        date_label = post.get("date", "")
+        badge_html = ""
         if post.get("kind"):
-            date_label = f"{date_label} · {post['kind']}" if date_label else post["kind"]
-        date_html = f'<p class="blog-card-date">{date_label}</p>' if date_label else ""
+            badge_html = (
+                '<span class="blog-card-badge">'
+                '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" '
+                'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+                '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M10 8l5 2-5 2z" fill="currentColor"/>'
+                f'</svg>{post["kind"]}</span>'
+            )
+        date_html = (
+            f'<p class="blog-card-date"><span>{post.get("date", "")}</span>{badge_html}</p>'
+            if post.get("date") or badge_html else ""
+        )
+        card_class = "blog-card blog-card-presentation" if post.get("kind") else "blog-card"
         desc_html = f"<p>{post['description']}</p>" if post.get("description") else ""
         cards.append(
-            f"""                <a href="{post_url}" class="blog-card">
+            f"""                <a href="{post_url}" class="{card_class}">
                     {date_html}
                     <h2>{post["title"]}</h2>
                     {desc_html}
@@ -566,7 +576,8 @@ def serve(port: int = 8000) -> None:
     handler = functools.partial(
         http.server.SimpleHTTPRequestHandler, directory=str(ROOT)
     )
-    with http.server.HTTPServer(("", port), handler) as httpd:
+    # Threading server: a browser keeps idle connections open, which would block a single-threaded server
+    with http.server.ThreadingHTTPServer(("", port), handler) as httpd:
         print(f"\nServing at http://localhost:{port}")
         print(f"  Homepage EN: http://localhost:{port}/")
         print(f"  Homepage FR: http://localhost:{port}/fr/")

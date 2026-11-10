@@ -1882,6 +1882,33 @@ footer a:hover {
     margin-bottom: 0.5rem;
 }
 
+.blog-card-presentation .blog-card-date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.blog-card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: #dbeafe;
+    color: var(--primary-dark);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    vertical-align: middle;
+}
+
+.blog-card-presentation {
+    border-left: none;
+    background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+    border-color: #bfdbfe;
+}
+
 .blog-card h2 {
     font-size: 1.5rem;
     text-align: left;
