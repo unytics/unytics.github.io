@@ -547,9 +547,9 @@ def build_all() -> None:
         fr_posts.append(fr_meta)
 
     # Link-only entries in either language (no translation required)
-    en_names = {p.name for p in en_md_files}
+    built_names = {p.name for p in en_md_files if not read_link_entry(p)}
     for fr_md_path in sorted(SRC.glob("blog/fr/*.md")):
-        if fr_md_path.name in en_names:
+        if fr_md_path.name in built_names:
             continue
         link = read_link_entry(fr_md_path)
         if link:

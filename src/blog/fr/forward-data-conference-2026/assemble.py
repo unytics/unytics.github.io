@@ -16,7 +16,24 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 DECK = HERE / "deck"
+
+# --- language-specific settings ---
+LANG = "fr"
 URL = "https://unytics.io/blog/fr/forward-data-conference-2026/"
+ALT_LANG = "en"
+ALT_URL = "https://unytics.io/blog/forward-data-conference-2026/"
+ALT_LABEL = "English"
+BLOG_URL = "/blog/fr/"
+LOCALE = "fr_FR"
+DESCRIPTION = ("Talk de Paul Marcombes à la Forward Data Conference 2026 : chez Optic 2000, le conversationnel est "
+               "mis au début de la chaîne, dans l'éditeur de code, et 25 contributeurs, en majorité des métiers, "
+               "construisent la data platform.")
+UI = {
+    "prev": "Slide précédente", "next": "Slide suivante", "notes": "Notes", "notes_aria": "Afficher les notes",
+    "fullscreen": "Plein écran", "slide": "Slide",
+    "hint": "&larr; &rarr; ou clic pour avancer &middot; N : notes de l’orateur &middot; F : plein écran",
+}
+# --- end of language-specific settings ---
 
 # Images uploaded to the artifact -> their copy in the site's /assets/
 BLOBS = {
@@ -24,26 +41,25 @@ BLOBS = {
     "/_blob/ad257a649f09457310ddea771c588e1b": "/assets/qr_linkedin.png",
 }
 
-DESCRIPTION = ("Talk de Paul Marcombes à la Forward Data Conference 2026 : chez Optic 2000, le conversationnel est "
-               "mis au début de la chaîne, dans l'éditeur de code, et 25 contributeurs, en majorité des métiers, "
-               "construisent la data platform.")
 FONTS = ("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700"
          "&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400..700&display=swap")
 
 PAGE = """<!DOCTYPE html>
-<html lang="fr">
+<html lang="__LANG__">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>__TITLE__ | Unytics</title>
 <meta name="description" content="__DESC__">
 <link rel="canonical" href="__URL__">
+<link rel="alternate" hreflang="__LANG__" href="__URL__">
+<link rel="alternate" hreflang="__ALT_LANG__" href="__ALT_URL__">
 <meta property="og:type" content="website">
 <meta property="og:url" content="__URL__">
 <meta property="og:title" content="__TITLE__">
 <meta property="og:description" content="__DESC__">
 <meta property="og:site_name" content="Unytics">
-<meta property="og:locale" content="fr_FR">
+<meta property="og:locale" content="__LOCALE__">
 <meta property="og:image" content="https://unytics.io/assets/unytics_social_image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="author" content="Paul Marcombes">
@@ -87,13 +103,14 @@ __SLIDES__
 <div id="notes" aria-live="polite"></div>
 <div id="ui">
 <span id="count"></span>
-<button id="prev" aria-label="Slide précédente">&larr;</button>
-<button id="next" aria-label="Slide suivante">&rarr;</button>
-<button id="nbtn" aria-label="Afficher les notes">Notes</button>
-<button id="fbtn" aria-label="Plein écran">Plein écran</button>
-<a href="/blog/fr/">Blog</a>
+<button id="prev" aria-label="__UI_prev__">&larr;</button>
+<button id="next" aria-label="__UI_next__">&rarr;</button>
+<button id="nbtn" aria-label="__UI_notes_aria__">__UI_notes__</button>
+<button id="fbtn" aria-label="__UI_fullscreen__">__UI_fullscreen__</button>
+<a href="__ALT_URL__" hreflang="__ALT_LANG__">__ALT_LABEL__</a>
+<a href="__BLOG_URL__">Blog</a>
 </div>
-<div id="hint">&larr; &rarr; ou clic pour avancer &middot; N : notes de l’orateur &middot; F : plein écran</div>
+<div id="hint">__UI_hint__</div>
 <script>
 (function(){
   var deck=document.getElementById('deck'),S=[].slice.call(deck.querySelectorAll(':scope > section'));
@@ -102,7 +119,7 @@ __SLIDES__
   var B=S.map(builds);
   function fit(){var k=Math.min(innerWidth/1920,innerHeight/1080);deck.style.transform='scale('+k+')'}
   function setStep(i,n){B[i].forEach(function(g,j){g.forEach(function(e){e.classList.toggle('shown',j<n)})})}
-  function renderNotes(){var a=S[cur].querySelector('aside');var t=a?a.textContent:'';notes.innerHTML='<div style="max-width:1100px;margin:0 auto"><div style="color:#94A3B8;font-size:13px;margin-bottom:6px">Slide '+(cur+1)+' / '+S.length+'</div>'+t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\\[clic\\]/g,'<b>[clic]</b>')+'</div>'}
+  function renderNotes(){var a=S[cur].querySelector('aside');var t=a?a.textContent:'';notes.innerHTML='<div style="max-width:1100px;margin:0 auto"><div style="color:#94A3B8;font-size:13px;margin-bottom:6px">__UI_slide__ '+(cur+1)+' / '+S.length+'</div>'+t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\\[clic\\]/g,'<b>[clic]</b>')+'</div>'}
   function magic(from,to){
     if(S[from].getAttribute('data-transition')!=='magic'||to!==from+1)return;
     var k=deck.getBoundingClientRect().width/1920;
@@ -164,8 +181,16 @@ def main() -> None:
             raise SystemExit(f"{sid}: image uploaded to the artifact with no copy in /assets/ (add it to BLOBS)")
         slides.append(s)
 
-    page = (PAGE.replace("__TITLE__", html.escape(index["title"])).replace("__DESC__", html.escape(DESCRIPTION))
-            .replace("__URL__", URL).replace("__FONTS__", FONTS).replace("__SLIDES__", "\n".join(slides)))
+    page = PAGE
+    for key, value in UI.items():
+        page = page.replace(f"__UI_{key}__", value)
+    for key, value in {
+        "__TITLE__": html.escape(index["title"]), "__DESC__": html.escape(DESCRIPTION), "__ALT_URL__": ALT_URL,
+        "__ALT_LANG__": ALT_LANG, "__ALT_LABEL__": ALT_LABEL, "__URL__": URL, "__LANG__": LANG,
+        "__LOCALE__": LOCALE, "__BLOG_URL__": BLOG_URL, "__FONTS__": FONTS,
+    }.items():
+        page = page.replace(key, value)
+    page = page.replace("__SLIDES__", "\n".join(slides))
     out = HERE / "index.html"
     out.write_text(page, encoding="utf-8", newline="\n")
     print(f"{len(slides)} slides -> {out} ({len(page) / 1024:.0f} KB)")
