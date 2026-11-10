@@ -6,17 +6,11 @@ date: 2026-11-16
 
 # Self-Service Analytics : pourquoi vos métiers ne doivent pas être que des consommateurs d'IA (mais aussi des Builders)
 
-*Cet article est le miroir écrit de mon talk donné lors de la Forward Data Conference 2026 : « L'analyse qui construit la plateforme : dites adieu au Ticketing 2.0 ».*
+En juin dernier, l'équipe Data d'Anthropic a raconté comment elle a construit son *self-service analytics* interne avec Claude. Branché « à froid » sur leur Data Warehouse, Claude ne donnait que **21 % de réponses exactes**. Avec un *harness* rigoureux (tables canoniques, couche sémantique, *Skills* documentés, validation automatisée), ils sont montés à **plus de 95 %**… avant de retomber à **65 % en un mois**, faute d'entretenir le contexte au fil de l'évolution des schémas et du produit.
 
-En juin dernier, l'équipe Data d'Anthropic a publié un retour d'expérience passionnant sur la façon dont elle a construit son propre *self-service analytics* interne avec Claude. Leurs chiffres résument à eux seuls le défi de toute notre industrie en 2026.
+La leçon : une IA en self-service ne vaut que par le contexte qu'on lui donne, et ce contexte doit être entretenu en permanence. Les équipes les plus avancées y parviennent aujourd'hui remarquablement bien, avec des *harness* rigoureux et des boucles de rétroaction proactives. Et tout le monde cherche à perfectionner l'expérience des métiers en tant que **consommateurs conversationnels** (*Consumers*).
 
-En branchant directement Claude « à froid » sur leur Data Warehouse pourtant très propre, **le taux de réponses exactes plafonnait à 21 %**. En construisant un *harness* rigoureux en quatre couches — tables canoniques, couche sémantique, *Skills* documentés et validation automatisée — **ils ont fait grimper la précision à plus de 95 %**. Mais le chiffre le plus instructif vient après : un mois seulement après le lancement, sans maintenance continue, **la précision de leur agent avait déjà chuté de 95 % à 65 %** sous l'effet de l'évolution naturelle des schémas et du produit. Pour maintenir le cap, **près de 90 % des Pull Requests** touchant un modèle de données chez Anthropic incluent désormais une mise à jour de *Skill* dans le même diff Git.
-
-Quelques semaines plus tard, Olga Berezovsky publiait une analyse remarquée sur son Substack (*« Self-Service Analytics Is Not Self-Service. But Don't Tell Anyone »*) en soulignant un détail : pour faire tourner cette mécanique, Anthropic emploie environ **30 professionnels de la data — soit près de 2 % des effectifs totaux de l'entreprise**. Sa conclusion : *« Il faut tout un village d'analystes »* pour faire fonctionner le self-service par l'IA.
-
-Faut-il vraiment une armée en central ? Pas nécessairement : aujourd'hui, des équipes ultra-modernes prouvent qu'avec une boucle de rétroaction IA bien pensée, 2 ou 3 personnes suffisent à servir toute une scale-up.
-
-Pourtant, en observant l'état de l'art actuel, je reste convaincu que notre écosystème s'arrête en chemin. Tout le monde cherche à perfectionner l'expérience des métiers en tant que **consommateurs conversationnels** (*Consumers*). Chez Optic 2000, nous avons fait le pari d'aller un cran plus loin : **permettre aux métiers de devenir eux-mêmes des Builders de la plateforme et de leurs applications opérationnelles.**
+Chez Optic 2000, nous suivons cette approche, mais nous sommes allés un cran plus loin : **les métiers sont aussi Builders — de la plateforme et de leurs propres applications opérationnelles.**
 
 ---
 
@@ -24,7 +18,7 @@ Pourtant, en observant l'état de l'art actuel, je reste convaincu que notre éc
 
 Depuis quinze ans, les équipes data poursuivent le même objectif : casser les silos et rendre les équipes métiers autonomes, parce que l'autonomie est le plus puissant levier de valeur d'une entreprise.
 
-Avec le *conversational analytics*, ce rêve est devenu tangible. Et les équipes les plus avancées ont résolu le problème des « 21 % de précision » d'Anthropic en industrialisant trois rôles bien distincts :
+Avec le *conversational analytics*, ce rêve est devenu tangible. Et les équipes les plus avancées, Anthropic en tête, ont résolu le problème du contexte en industrialisant trois rôles bien distincts :
 
 1. **Les Data Platformers**, qui construisent le *harness* technique (le mono-repo, le serveur MCP, la CI/CD, les évals).
 2. **Les Builders (l'équipe Data)**, qui modélisent la donnée et maintiennent le contexte métier dans le *harness*.
@@ -38,7 +32,7 @@ Soyons parfaitement honnêtes : lorsqu'elle est poussée à son maximum, cette o
 
 Regardez ce que font des équipes comme **Gorgias** (où 83 % des employés posent plus de 1 000 questions par jour grâce au *Context Engineering*) ou **Photoroom** (où Juliette Duizabo explique comment 3 personnes côté Data servent toute l'entreprise).
 
-Dans un éditeur de logiciel ou une scale-up de 60 à 150 personnes sans opérations physiques lourdes, avoir 2 ou 3 personnes à la Data (soit ces fameux 2 %) est tout à fait raisonnable. Surtout quand l'équipe centrale passe d'un mode réactif à une **boucle de rétroaction ultra-proactive** comme chez Jolimoi :
+Dans un éditeur de logiciel ou une scale-up de 60 à 150 personnes sans opérations physiques lourdes, avoir 2 ou 3 personnes à la Data (environ 2 % des effectifs) est tout à fait raisonnable. Surtout quand l'équipe centrale passe d'un mode réactif à une **boucle de rétroaction ultra-proactive** comme chez Jolimoi :
 
 | Brique de la boucle proactive | Ce que cela change concrètement |
 | ----- | ----- |

@@ -6,17 +6,11 @@ date: 2026-11-16
 
 # Self-Service Analytics: Why Your Business Teams Shouldn't Just Be AI Consumers (But Builders Too)
 
-*This article is the written version of the talk I gave at Forward Data Conference 2026: "The Analysis That Builds the Platform: Say Goodbye to Ticketing 2.0".*
+Last June, Anthropic's Data team shared how they built their internal *self-service analytics* with Claude. Plugged "cold" into their Data Warehouse, Claude gave only **21% correct answers**. With a rigorous *harness* (canonical tables, a semantic layer, documented *Skills*, automated validation), they climbed to **over 95%**… before falling back to **65% within a month**, because the context wasn't kept up to date as schemas and the product evolved.
 
-Last June, Anthropic's Data team published a fascinating write-up on how they built their own internal *self-service analytics* with Claude. Their numbers alone sum up the challenge our entire industry faces in 2026.
+The lesson: self-service AI is only as good as the context you give it, and that context has to be maintained continuously. The most advanced teams now do this remarkably well, with rigorous harnesses and proactive feedback loops. And everyone is trying to perfect the experience of business teams as **conversational consumers** (*Consumers*).
 
-By plugging Claude "cold" straight into their otherwise very clean Data Warehouse, **the rate of correct answers topped out at 21%**. By building a rigorous four-layer *harness* — canonical tables, a semantic layer, documented *Skills* and automated validation — **they pushed accuracy above 95%**. But the most telling number comes next: just one month after launch, without continuous maintenance, **their agent's accuracy had already dropped from 95% to 65%** as schemas and the product naturally evolved. To stay on course, **nearly 90% of Pull Requests** touching a data model at Anthropic now include a *Skill* update in the same Git diff.
-
-A few weeks later, Olga Berezovsky published a widely shared analysis on her Substack (*"Self-Service Analytics Is Not Self-Service. But Don't Tell Anyone"*), highlighting one detail: to keep this machine running, Anthropic employs around **30 data professionals — nearly 2% of the company's total headcount**. Her conclusion: *"It takes a village of analysts"* to make AI-powered self-service work.
-
-Do you really need an army at the center? Not necessarily: today, cutting-edge teams are proving that with a well-designed AI feedback loop, 2 or 3 people are enough to serve an entire scale-up.
-
-And yet, looking at the current state of the art, I remain convinced that our ecosystem is stopping halfway. Everyone is trying to perfect the experience of business teams as **conversational consumers** (*Consumers*). At Optic 2000, we bet on going one step further: **enabling business teams to become Builders of the platform and of their own operational applications.**
+At Optic 2000, we follow this approach too, but we went one step further: **business teams are Builders as well — of the platform and of their own operational applications.**
 
 ---
 
@@ -24,7 +18,7 @@ And yet, looking at the current state of the art, I remain convinced that our ec
 
 For fifteen years, data teams have pursued the same goal: break down silos and make business teams autonomous, because autonomy is a company's most powerful value lever.
 
-With *conversational analytics*, that dream has become tangible. And the most advanced teams have solved Anthropic's "21% accuracy" problem by industrializing three clearly distinct roles:
+With *conversational analytics*, that dream has become tangible. And the most advanced teams, Anthropic first among them, have solved the context problem by industrializing three clearly distinct roles:
 
 1. **Data Platformers**, who build the technical *harness* (the mono-repo, the MCP server, CI/CD, evals).
 2. **Builders (the Data team)**, who model the data and maintain business context in the *harness*.
@@ -38,7 +32,7 @@ Let's be completely honest: when pushed to its limit, this organization is remar
 
 Look at what teams like **Gorgias** (where 83% of employees ask more than 1,000 questions a day thanks to *Context Engineering*) or **Photoroom** (where Juliette Duizabo explains how 3 Data people serve the whole company) are doing.
 
-In a software company or a 60–150 person scale-up without heavy physical operations, having 2 or 3 people in Data (those famous 2%) is perfectly reasonable. Especially when the central team moves from a reactive mode to an **ultra-proactive feedback loop** like at Jolimoi:
+In a software company or a 60–150 person scale-up without heavy physical operations, having 2 or 3 people in Data (around 2% of headcount) is perfectly reasonable. Especially when the central team moves from a reactive mode to an **ultra-proactive feedback loop** like at Jolimoi:
 
 | Building block of the proactive loop | What it concretely changes |
 | ----- | ----- |
