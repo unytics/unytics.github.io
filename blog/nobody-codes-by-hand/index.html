@@ -112,6 +112,7 @@
 schedule: &quot;0 6 * * *&quot;
 </code></pre>
 <p>Terraform reads this YAML and deploys the job to AWS Lambda or ECS Fargate. Nobody touches the AWS console, writes Terraform, or manages infrastructure.</p>
+<p>Separating configuration from deployment glue like this is the foundation of a platform that 25 people can change with almost no review; I describe the whole approach in <a href="https://unytics.io/blog/boringly-simple-data-platform/">Boringly Simple</a>.</p>
 <hr />
 <h2>Why Standardization Is What Makes Coding Agents Reliable</h2>
 <p>As I explained in <a href="https://unytics.io/blog/best-tool-for-deep-dive-analyses/">Why Claude Code in VSCode is a Game Changer for Data Analysis</a>, a coding agent's effectiveness depends less on the raw intelligence of the LLM than on the project's context and constraints.</p>

@@ -43,6 +43,8 @@ schedule: "0 6 * * *"
 
 Terraform reads this YAML and deploys the job to AWS Lambda or ECS Fargate. Nobody touches the AWS console, writes Terraform, or manages infrastructure.
 
+Separating configuration from deployment glue like this is the foundation of a platform that 25 people can change with almost no review; I describe the whole approach in [Boringly Simple](https://unytics.io/blog/boringly-simple-data-platform/).
+
 ---
 
 ## Why Standardization Is What Makes Coding Agents Reliable

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boringly Simple: How 25 Contributors Change Our Data Platform With Almost No Review | Unytics Blog</title>
+    <meta name="description" content="At Optic 2000, 25 contributors and their AI agents change the data platform with almost no review from the platform team. The secret is a boringly simple platform: configuration separated from deployment glue, settings derived rather than declared, security and monitoring built in, and rules that reach the agent where it works.">
+    <link rel="canonical" href="https://unytics.io/blog/boringly-simple-data-platform/">
+
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://unytics.io/blog/boringly-simple-data-platform/">
+    <link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/boringly-simple-data-platform/">
+    <link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/boringly-simple-data-platform/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://unytics.io/blog/boringly-simple-data-platform/">
+    <meta property="og:title" content="Boringly Simple: How 25 Contributors Change Our Data Platform With Almost No Review | Unytics Blog">
+    <meta property="og:description" content="At Optic 2000, 25 contributors and their AI agents change the data platform with almost no review from the platform team. The secret is a boringly simple platform: configuration separated from deployment glue, settings derived rather than declared, security and monitoring built in, and rules that reach the agent where it works.">
+    <meta property="og:site_name" content="Unytics">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://unytics.io/blog/boringly-simple-data-platform/">
+    <meta name="twitter:title" content="Boringly Simple: How 25 Contributors Change Our Data Platform With Almost No Review | Unytics Blog">
+    <meta name="twitter:description" content="At Optic 2000, 25 contributors and their AI agents change the data platform with almost no review from the platform team. The secret is a boringly simple platform: configuration separated from deployment glue, settings derived rather than declared, security and monitoring built in, and rules that reach the agent where it works.">
+    <meta name="twitter:image" content="https://unytics.io/assets/unytics_social_image.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="https://unytics.io/assets/unytics_social_image.png">
+    <meta property="og:image:width" content="960">
+    <meta property="og:image:height" content="540">
+
+    <!-- Additional SEO -->
+    <meta name="author" content="Paul Marcombes">
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-YHunZhK65WvaJpQXfwUD_.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
+    
+</head>
+
+<body>
+    <a href="#content" class="skip-link">Skip to main content</a>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Unytics</a>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">About Unytics</a></li>
+                <li><a href="https://unytics.io/book-meeting/" target="_blank" class="btn-primary">Free Data Call</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="content">
+        
+        <article class="blog-post">
+            <div class="container">
+                <div class="blog-post-topbar">
+                    <a href="/blog/" class="blog-back-link">&larr; Blog</a>
+                    <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+                </div>
+                <div class="blog-post-header">
+                    <p class='blog-post-date'>2026-11-05</p>
+                    <h1>Boringly Simple: How 25 Contributors Change Our Data Platform With Almost No Review</h1>
+                </div>
+                <div class="blog-post-content">
+                    <p>In <a href="https://unytics.io/blog/nobody-codes-by-hand/">Nobody Codes by Hand</a>, I told how the number of people contributing to our data platform at Optic 2000 went from 4 to 25 — most of them business people, working through a coding agent. I ended with a lesson we were still learning: with 25 contributors, <strong>review becomes the critical path</strong>. A platform team of four can't read everything 25 people and their agents produce.</p>
+<p>Every change still goes through a Pull Request approved by a human. But in most of them, there's almost nothing left for us to review. Not because we trust agents more than we used to, but because we designed the platform so that a contribution can hardly express a mistake.</p>
+<p>Our platform is deliberately <strong>boring</strong>. Adding a data source means writing a YAML file. Deploying a function means a Python file and a few lines of YAML. Publishing a data app means moving a file out of a folder. Everything that's hard — infrastructure, security, deployment, monitoring — is written once, by the platform team, in what I'll call the <strong>glue</strong>. Contributors never need to touch it, and neither do their agents.</p>
+<p>This article describes the five principles behind that boredom, and what they change for a platform team. As in <a href="https://unytics.io/blog/one-name-one-definition/">One Name, One Definition</a>, the technical details are tucked away in collapsible sections, for those who want to replicate them.</p>
+<hr />
+<h2>Why Boring Is the Goal</h2>
+<p>A data platform contains two kinds of code. The <strong>configuration</strong> says <em>what</em> the company needs: this source and its tables, this function and its schedule, this role and what it can read, this data app and who owns it. The <strong>glue</strong> says <em>how</em> to deploy it: cloud permissions, warehouse grants, load balancer rules, container definitions, CI steps, alerts.</p>
+<p>In most platforms, the two are intertwined. Adding a source means copying a Terraform module, adding a cloud permission, wiring a notification, declaring an alert. Every contribution touches the glue, so every review has to check the glue: is this permission too broad? Will this rule collide with another? Is the alert wired? That's specialist review. It doesn't scale to 25 contributors, let alone to their agents, which will happily write a perfectly plausible policy granting access to every bucket.</p>
+<p>We made the opposite choice: <strong>contributors only write configuration, and the configuration can only say what the glue lets it say.</strong> What a contribution can't express, a reviewer doesn't have to check.</p>
+<p>It matters even more with coding agents. An agent reproduces what it sees in the repository. In a platform where each pipeline is deployed a little differently, it has a dozen patterns to choose from, and picks one without telling you which. In a boring platform, the thirtieth source looks exactly like the twenty-ninth: the agent copies the previous one, and it's right.</p>
+<p>Engineers know the advice to <em>choose boring technology</em>. We apply it one level up: <strong>we make contributing boring.</strong> Cleverness belongs in the glue, written once by the people who maintain it. Wherever a contributor goes, there should be nothing to figure out.</p>
+<hr />
+<h2>Principle 1: Separate Configuration From Glue</h2>
+<p>The whole platform is driven by a handful of YAML files. Terraform reads them and deploys everything they describe, in loops: nobody writes Terraform to add a source, a function, a web app or a role.</p>
+<table>
+<thead>
+<tr>
+<th>Configuration file</th>
+<th>What a contributor declares</th>
+<th>What the glue deploys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>load/&lt;source&gt;.yml</code></td>
+<td>a source's tables, their columns and the files that feed them</td>
+<td>a warehouse schema, a stage, one table and one Snowpipe per table, freshness monitoring</td>
+</tr>
+<tr>
+<td><code>functions.yml</code></td>
+<td>a function's schedule or trigger, timeout and memory</td>
+<td>a Lambda function or a Fargate task, its schedule or trigger, its logs, alarms and crash detection</td>
+</tr>
+<tr>
+<td><code>apps.yml</code></td>
+<td>a web app's size, and optionally its paths and environment</td>
+<td>a container service, its load balancer rule behind the company login, its health check and logs</td>
+</tr>
+<tr>
+<td><code>snowflake_roles.yml</code></td>
+<td>a role: which warehouses, which databases or schemas, with which privileges</td>
+<td>every grant, on existing and future objects</td>
+</tr>
+<tr>
+<td><code>snowflake_users.yml</code></td>
+<td>a person: their email and their roles</td>
+<td>a warehouse user, with its default role and role grants</td>
+</tr>
+</tbody>
+</table>
+<p>Here is everything a contributor writes to bring a new source from an API into the warehouse. A few lines in <code>functions.yml</code>:</p>
+<pre><code class="language-yaml">get_crm:
+  category: get_data
+  schedule: cron(0 4 * * ? *)
+  timeout: 600
+  memory: 2048
+</code></pre>
+<p>A Python file, <code>functions/get_crm.py</code>, whose function calls the API and drops its records in S3 as they are, under one of our decorators. And the description of what lands, in <code>load/crm.yml</code>:</p>
+<pre><code class="language-yaml">source_path: crm/
+source_type: API
+data_extract_lambda: get_crm
+description: |
+  Customer relationship data: accounts, contacts, opportunities.
+format:
+  type: JSON
+destination_tables:
+  - name: ACCOUNTS
+    description: Customer accounts, one row per account and extraction.
+    pattern: &quot;accounts/accounts_.*\\.ndjson&quot;
+    columns:
+      - name: ID
+        type: varchar
+        description: Identifier of the account in the CRM.
+      - name: NAME
+        type: varchar
+        description: Name of the account.
+</code></pre>
+<p>Once the Pull Request is merged, the deployment pipeline does the rest: the function goes live with its schedule, a <code>CRM</code> schema appears in the warehouse with an <code>ACCOUNTS</code> table and its Snowpipe, and the files the function drops start flowing in. Not a line of Terraform, not a click in a console. <strong>Adding a source adds configuration, never glue</strong>: today, about forty source files and some forty functions are deployed by under 5,000 lines of Terraform that contributors never need to open.</p>
+<p>Reviewing such a contribution means reviewing a declaration: a schedule, a memory size, the description of a table. The reviewer doesn't check whether a cloud permission is too broad or a Snowpipe wired to the right notification: there's no permission and no Snowpipe in the diff. Those were reviewed once, when the glue was written, and they're the same for every source.</p>
+<p>When a need comes up that the configuration can't express, we don't make an exception: <strong>we extend the configuration, for everyone, with an optional field.</strong> A function that unzips large archives needs more disk: <code>ephemeral_storage</code>. A function calling an API with a strict rate limit must never run more than twice at once: <code>max_concurrency</code>. A table refreshed once a week mustn't raise a freshness alert every day: <code>max_staleness_hours</code>. A source that isn't producing yet, or is down while its supplier fixes it: <code>muted_until</code>, with a date, after which monitoring resumes on its own. Each field was added to the glue once, and is now available to every contributor, with no new pattern to copy.</p>
+<p>And access to the warehouse is configuration too. Privilege sets are defined once, and each role combines them; a person is an email and a list of roles. No <code>GRANT</code> is ever run by hand: a missing privilege is added to the YAML and deployed like everything else. The YAML file <em>is</em> the access policy — versioned, readable by anyone, reviewed like any change.</p>
+<details>
+<summary><strong>Going further: the glue behind a YAML file</strong></summary>
+
+<p>Terraform reads every configuration file into a local value, and each resource loops over it. A simplified version for sources:</p>
+
+<pre><code class="language-hcl">locals {
+  sources = {
+    for file in fileset("${path.module}/../load", "*.yml") :
+    trimsuffix(file, ".yml") =&gt; yamldecode(file("${path.module}/../load/${file}"))
+  }
+}
+
+resource "snowflake_schema" "source" {
+  for_each = local.sources
+  database = "RAW"
+  name     = upper(replace(each.key, "-", "_"))
+  comment  = split("\n", trimspace(each.value.description))[0]
+}</code></pre>
+
+<p>The schema takes the name of the file, and its comment the first line of the source's description. Stages, tables, Snowpipes and notifications follow the same pattern, over one entry per table.</p>
+
+<p>Warehouse access works the same way. Privilege sets are YAML anchors, defined once, and roles combine them per database or schema:</p>
+
+<pre><code class="language-yaml">read: &amp;read
+  TABLES: [SELECT]
+  VIEWS: [SELECT]
+
+write: &amp;write
+  SCHEMA: [CREATE TABLE, CREATE VIEW]
+  TABLES: [SELECT, INSERT, UPDATE, DELETE, TRUNCATE]
+  VIEWS: [SELECT]
+
+role_grants:
+  FINANCE:
+    warehouses: [FINANCE_WH]
+    objects:
+      MARTS: *read
+      SANDBOX.FINANCE: *write
+  MARKETING:
+    warehouses: [MARKETING_WH]
+    objects:
+      MARTS.MARKETING: *read</code></pre>
+
+<p>The glue turns each entry into grants on all existing and future objects, so a table created tomorrow is readable by the roles that should read it, without anyone thinking about it. Users are even simpler:</p>
+
+<pre><code class="language-yaml">human_users:
+  jane.doe@example.com:
+    roles: [FINANCE]
+  john.smith@example.com:
+    roles: [MARKETING, FINANCE]</code></pre>
+
+<p>The username is derived from the email, and the first role is the default role.</p>
+
+</details>
+
+<hr />
+<h2>Principle 2: Derive, Don't Declare</h2>
+<p>Every field a contributor fills in is a field they can get wrong. So we ask the same question of every setting: could the glue compute it? If it can, the field doesn't exist.</p>
+<p><strong>If two settings must agree, one of them shouldn't exist.</strong></p>
+<ul>
+<li><strong>Where a function runs.</strong> A Lambda function can't run longer than 15 minutes or use more than 10 GB of memory. Our functions declare their <code>timeout</code> and <code>memory</code>; when they ask for more than Lambda allows, the glue deploys them as a scheduled Fargate task instead — same Python file, same decorator, same status reporting. There's no <code>backend</code> field, so no backend can contradict the timeout.</li>
+<li><strong>How much CPU.</strong> Fargate only accepts certain pairs of CPU and memory. Declaring the CPU would just be a chance to declare an invalid pair, so the glue picks the smallest valid CPU for the requested memory. A task that needs more compute asks for more memory.</li>
+<li><strong>Where a web app lives.</strong> A web app's URL is its name, and its health check has a default path. Its load balancer rule needs a priority, unique across all web apps. Nobody picks it, and it isn't the web app's rank in alphabetical order either: adding a web app would shift all the ones after it, and the load balancer refuses two rules with the same priority, even for a moment. It's derived from a hash of the name, so adding or removing a web app never moves the others.</li>
+<li><strong>What things are called.</strong> A source's warehouse schema is the name of its YAML file. A person's warehouse username is derived from their email, and their first role is their default role.</li>
+<li><strong>What the menu shows.</strong> Our data apps — dashboards and small business tools, each a single Python file — are listed in a menu, but there's no menu file: the menu is the folder tree. A section is a folder with a short <code>_section.yml</code>, and each data app declares its own title, icon, description and owner, in its own file:</li>
+</ul>
+<pre><code class="language-python">page.config(
+    title=&quot;Supplier Invoices&quot;,
+    icon=&quot;🧾&quot;,
+    description=&quot;Invoices received from suppliers, by store and by month.&quot;,
+    owner=&quot;jane.doe@example.com&quot;,
+)
+</code></pre>
+<p>Adding a data app means adding a file; deleting the file removes it from the menu. There's no central list to update, and no menu entry pointing to a data app that's gone. Even publishing is a file move: a new data app starts in an under-construction folder, which the web app we serve to our stores never shows, and goes live there when the file moves out.</p>
+<p>Derivation has a second benefit: the platform can change without anyone migrating anything. If Lambda's limits change tomorrow, we change one rule in the glue, and every function lands where it should at the next deployment.</p>
+<hr />
+<h2>Principle 3: One Place for Each Kind of Logic</h2>
+<p>Configuration takes care of infrastructure. But contributors also write logic: Python functions, SQL models, data apps. There, the same idea takes another form: <strong>each kind of logic has exactly one place where it can live</strong>, and the boundaries are strict.</p>
+<ul>
+<li><strong>A function lands its source as is.</strong> Every field the source returns, under the source's own name, nested objects and arrays kept whole: no renaming, no filtering, no unnesting. All transformation happens in dbt. An extraction has nothing to decide, and nowhere to hide a business rule.</li>
+<li><strong>Data enters the warehouse one way.</strong> Every source lands in S3 first, and Snowpipe loads it: no function ever writes to the warehouse directly. Every raw row can be traced back to its file, and any load can be replayed.</li>
+<li><strong>Business logic lives in dbt, metrics in the semantic layer.</strong> A ratio is computed by the semantic layer as a ratio of sums, never averaged in a data app. Year-over-year comparisons — which period to compare with, which stores to include — are computed by a single engine, from a rule written once in our data portal's guides; no data app and no ad hoc query re-derives them. Even an agent answering an ad hoc question queries the semantic layer first, so its figures match those of the data apps.</li>
+<li><strong>Definitions live in the business dictionary</strong>, attached to column names, as described in <a href="https://unytics.io/blog/one-name-one-definition/">One Name, One Definition</a>.</li>
+<li><strong>Look and feel lives in a style guide.</strong> Data apps don't style their own indicator cards or tables: they call the helpers of a shared style-guide module, so that data apps written by different people look like one product.</li>
+<li><strong>Explanations live next to what they explain.</strong> A function's entry in <code>functions.yml</code> holds no explanatory comment: what the function extracts, why that schedule, how its incremental load works goes in the docstring of its Python file, which the data portal publishes on the function's page. A metric's definition lives in its description in the semantic layer, and the portal renders it.</li>
+</ul>
+<p>When every kind of logic has a single place, <strong>a reviewer no longer asks <em>where</em> something should be, only <em>whether</em> it's right.</strong> And an agent never has to choose between two places: there's only one.</p>
+<hr />
+<h2>Principle 4: Make the Safe Path the Only Path</h2>
+<p>A contributor shouldn't have to <em>remember</em> security, deployment or monitoring. When something matters, it's built into the glue, with no way to opt out — and <strong>what can't be forgotten doesn't need to be checked.</strong></p>
+<h3>Security at the door, not in each data app</h3>
+<p>Our web apps sit behind a load balancer that requires the company login before a single request reaches them, and each one re-checks the user's identity through a shared library. A store manager only ever sees their own stores' figures, because the perimeter is applied by the semantic layer, from the user's identity, for every data app at once — whether the question comes from a data app, a Teams card or an AI assistant through our MCP server. A contributor building a data app can't forget a security check: there isn't one to write.</p>
+<p>Agents get the same treatment. On a contributor's workstation, the agent connects to the warehouse with the contributor's own login and roles: a marketing contributor's agent can't read what marketing can't.</p>
+<h3>Configuration where its owner can change it</h3>
+<p><strong>Put each piece of configuration where its owner can change it safely.</strong> Infrastructure belongs in reviewed YAML. Who can open which data app doesn't: it changes often, and it's decided by managers, not contributors. We first declared access in each data app's file, then moved it out of the repository altogether. Today it lives in a database, edited by a handful of managers from a dedicated data app. A data app nobody has been granted access to is open only to its owner and to admins. An access request arrives in Teams with a link that opens that person and that data app, and suggests the groups that would grant it while opening the fewest other data apps. A Pull Request can't grant access, so no reviewer has to check who gets to see what.</p>
+<p>The same goes for a setting an operator must change without an engineer: it goes to a key-value store they can write to, not into the code. Secrets hold credentials, nothing else.</p>
+<h3>One deployment path</h3>
+<p>A merge to main triggers the only deployment path. Based on the files changed, the pipeline rebuilds what's needed, in a fixed order: infrastructure first, then the data transformations, then the code and web apps that read them — so code never ships ahead of the data it expects. Even metric definitions ship with the data: the dbt run publishes them next to the exports it produces, and every data app picks up the new version within minutes.</p>
+<p>A Pull Request builds the models it changes in a schema of its own, where reviewers and agents can compare them with production. But it can't deploy anything, by accident or on purpose: the cloud only issues production credentials to pipelines running on main. And when a web app misbehaves after a deployment, rolling it back is one line in <code>apps.yml</code>: pin its image to the previous commit.</p>
+<h3>Monitoring built into every function</h3>
+<p>Every function runs under one of our decorators: scheduled, or triggered by a file, an event or an HTTP call. The decorator records each run's status, duration and logs. If the function dies before it can report — out of memory, out of time — a crash handler writes the error in its place. Every hour, a check compares each function's last run with its schedule; every morning, after a job has reloaded any file Snowpipe missed, another compares each raw table's freshness with its threshold: 24 hours, unless the source's YAML says otherwise. An error stays flagged until someone marks it as resolved in the portal, even if the next run succeeds. And since run statuses are exposed in the semantic layer like any other data, a scheduled Teams card lists the functions in trouble. When there are none, it says so: a card that stays silent when all is well can't be told from a card that's broken.</p>
+<p>A contributor gets all of this for their function without writing a line of it.</p>
+<h3>Documentation generated from the configuration</h3>
+<p>Whenever the configuration changes, the data portal is regenerated from it: a page per source and per table, from the YAML files; a page per function, with its docstring, its configuration, its latest status and a button to run it; a page per dbt model; the dictionary and the metrics. Contributors document by filling in the descriptions of their configuration — there's no separate documentation to keep in sync.</p>
+<p><strong>Security, deployment and monitoring aren't items on a review checklist: they're properties of the platform.</strong></p>
+<hr />
+<h2>Principle 5: Put the Rules Where the Agent Works</h2>
+<p>Configuration and glue remove most of the room for error. What's left — SQL, Python, data apps — is written by agents. For that part, the rules have to reach the agent at the moment it acts, and the machine has to check them.</p>
+<ul>
+<li><strong>Instructions next to the code they govern.</strong> A root instructions file (<code>CLAUDE.md</code>, for Claude Code) describes the platform and its non-negotiable rules. Each main folder — ingestion, functions, infrastructure, web apps — has its own, which the agent loads when it works there. Rules for a type of file — YAML, Terraform, Python, Markdown — load only when the agent touches such a file. The agent's context holds the rules of what it's doing, not the whole rulebook.</li>
+<li><strong>A skill for each kind of task.</strong> Before touching a dbt model, the agent loads the dbt skill: layers, naming, tests, SQL style, and an exit gate before it hands back. Same for data apps and for the style guide. And contributors publish with a single command: a skill commits their work, pushes it, opens the Pull Request with its reviewers and writes its description — including what a reviewer must not miss, such as a data feed being cut.</li>
+<li><strong>Checks at write time.</strong> When the agent edits the business dictionary or the semantic layer, a hook re-runs their check and sends any violation back to the agent, which fixes it before a human ever sees the diff — as described in <a href="https://unytics.io/blog/one-name-one-definition/">One Name, One Definition</a>.</li>
+</ul>
+<details>
+<summary><strong>Going further: how the instructions are organized</strong></summary>
+
+<pre><code>CLAUDE.md                          platform overview and non-negotiable rules
+load/CLAUDE.md                     ingestion conventions
+functions/CLAUDE.md                function conventions
+infra/CLAUDE.md                    infrastructure conventions
+data_portal/CLAUDE.md              web app conventions
+.claude/rules/yml.md               loaded when the agent touches a YAML file
+.claude/rules/terraform.md         loaded when it touches a Terraform file
+.claude/rules/python-standards.md  loaded when it touches a Python file
+.claude/skills/dbt-model/          loaded before creating or changing a dbt model
+.claude/skills/streamlit/          loaded before creating or changing a data app
+.claude/skills/publish-pr/         commit, push and open the Pull Request in one command
+.claude/skills/review-*/           review a Pull Request, verdict MERGE or NO MERGE
+.claude/settings.json              hooks</code></pre>
+
+<p>A rule file declares the files it applies to in a header:</p>
+
+<pre><code class="language-markdown">---
+paths:
+  - "**/*.tf"
+---
+
+# Terraform Style
+…</code></pre>
+
+</details>
+
+<h3>Rules about rules</h3>
+<p>Instructions files drift like any documentation. Two meta-rules keep them sharp. <strong>Every correction becomes a rule</strong>: when we correct the agent, it writes the lesson into the right instructions file, with its technical reason, before going on, so the same mistake doesn't happen twice. And <strong>each rule lives in one place</strong>: a business rule is written once, in the data portal's guides, and instructions only point to it, because two copies end up contradicting each other and the agent follows the wrong one.</p>
+<h3>Rules learned the hard way</h3>
+<p>Several of our sharpest rules come from something that went wrong. They're worth stealing:</p>
+<ul>
+<li><strong>Never cut a feed that's still read.</strong> Removing a function's schedule stops every table it feeds at once — and readers aren't only dbt models: some data apps read raw tables directly. Search the whole repository, switch the readers first, then cut.</li>
+<li><strong>A mute never comes with a cut.</strong> Silencing a table's freshness alert at the same time as you stop feeding it hides exactly the signal that would reveal the mistake.</li>
+<li><strong>A model only reads data that's already in production.</strong> Ingestion ships in a first Pull Request, and the models that read it in a second, once the data has landed.</li>
+<li><strong>No write to production as a side effect of a code change.</strong> A data migration runs after the code that needs it is deployed, on an explicit go, after a dry run: until then, production still reads the old format.</li>
+<li><strong>A change that adds something leaves everything else as it was.</strong> A fix noticed along the way is proposed separately, never slipped into the same diff: a reviewer approving a new table shouldn't unknowingly approve a change to existing figures.</li>
+</ul>
+<p>None of these shows up in a SQL diff. That's precisely why they're written where the agent works, and why the publishing skill flags any cut feed in the Pull Request description.</p>
+<h3>Review agents before human reviewers</h3>
+<p>Finally, a contribution meets review agents before it meets us. Two review skills, one for dbt models and one for data apps, read a Pull Request the way we would: the rule files are their checklist, and they report only what blocks — whatever changes a figure, a grain or a column name, crashes in production, touches access rights or a file shared by every data app, or duplicates an existing data app. Style never blocks. They also check the data: the dbt reviewer queries the models the Pull Request built, and the data app reviewer recomputes, with independent queries, every figure the data app displays — the real bugs of our past data app reviews were all found in the data, not in the code. If a check can't run, the verdict is never "merge".</p>
+<p>A verdict opens with a summary in plain language, written for the contributor, before the technical details and the comments to post on the Pull Request (figures made up):</p>
+<pre><code>MERGE: NO, the &quot;active stores&quot; card shows 120 stores where the definition gives 100.
+
+1. Duplicate: no.
+2. Against our practices or a business rule: yes, 1 point:
+   - the card counts every store with a sale; the definition counts stores open over the period.
+3. Reinvents the wheel: partly — the cards are drawn by hand instead of using the style guide.
+4. Merge: NO.
+</code></pre>
+<p>Human approval doesn't disappear. Every Pull Request is still approved by a person, and business owners still answer for their domain: that's governance, the subject of <a href="https://unytics.io/blog/nobody-codes-by-hand/">Nobody Codes by Hand</a>. But the approval now rests on a verdict that has already checked the conventions and the figures. What's left for the human is the question no machine can settle: is this the right thing to build?</p>
+<hr />
+<h2>What This Changes</h2>
+<ul>
+<li><strong>Review shrinks to what matters.</strong> Most diffs are YAML declarations and code that follows a pattern a review agent has already checked. We read intent, not plumbing.</li>
+<li><strong>Agents get it right the first time.</strong> A boring platform has one pattern per task. The agent copies the last source, the last function, the last data app — and it's right.</li>
+<li><strong>Contributors build what they know.</strong> A financial controller can add a source, a model and a data app without ever hearing about IAM, VPCs or warehouse grants. Their expertise goes into the business logic, which is where we need it.</li>
+<li><strong>The glue improves for everyone at once.</strong> When we improve crash detection, tighten a grant or change a default, every function and every role gets it at the next deployment. Nobody migrates their pipeline, because nobody owns a pipeline's plumbing.</li>
+<li><strong>The infrastructure stays replaceable.</strong> Since the configuration says <em>what</em> and not <em>how</em>, moving a function from Lambda to Fargate — or the platform to another provider — is a change in the glue, not in forty contributions. That's what I meant, in <a href="https://unytics.io/blog/optic-2000-independence/">my article on independence</a>, by <em>configuration is an asset, the metal is a commodity</em>.</li>
+<li><strong>The platform team becomes a product team.</strong> Its product is the glue, the conventions and the review agents; its users are the 25 contributors and their agents.</li>
+</ul>
+<hr />
+<h2>What It Costs</h2>
+<p>Boring for contributors isn't free for the platform team.</p>
+<ul>
+<li><strong>The glue is harder to write.</strong> Deriving everything, supporting every optional field, closing every unsafe path: our Terraform is denser than a module per pipeline would be. It's written once, but it has to be written well. And when a derivation is needed outside Terraform — the portal also needs to know where a function runs — both implementations must change together.</li>
+<li><strong>You have to say no.</strong> Every "just this once" exception is a second pattern for agents to copy. When a need doesn't fit, the answer is to extend the configuration for everyone, or to decline.</li>
+<li><strong>The configuration must stay declarative.</strong> A YAML file that grows conditions and loops is a programming language without a debugger. Ours only says <em>what</em>; anything that needs logic goes into the glue, as a derivation.</li>
+<li><strong>Rules need gardening.</strong> Instructions grow with every correction. Keeping each rule in one place, with its reason and without stale examples, is a job in itself.</li>
+</ul>
+<hr />
+<h2>Key Takeaways</h2>
+<p>Our platform is boring so that what people build on it doesn't have to be.</p>
+<p>Everything hard — infrastructure, security, deployment, monitoring — is written once, in the glue, by the team that maintains it. Everything else is configuration that says <em>what</em>, derived wherever it can be, with a single place for each kind of logic and the rules waiting for the agent wherever it works. What's left for the reviewer is the only question that ever mattered: is this the right thing to build?</p>
+<p>Ask yourself this about your own platform: <strong>when someone adds a data source, how many of the lines they write are plumbing?</strong> Every line of plumbing in a contribution is a line someone has to review — and with agents writing more and more of them, that someone won't keep up.</p>
+<hr />
+<p><em>Want to open your data platform to business teams and their agents without becoming the bottleneck? <a href="https://unytics.io/book-meeting/">Let's talk about it in a 30-minute data chat</a>.</em></p>
+                </div>
+                <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/#pain-points">Pitfalls</a>
+                    <a href="/#services">Solutions</a>
+                    <a href="/#data-applications">Case Studies</a>
+                    <a href="/#about">Offers</a>
+                    <a href="/blog/">Blog</a>
+                </div>
+                <div class="footer-contact">
+                    <a href="#" class="copy-email" data-email="contact@unytics.io">contact@unytics.io</a>
+                    <a href="https://www.linkedin.com/in/paul-marcombes" target="_blank" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/unytics" target="_blank" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <p class="footer-copyright">&copy; 2026 Unytics. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Email copied to clipboard!</div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletter-modal" class="newsletter-modal">
+        <div class="newsletter-modal-content">
+            <button class="newsletter-modal-close" aria-label="Close">&times;</button>
+            <iframe src="https://cdn.forms-content.sg-form.com/aebe3f17-38d0-11f1-b0e1-1649d933d8bb" title="Subscribe to Newsletter" scrolling="no"></iframe>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

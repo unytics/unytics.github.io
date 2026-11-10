@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Name, One Definition: How We Document 1,800 Columns Without Documenting a Single dbt Model | Unytics Blog</title>
+    <meta name="description" content="At Optic 2000, no dbt model describes its columns, yet every column has a definition: it is attached to the column's name and written once, in a business dictionary. Naming conventions, guardrails for coding agents, a generated data portal: how a single way of naming things eliminates definition drift.">
+    <link rel="canonical" href="https://unytics.io/blog/one-name-one-definition/">
+
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://unytics.io/blog/one-name-one-definition/">
+    <link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/one-name-one-definition/">
+    <link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/one-name-one-definition/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://unytics.io/blog/one-name-one-definition/">
+    <meta property="og:title" content="One Name, One Definition: How We Document 1,800 Columns Without Documenting a Single dbt Model | Unytics Blog">
+    <meta property="og:description" content="At Optic 2000, no dbt model describes its columns, yet every column has a definition: it is attached to the column's name and written once, in a business dictionary. Naming conventions, guardrails for coding agents, a generated data portal: how a single way of naming things eliminates definition drift.">
+    <meta property="og:site_name" content="Unytics">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://unytics.io/blog/one-name-one-definition/">
+    <meta name="twitter:title" content="One Name, One Definition: How We Document 1,800 Columns Without Documenting a Single dbt Model | Unytics Blog">
+    <meta name="twitter:description" content="At Optic 2000, no dbt model describes its columns, yet every column has a definition: it is attached to the column's name and written once, in a business dictionary. Naming conventions, guardrails for coding agents, a generated data portal: how a single way of naming things eliminates definition drift.">
+    <meta name="twitter:image" content="https://unytics.io/assets/unytics_social_image.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="https://unytics.io/assets/unytics_social_image.png">
+    <meta property="og:image:width" content="960">
+    <meta property="og:image:height" content="540">
+
+    <!-- Additional SEO -->
+    <meta name="author" content="Paul Marcombes">
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-YHunZhK65WvaJpQXfwUD_.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
+    
+</head>
+
+<body>
+    <a href="#content" class="skip-link">Skip to main content</a>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Unytics</a>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">About Unytics</a></li>
+                <li><a href="https://unytics.io/book-meeting/" target="_blank" class="btn-primary">Free Data Call</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="content">
+        
+        <article class="blog-post">
+            <div class="container">
+                <div class="blog-post-topbar">
+                    <a href="/blog/" class="blog-back-link">&larr; Blog</a>
+                    <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+                </div>
+                <div class="blog-post-header">
+                    <p class='blog-post-date'>2026-11-04</p>
+                    <h1>One Name, One Definition: How We Document 1,800 Columns Without Documenting a Single dbt Model</h1>
+                </div>
+                <div class="blog-post-content">
+                    <p>At Optic 2000, our data platform has more than 350 dbt models and some 1,800 column names. Every one of them has a definition, available to everyone in our data portal and organized by business entity.</p>
+<p>Yet open any of our dbt models' YAML files: you won't find a single column description.</p>
+<p>That's not an oversight. It's the core of our approach: <strong>we don't document models, we document names.</strong></p>
+<p>In a typical dbt project, each model re-describes its columns in its YAML file. The same customer identifier is described in staging, then in the intermediate model, then in the mart, then in the export: four copies of one definition, written at different times by different people. They always end up diverging. A fix lands in one place only; a new column arrives without a description, because filling in the YAML is a chore; and the day two descriptions contradict each other, nobody knows which one to trust.</p>
+<p>Data engineers will recognize the problem: it's denormalized data, with its update anomalies. The <code>{{ doc() }}</code> blocks in dbt and the tools that propagate descriptions from one model to the next treat the symptom, at the cost of extra machinery. They don't remove the copies.</p>
+<p><strong>With AI agents, this drift gets expensive, and fast.</strong> Anthropic's Data team measured it: a month after launching its analytics agent, without continuous maintenance, the agent's accuracy had dropped from 95% to 65%, as schemas and the product naturally evolved. To stay on course, nearly 90% of the team's Pull Requests that touch a data model now ship a <em>Skill</em> update in the same diff. An agent's context goes stale as fast as the code it describes.</p>
+<p>Our answer fits in one sentence: <strong>a concept has a single name, a name has a single definition, and that definition is written only once.</strong> It only holds on one condition — that a name really means the same thing everywhere — and that's the whole point of our naming conventions.</p>
+<p>This article explains why <strong>these rules matter as much for agents as for humans</strong>, how we made them impossible to bypass, and how every model's documentation became a computed by-product. For teams that want to replicate the approach, the technical details are tucked away in collapsible sections.</p>
+<hr />
+<h2>Why Rules Matter, for Humans and Agents Alike</h2>
+<p><strong>A name is the most-read documentation there is.</strong> A column's name travels with the data: in every query, every result, every Excel export, every answer from an AI assistant. Its description is read only by those who go looking for it — which is to say, almost nobody. An ambiguous name like <code>status</code>, <code>date</code> or <code>amount</code> breeds questions, wrong joins and wrong numbers, often without anyone noticing.</p>
+<p><strong>Agents don't ask: they guess.</strong> A coding agent rediscovers the repository at every session and reproduces what it sees there. If it finds <code>email</code>, <code>client_mail</code> and <code>customer_email</code>, it won't pick "the right one": it will create a fourth. Faced with a <code>date</code> column in an orders table, an analyst asks whether it's the creation, invoicing or delivery date. An agent picks one, and doesn't tell you.</p>
+<p>As I wrote in <a href="https://unytics.io/blog/nobody-codes-by-hand/">Nobody Codes by Hand</a>, in a repository where there's only one way to do each thing, the agent just has to copy the right pattern. Naming is the textbook case of that rule: <strong>every synonym is a second pattern to copy.</strong></p>
+<p><strong>A convention is a decision made once and for all.</strong> Without a rule, every new column opens a micro-debate: between two humans in review, or inside the reasoning of an agent that lacks the context to settle it. With 25 contributors, most of them not engineers, these debates don't scale.</p>
+<p><strong>And a rule an agent can break without being told is only a suggestion.</strong> Writing the conventions down in an instructions file isn't enough: the machine has to check them at the very moment the column is written. More on that below.</p>
+<hr />
+<h2>The Principle: One Concept, One Name, One Definition</h2>
+<p>Here's what the typical approach produces, across three models:</p>
+<pre><code class="language-yaml">models:
+  - name: stg_crm__contacts
+    columns:
+      - name: email
+        description: &quot;Contact email&quot;
+  - name: dim_customers
+    columns:
+      - name: email_customer
+        description: &quot;Customer email address, in lowercase&quot;
+  - name: exp_customers_newsletter
+    columns:
+      - name: customer_email
+        description: &quot;Cleaned customer email&quot;
+</code></pre>
+<p>Three names and three definitions for a single concept. Which one is right? And which one will the agent copy into the fourth model?</p>
+<p>Our base rule is a bijection:</p>
+<ul>
+<li><strong>one concept = one name</strong>, everywhere: from staging to marts, whatever the model, the source or the original format;</li>
+<li><strong>one name = one concept</strong>: two different names mean two different concepts, and a given name always has the same type and the same format. The day a column's meaning changes, so does its name.</li>
+</ul>
+<p>If a name means exactly the same thing in every model that carries it, its definition no longer depends on the model. It can be attached to the name, once, in a <strong>business dictionary</strong>.</p>
+<p>Our dictionary is a single YAML file, organized by business entity: customer, order, product, store… about sixty in all. Each entity has a description, and its columns are filed into two sections: <code>dimensions</code>, which describe (identifiers, dates, labels, booleans), and <code>facts</code>, which aggregate (amounts, quantities, counts). One line per column, in alphabetical order, and each name appears only once in the whole file:</p>
+<pre><code class="language-yaml">order:
+  description: &gt;-
+    Order placed by a customer, in store or on the e-commerce website.
+  dimensions:
+    channel_order: Channel through which the order was placed (store, e-commerce website, phone).
+    date_creation_order: Date on which the order was recorded.
+    id_order: Unique identifier of the order, across all sources.
+    is_cancelled_order: Whether the order was cancelled after it was created.
+    status_order: Stage of the order in its lifecycle (being prepared, shipped, delivered).
+  facts:
+    amount_including_tax_order: Total amount of the order, including tax and shipping fees.
+    amount_shipping_fee_order: Shipping fees charged to the customer, including tax.
+    number_items_order: Number of items in the order.
+</code></pre>
+<p>And here, as a result, is a dbt model's YAML file: a description, an owner, tests. No columns.</p>
+<pre><code class="language-yaml">models:
+  - name: fct_orders
+    description: |-
+      One row per order, across all sources.
+    config:
+      meta:
+        owner: &quot;jane.doe@example.com&quot;
+    tests:
+      - unique:
+          column_name: id_order
+      - not_null:
+          column_name: id_order
+</code></pre>
+<p>The model's description says what a row represents. What each column means, the dictionary already says.</p>
+<p>Three principles round out the rule:</p>
+<ul>
+<li><strong>An entity is a broad business domain</strong> — customer, product, store — never a source table, a data provider or an aggregate. A reference table that only translates a code into a label isn't an entity: its labels join the entity they describe. That's what keeps the dictionary readable at 1,800 columns.</li>
+<li><strong>A definition describes the concept, not how it's built.</strong> It mentions neither the technical name of a source field nor a dbt model: <code>email_customer</code> is still "the customer's email address" the day we switch CRMs or rewrite the model.</li>
+<li><strong>The dictionary says what a column means; the semantic layer says how to aggregate it.</strong> The metrics' SQL lives in our semantic layer, which I described in <a href="https://unytics.io/blog/optic-2000-independence/">my article on independence at Optic 2000</a>. Its entities carry the name of a dictionary entity and have no description of their own: they inherit the dictionary's. A metric that no model materializes, such as average basket size, exists only in the semantic layer; the dictionary only documents real columns.</li>
+</ul>
+<hr />
+<h2>The Conventions That Make a Name Unique</h2>
+<p>To serve as the key to its definition, a name must be unique across the whole warehouse, and predictable. That's the sole purpose of our naming conventions: they're not a matter of taste.</p>
+<ul>
+<li><strong>The name carries its entity.</strong> <code>email</code> becomes <code>email_customer</code>, <code>status</code> becomes <code>status_order</code>. This suffix makes the name unique and says which dictionary entity it belongs to.</li>
+<li><strong>The suffix names the entity described, not the table that carries it.</strong> A product's family is called <code>family_product</code> in sales lines, quote lines and return lines: three models, one definition. Never <code>family_product_sale</code>.</li>
+<li><strong>The prefix announces the type.</strong> <code>is_</code> or <code>has_</code> for a boolean (<code>is_cancelled_order</code>, <code>has_phone_customer</code>), <code>date_</code> for a date, <code>datetime_</code> for a UTC timestamp, <code>amount_</code> for an amount. An agent that reads <code>is_active_customer</code> knows it filters on <code>true</code> — not on <code>1</code>, nor on <code>'Y'</code>.</li>
+<li><strong>Whole words.</strong> No abbreviations or in-house acronyms (<code>compliance</code>, not <code>compl</code>), except official codes (GTIN, IBAN…).</li>
+<li><strong>The business concept from staging onwards.</strong> A column takes the name of the business concept from the very first transformation, not the source's name: the <code>AccountId</code> field of a Salesforce opportunity becomes <code>id_customer_salesforce</code>, not <code>account_id</code>.</li>
+<li><strong>One language.</strong> Our names are in French, the language of the people who read these columns; this article translates them into English. What matters isn't which language you choose, it's having only one: never <code>_commande</code> and <code>_order</code> in the same warehouse.</li>
+<li><strong>An identifier's name says how far it has been unified.</strong> <code>id_customer_salesforce</code> only makes sense in Salesforce; <code>id_customer_source</code> brings together identifiers from several sources, each prefixed with its own; <code>id_customer</code> is the unified customer. A join on <code>id_customer</code> holds everywhere; a join on <code>id_customer_salesforce</code> only holds in the Salesforce world — and the name says so.</li>
+</ul>
+<details>
+<summary><strong>Going further: common mistakes and format rules</strong></summary>
+
+<p>The most common mistakes:</p>
+
+<table>
+<thead>
+<tr><th>Avoid</th><th>Prefer</th><th>Why</th></tr>
+</thead>
+<tbody>
+<tr><td><code>email</code></td><td><code>email_customer</code></td><td>The email of which entity?</td></tr>
+<tr><td><code>status</code></td><td><code>status_order</code></td><td>The name must be unique across the warehouse.</td></tr>
+<tr><td><code>date</code></td><td><code>date_creation_order</code></td><td>SQL reserved word, and which date?</td></tr>
+<tr><td><code>date_created_order</code></td><td><code>date_creation_order</code></td><td>An action noun, not a past participle.</td></tr>
+<tr><td><code>value_discount</code></td><td><code>amount_discount</code></td><td>An amount starts with <code>amount_</code>.</td></tr>
+<tr><td><code>num_itm_ord</code></td><td><code>number_items_order</code></td><td>No abbreviations.</td></tr>
+<tr><td><code>is_active</code> as <code>1</code> / <code>0</code></td><td><code>is_active_customer</code> as <code>true</code> / <code>false</code></td><td>A boolean is a real boolean, and carries its entity.</td></tr>
+<tr><td><code>family_product_sale</code></td><td><code>family_product</code></td><td>The suffix names the entity described, not the model.</td></tr>
+<tr><td><code>country_website</code></td><td><code>country_website_visitor</code></td><td>The visitor's country, not the website's.</td></tr>
+<tr><td><code>name_customer_crm</code></td><td><code>name_customer</code></td><td>A business attribute doesn't carry the name of its source.</td></tr>
+</tbody>
+</table>
+
+<p>And the format rules:</p>
+
+<ul>
+<li><strong>Dates:</strong> <code>date_&lt;event&gt;_&lt;entity&gt;</code> (<code>date_delivery_order</code>). Timestamps: <code>datetime_&lt;event&gt;_&lt;entity&gt;</code>, in UTC unless the definition says otherwise.</li>
+<li><strong>Date parts:</strong> the name gives the format (<code>year_yyyy</code>, <code>month_mm</code>, <code>month_yyyymm</code>) and carries no entity: it's the same year everywhere.</li>
+<li><strong>Amounts:</strong> <code>amount_</code>, never <code>value_</code>. An amount that isn't expressed in the currency unit says so in its name (<code>price_in_cents_item</code>).</li>
+<li><strong>SQL reserved words:</strong> never on their own as a column name (<code>date</code>, <code>order</code>, <code>group</code>), with one exception: <code>date</code> is the calendar day of day-grain tables, as in the calendar.</li>
+<li><strong>Qualifying suffix:</strong> only when two versions of the same attribute coexist in a model, and with a business meaning: <code>brand_name_product</code> next to <code>brand_name_product_before_unification</code>. Never <code>_old</code>, <code>_new</code> or <code>_v2</code>.</li>
+<li><strong>Technical columns:</strong> lineage columns have a single name across the whole project, prefixed with <code>_</code>, and live, like the identifiers of reference tables, in a <code>technical</code> entity of the dictionary. <code>_source</code> gives a row's source in models that combine several; <code>_source_row_updated_at</code> is the date the row was last modified in the source, whatever the original field is called (<code>SystemModstamp</code> in Salesforce, <code>updated_at</code> elsewhere).</li>
+<li><strong>Case:</strong> all lowercase, in <em>snake_case</em>. Models are plural, named <code>stg_&lt;source&gt;__&lt;table&gt;</code> in staging.</li>
+</ul>
+
+</details>
+
+<details>
+<summary><strong>Going further: the three tiers of identifiers</strong></summary>
+
+<p>When the same business object comes from several sources — a product listed both in the ERP and on the e-commerce website, for example — the name of its identifier says how far it has been unified, and its value says where it comes from:</p>
+
+<table>
+<thead>
+<tr><th>Tier</th><th>Name</th><th>Example value</th><th>Created in</th></tr>
+</thead>
+<tbody>
+<tr><td>1. Source identifier</td><td><code>id_product_erp</code></td><td><code>12345</code></td><td>the source's staging</td></tr>
+<tr><td>2. Multi-source identifier</td><td><code>id_product_source</code></td><td><code>erp::12345</code>, <code>ecommerce::SKU-987</code></td><td>the model that combines the sources</td></tr>
+<tr><td>3. Unified identifier</td><td><code>id_product</code></td><td><code>GTIN::3600000000016</code>, or <code>erp::12345</code> as a fallback</td><td>the model that matches the sources</td></tr>
+</tbody>
+</table>
+
+<ul>
+<li>Tier 3 is prefixed with the rule that made the match possible (here the GTIN), or, failing that, with the source retained.</li>
+<li>Each tier is only created when it's needed: no union of sources, no tier 2; no match used downstream, no tier 3.</li>
+<li>The separator is always <code>::</code>, and source prefixes are lowercase, like the values of the <code>_source</code> column. When a source has several instances (one database per company, for example), a discriminator goes in between: <code>erp::company_02::12345</code>.</li>
+<li>A source identifier never serves as a business identifier: it doesn't leave staging and intermediate models, and in the marts, the reference identifier is called <code>id_product</code>, even when the ERP is the source of truth. Otherwise, the name no longer tells you whether you're handling the ERP's identifier or the unified one.</li>
+</ul>
+
+<p>The payoff: a join key's name tells you how much you can trust it, and an identifier's value tells you where it comes from without tracing the lineage.</p>
+
+</details>
+
+<hr />
+<h2>Making the Rule Impossible to Bypass</h2>
+<p>Conventions written in a Markdown file remain wishful thinking. With 25 contributors and as many agents, they only hold if the machine enforces them, at write time rather than in review. We put four locks in place.</p>
+<h3>1. A single way in: a CLI</h3>
+<p>Agents don't edit the dictionary by hand: they go through a small Python CLI, the same one we use to query our semantic layer. It answers the two questions to ask before naming a column — does this name already exist? what does it mean? — and it's the CLI that does the writing:</p>
+<pre><code class="language-console">$ uv run scripts/semantic_layer.py search email
+- column `email_store` (store.dimensions) — Email address of the store.
+- column `email_customer` (customer.dimensions) — Email address of the customer (in lowercase).
+- column `is_optin_email_customer` (customer.dimensions) — Whether the customer has agreed to receive emails.
+…
+
+$ uv run scripts/semantic_layer.py add-column customer dimensions email_customer &quot;Customer email.&quot;
+column `email_customer` already defined in customer.dimensions (l.836)
+
+$ uv run scripts/semantic_layer.py add-column customers dimensions segment_customer &quot;Customer segment.&quot;
+unknown entity 'customers'. Closest: customer.
+
+$ uv run scripts/semantic_layer.py add-column customer dimensions segment_customer &quot;Value of CUSTOMER_TIER__C.&quot;
+the description cites a source field name, `CUSTOMER_TIER__C`: a business definition doesn't carry one
+</code></pre>
+<p>Every write inserts the line at its alphabetical position, shows the diff and runs the full check before and after: if the write introduces an inconsistency, it's rolled back. Renaming or deleting a column is refused as long as the semantic layer uses it; otherwise, the command lists the models that still reference the old name. Read commands accept a Git revision (<code>--ref</code>), to review the dictionary as a Pull Request changes it.</p>
+<p>As a bonus, the agent spares its context window: it loads one definition, not a file of tens of thousands of tokens.</p>
+<h3>2. A check after every agent write</h3>
+<p>In Claude Code, two <em>hooks</em> keep the agent on track:</p>
+<ul>
+<li><strong>after every file write</strong>, a hook re-runs the check if the dictionary or the semantic layer has changed — including when the agent wrote the file without going through the CLI. It puts the dictionary back in alphabetical order and, if any inconsistency remains, returns an error code: the list of issues goes back to the agent, which fixes them in the same session, before a human ever sees the diff;</li>
+<li><strong>before every read</strong>, another hook refuses to load these two files in full, and points the agent to the command that answers its question.</li>
+</ul>
+<p>The agent doesn't need to remember the rule: it can't break it without the machine telling it.</p>
+<h3>3. A check before handing back</h3>
+<p>The dbt <em>skill</em> — the instructions the agent loads before touching a model — ends with an exit gate. Before declaring the work done, the agent looks up every column of the final <code>select</code> of every modified model in the dictionary, and reports back: "Dictionary: 24 columns checked across 3 models, 0 missing". A missing column gets defined in the same diff as the model.</p>
+<h3>4. CI</h3>
+<p>Finally, the same check runs in CI, on every Pull Request as well as on main, whenever the dictionary or the semantic layer changes, before dbt runs.</p>
+<p>The result: a new name arrives with its definition, in the same diff as the SQL that creates it. Anthropic gets there through the discipline of its teams; we hand as much of it as we can to the machine.</p>
+<details>
+<summary><strong>Going further: the Claude Code hooks and what the check verifies</strong></summary>
+
+<p>The two hooks, declared in the repository's <code>.claude/settings.json</code> (simplified version):</p>
+
+<pre><code class="language-json">{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [{"type": "command", "command": "uv run scripts/semantic_layer.py read-hook"}]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [{"type": "command", "command": "uv run scripts/semantic_layer.py hook || exit 2"}]
+      }
+    ]
+  }
+}</code></pre>
+
+<p>Claude Code passes the tool call as JSON on standard input: the script checks which file is targeted and does nothing for any other. Exit code 2 does all the work. After a write, it sends the error message back to the agent, which treats it as feedback to act on; before a read, it blocks the tool, and the message names the command to use instead.</p>
+
+<p>The check, run by the hook, by every CLI write and by CI, verifies that:</p>
+
+<ul>
+<li>each column fits on one line, in alphabetical order within its section;</li>
+<li>each name is defined only once in the whole file, across all entities and sections;</li>
+<li>each entity has a description, and each column a non-empty definition;</li>
+<li>no definition mentions a source field (<code>CUSTOMER_TIER__C</code>, or an uppercase name in parentheses) or a dbt model (<code>stg_…</code>, <code>fct_…</code>);</li>
+<li>each entity, dimension and attribute of the semantic layer has its definition in the dictionary, and an unknown entity is reported along with the closest names.</li>
+</ul>
+
+</details>
+
+<hr />
+<h2>The Data Portal: Documentation That Is Computed, Never Written</h2>
+<p>If the definition is attached to the name, a model's documentation no longer needs to be written. <strong>It's a join between its columns and the dictionary.</strong></p>
+<p>On every production deployment, a script generates our data portal:</p>
+<ol>
+<li><code>dbt compile</code> produces the manifest, which contains every model's compiled SQL;</li>
+<li>sqlglot parses that SQL and extracts the columns of the final <code>select</code>, even behind a <code>select * from final</code>, by unrolling the CTEs down to their aliases;</li>
+<li>each name is looked up in the dictionary.</li>
+</ol>
+<p>From this, the portal builds:</p>
+<ul>
+<li><strong>one page per model</strong>, with its columns, their definitions and tests, a data preview, the lineage, downstream usages and the SQL. An "Ask AI" box turns a question into a SQL query: the LLM receives the table's columns <em>with their definitions</em>, so the dictionary becomes the context for text-to-SQL;</li>
+<li><strong>a dictionary page</strong>, which lays out every definition grouped by business entity, with each entity's dimensions, facts and metrics. Every column links to the marts that carry it. It's an inverted index that answers "where do I find an order's amount including tax?" without reading a line of SQL — and the business glossary we never had to buy or keep in sync.</li>
+</ul>
+<p>Finally, the same script lists, model by model, the columns that have no definition — except in the exposure layer, whose columns follow the interface contract of the tools it feeds.</p>
+<details>
+<summary><strong>Going further: extracting a model's columns with sqlglot</strong></summary>
+
+<p>The core of the extraction fits in a few lines:</p>
+
+<pre><code class="language-python">import sqlglot
+import sqlglot.expressions
+import sqlglot.optimizer.qualify_columns
+import sqlglot.schema
+
+
+def output_columns(compiled_sql: str, dictionary: dict[str, str]) -&gt; list[dict]:
+    """The columns of a compiled model's final select, with their definition."""
+    tree = sqlglot.parse_one(compiled_sql, read="snowflake")
+    # Expands `select *` over CTEs: `select * from final` yields the aliases of `final`.
+    tree = sqlglot.optimizer.qualify_columns.qualify_columns(
+        tree, schema=sqlglot.schema.MappingSchema(), dialect="snowflake"
+    )
+    select = tree.find(sqlglot.expressions.Select)
+    columns = []
+    for expression in select.expressions:
+        if isinstance(expression, sqlglot.expressions.Star):
+            continue  # a `select *` over another model: flagged on the model's page
+        name = expression.alias_or_name.lower()
+        columns.append({"name": name, "description": dictionary.get(name, "")})
+    return columns</code></pre>
+
+<p>A few precautions in production:</p>
+
+<ul>
+<li>the SQL comes from the dbt manifest (<code>compiled_code</code>, after <code>dbt compile</code>), stripped of any leftover Jinja;</li>
+<li>without a schema, <code>qualify_columns</code> fails on some queries: it's called inside a <code>try</code>, and the unqualified tree is then used as is;</li>
+<li>a remaining <code>select *</code> is over another model, whose columns sqlglot doesn't know: the model's page flags it;</li>
+<li>if sqlglot can't parse the SQL, a regular-expression fallback picks up the <code>as …</code> aliases.</li>
+</ul>
+
+<p>The dictionary, for its part, is flattened into <code>{name: definition}</code>: looking up a column is a plain Python dictionary lookup, and the portal's dictionary page is built by inverting the relationship — for each name, the marts that carry it.</p>
+
+</details>
+
+<hr />
+<h2>One Definition, Every Reader</h2>
+<p>The same dictionary line serves everyone:</p>
+<pre><code>                   Business dictionary
+             (one name, one definition, once)
+                            │
+      ┌──────────────┬──────┴───────┬──────────────┐
+      ▼              ▼              ▼              ▼
+ Data portal   Coding agents   MCP server     Text-to-SQL
+ (humans)      (CLI)           (assistants)   (Ask AI)
+</code></pre>
+<ul>
+<li><strong>humans</strong>, in the data portal;</li>
+<li><strong>coding agents</strong>, through the CLI and its hooks;</li>
+<li><strong>AI assistants</strong>, through our MCP server: its catalog includes the dictionary description of every entity it serves, and its search tool finds every column's definition there;</li>
+<li><strong>text-to-SQL</strong> in the portal.</li>
+</ul>
+<p>Fixing a definition fixes it for all its readers, at the next deployment. There's no second copy to forget.</p>
+<hr />
+<h2>What This Changes</h2>
+<ul>
+<li><strong>Agents that search instead of guessing.</strong> Before creating a column, the agent searches for the existing name, and finds it. Reuse becomes the default path, because the CLI makes what already exists visible and refuses duplicates. Whole classes of agent errors disappear: invented synonyms, joins between two different concepts, booleans encoded as <code>'Y'</code> and <code>'N'</code>.</li>
+<li><strong>No drifting copies, almost no maintenance.</strong> A definition changes in one line, in one place. No <code>doc()</code> blocks, no propagation tool, no fifteen YAML files to realign. Renaming a column is a single command, which tells you which models still reference the old name.</li>
+<li><strong>A business review rather than a SQL review.</strong> In a business contributor's Pull Request, the dictionary diff is the business summary of the change: which new concepts, defined how. The reviewer reads three lines of definitions before three hundred lines of SQL, and the machine has already checked format, uniqueness and consistency. Reviewers can focus on the one question the machine can't settle: is this really a new concept? When <a href="https://unytics.io/blog/nobody-codes-by-hand/">review becomes the critical path</a>, that's a direct gain in throughput.</li>
+<li><strong>Business teams that contribute without learning the conventions.</strong> A financial controller vibe-coding a model doesn't need to know our naming rules: the agent applies them, and the tooling enforces them. It's one of the conditions that let some twenty business contributors work on the platform without weighing down the review.</li>
+<li><strong>Joins you can guess.</strong> Same name, same concept, same type, same format: a join on <code>id_product</code> between two marts is always valid, and an identifier's suffix says how far it has been unified.</li>
+<li><strong>AI-ready context.</strong> The MCP server and text-to-SQL read the same definitions as humans do. When an assistant hesitates between two columns, the definition settles it, and it's the same for everyone.</li>
+<li><strong>A vocabulary we own.</strong> The dictionary is a YAML file versioned in our repository, not a database inside a vendor's tool. Like the rest of our business logic, it <a href="https://unytics.io/blog/optic-2000-independence/">survives a change of tools</a>.</li>
+</ul>
+<hr />
+<h2>Key Takeaways</h2>
+<p>Documenting a model describes a table. Documenting a name builds a vocabulary, shared by every model, every team and every agent.</p>
+<p>With coding agents, naming stops being a matter of style and becomes an interface: names are how an agent understands the data, and how it gets the data wrong. We treated a name and its definition as a key and its value, written once. Everything else — portal pages, agent context, business glossary — is computed from them.</p>
+<p>Ask yourself this about your own platform: <strong>how many places do you have to edit to change a column's definition?</strong> If the answer is more than one, drift is only a matter of time.</p>
+<hr />
+<p><em>Want to make your data platform readable by your teams and your AI agents alike? <a href="https://unytics.io/book-meeting/">Let's talk about it in a 30-minute data chat</a>.</em></p>
+                </div>
+                <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/#pain-points">Pitfalls</a>
+                    <a href="/#services">Solutions</a>
+                    <a href="/#data-applications">Case Studies</a>
+                    <a href="/#about">Offers</a>
+                    <a href="/blog/">Blog</a>
+                </div>
+                <div class="footer-contact">
+                    <a href="#" class="copy-email" data-email="contact@unytics.io">contact@unytics.io</a>
+                    <a href="https://www.linkedin.com/in/paul-marcombes" target="_blank" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/unytics" target="_blank" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <p class="footer-copyright">&copy; 2026 Unytics. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Email copied to clipboard!</div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletter-modal" class="newsletter-modal">
+        <div class="newsletter-modal-content">
+            <button class="newsletter-modal-close" aria-label="Close">&times;</button>
+            <iframe src="https://cdn.forms-content.sg-form.com/aebe3f17-38d0-11f1-b0e1-1649d933d8bb" title="Subscribe to Newsletter" scrolling="no"></iframe>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

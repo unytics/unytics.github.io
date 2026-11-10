@@ -80,6 +80,8 @@ Blog posts are written and edited in English in `src/blog/*.md`. French translat
 
 The build script requires a French translation for every English blog post — it will fail if one is missing.
 
+**Internal links only point to earlier posts**: a post never links to a post whose frontmatter `date` is later than its own, since that post isn't published yet when this one goes out. Check the target's `date:` before linking.
+
 ## Translation Guidelines
 
 When creating or updating French translations:
@@ -130,3 +132,4 @@ The site uses a Python build script (`build.py`) to generate HTML from templates
 - Root directory serves English site
 - Subdirectories serve alternate languages
 - Single 404.html at root handles all not-found scenarios
+- **Source files are kept off the site by `_config.yml`**: Pages runs Jekyll on the whole branch root, which publishes every file and renders each Markdown file with front matter as its own page (`src/blog/<slug>.md` was public at `/src/blog/<slug>.html`, unpublished posts included). Any new source or internal file at the root (scripts, notes, drafts) goes into its `exclude` list.
