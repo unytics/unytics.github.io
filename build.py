@@ -333,14 +333,17 @@ def build_blog_index(posts: list[dict], lang: str, template: str) -> None:
     # Generate cards HTML
     cards = []
     for post in sorted_posts:
-        if lang == "en":
+        if post.get("url"):
+            post_url = post["url"]
+        elif lang == "en":
             post_url = f"/blog/{post['slug']}/"
         else:
             post_url = f"/blog/fr/{post['slug']}/"
 
-        date_html = (
-            f'<p class="blog-card-date">{post["date"]}</p>' if post.get("date") else ""
-        )
+        date_label = post.get("date", "")
+        if post.get("kind"):
+            date_label = f"{date_label} · {post['kind']}" if date_label else post["kind"]
+        date_html = f'<p class="blog-card-date">{date_label}</p>' if date_label else ""
         desc_html = f"<p>{post['description']}</p>" if post.get("description") else ""
         cards.append(
             f"""                <a href="{post_url}" class="blog-card">
@@ -459,6 +462,39 @@ def build_sitemap(posts: list[dict]) -> None:
         print(f"  {index_path.relative_to(ROOT)}")
 
 
+def read_link_entry(md_path: Path) -> dict | None:
+    """A blog entry whose frontmatter has a `url` only links to that page (e.g. a presentation).
+
+    No page is built for it, and it needs no translation."""
+    metadata, _ = parse_frontmatter(md_path.read_text(encoding="utf-8"))
+    if not metadata.get("url"):
+        return None
+    return {
+        "title": metadata.get("title", md_path.stem),
+        "description": metadata.get("description", ""),
+        "date": metadata.get("date", ""),
+        "slug": slugify(md_path.name),
+        "url": metadata["url"],
+        "kind": metadata.get("kind", ""),
+        "md_filename": md_path.name,
+    }
+
+
+def copy_blog_folders() -> None:
+    """Copy src/blog/<slug>/ and src/blog/fr/<slug>/ (e.g. an HTML presentation) to blog/<slug>/ and
+    blog/fr/<slug>/. Working files are not published: *.md, *.py and the deck/ sources."""
+    for src_root, out_root in ((SRC / "blog", ROOT / "blog"), (SRC / "blog" / "fr", ROOT / "blog" / "fr")):
+        for folder in sorted(p for p in src_root.iterdir() if p.is_dir() and p.name != "fr"):
+            for path in sorted(folder.rglob("*")):
+                rel = path.relative_to(folder)
+                if path.is_dir() or path.suffix in (".md", ".py") or rel.parts[0] == "deck":
+                    continue
+                dest = out_root / folder.name / rel
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                dest.write_bytes(path.read_bytes())
+                print(f"  {dest.relative_to(ROOT)}")
+
+
 def build_all() -> None:
     """Build all pages: homepages + blog."""
     template = read_template()
@@ -480,6 +516,11 @@ def build_all() -> None:
     fr_posts = []
 
     for md_path in en_md_files:
+        link = read_link_entry(md_path)
+        if link:
+            en_posts.append(link)
+            continue
+
         # Build English version
         post_meta = build_post(md_path, "en", template)
         en_posts.append(post_meta)
@@ -495,13 +536,25 @@ def build_all() -> None:
         fr_meta = build_post(fr_md_path, "fr", template)
         fr_posts.append(fr_meta)
 
+    # Link-only entries in either language (no translation required)
+    en_names = {p.name for p in en_md_files}
+    for fr_md_path in sorted(SRC.glob("blog/fr/*.md")):
+        if fr_md_path.name in en_names:
+            continue
+        link = read_link_entry(fr_md_path)
+        if link:
+            fr_posts.append(link)
+
+    print("Copying blog folders...")
+    copy_blog_folders()
+
     # Build blog indexes
     print("Building blog indexes...")
     build_blog_index(en_posts, "en", template)
     build_blog_index(fr_posts, "fr", template)
 
     print("Building sitemap...")
-    build_sitemap(en_posts)
+    build_sitemap([p for p in en_posts if not p.get("url")])
 
     print("Done!")
 

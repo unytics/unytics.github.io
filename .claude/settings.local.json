@@ -1,8 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -E '\\\\.\\(html|css|js|json\\)$')",
-      "Bash(uv run *)"
+      "Bash(*)",
+      "PowerShell(*)",
+      "WebSearch",
+      "Bash(uv run *)",
+      "mcp__claude_ai_Google_Slides__read_slide_page_thumbnail",
+      "mcp__claude_ai_Google_Drive__create_file",
+      "mcp__claude_ai_Google_Drive__update_file",
+      "Bash(sed -i 's/\"Une équipe data devenue le goulot d'\"'\"'étranglement du build\"/\"Une équipe data devenue le goulot du build\"/' content.py)",
+      "mcp__claude_ai_Google_Slides__update_presentation"
     ]
   }
 }

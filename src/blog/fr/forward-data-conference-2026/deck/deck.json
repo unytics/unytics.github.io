@@ -1,0 +1,109 @@
+{
+ "v": 4,
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-11-10T21:06:53Z"
+ },
+ "lists": "css",
+ "title": "Et si vos métiers construisaient la data platform ?",
+ "cover": "cover",
+ "order": [
+  "cover",
+  "promesse",
+  "capot",
+  "impasse",
+  "chantier",
+  "marche",
+  "contrepied",
+  "plan",
+  "sceptique",
+  "silos",
+  "test",
+  "deux-equipes",
+  "div-builders",
+  "metiers",
+  "barriere",
+  "petit",
+  "referentiel",
+  "village",
+  "idees",
+  "saas",
+  "backends",
+  "objection",
+  "monorepo",
+  "ennui",
+  "lambda",
+  "fargate",
+  "pattern",
+  "briques",
+  "div-apprend",
+  "dangers",
+  "noms",
+  "dictionnaire",
+  "machine",
+  "regle-or",
+  "div-consumers",
+  "deux-ia",
+  "magasins",
+  "roles",
+  "pour-qui",
+  "div-humain",
+  "petit-pas",
+  "humain",
+  "message",
+  "merci"
+ ],
+ "sections": {
+  "ouverture": {
+   "description": "Ouverture : qui parle, et ce que le talk va raconter.",
+   "start": "cover"
+  },
+  "paradoxe": {
+   "description": "Le paradoxe conversationnel : tout le monde veut parler à ses données, mais l’équipe data reste le goulot d’étranglement.",
+   "start": "promesse"
+  },
+  "silos": {
+   "description": "La fin des silos : l’équipe BI devient autonome, du modèle dbt à l’application Streamlit.",
+   "start": "sceptique"
+  },
+  "builders": {
+   "description": "Le métier devient builder : de 4 à 25 contributeurs.",
+   "start": "div-builders"
+  },
+  "apps": {
+   "description": "Au-delà du dashboard : remplacer des SaaS, sublimer les back-ends.",
+   "start": "idees"
+  },
+  "anti-chaos": {
+   "description": "L’architecture anti-chaos : un seul repo, une contribution ennuyeuse.",
+   "start": "objection"
+  },
+  "apprend": {
+   "description": "La plateforme qui apprend : un nom par concept, la machine vérifie, chaque commentaire devient une règle.",
+   "start": "div-apprend"
+  },
+  "consumers": {
+   "description": "Builders et consumers : deux populations, deux usages de l’IA.",
+   "start": "div-consumers"
+  },
+  "humain": {
+   "description": "Le shift humain : commencer petit, accompagner, et la question à emporter.",
+   "start": "div-humain"
+  }
+ },
+ "faces": {
+  "space-grotesk": {
+   "family": "Space Grotesk",
+   "href": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&display=swap"
+  },
+  "inter": {
+   "family": "Inter",
+   "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  },
+  "jetbrains-mono": {
+   "family": "JetBrains Mono",
+   "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
+  }
+ },
+ "designSystems": []
+}
