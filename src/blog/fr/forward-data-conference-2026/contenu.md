@@ -286,7 +286,7 @@ Pour les magasins, l'IA prend deux formes. D'abord, des agents spécialisés, em
 
 #### Slide 38 · Nous avons déplacé la frontière · `20:38`
 
-*À l'écran : Deux lignes Platformers / Builders / Consumers : la barre orange (la frontière) se déplace. Puis la phrase finale.*
+*À l'écran : Trois colonnes (Platformers, Builders, Consumers) et deux lignes : qui tient chaque rôle. La ligne orange (la frontière) se décale vers la gauche. Sous la ligne Optic 2000, les 25 contributeurs en points. Puis la phrase finale.*
 
 Si je résume. Dans une organisation data, il y a trois rôles : ceux qui construisent la plateforme, ceux qui construisent dessus, et ceux qui consomment. Dans le modèle habituel, la frontière passe entre l'équipe data, qui construit, et les métiers, qui consomment. **[clic]** Nous, nous avons déplacé cette frontière. L'équipe plateforme construit le cadre. Et parmi ceux qui construisent dessus, il y a désormais plus de métiers que de data. **[clic]** Notre conviction : il faut mettre le plus de monde possible du côté des builders. Une équipe centrale ne détiendra jamais toute la connaissance de l'entreprise. Ce sont les métiers qui connaissent leurs données et leurs processus.
 

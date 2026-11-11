@@ -278,7 +278,7 @@ For stores, AI comes in two forms. First, specialised agents, embedded in their 
 
 #### Slide 38 · We moved the boundary · `19:43`
 
-*On screen: Two rows Platformers / Builders / Consumers: the orange bar (the boundary) moves. Then the closing line.*
+*On screen: Three columns (Platformers, Builders, Consumers) and two rows: who holds each role. The orange line (the boundary) steps to the left. Under the Optic 2000 row, the 25 contributors as dots. Then the closing line.*
 
 To sum up. In a data organisation, there are three roles: those who build the platform, those who build on top of it, and those who consume. In the usual model, the boundary runs between the data team, which builds, and business teams, which consume. **[click]** We moved that boundary. The platform team builds the frame. And among those who build on top of it, there are now more business users than data people. **[click]** Our conviction: put as many people as possible on the builders’ side. A central team will never hold all of the company’s knowledge. Business teams are the ones who know their data and their processes.
 
