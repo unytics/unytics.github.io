@@ -1,112 +1,121 @@
 ---
 title: "Personne ne code à la main : comment nous sommes passés de 4 à 25 contributeurs sur notre data platform"
-description: "Chez Optic 2000, personne ne code à la main : 25 contributeurs vibe-codent apps et pipelines dans le repository, et tous les autres parlent directement à la donnée via des agents d'IA. La clé n'est pas le modèle : c'est un repository où il n'existe qu'une seule façon de faire les choses."
+description: "Chez Optic 2000, personne ne code à la main : en dix mois, le nombre de contributeurs à la data platform est passé de 4 à 25, en majorité des métiers. L'équipe BI d'abord, puis les métiers du siège : comment nous les embarquons, ce qui se passe quand l'un d'eux s'en va, et ce que cela change pour l'équipe data."
 date: 2026-11-03
 ---
 
 # Personne ne code à la main : comment nous sommes passés de 4 à 25 contributeurs sur notre data platform
 
-Dans [un précédent article](https://unytics.io/blog/fr/optic-2000-independence/), je décrivais l'architecture que nous avons bâtie chez Optic 2000. En dix mois, nous avons remplacé un socle PostgreSQL historique, absorbé une nouvelle caisse, un nouveau CRM et un nouveau programme de fidélité, et débranché notre outil de BI.
+Dans [un précédent article](https://unytics.io/blog/fr/optic-2000-independence/), je décrivais l'architecture que nous avons bâtie chez Optic 2000, en dix mois et plusieurs migrations simultanées.
 
-Le chiffre le plus marquant de ce projet n'est pas technique. Sur la même période, l'équipe data platform est passée de 6 à 4 personnes, tandis que le nombre de personnes contribuant au repository data passait de **4 à 25**.
+Le chiffre le plus marquant de ce projet n'est pas technique. Sur la même période, l'équipe data platform est passée de 6 à 4 personnes, tandis que le nombre de personnes contribuant au repository data passait de **4 à 25**. Dix-sept d'entre elles ne font partie d'aucune équipe data : ce sont des métiers.
 
-Et aucune d'entre elles ne code à la main.
+Et aucune ne code à la main.
+
+Cet article raconte comment c'est arrivé : par qui nous avons commencé, comment nous embarquons un métier, et ce que cela change pour l'équipe data.
 
 ---
 
 ## Une petite équipe ne peut pas être le goulot d'étranglement
 
-Avec quatre migrations simultanées, une petite équipe qui doit traiter chaque demande métier devient un goulot d'étranglement en quelques semaines. C'est le [piège du Ticketing 2.0](https://unytics.io/blog/fr/the-ticketing-2-0-trap/) : l'équipe data prépare, le métier attend.
+Avec autant de chantiers à la fois, une petite équipe qui doit traiter chaque demande métier devient un goulot d'étranglement en quelques semaines. C'est le [piège du Ticketing 2.0](https://unytics.io/blog/fr/the-ticketing-2-0-trap/) : l'équipe data prépare, le métier attend.
 
-Il y avait deux issues : recruter, ou permettre aux autres de contribuer. Nous avons choisi la seconde. Mais pour que 25 personnes — dont la plupart ne sont pas ingénieurs — contribuent sans risque, le repository doit être conçu pour ça.
-
----
-
-## La règle d'or : une seule façon de faire les choses
-
-Toute la plateforme vit dans un **mono-repo Git unique**, régi par une règle : *il n'y a qu'une seule et unique façon d'accomplir chaque tâche, et tout passe par de la configuration déclarative (YAML).*
-
-* **Une seule façon de déclarer une source :** un fichier YAML décrivant le schéma et le chemin de stockage.
-* **Une seule façon de créer une fonction :** un fichier Python avec un décorateur maison, et un fichier YAML qui déclare ses besoins de compute et sa planification.
-* **Une seule convention pour les modèles dbt**, du staging aux marts.
-* **Une seule façon de consommer les métriques :** via la couche sémantique, que ce soit depuis Streamlit ou depuis le serveur MCP.
-
-Par exemple, voici tout ce qu'il faut pour déployer une fonction :
-
-```yaml
-compute:
-  cpu: 256
-  memory: 512
-  timeout: 300
-schedule: "0 6 * * *"
-```
-
-Terraform lit ce YAML et déploie le job sur AWS Lambda ou ECS Fargate. Personne ne touche à la console AWS, n'écrit de Terraform ni ne gère d'infrastructure.
-
-Séparer ainsi la configuration de la plomberie de déploiement est le socle d'une plateforme que 25 personnes peuvent modifier presque sans relecture ; je décris toute l'approche dans [Ennuyeusement simple](https://unytics.io/blog/fr/boringly-simple-data-platform/).
+Il y avait deux issues : recruter, ou permettre aux autres de contribuer. Nous avons choisi la seconde. Mais laisser des non-développeurs modifier le repository central de la data platform ? J'étais moi-même très sceptique. Nous avons donc procédé par étapes, en commençant par les plus proches de nous.
 
 ---
 
-## Pourquoi la standardisation rend les agents de code fiables
+## Première étape : notre propre équipe BI
 
-Comme je l'expliquais dans [Pourquoi Claude Code dans VSCode révolutionne l'analyse de données](https://unytics.io/blog/fr/best-tool-for-deep-dive-analyses/), l'efficacité d'un agent de code dépend moins de l'intelligence brute du LLM que du contexte et des contraintes du projet.
+Historiquement, la data chez Optic 2000, c'étaient trois équipes étanches :
 
-Dans un repository où chaque pipeline est écrit différemment, un agent d'IA doit deviner : il invente des patterns, mélange les conventions et casse la CI.
+* **quatre data engineers**, qui géraient l'ingestion et les transformations, dans des procédures stockées PostgreSQL ;
+* **deux BI engineers**, qui administraient la couche sémantique dans MicroStrategy ;
+* **quatre personnes à la BI**, qui construisaient les dashboards en clic-bouton.
 
-Dans un repository où il n'existe qu'une seule façon de faire chaque chose, l'agent n'a qu'à copier le bon pattern. La standardisation était une question d'hygiène ; avec les agents de code, elle devient la condition de leur bon fonctionnement.
+Cette équipe BI savait lire un peu de SQL. Elle n'avait jamais touché à Git, à Python ni à dbt.
 
----
+En quittant MicroStrategy, Optic 2000 avait d'abord choisi Tableau, et l'équipe BI y passait un temps phénoménal, sur des tâches répétitives et laborieuses. Nous lui avons proposé un test : construire ses tableaux de bord sous forme de data apps Streamlit, en *vibe-codant* dans notre repository, avec l'IA. Elle était elle-même sceptique : est-ce que ce sera propre ? Est-ce que les chiffres seront justes ? Est-ce qu'on saura le maintenir ?
 
-## Deux façons d'entrer : construire ou consommer
+En quelques semaines, le déclic a été spectaculaire :
 
-### 1. Construire : vibe-coder dans le repository
+* l'équipe est devenue **autonome** sur Streamlit ;
+* l'expérience de l'utilisateur final est **bien meilleure**, pour une fraction du temps que nous passions sur Tableau ;
+* et surtout, elle ne s'est pas arrêtée là : d'elle-même, elle s'est mise à créer et à maintenir **ses propres modèles dbt**.
 
-Un contributeur ouvre le repository avec Claude Code et décrit son besoin. En quelques prompts, l'agent peut connecter une nouvelle source, écrire le YAML, créer les modèles dbt, construire une app Streamlit ou mettre en place une activation de données.
-
-Il n'a pas besoin de lire ni de comprendre le code. Les conventions et la revue s'en chargent.
-
-### 2. Consommer : parler directement à la donnée
-
-Pour la plupart des utilisateurs, il existe un chemin encore plus simple : pas de repository, pas d'éditeur de code, pas de Git. Ils consomment la donnée directement via des agents d'IA basés sur la couche sémantique.
-
-* **OpenWebUI**, notre interface d'IA interne unique, connectée à la couche sémantique via notre serveur MCP — où chaque utilisateur ne voit que ses propres données. Les magasins peuvent aussi venir avec leur propre client d'IA (Claude, ChatGPT, Dust…), et nous pouvons changer de client ou de modèle à tout moment.
-* **Des agents embarqués dans nos apps Streamlit :** un playground qui génère des analyses et des dashboards HTML que l'on peut enregistrer et partager, une app pour configurer et planifier des notifications Teams, et des dashboards métiers dotés d'une partie conversationnelle, avec un system prompt spécialisé sur le sujet.
-
-Ce second chemin est de loin le plus accessible. Le premier sert à ce qui doit devenir une partie de la plateforme — et c'est là qu'interviennent les 25 contributeurs.
+Aujourd'hui, nous sommes passés de trois équipes à deux : quatre data engineers, quatre personnes à la BI, et plus de couche intermédiaire. La BI maîtrise toute la chaîne, du modèle dbt jusqu'à la data app, et Streamlit est devenu notre outil de dashboarding, y compris pour des milliers d'utilisateurs en magasin. Les data engineers, eux, posent le cadre et accompagnent ceux qui construisent.
 
 ---
 
-## Gouvernance : qui vérifie un code que personne ne lit ?
+## Deuxième étape : les métiers du siège
 
-Si les contributeurs ne lisent pas leur code, quelqu'un d'autre doit en être garant. Chaque modification passe par une **Pull Request** relue et validée par l'équipe centrale.
+Quand nous avons vu notre équipe BI créer des modèles marts impeccables, sans aucun bagage logiciel au départ, nous nous sommes dit : pourquoi s'arrêter là ?
 
-Là encore, la standardisation aide : quand tout suit le même pattern, un relecteur repère immédiatement les écarts. Relire un fichier YAML et un modèle dbt qui ressemblent à tous les autres est bien plus rapide que relire du code sur mesure.
+Nous sommes allés voir les métiers du siège : les chefs de projet AMOA, le contrôle de gestion, la finance, la comptabilité, le marketing digital. Des profils analytiques, qui suivent leurs chiffres au quotidien, mais qui n'avaient jamais écrit une ligne de code.
+
+**Tout a commencé par de petits sujets.** Une cheffe de projet s'est construit une data app de suivi de ses tickets Jira, pour mieux piloter ses chantiers. Rien de stratégique. Mais c'est ainsi que la confiance s'installe : la sienne, et la nôtre.
+
+**Puis les sujets sont devenus critiques.** Le responsable du référentiel magasins, dans Salesforce, doit tenir à jour un référentiel qui bouge en permanence, avec des rachats et des ouvertures. Avant, c'est nous qui écrivions des tests dbt sur ce référentiel : quand un test tombait en erreur, nous le prévenions, et il corrigeait après coup. Aujourd'hui, il s'est construit son propre cockpit, bien plus détaillé que nos tests. Quand un magasin est racheté, par exemple, les dates d'ouverture de l'ancien et du nouveau ne doivent pas se chevaucher. Il voit les incohérences, et il peut être proactif. Ces règles de gestion, c'est lui qui les connaît. Pas nous.
+
+**Et certains vont très vite.** Un chef de projet AMOA, qui connaît SAP et travaille avec la logistique, a rapatrié des données de SAP dans Snowflake, les a mises en qualité selon nos conventions, et a construit un dashboard opérationnel de suivi des KPI des équipes logistiques. En une seule conversation.
+
+*Le détail — tout ce que les métiers construisent, bien au-delà des dashboards — est dans [Un dashboard montre, une data app agit](https://unytics.io/blog/fr/data-apps-beyond-dashboards/).*
 
 ---
 
-## Le nouveau métier de l'équipe centrale
+## La barrière à l'entrée est quasi nulle
 
-L'équipe centrale ne produit plus l'essentiel des dashboards et des pipelines. Son rôle est de :
+Il faut casser un mythe : contribuer à un repository ne demande plus de savoir coder. Ces collaborateurs n'écrivent pas de code. Ils ne le lisent même pas. Et ils ne tapent aucune commande Git. **Ils conversent** avec Claude, dans VS Code ou directement dans Claude Desktop, sans même ouvrir d'éditeur. Ils décrivent leur besoin ; en quelques prompts, l'agent peut connecter une nouvelle source, écrire le YAML, créer les modèles dbt, construire une data app Streamlit, puis gérer la branche, le commit et la Pull Request.
 
-* maintenir les patterns et conventions que les agents copient ;
+Embarquer un métier tient en deux réunions, et un peu de préparation entre les deux :
+
+1. **Une première réunion.** Nous installons les outils sur son poste — vingt minutes —, nous lui montrons comment nous travaillons, et nous cherchons ensemble les sujets qui auraient du sens pour lui.
+2. **Entre les deux, nous préparons le terrain.** Nous mettons en place la récupération des données et nous initialisons une data app Streamlit, pour un premier cas d'usage dont nous avons parlé.
+3. **Une seconde réunion.** Le métier prend le clavier, et itère lui-même sur sa data app.
+
+Sur nos quatre data engineers, une personne travaille à plein temps à embarquer et à accompagner les métiers.
+
+Tout le monde n'a pas vocation à construire pour autant. Il faut une appétence analytique, et au siège, personne n'y est obligé. Quant aux magasins, ils sont les clients de la plateforme : ils parlent à leurs données à travers des agents d'IA, embarqués dans leurs data apps ou branchés sur notre serveur MCP, sans repository, sans éditeur de code et sans Git. Ce chemin-là est de loin le plus accessible, et beaucoup de besoins y trouvent leur réponse. Le repository sert à ce qui doit devenir une partie de la plateforme.
+
+---
+
+## Et quand un contributeur s'en va ?
+
+On pourrait craindre que tout ce travail ne tienne qu'à ses auteurs. C'est l'inverse. Avant, les métiers fabriquaient déjà leurs propres outils, mais dans l'ombre : des fichiers Excel sur mesure, avec du VBA par exemple. Quand la personne partait, tout était perdu. Aujourd'hui, tout est dans la plateforme, écrit selon nos standards : n'importe qui peut le reprendre, avec Claude.
+
+---
+
+## Le nouveau métier de l'équipe data
+
+L'équipe plateforme ne produit plus l'essentiel des dashboards et des pipelines. Son rôle est de :
+
+* maintenir les patterns et les conventions que les agents copient ;
 * maintenir les briques de la plateforme (déploiement, ingestion, couche sémantique, serveur MCP) ;
+* embarquer et accompagner ceux qui construisent ;
 * relire et intégrer les contributions.
 
 C'est ainsi qu'une équipe de 4 personnes peut accompagner 25 contributeurs.
 
+Le métier de l'équipe BI change lui aussi. Hier, elle répondait à des tickets, en clic-bouton. Libérée de l'un et de l'autre, elle devient proactive : souvent, les métiers n'ont pas seulement besoin d'un chiffre de plus, ils ont besoin d'un regard extérieur pour repenser leur façon de travailler. Et le chantier est immense : Optic 2000 a été créé en 1969, et beaucoup de ses processus sont encore manuels.
+
 ---
 
-## Ce que nous apprenons encore
+## Pourquoi cela ne tourne pas au chaos
 
-* **La revue devient le chemin critique.** Avec 25 contributeurs, ce qui limite le débit n'est plus la capacité de développement, mais la capacité de revue.
-* **Chaque exception a un coût.** Un seul pipeline écrit « différemment, juste pour cette fois » suffit à donner aux agents un second pattern à copier. La standardisation exige une discipline constante.
-* **La qualité repose sur l'équipe centrale.** Des contributeurs qui ne lisent pas le code s'en remettent entièrement aux conventions et à la revue. C'est acceptable tant que les deux restent exigeantes.
+Vingt-cinq personnes et leurs agents dans le même repository : l'objection vient aussitôt. Et de fait, avec 25 contributeurs, **la revue devient le chemin critique** : ce qui limite le débit n'est plus la capacité de développement, mais la capacité de revue. Trois choses la rendent tenable, chacune détaillée dans son article.
+
+* **Le repository est conçu pour cela.** Dans un repository où il n'existe qu'une seule façon de faire chaque chose, l'agent n'a qu'à copier le bon pattern. C'est le sujet d'[Ennuyeusement simple](https://unytics.io/blog/fr/boringly-simple-data-platform/).
+* **Un concept n'a qu'un seul nom.** L'agent ne choisit jamais entre trois synonymes. C'est le sujet d'[Un nom, une définition](https://unytics.io/blog/fr/one-name-one-definition/).
+* **Chaque raté devient une règle.** Aucun de nos garde-fous n'existait au départ, et une Pull Request nous arrive aujourd'hui déjà relue par un agent. C'est le sujet de [La plateforme qui apprend](https://unytics.io/blog/fr/the-platform-that-learns/).
 
 ---
 
 ## Ce qu'il faut en retenir
 
-Avec les agents de code, la question n'est plus « qui sait coder ? » mais « notre repository est-il conçu pour qu'un agent ne puisse pas se tromper ? ». En misant sur une seule façon de faire, la configuration déclarative et une revue systématique, nous avons transformé les métiers en contributeurs — et une équipe plus petite en équipe plateforme.
+Avec les agents de code, la question n'est plus « qui sait coder ? » mais « notre repository est-il conçu pour qu'un agent ne puisse pas se tromper ? ». Le reste est une affaire de méthode : commencer par l'équipe la plus proche de soi, puis par un métier volontaire sur un sujet sans enjeu, et laisser chaque raté devenir une règle. C'est ainsi que nous avons transformé les métiers en contributeurs — et une équipe plus petite en équipe plateforme.
+
+Posez-vous la question pour votre propre entreprise : **combien d'outils métier y vivent dans un fichier Excel que seul son auteur sait faire tourner ?** Chacun de ces auteurs est un contributeur qui s'ignore.
+
+*Cet article détaille une partie d'un récit plus large : [Pourquoi vos métiers ne doivent pas être que des consommateurs d'IA (mais aussi des builders)](https://unytics.io/blog/fr/self-service-analytics-builders/).*
 
 ---
 

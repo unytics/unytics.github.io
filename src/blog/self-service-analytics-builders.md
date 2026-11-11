@@ -1,152 +1,136 @@
 ---
 title: "Self-Service Analytics: Why Your Business Teams Shouldn't Just Be AI Consumers (But Builders Too)"
-description: "Conversational analytics and proactive feedback loops are transforming access to data. But in a company with complex operations, you need to go further: open the mono-repo to business teams so they become Builders of the platform and of their own operational applications."
+description: "Everyone wants conversational AI to consume data. At Optic 2000, we also put it at the start of the chain, in the code editor: 25 contributors, most of them business people, build the data platform. The full story, with links to the articles that detail each part."
 date: 2026-11-16
 ---
 
 # Self-Service Analytics: Why Your Business Teams Shouldn't Just Be AI Consumers (But Builders Too)
 
-Last June, Anthropic's Data team shared how they built their internal *self-service analytics* with Claude. Plugged "cold" into their Data Warehouse, Claude gave only **21% correct answers**. With a rigorous *harness* (canonical tables, a semantic layer, documented *Skills*, automated validation), they climbed to **over 95%**… before falling back to **65% within a month**, because the context wasn't kept up to date as schemas and the product evolved.
+*This article follows the thread of my talk at the Forward Data Conference 2026, "What if your business teams built the data platform?" ([the slides are here](https://unytics.io/blog/forward-data-conference-2026/)). It is the whole story, in its short version: each part points to the article that details it.*
 
-The lesson: self-service AI is only as good as the context you give it, and that context has to be maintained continuously. The most advanced teams now do this remarkably well, with rigorous harnesses and proactive feedback loops. And everyone is trying to perfect the experience of business teams as **conversational consumers** (*Consumers*).
+Every executive team and every business department is asking for the same thing today: conversational analytics. An interface where any employee asks a question of their data, in natural language, and instantly gets a relevant analysis.
 
-At Optic 2000, we follow this approach too, but we went one step further: **business teams are Builders as well — of the platform and of their own operational applications.**
-
----
-
-## 💬 Act 1: The State of the Art of "Context Engineering" — and Why It Works Remarkably Well
-
-For fifteen years, data teams have pursued the same goal: break down silos and make business teams autonomous, because autonomy is a company's most powerful value lever.
-
-With *conversational analytics*, that dream has become tangible. And the most advanced teams, Anthropic first among them, have solved the context problem by industrializing three clearly distinct roles:
-
-1. **Data Platformers**, who build the technical *harness* (the mono-repo, the MCP server, CI/CD, evals).
-2. **Builders (the Data team)**, who model the data and maintain business context in the *harness*.
-3. **Consumers (business teams)**, who query data in natural language through Claude, Slack or their BI tools.
+At Optic 2000, we do that too. But it's not where we started. We first put conversational AI at the other end of the chain: in the code editor, where the platform is built. Ten months later, 25 people contribute to our data platform, and most of them aren't on a data team: **they are business people.**
 
 ---
 
-### 🏆 The Excellence of the Proactive Model: Jolimoi, Gorgias, Photoroom...
+## The Paradox: An AI Only Answers Right If Someone Maintains Its Context
 
-Let's be completely honest: when pushed to its limit, this organization is remarkably effective.
+Data teams know what's under the hood. Anthropic's data team [told the story very well in June](https://claude.com/blog/how-anthropic-enables-self-service-data-analytics-with-claude):
 
-Look at what teams like **Gorgias** (where 83% of employees ask more than 1,000 questions a day thanks to *Context Engineering*) or **Photoroom** (where Juliette Duizabo explains how 3 Data people serve the whole company) are doing.
+* without prepared context, Claude gets no more than **21%** of answers right on their warehouse;
+* with a senior team curating that context — reference tables, a semantic layer, skills, tests — it goes above **95%**;
+* within a month, without maintenance, it falls back to **65%**.
 
-In a software company or a 60–150 person scale-up without heavy physical operations, having 2 or 3 people in Data (around 2% of headcount) is perfectly reasonable. Especially when the central team moves from a reactive mode to an **ultra-proactive feedback loop** like at Jolimoi:
+Context isn't prepared once: it has to be maintained. Olga Berezovsky drew the conclusion in her [*Data Analysis Journal*](https://dataanalysis.substack.com/p/self-service-analytics-is-not): you need a village of analysts to make self-service work and keep it going.
 
-| Building block of the proactive loop | What it concretely changes |
-| ----- | ----- |
-| **Automatic capture of dead ends** | As soon as a *Consumer* asks a question the MCP can't answer, the intent is logged automatically. |
-| **Proactive listening across the company** | The system ingests public Slack channels and Google Meet transcripts to detect new business topics before a request is even made. |
-| **Automatic Pull Request generation** | A daily digest creates Linear tickets and automatically opens dozens of Pull Requests a day to enrich the models and the semantic layer. The central team just has to review and approve. |
+Here is what that looks like in practice. A business user is in the middle of an analysis, and a piece of data is missing: a column, a table, a measure. They have two options.
 
-With that kind of velocity, let's be fair: for 90% of everyday analytical questions, friction almost entirely disappears and the loss of serendipity becomes very small. This is exactly the feedback loop approach we are putting in place at Optic 2000 for our *Consumer* users.
+1. **Hack it on their own**, with an export and an Excel file. That's *shadow data*: what they learned never makes it back into the platform.
+2. **Open a ticket**, and wait for the data team to prepare the data. We used to open a ticket to get a dashboard; now we open one to get a column in the semantic layer. That's [Ticketing 2.0](https://unytics.io/blog/the-ticketing-2-0-trap/).
 
-**So if this model works so well, why do we claim a key piece of the puzzle is missing?**
-
----
-
-## ⚠️ Act 2: What "All-Consumer" Doesn't Solve — Business Nuance and Taking Action
-
-Most data teams today are trying to copy Alexis Blandin's model: a small, ultra-efficient central team that builds the *harness*, runs the feedback loop and keeps a monopoly on *building*.
-
-But as soon as you step outside a homogeneous SaaS company into a business with complex operations (like Optic 2000 with its 1,200 stores, logistics, finance, insurance partners, SAP and Salesforce), **siloing the Builder role in Data and the Consumer role in the business reveals two major limits.**
-
-### 1. A small central Data team will never master the nuances of every business process
-
-At Optic 2000, we are **8 full-time Data people**: 4 on the Data Platform team and 4 on the BI team.
-
-Even with the best AI agents in the world, how could 8 people at the center claim to know in detail every accounting subtlety of SAP, every business rule of the store master data in Salesforce, and every financial exception across the network? It's an illusion. **Business teams are the ones who know their data and their processes.**
-
-If you prevent analytically minded business people from being *Builders*:
-
-* You lose a considerable amount of efficiency in back-and-forths where information gets distorted at every handoff (even with AI assistance) between the person who knows the business process and the person who validates the dbt model.
-* During **deep dives** — where 80% of the value lies in exploring raw tables that haven't been modeled yet — the business analyst can't build the pipeline while exploring. They remain dependent on a round-trip with the central team (a *Ticketing 2.0*, automated by agents and feedback loops, sure, but still an intermediary).
-
-### 2. Business teams don't just need analyses: they need to build applications that act
-
-In the classic model, when you need real applications that go beyond analysis — for example operational tools with read and write access to SAP, Salesforce or Bitbucket — it's still the central team that has to build them on the business's behalf.
-
-Yet with *vibe-coding*, business teams now have the ability to create the tools that solve their daily operational friction themselves. They just need to be given the framework to do it.
+The most advanced teams shorten that wait: they analyze the questions that went unanswered, and enrich the context before anyone asks. It works remarkably well, and we are putting it in place too, for those who consume. But the data team remains the only one that builds — and therefore the bottleneck for everything that gets built.
 
 ---
 
-## 🛠️ Act 3: The Optic 2000 Model — Complementing Conversational Analytics by Turning Business Teams into Builders
+## Going Against the Market: Conversational AI at the Start of the Chain
 
-At Optic 2000, our conviction is simple: **the Consumer approach in a conversational interface and the Builder approach in VS Code are not opposed — they complement each other.**
+At Optic 2000, we had an extra problem this year: everything was changing at once. In ten months, we replaced the legacy PostgreSQL stack, absorbed a new point of sale, a new CRM and a new loyalty program, and switched off our BI tool. All with a platform team that went from six to four people. Our BI team didn't have a minute to take on new business topics.
 
-* We're obviously not going to ask an in-store optician or an operator who isn't comfortable with computers to open VS Code on our Git repository! For them, the *Consumer* conversational interface with a feedback loop is perfect.
-* But limiting yourself to the *Consumer* approach keeps a glass ceiling in place. That's why our **4 Data Platformers** opened our Git mono-repo to our **4 BI specialists** and to **around 20 Builders from business departments** (financial controlling, finance, master data owners...), bringing the total to **25 people actively building the platform** — without a single one of them writing code by hand.
+Faced with that wall, we went against the market. A classic data platform chains sources, transformations, a semantic layer and applications. The data team prepares, business teams consume, and the market plugs conversational AI at the very end of the chain, in a consumption interface.
 
----
+```
+Sources → Transformations → Semantic layer → Applications
+                                                  ▲
+                       the market: conversational AI here
 
-### 🎨 The 3 Spaces Where We "Vibe-Code" at Optic 2000
+├─ Optic 2000: conversational AI along the whole chain ─┤
+```
 
-This complementarity takes shape in three distinct workspaces on our platform:
+We put it at the very start: in the code editor, where the platform is built. The moment someone starts an analysis, the AI helps them prepare and enrich the data, at the source, in the platform. That's the third option: neither hacking nor waiting. Building.
 
-| Vibe-Coding Space | Who uses it? | What happens there | How the platform gets enriched |
-| ----- | ----- | ----- | ----- |
-| **1. Claude Desktop & OpenWebUI (on an MCP server)** | **Consumers** (Stores, business users) | Direct conversational analysis on the semantic layer with strict access-rights filtering. | **Feedback loop (like at Alexis Blandin's)**: you don't *build* while analyzing, but feedback generates PRs that improve the YAML. |
-| **2. Streamlit Data Apps (Playground & embedded AI)** | **Consumers & advanced business users** | Dashboards and operational apps on top of our SaaS tools. Some apps **embed a conversational Claude agent** to analyze the data on screen or generate your own dashboards (see below). | Feedback loop today — and probably tomorrow the ability to trigger PRs directly from the agents embedded in Streamlit. |
-| **3. The Git Mono-repo in VS Code (with Claude Code)** | **Builders (Business & BI - ~24 people)** & **Data Platformers (4 people)** | **You build while you analyze**. The business user explores raw data, pipes an ingestion, models in dbt, edits the semantic layer and vibe-codes Streamlit apps. | **Full autonomy**: the business user opens their Pull Request directly in the Git repo as part of their work. |
+**Analysis builds the platform.** An example. We were analyzing the performance of some of our stores, and we wanted to compare them with one another. But you can't compare apples and oranges: we first needed segments. We built them within the same analysis, with a k-means on each store's sales profile: high-end, mid-range or entry-level, volumes, products for seniors or for children… The analysis answered the question we had asked: how those stores perform, how that evolves over time, and where they stand against similar stores. And it left two things behind in the platform: a "segment" dimension in `dim_magasins`, our store dimension model, and a feature table — sales statistics per store — that other analyses and machine-learning algorithms can reuse.
 
----
-
-### 💡 Focus on Space 2: When Streamlit Apps Embed Conversational AI and Artifacts
-
-Most of our Streamlit applications are dashboards vibe-coded in VS Code by business teams or the BI team. But several of them combine the best of structured applications and generative AI:
-
-* **The financial statement augmented by a dedicated agent:** A Streamlit app displays a store's financial statements. Right inside the app, a Claude agent is embedded with a hardcoded financial *system prompt*. The end user chats with Claude within the app to dig into their statements, test hypotheses and generate complementary HTML artifacts.
-* **The Playground app ("Claude Dashboards"):** We built a Streamlit app that acts as a generator and host for HTML artifacts. A *Consumer* vibe-codes their own dashboard there in playground mode, then saves it. The app now holds dozens of dashboards created by users themselves — durable, discoverable, shareable and all in one place.
-* **The alert scheduling app:** A Streamlit app that lets users configure and schedule automatic emails driven by the indicators from our metrics engine.
+In a separate analysis tool, that segmentation would have stayed in a notebook. Here, everyone builds on the shoulders of those who came before.
 
 ---
 
-## ⚡ Act 4: Beyond Read-Only — Operational Applications Built on SAP, Salesforce and Git
+## What Happened: The BI Team First, Then Business Teams
 
-When a business user becomes a *Builder* in VS Code, they don't just build analytical pipelines or read-only charts. They build **operational applications that let them see AND act** directly on the company's systems.
+Opening the central repository to non-developers didn't happen overnight. We started with the people closest to us: our BI team, who had never touched Git or dbt. Within a few weeks, they were building their data apps on their own, then their models. Business teams at headquarters followed, first on small topics, then on critical ones.
 
-Here are 6 concrete examples of apps vibe-coded at Optic 2000:
+The result: in ten months, the number of people contributing to our data repository went from **4 to 25**. Four on the platform team, four in BI, and all the others are business people. None of these twenty-five people codes by hand: they converse with an agent.
 
-| Vibe-Coded App | Connected system | Operational use (See & Act) |
-| ----- | ----- | ----- |
-| **1. Inconsistency Detection & Correction** | **Salesforce** | Vibe-coded by the business owner of the store master data: the app detects anomalies in Salesforce, displays them clearly and lets the business **fix the data directly in Salesforce**. |
-| **2. Human-in-the-Loop Enrichment** | **Salesforce** | Algorithms compute enrichment proposals for the store master data. The Streamlit app provides the *Human-in-the-Loop* interface where the business reviews and approves before anything is written to Salesforce. |
-| **3. Operational business front-end** | **SAP** | A dedicated, custom front-end on top of SAP that offers clear views and runs specific operational processes without the complexity of the native SAP interface. |
-| **4. PR governance cockpit** | **Bitbucket** | A far more readable interface than Bitbucket to track all open Pull Requests, see at a glance who needs to review what, and check that all our requirements are met. |
-| **5. Visual Semantic Layer editor** | **Git Repository** | An interface on top of Git to visualize and edit the entire semantic layer with business validation, far easier to digest than raw YAML (and integrated with the PRs generated by our feedback loops). |
-| **6. Access rights manager** | **Streamlit platform** | A dedicated app to easily manage access permissions for every Streamlit application. |
+The village of analysts you supposedly need to make self-service work? Here it is. Except we didn't hire it: **it was already in the company.**
+
+*The details — the BI team's story, the business teams' stories, how we onboard people, and what happens when a contributor leaves — are in [Nobody Codes by Hand](https://unytics.io/blog/nobody-codes-by-hand/).*
 
 ---
 
-### 🤔 Claude Artifacts vs Apps on Git: Where Will the Line Be Tomorrow?
+## What They Build: Much More Than Dashboards
 
-A legitimate question arises: *"Tomorrow, artifacts generated in Claude or in a playground won't just be read-only charts. They're already durable and shareable, soon organizable like a Google Drive, and will be able to write directly to Salesforce or SAP via MCP connectors. Will we still need business teams to vibe-code Streamlit apps in VS Code and Git?"*
+Multiplying contributors doesn't just save time: it brings out ideas the data team would never have had. We expected dashboards. Business people did something else: they replaced licensed software, and gave SAP and Salesforce the interfaces they were missing.
 
-The answer won't be binary: it will be a **continuum of mastery and control**.
-
-* **For lightweight, quick or exploratory needs:** artifacts generated on the fly, saved and shared in a Drive-like space (or in our Streamlit Playground app) will be more than enough and unbeatable in velocity.
-* **For business-critical processes:** as soon as you need to write in bulk to SAP or Salesforce with complex upstream algorithms, enforce strict access governance, guarantee non-regression through CI tests and deploy on the company's secure infrastructure, **you'll always want real code files versioned in Git and approved through Pull Requests**.
+*The details — what they built, what these data apps read and write, and what keeps them consistent — are in [A Dashboard Shows, a Data App Acts](https://unytics.io/blog/data-apps-beyond-dashboards/).*
 
 ---
 
-## 🛡️ Act 5: The Architectural Secret — A Declarative Mono-Repo to Align 25 Builders
+## Why It Holds Without Turning into Chaos
 
-How do you let 25 people (4 Data Platform, 4 BI and around 20 business users) build in the same Git repository without anyone coding by hand and without creating chaos?
+The objection is fair, and I raised it myself: letting twenty-five people and their agents change the data platform will create a plate of spaghetti, and we'll spend more time reviewing their code than writing it ourselves. Five things prevent that, and each has its own article.
 
-It all relies on the *harness* built by the 4 Data Platformers in a **single, 100% declarative mono-repo**:
-
-1. **Only one way to do each thing:** Whether it's ingesting data, creating a dbt model, adding a metric to the semantic layer (like at Anthropic, where 90% of PRs unify model and context) or deploying a Streamlit app on AWS via Terraform, there's only one declarative pattern. In VS Code, Claude Code sees the whole repository and faithfully reproduces our standards.
-2. **The analysis builds the platform (*Deep Dive & Pipe*):** Guided by our *Skills*, a business user exploring raw data in VS Code enriches the dbt model and the semantic layer as part of the same motion as their analysis.
-3. **Centralized PR review:** The 4 Data Platformers keep final control by reviewing Pull Requests (helped by CI and our Bitbucket app) before anything goes to production.
-4. **Supporting business teams:** One of the 4 Data Platformers is dedicated full-time to supporting business teams so they can make the most of the platform.
+* **A single repository.** Ingestion, transformations, the semantic layer and data apps live in the same Git repository: an agent goes from the source to the screen in the same conversation and the same Pull Request, which none could do with scattered tools. It is also what makes us [independent from our vendors](https://unytics.io/blog/optic-2000-independence/).
+* **Boring contributions.** A contributor only writes configuration; deployment, security and monitoring are written once, by the platform team. What a contribution can't express, a reviewer doesn't have to check. That's the subject of [Boringly Simple](https://unytics.io/blog/boringly-simple-data-platform/).
+* **One name per concept.** A column has the same name across the whole warehouse, and its definition is written only once: the agent has nothing to guess. That's the subject of [One Name, One Definition](https://unytics.io/blog/one-name-one-definition/).
+* **A review done by the machine first.** A review agent reads the work before the Pull Request is opened, and every review comment becomes a rule. Otherwise, we would only have moved the bottleneck, from tickets to Pull Requests. That's the subject of [The Platform That Learns](https://unytics.io/blog/the-platform-that-learns/).
+* **People who are supported.** The key isn't technology, it's people: one of our four data engineers is dedicated full time to supporting business people. That's in [Nobody Codes by Hand](https://unytics.io/blog/nobody-codes-by-hand/).
 
 ---
 
-## 🎯 Conclusion: Open Your Harness to Business Teams
+## Builders and Consumers: We Do Both
 
-*Conversational Analytics* combined with a proactive feedback loop is a major step forward. Small teams of 2 or 3 people like at Jolimoi or Photoroom demonstrate every day how much this approach transforms access to data for *Consumers*.
+Does all this mean throwing away conversational analytics and putting everyone in VS Code? Absolutely not. At headquarters, analytical profiles use AI to build lasting assets, in the repository. But an optician in one of our stores will never open a code editor: they need to be served like a customer.
 
-But don't stop there. If your company has rich, complex operational processes, your central Data team — however brilliant — will never replace the intimate knowledge your business teams have of their own data and their own tools.
+For stores, AI comes in two forms:
 
-Keep the conversational approach and lightweight artifacts for quick consumption. But **open your mono-repo and VS Code to your business experts**. The day your business teams stop merely asking a chatbot questions and become the *Builders* of the platform and of their own operational applications, you will finally have broken down data's last silo.
+* **specialized agents, embedded in their data apps.** A store manager looks at the store's financial statement and talks it through with an agent that is an expert in optical retail finance: they compare themselves with similar stores, bring in their local context, and get recommendations;
+* **an MCP server and skills**, which expose the same expertise: stores query their data from their own Claude or their own ChatGPT.
+
+In both cases, the figures come from the same semantic layer, and everyone sees only their own data.
+
+A data organization has three roles: those who build the platform (*platformers*), those who build on top of it (*builders*) and those who consume (*consumers*). In the usual model, the boundary runs between the data team, which builds, and business teams, which consume. We moved it.
+
+| | Platformers | Builders | Consumers |
+|---|---|---|---|
+| **The usual model** | the data team | the data team | business teams |
+| **At Optic 2000** | the platform team | business teams at headquarters, with the BI team | the stores |
+
+Among those who build, there are now more business people than data people. Our conviction: put as many people as possible on the builders' side. With eight of us in data, we will never know every accounting subtlety of SAP, or every business rule of the store master data. **Business teams are the ones who know their data and their processes.**
+
+---
+
+## A Trend Bigger Than Our Case
+
+I don't think this way of working is specific to a company like ours. I have the impression a trend is setting in: business people who have never coded are starting to work in code repositories, in three forms:
+
+* they open a ticket from Slack, and an agent codes it;
+* they build directly in another team's repository, as ours do;
+* they create their own repository.
+
+It's especially visible in marketing and go-to-market teams, to manage their campaigns. And digital-native companies are concerned too. One of them actually inspired me: Taha Le Bras, at Supabase, told me that one morning marketing had made a Pull Request in his data repository, and that he himself, the same day, had made one in the product's.
+
+It may be the beginning of a "git-ification" of the company. What changes from one case to another is what gets built: in ours, the transformation of processes that are still manual. And nothing forces you to bring everything into a single repository from the start: you can open the dbt repository first, then bring the rest into it.
+
+---
+
+## Key Takeaways
+
+People say you need a whole village of analysts to make self-service work. I believe that village already exists, in every company: **it's your business teams.**
+
+Keep conversational AI for those who consume. But don't leave the data team with a monopoly on building. Ours no longer builds simple dashboards: freed from ticketing and point-and-click, our BI team helps business teams rethink the way they work, and the data team as a whole co-builds the operational transformation of the company.
+
+Ask yourself the question about your own company: **who could become a builder tomorrow?**
+
+---
+
+*Want to open your data platform to your business teams, and wondering where to start? [Let's talk about it in a 30-minute data chat](https://unytics.io/book-meeting/).*

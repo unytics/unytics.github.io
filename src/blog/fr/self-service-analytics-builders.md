@@ -1,152 +1,136 @@
 ---
-title: "Self-Service Analytics : pourquoi vos métiers ne doivent pas être que des consommateurs d'IA (mais aussi des Builders)"
-description: "Le conversational analytics et les boucles de rétroaction proactives transforment l'accès à la donnée. Mais dans une entreprise aux opérations complexes, il faut aller plus loin : ouvrir le mono-repo aux métiers pour qu'ils deviennent les Builders de la plateforme et de leurs applications opérationnelles."
+title: "Self-Service Analytics : pourquoi vos métiers ne doivent pas être que des consommateurs d'IA (mais aussi des builders)"
+description: "Tout le monde veut du conversationnel pour consommer la donnée. Chez Optic 2000, nous l'avons aussi mis au début de la chaîne, dans l'éditeur de code : 25 contributeurs, en majorité des métiers, construisent la data platform. Le récit complet, et les articles qui détaillent chaque partie."
 date: 2026-11-16
 ---
 
-# Self-Service Analytics : pourquoi vos métiers ne doivent pas être que des consommateurs d'IA (mais aussi des Builders)
+# Self-Service Analytics : pourquoi vos métiers ne doivent pas être que des consommateurs d'IA (mais aussi des builders)
 
-En juin dernier, l'équipe Data d'Anthropic a raconté comment elle a construit son *self-service analytics* interne avec Claude. Branché « à froid » sur leur Data Warehouse, Claude ne donnait que **21 % de réponses exactes**. Avec un *harness* rigoureux (tables canoniques, couche sémantique, *Skills* documentés, validation automatisée), ils sont montés à **plus de 95 %**… avant de retomber à **65 % en un mois**, faute d'entretenir le contexte au fil de l'évolution des schémas et du produit.
+*Cet article reprend le fil de mon talk à la Forward Data Conference 2026, « Et si vos métiers construisaient la data platform ? » ([les slides sont ici](https://unytics.io/blog/fr/forward-data-conference-2026/)). C'est le récit complet, en version courte : chaque partie renvoie vers l'article qui la détaille.*
 
-La leçon : une IA en self-service ne vaut que par le contexte qu'on lui donne, et ce contexte doit être entretenu en permanence. Les équipes les plus avancées y parviennent aujourd'hui remarquablement bien, avec des *harness* rigoureux et des boucles de rétroaction proactives. Et tout le monde cherche à perfectionner l'expérience des métiers en tant que **consommateurs conversationnels** (*Consumers*).
+Toutes les directions générales et toutes les directions métiers demandent aujourd'hui la même chose : de l'analytique conversationnelle. Une interface où n'importe quel collaborateur pose une question à ses données, en langage naturel, et obtient aussitôt une analyse pertinente.
 
-Chez Optic 2000, nous suivons cette approche, mais nous sommes allés un cran plus loin : **les métiers sont aussi Builders — de la plateforme et de leurs propres applications opérationnelles.**
-
----
-
-## 💬 Acte 1 : L'état de l'art du « Context Engineering » — et pourquoi ça marche redoutablement bien
-
-Depuis quinze ans, les équipes data poursuivent le même objectif : casser les silos et rendre les équipes métiers autonomes, parce que l'autonomie est le plus puissant levier de valeur d'une entreprise.
-
-Avec le *conversational analytics*, ce rêve est devenu tangible. Et les équipes les plus avancées, Anthropic en tête, ont résolu le problème du contexte en industrialisant trois rôles bien distincts :
-
-1. **Les Data Platformers**, qui construisent le *harness* technique (le mono-repo, le serveur MCP, la CI/CD, les évals).
-2. **Les Builders (l'équipe Data)**, qui modélisent la donnée et maintiennent le contexte métier dans le *harness*.
-3. **Les Consumers (les métiers)**, qui interrogent la donnée en langage naturel via Claude, Slack ou leurs outils de BI.
+Chez Optic 2000, nous le faisons aussi. Mais ce n'est pas par là que nous avons commencé. Nous avons d'abord mis le conversationnel à l'autre bout de la chaîne : dans l'éditeur de code, là où la plateforme se construit. Dix mois plus tard, 25 personnes contribuent à notre data platform, et la plupart ne font partie d'aucune équipe data : **ce sont des métiers.**
 
 ---
 
-### 🏆 L'excellence du modèle proactif : Jolimoi, Gorgias, Photoroom...
+## Le paradoxe : une IA ne répond juste que si quelqu'un entretient son contexte
 
-Soyons parfaitement honnêtes : lorsqu'elle est poussée à son maximum, cette organisation est d'une efficacité redoutable.
+Les équipes data savent ce qu'il y a sous le capot. L'équipe data d'Anthropic [l'a très bien raconté en juin](https://claude.com/blog/how-anthropic-enables-self-service-data-analytics-with-claude) :
 
-Regardez ce que font des équipes comme **Gorgias** (où 83 % des employés posent plus de 1 000 questions par jour grâce au *Context Engineering*) ou **Photoroom** (où Juliette Duizabo explique comment 3 personnes côté Data servent toute l'entreprise).
+* sans contexte préparé, Claude ne dépasse pas **21 %** de bonnes réponses sur leur entrepôt ;
+* avec une équipe senior qui organise ce contexte — tables de référence, couche sémantique, skills, tests —, il dépasse **95 %** ;
+* en un mois, faute d'entretien, il retombe à **65 %**.
 
-Dans un éditeur de logiciel ou une scale-up de 60 à 150 personnes sans opérations physiques lourdes, avoir 2 ou 3 personnes à la Data (environ 2 % des effectifs) est tout à fait raisonnable. Surtout quand l'équipe centrale passe d'un mode réactif à une **boucle de rétroaction ultra-proactive** comme chez Jolimoi :
+Le contexte ne se prépare pas une fois : il s'entretient. Olga Berezovsky en a tiré la conclusion dans son [*Data Analysis Journal*](https://dataanalysis.substack.com/p/self-service-analytics-is-not) : pour faire fonctionner le self-service, et le faire durer, il faut tout un village d'analystes.
 
-| Brique de la boucle proactive | Ce que cela change concrètement |
-| ----- | ----- |
-| **Capture automatique des impasses** | Dès qu'un utilisateur *Consumer* pose une question à laquelle le MCP ne peut pas répondre, l'intention est logguée automatiquement. |
-| **Écoute proactive de l'entreprise** | Le système ingère les canaux Slack publics et les transcriptions Google Meet pour détecter les nouveaux sujets métiers avant même qu'une demande ne soit formulée. |
-| **Génération automatique de Pull Requests** | Un digest quotidien génère des tickets Linear et ouvre automatiquement des dizaines de Pull Requests par jour pour enrichir les modèles et la couche sémantique. L'équipe centrale n'a plus qu'à relire et valider. |
+Voici ce que cela donne au quotidien. Un métier est en pleine analyse, et il lui manque une donnée : une colonne, une table, une mesure. Il a deux options.
 
-Avec une telle vélocité, soyons justes : pour 90 % des questions analytiques courantes, la friction disparaît presque entièrement et la perte de sérendipité devient très faible. C'est d'ailleurs exactement cette approche de boucle de rétroaction que nous mettons en place chez Optic 2000 pour nos utilisateurs *Consumers*.
+1. **Bricoler dans son coin**, avec un export et un fichier Excel. C'est le *shadow data* : ce qu'il a compris ne revient jamais dans la plateforme.
+2. **Ouvrir un ticket**, et attendre que l'équipe data prépare la donnée. Avant, on ouvrait un ticket pour avoir un dashboard ; maintenant, on en ouvre un pour avoir une colonne dans la couche sémantique. C'est le [Ticketing 2.0](https://unytics.io/blog/fr/the-ticketing-2-0-trap/).
 
-**Alors, si ce modèle fonctionne si bien, pourquoi affirmons-nous qu'il manque une pièce essentielle au puzzle ?**
-
----
-
-## ⚠️ Acte 2 : Ce que le « Tout-Consumer » ne résout pas — La finesse métier et le passage à l'action
-
-La grande majorité des équipes data cherchent aujourd'hui à copier le modèle d'Alexis Blandin : une petite équipe centrale ultra-efficace qui construit le *harness*, pilote la boucle de feedback et garde le monopole du *build*.
-
-Mais dès que vous sortez du cadre d'un éditeur SaaS homogène pour entrer dans une entreprise aux opérations complexes (comme Optic 2000 avec ses 1 200 magasins, sa logistique, sa finance, ses mutuelles, SAP et Salesforce), **siloter la responsabilité de Builder côté Data et de Consumer côté Métier révèle deux grandes limites.**
-
-### 1. Une petite équipe Data centrale ne maîtrisera jamais la finesse de tous les processus métiers
-
-Chez Optic 2000, nous sommes **8 personnes côté Data à plein temps** : 4 personnes dans l'équipe Data Platform et 4 personnes dans l'équipe BI.
-
-Même avec les meilleurs agents IA du monde, comment 8 personnes en central pourraient-elles prétendre connaître avec finesse toutes les subtilités comptables de SAP, toutes les règles de gestion du référentiel magasin dans Salesforce et toutes les exceptions financières du réseau ? C'est illusoire. **Ce sont les métiers qui connaissent leurs données et leurs processus.**
-
-Si vous interdisez aux métiers qui ont une appétence analytique d'être des *Builders* :
-
-* Vous perdez une efficacité considérable en allers-retours où l'information se déforme à chaque passage de relais (même assistés par IA) entre celui qui connaît le processus métier et celui qui valide le modèle dbt.
-* Lors des **analyses approfondies (*deep dives*)** — où 80 % de la valeur se cache dans l'exploration de tables brutes non encore modélisées — l'analyste métier ne peut pas construire le pipeline en même temps qu'il explore. Il reste tributaire d'un aller-retour avec l'équipe centrale (un *Ticketing 2.0*, certes automatisé par des agents et des boucles de feedback, mais un intermédiaire quand même).
-
-### 2. Les métiers n'ont pas seulement besoin d'analyses : ils ont besoin de construire des applications qui agissent
-
-Dans le modèle classique, quand il faut construire de véritables applications qui vont au-delà de l'analyse — par exemple des outils opérationnels connectés en lecture et écriture à SAP, Salesforce ou Bitbucket — c'est encore l'équipe centrale qui doit développer à la place du métier.
-
-Or, avec le *vibe-coding*, les métiers ont désormais la capacité de créer eux-mêmes les outils qui résolvent leurs frictions opérationnelles quotidiennes. Encore faut-il leur en donner le cadre.
+Les équipes les plus avancées réduisent cette attente : elles analysent les questions restées sans réponse, et enrichissent le contexte avant même qu'on le leur demande. C'est remarquablement efficace, et nous le mettons en place nous aussi, pour ceux qui consomment. Mais l'équipe data y reste la seule à construire — donc le goulot d'étranglement de tout ce qui se construit.
 
 ---
 
-## 🛠️ Acte 3 : Le modèle Optic 2000 — Compléter le Conversationnel en transformant les métiers en Builders
+## Le contre-pied : mettre le conversationnel au début de la chaîne
 
-Chez Optic 2000, notre conviction est simple : **l'approche Consumer dans une interface conversationnelle et l'approche Builder dans VS Code ne s'opposent pas, elles se complètent.**
+Chez Optic 2000, nous avions cette année un problème de plus : tout changeait en même temps. En dix mois, nous avons remplacé le socle PostgreSQL historique, intégré un nouveau logiciel de caisse, un nouveau CRM et un nouveau programme de fidélité, et débranché notre outil de BI. Le tout avec une équipe plateforme passée de six à quatre personnes. Notre équipe BI n'avait pas une minute pour traiter de nouveaux sujets métiers.
 
-* On ne va évidemment pas demander à un opticien en magasin ou à un opérateur peu à l'aise avec l'informatique d'ouvrir VS Code sur notre repository Git ! Pour eux, l'interface conversationnelle *Consumer* avec boucle de rétroaction est parfaite.
-* Mais se limiter uniquement à l'approche *Consumer* maintient un plafond de verre. C'est pourquoi nos **4 Data Platformers** ont ouvert notre mono-repo Git à nos **4 spécialistes BI** et à **une vingtaine de Builders issus des directions métiers** (contrôle de gestion, finance, responsables référentiels...), portant le total à **25 personnes qui buildent activement la plateforme** — sans qu'aucune d'entre elles ne code à la main.
+Face à ce mur, nous avons pris le contre-pied du marché. Une data platform classique enchaîne des sources, des transformations, une couche sémantique et des applications. L'équipe data prépare, les métiers consomment, et le marché branche le conversationnel tout au bout de la chaîne, dans une interface de consommation.
 
----
+```
+Sources → Transformations → Couche sémantique → Applications
+                                                     ▲
+                          le marché : le conversationnel ici
 
-### 🎨 Les 3 espaces où l'on « Vibe-Code » chez Optic 2000
+├── Optic 2000 : le conversationnel sur toute la chaîne ───┤
+```
 
-Cette complémentarité s'incarne dans trois espaces de travail distincts sur notre plateforme :
+Nous l'avons mis au tout début : dans l'éditeur de code, là où la plateforme se construit. Au moment même où quelqu'un cherche à faire une analyse, l'IA l'aide à préparer et à enrichir la donnée, à la source, dans la plateforme. C'est la troisième option : ni bricoler, ni attendre. Construire.
 
-| Espace de Vibe-Coding | Qui l'utilise ? | Ce qu'on y fait concrètement | Comment la plateforme s'enrichit |
-| ----- | ----- | ----- | ----- |
-| **1. Claude Desktop & OpenWebUI (sur serveur MCP)** | **Consumers** (Magasins, utilisateurs métiers) | Analyse conversationnelle directe sur la couche sémantique avec filtrage strict des droits d'accès. | **Boucle de rétroaction (comme chez Alexis Blandin)** : on ne *builde* pas pendant qu'on analyse, mais les feedbacks génèrent des PRs d'amélioration du YAML. |
-| **2. Les Data Apps Streamlit (Playground & IA embarquée)** | **Consumers & Métiers avancés** | Dashboards et applications opérationnelles sur nos SaaS. Certaines apps **embarquent un agent Claude conversationnel** pour analyser les données affichées ou générer ses propres dashboards (voir ci-dessous). | Boucle de rétroaction aujourd'hui — et probablement demain la possibilité de déclencher directement des PRs depuis les agents embarqués dans Streamlit. |
-| **3. Le Mono-repo Git dans VS Code (avec Claude Code)** | **Builders (Métiers & BI - ~24 pers.)** & **Data Platformers (4 pers.)** | **On builde en même temps qu'on analyse**. Le métier explore le brut, pipe une ingestion, modélise dans dbt, édite la couche sémantique et vibe-code des apps Streamlit. | **Autonomie complète** : le métier ouvre directement sa Pull Request dans le repo Git pendant son travail. |
+**L'analyse construit la plateforme.** Un exemple. Nous analysions la performance de certains magasins, et nous avons voulu les comparer entre eux. Mais on ne compare pas des choux et des carottes : il fallait d'abord des segments. Nous les avons construits dans la même analyse, par un k-means sur le profil de vente de chaque magasin : haut, moyen ou bas de gamme, volumes, produits destinés aux personnes âgées ou aux enfants… L'analyse a répondu à la question posée : la performance de ces magasins, son évolution dans le temps, et leur position face à des magasins similaires. Et elle a laissé deux choses dans la plateforme : une dimension « segment » dans notre modèle `dim_magasins`, et une table de *features* — des statistiques de vente par magasin —, réutilisable par d'autres analyses comme par des algorithmes de machine learning.
 
----
-
-### 💡 Focus sur l'Espace 2 : Quand les Apps Streamlit embarquent le Conversationnel et les Artefacts
-
-La plupart de nos applications Streamlit sont des dashboards vibe-codés dans VS Code par les métiers ou l'équipe BI. Mais plusieurs d'entre elles hybrident le meilleur de l'application structurée et de l'IA générative :
-
-* **Le bilan financier augmenté par un agent dédié :** Une application Streamlit affiche les bilans financiers d'un magasin. Directement dans l'application, un agent Claude est embarqué avec un *system prompt* financier hardcodé. L'utilisateur final discute avec Claude au sein de l'app pour fouiller son bilan, tester des hypothèses et générer des artefacts HTML complémentaires.
-* **L'application Playground (« Claude Dashboards ») :** Nous avons construit une application Streamlit qui sert de générateur et d'hébergeur d'artefacts HTML. Un utilisateur *Consumer* y vibe-code son propre dashboard en mode playground, puis l'enregistre. L'application contient ainsi des dizaines de dashboards créés par les utilisateurs eux-mêmes, pérennes, découvrables, partageables et embarqués au même endroit.
-* **L'application de planification d'alertes :** Une app Streamlit permettant aux utilisateurs de configurer et planifier des envois d'emails automatiques branchés sur les indicateurs de notre moteur de mesure.
+Dans un outil d'analyse à part, cette segmentation serait restée dans un notebook. Ici, chacun construit sur les épaules de ceux qui l'ont précédé.
 
 ---
 
-## ⚡ Acte 4 : Au-delà du Read-Only — Les applications opérationnelles construites sur SAP, Salesforce et Git
+## Ce qui s'est passé : l'équipe BI d'abord, puis les métiers
 
-Lorsqu'un métier devient *Builder* dans VS Code, il ne construit pas uniquement des pipelines analytiques ou des graphiques en lecture seule. Il construit des **applications opérationnelles qui permettent de voir ET d'agir** directement sur les systèmes de l'entreprise.
+Ouvrir le repository central à des non-développeurs ne s'est pas fait d'un coup. Nous avons commencé par les plus proches de nous : notre équipe BI, qui n'avait jamais touché à Git ni à dbt. En quelques semaines, elle construisait seule ses data apps, puis ses modèles. Les métiers du siège ont suivi, d'abord sur de petits sujets, puis sur des sujets critiques.
 
-Voici 6 exemples concrets d'applications vibe-codées chez Optic 2000 :
+Résultat : en dix mois, le nombre de personnes qui contribuent à notre repository data est passé de **4 à 25**. Quatre à la plateforme, quatre à la BI, et tous les autres sont des métiers. Aucune de ces vingt-cinq personnes ne code à la main : elles conversent avec un agent.
 
-| Application Vibe-Codée | Système connecté | Usage opérationnel (Voir & Agir) |
-| ----- | ----- | ----- |
-| **1. Détection & Correction d'incohérences** | **Salesforce** | Vibe-codée par le responsable métier du référentiel magasins : l'app détecte les anomalies dans Salesforce, les affiche clairement et permet au métier de **corriger directement les données dans Salesforce**. |
-| **2. Enrichissement Human-in-the-Loop** | **Salesforce** | Des algorithmes calculent des propositions d'enrichissement du référentiel magasin. L'app Streamlit offre l'interface *Human-in-the-Loop* où le métier contrôle et valide avant écriture dans Salesforce. |
-| **3. Front-end opérationnel métier** | **SAP** | Un front dédié et sur mesure branché au-dessus de SAP pour offrir des vues claires et exécuter des processus opérationnels précis sans subir la complexité de l'interface SAP native. |
-| **4. Cockpit de gouvernance des PRs** | **Bitbucket** | Une interface bien plus lisible que Bitbucket pour suivre toutes les Pull Requests ouvertes, voir en un clin d'œil qui doit relire quoi, et vérifier que toutes nos exigences sont respectées. |
-| **5. Éditeur visuel de Semantic Layer** | **Git Repository** | Une interface par-dessus Git pour visualiser et éditer toute la couche sémantique avec validation métier, bien plus digeste que le YAML brut (et qui s'intègre avec les PRs générées par nos boucles de feedback). |
-| **6. Gestionnaire des droits d'accès** | **Plateforme Streamlit** | Une application dédiée pour administrer facilement les permissions d'accès à chaque application Streamlit. |
+Le village d'analystes qu'il faudrait pour faire vivre le self-service ? Le voilà. Sauf que nous ne l'avons pas recruté : **il était déjà dans l'entreprise.**
+
+*Le détail — l'histoire de l'équipe BI, celles des métiers, le parcours d'embarquement, et ce qui se passe quand un contributeur s'en va — est dans [Personne ne code à la main](https://unytics.io/blog/fr/nobody-codes-by-hand/).*
 
 ---
 
-### 🤔 Artefacts Claude vs Applications sur Git : où placer le curseur demain ?
+## Ce qu'ils construisent : bien plus que des dashboards
 
-Une question légitime se pose : *« Demain, les artefacts générés dans Claude ou dans un playground ne seront plus de simples graphiques en lecture seule. Ils sont déjà pérennes, partageables, bientôt organisables comme un Google Drive, et pourront écrire directement dans Salesforce ou SAP via des connecteurs MCP. Aura-t-on encore besoin que les métiers vibe-codent des applications Streamlit dans VS Code et Git ? »*
+En démultipliant les contributeurs, on ne gagne pas seulement du temps : on fait émerger des idées que l'équipe data n'aurait pas eues. Nous attendions des dashboards. Les métiers ont fait autre chose : ils ont remplacé des logiciels sous licence, et donné à SAP et à Salesforce les interfaces qui leur manquaient.
 
-La réponse ne sera pas binaire : il s'agira d'un **continuum de maîtrise et de contrôle**.
-
-* **Pour les besoins légers, rapides ou exploratoires :** les artefacts générés à la volée, sauvegardés et partagés dans un espace type Drive (ou dans notre app Streamlit Playground) seront largement suffisants et imbattables en vélocité.
-* **Pour les processus critiques d'entreprise :** dès qu'il s'agit d'écrire en masse dans SAP ou Salesforce avec des algorithmes complexes en amont, d'imposer une gouvernance stricte des droits d'accès, de garantir la non-régression par des tests CI et de déployer sur l'infrastructure sécurisée de l'entreprise, **on voudra toujours avoir de vrais fichiers de code versionnés sur Git et validés par Pull Request**.
+*Le détail — ce qu'ils ont construit, ce que ces data apps lisent et écrivent, et ce qui les garde homogènes — est dans [Un dashboard montre, une data app agit](https://unytics.io/blog/fr/data-apps-beyond-dashboards/).*
 
 ---
 
-## 🛡️ Acte 5 : Le secret d'architecture — Un Mono-Repo déclaratif pour aligner 25 Builders
+## Comment ça tient sans tourner au chaos
 
-Comment permettre à 25 personnes (4 Data Platform, 4 BI et une vingtaine de métiers) de builder dans le même repository Git sans que personne ne code à la main et sans créer le chaos ?
+L'objection est légitime, et je me la faisais moi-même : laisser vingt-cinq personnes et leurs agents modifier la data platform, c'est fabriquer un plat de spaghettis, et passer plus de temps à relire leur code qu'à l'écrire soi-même. Cinq choses l'évitent, et chacune a son article.
 
-Tout repose sur le *harness* construit par les 4 Data Platformers dans un **mono-repo unique et 100 % déclaratif** :
-
-1. **Une seule façon de faire chaque chose :** Qu'il s'agisse d'ingérer une donnée, de créer un modèle dbt, d'ajouter une métrique dans le semantic layer (comme chez Anthropic où 90 % des PRs unifient modèle et contexte) ou de déployer une app Streamlit sur AWS via Terraform, il n'existe qu'un seul pattern déclaratif. Dans VS Code, Claude Code voit tout le repository et reproduit scrupuleusement nos standards.
-2. **L'analyse construit la plateforme (*Deep Dive & Pipe*) :** Guidé par nos *Skills*, un métier qui explore une donnée brute dans VS Code enrichit le modèle dbt et la couche sémantique dans le même mouvement que son analyse.
-3. **La revue de PR centralisée :** Les 4 Data Platformers gardent le contrôle final en relisant les Pull Requests (aidés par la CI et notre application Bitbucket) avant toute mise en production.
-4. **L'accompagnement des métiers :** Parmi les 4 Data Platformers, l'un d'entre eux est dédié à plein temps à l'accompagnement des métiers pour qu'ils exploitent pleinement la plateforme.
+* **Un seul repository.** L'ingestion, les transformations, la couche sémantique et les data apps vivent dans le même dépôt Git : un agent va de la source à l'écran dans la même conversation et la même Pull Request, ce qu'aucun ne pourrait faire avec des outils éclatés. C'est aussi ce qui nous rend [indépendants de nos fournisseurs](https://unytics.io/blog/fr/optic-2000-independence/).
+* **Une contribution ennuyeuse.** Un contributeur n'écrit que de la configuration ; le déploiement, la sécurité et la supervision sont écrits une fois, par l'équipe plateforme. Ce qu'une contribution ne peut pas exprimer, un relecteur n'a pas à le vérifier. C'est le sujet d'[Ennuyeusement simple](https://unytics.io/blog/fr/boringly-simple-data-platform/).
+* **Un seul nom par concept.** Une colonne porte le même nom dans tout l'entrepôt, et sa définition n'est écrite qu'une fois : l'agent n'a rien à deviner. C'est le sujet d'[Un nom, une définition](https://unytics.io/blog/fr/one-name-one-definition/).
+* **Une revue faite d'abord par la machine.** Un agent relit le travail avant l'ouverture de la Pull Request, et chaque commentaire de revue devient une règle. Sans cela, nous aurions seulement déplacé le goulot d'étranglement, des tickets vers les Pull Requests. C'est le sujet de [La plateforme qui apprend](https://unytics.io/blog/fr/the-platform-that-learns/).
+* **Des humains accompagnés.** La clé n'est pas technologique, elle est humaine : un de nos quatre data engineers se consacre à plein temps à l'accompagnement des métiers. C'est dans [Personne ne code à la main](https://unytics.io/blog/fr/nobody-codes-by-hand/).
 
 ---
 
-## 🎯 Conclusion : Ouvrez votre Harness aux métiers
+## Builders et consumers : nous faisons les deux
 
-Le *Conversational Analytics* couplé à une boucle de rétroaction proactive est une avancée majeure. Des équipes réduites de 2 ou 3 personnes comme chez Jolimoi ou Photoroom démontrent tous les jours à quel point cette approche transforme l'accès à la donnée pour les *Consumers*.
+Faut-il pour autant jeter l'analytique conversationnelle et mettre tout le monde dans VS Code ? Absolument pas. Au siège, les profils analytiques utilisent l'IA pour construire des actifs durables, dans le repository. Mais un opticien, dans l'un de nos magasins, n'ouvrira jamais un éditeur de code : lui doit être servi comme un client.
 
-Mais ne vous arrêtez pas là. Si votre entreprise possède des processus opérationnels riches et complexes, votre équipe Data centrale — aussi brillante soit-elle — ne remplacera jamais la connaissance intime qu'ont vos métiers de leurs propres données et de leurs propres outils.
+Pour les magasins, l'IA prend deux formes :
 
-Gardez l'approche conversationnelle et les artefacts légers pour la consommation rapide. Mais **ouvrez votre mono-repo et VS Code à vos référents métiers**. Le jour où vos métiers ne se contentent plus de poser des questions à un chatbot, mais deviennent les *Builders* de la plateforme et de leurs propres applications opérationnelles, vous aurez enfin brisé le dernier silo de la data.
+* **des agents spécialisés, embarqués dans leurs data apps.** Un directeur de magasin consulte son bilan financier et en discute avec un agent expert en finance de l'optique : il se compare aux magasins similaires, apporte son contexte local, obtient des recommandations ;
+* **un serveur MCP et des skills**, qui exposent ces mêmes expertises : les magasins interrogent leurs données depuis leur propre Claude ou leur propre ChatGPT.
+
+Dans les deux cas, les chiffres viennent de la même couche sémantique, et chacun ne voit que ses propres données.
+
+Une organisation data compte trois rôles : ceux qui construisent la plateforme (les *platformers*), ceux qui construisent dessus (les *builders*) et ceux qui consomment (les *consumers*). Dans le modèle habituel, la frontière passe entre l'équipe data, qui construit, et les métiers, qui consomment. Nous l'avons déplacée.
+
+| | Platformers | Builders | Consumers |
+|---|---|---|---|
+| **Le modèle habituel** | l'équipe data | l'équipe data | les métiers |
+| **Chez Optic 2000** | l'équipe plateforme | les métiers du siège, avec l'équipe BI | les magasins |
+
+Parmi ceux qui construisent, il y a désormais plus de métiers que de personnes de la data. Notre conviction : il faut mettre le plus de monde possible du côté des builders. À huit dans les équipes data, nous ne connaîtrons jamais toutes les subtilités comptables de SAP, ni toutes les règles de gestion du référentiel magasins. **Ce sont les métiers qui connaissent leurs données et leurs processus.**
+
+---
+
+## Une tendance qui dépasse notre cas
+
+Je ne crois pas que cette façon de faire soit propre à une entreprise comme la nôtre. J'ai l'impression qu'une tendance s'installe : des métiers qui n'ont jamais codé se mettent à travailler dans des repositories de code, sous trois formes :
+
+* ils ouvrent un ticket depuis Slack, et un agent le code ;
+* ils construisent directement dans le repository d'une autre équipe, comme chez nous ;
+* ils créent leur propre repository.
+
+C'est particulièrement visible dans les équipes marketing et go-to-market, pour gérer leurs campagnes. Et les entreprises *digital native* sont concernées elles aussi. C'est même l'une d'elles qui m'a inspiré : Taha Le Bras, chez Supabase, me racontait qu'un matin, le marketing avait fait une Pull Request dans son repository data, et que lui-même, le même jour, en avait fait une dans celui du produit.
+
+C'est peut-être une « git-ification » de l'entreprise qui commence. Ce qui change d'un cas à l'autre, c'est ce qu'on y construit : chez nous, la transformation de processus encore manuels. Et rien n'oblige à tout réunir d'emblée dans un seul repository : on peut ouvrir d'abord le repository dbt, puis y ramener le reste.
+
+---
+
+## Ce qu'il faut en retenir
+
+On dit qu'il faut tout un village d'analystes pour faire vivre le self-service. Je crois que ce village existe déjà, dans chaque entreprise : **ce sont vos métiers.**
+
+Gardez le conversationnel pour ceux qui consomment. Mais ne laissez pas à l'équipe data le monopole de la construction. La nôtre ne construit plus de simples tableaux de bord : libérée du ticketing et du clic-bouton, notre équipe BI aide les métiers à repenser leur façon de travailler, et l'équipe data dans son ensemble co-construit la transformation opérationnelle de l'entreprise.
+
+Posez-vous la question pour votre propre entreprise : **qui, chez vous, pourrait devenir builder dès demain ?**
+
+---
+
+*Vous voulez ouvrir votre data platform à vos métiers, et savoir par où commencer ? [Parlons-en lors d'un échange data de 30 minutes](https://unytics.io/book-meeting/).*

@@ -2,12 +2,12 @@
 
 **Forward Data Conference · 16 November 2026 · 25 minutes · Paul Marcombes**
 
-English version of the talk script: 44 slides, 2,894 words to say. It is the same text as the speaker notes of the English deck, slide by slide. The talk itself is given in French: the French script (`src/blog/fr/forward-data-conference-2026/contenu.md`) is the reference.
+English version of the talk script: 44 slides, 2,893 words to say. It is the same text as the speaker notes of the English deck, slide by slide. The talk itself is given in French: the French script (`src/blog/fr/forward-data-conference-2026/contenu.md`) is the reference.
 
 ## How to use it
 
 - **[click]**: bring in the next element of the slide. The progressive builds exist in the HTML version; in the Google Slides backup, everything is shown at once.
-- The timestamps (`m:ss`) show when you reach each slide. They assume 140 words per minute, two seconds per slide change and a second and a half per click: **23:22 in total**. At 125 words per minute, count 25:51; at 155, 21:22.
+- The timestamps (`m:ss`) show when you reach each slide. They assume 140 words per minute, two seconds per slide change and a second and a half per click: **23:21 in total**. At 125 words per minute, count 25:50; at 155, 21:21.
 
 ## The storyline
 
@@ -15,7 +15,7 @@ English version of the talk script: 44 slides, 2,894 words to say. It is the sam
 2. At Optic 2000, conversational AI sits **at the start of the chain**, in the code editor: the people who analyse build the platform at the same time.
 3. The result: from 4 to 25 contributors, most of them business users, and applications the data team would never have imagined.
 4. It doesn’t turn into chaos, because contributing is boring (one repo, one way to do things) and the platform learns from every review.
-5. Conversational AI for those who consume remains essential, for the stores. And this model fits companies with complex operations, where the data team is the build bottleneck.
+5. Conversational AI for those who consume remains essential, for the stores. And business teams arriving in code repos is a trend bigger than our case: only what gets built changes.
 
 The line to remember: **the village of analysts already exists: it’s your business teams.**
 
@@ -31,10 +31,10 @@ The question to leave with the room: *in your company, who could become a builde
 | 3 · Business users become builders | 13–18 | 6:42 | 3:05 | 379 |
 | 4 · Beyond the dashboard | 19–21 | 9:46 | 1:57 | 248 |
 | 5 · The anti-chaos architecture | 22–28 | 11:43 | 3:41 | 465 |
-| 6 · The learning platform | 29–34 | 15:24 | 2:55 | 346 |
-| 7 · Builders and consumers | 35–39 | 18:19 | 2:50 | 348 |
+| 6 · The learning platform | 29–34 | 15:24 | 2:56 | 347 |
+| 7 · Builders and consumers | 35–39 | 18:20 | 2:49 | 346 |
 | 8 · The human shift | 40–44 | 21:09 | 2:13 | 269 |
-| **Total** | **1–44** | | **23:22** | **2,894** |
+| **Total** | **1–44** | | **23:21** | **2,893** |
 
 ## Script
 
@@ -248,7 +248,7 @@ In our platform, the rule is strict: a business concept has only one column name
 
 *On screen: Four steps appearing one by one, then the final question.*
 
-Next, review. The machine checks before the reviewer. As soon as a dbt model changes, a check verifies that every column is declared in the dictionary. **[click]** Then our skills prepare the pull request: they tick the compliance checklist before the code is even pushed. **[click]** They automatically assign the pull request to the business owners of the domains or metrics that changed. **[click]** And reviewer agents go before us, and recompute the numbers. **[click]** What’s left for the human is the one question no machine can settle: is this the right thing to build?
+Next, review. The machine checks before the reviewer. As soon as a dbt model changes, a check verifies that every column is declared in the dictionary. **[click]** Then our skills prepare the pull request: they tick the compliance checklist before the code is even pushed. **[click]** A reviewer agent reviews the work, before the pull request is opened. **[click]** It arrives already reviewed, assigned to the business owners of the domains or metrics that changed. **[click]** What’s left for the human is the one question no machine can settle: is this the right thing to build?
 
 #### Slide 34 · Every review comment becomes a rule · `17:43`
 
@@ -258,19 +258,19 @@ And here is our golden rule. Every time an engineer writes a comment on a pull r
 
 ### Part 7 · Builders and consumers
 
-#### Slide 35 · Should everyone be in VS Code? · `18:19`
+#### Slide 35 · Should everyone be in VS Code? · `18:20`
 
 *On screen: Dark slide: the question, then the answer on click.*
 
 Does all this mean we should throw away classic conversational analytics, and put everyone in VS Code? **[click]** Absolutely not. The proof: we do both.
 
-#### Slide 36 · Two populations, two faces of AI · `18:33`
+#### Slide 36 · Two populations, two faces of AI · `18:34`
 
 *On screen: Two cards: at headquarters (they build), then in stores (they consume).*
 
 We need to distinguish two populations. At headquarters, analytical profiles use AI to build lasting assets, in the repo. **[click]** But an optician, in one of our stores, will never open a code editor. It would make no sense. They need to be served like a customer.
 
-#### Slide 37 · In stores, AI is consumed in two ways · `18:56`
+#### Slide 37 · In stores, AI is consumed in two ways · `18:57`
 
 *On screen: Two cards linked to a “Semantic layer” bar.*
 
@@ -282,11 +282,11 @@ For stores, AI comes in two forms. First, specialised agents, embedded in their 
 
 To sum up. In a data organisation, there are three roles: those who build the platform, those who build on top of it, and those who consume. In the usual model, the boundary runs between the data team, which builds, and business teams, which consume. **[click]** We moved that boundary. The platform team builds the frame. And among those who build on top of it, there are now more business users than data people. **[click]** Our conviction: put as many people as possible on the builders’ side. A central team will never hold all of the company’s knowledge. Business teams are the ones who know their data and their processes.
 
-#### Slide 39 · Who is this model for? · `20:34`
+#### Slide 39 · A trend bigger than our case · `20:35`
 
-*On screen: Two cards: when this model makes sense, then when it makes less sense.*
+*On screen: Two cards: what is taking hold (business teams in code repos), then what changes from one company to the next.*
 
-And let’s be honest: this approach isn’t universal. It fits very well in a company of a certain size, with complex operations, where the data team has become the build bottleneck. In our case, it also serves to transform processes that are still very manual. **[click]** In a digital-native company, a small data team serving everyone through conversational AI often does the job very well. And transforming manual processes isn’t really a topic there.
+This isn’t specific to a company like ours. Business users who have never written code are arriving in code repos. They open a ticket from Slack, and an agent codes it. They open a pull request in another team’s repo. Or they create their own repo. **[click]** Digital natives too: at Supabase, marketing opens pull requests in the data repo. Only what gets built changes: for us, processes that are still manual.
 
 ### Part 8 · The human shift
 
@@ -308,7 +308,7 @@ The first: start small, and iterate. Don’t open your Git repo to a hundred bus
 
 The second: the key isn’t technology, it’s people. Of our four data engineers, one works full time onboarding and coaching business users. **[click]** And our BI team’s job is changing. Freed from ticketing and point-and-click, it is becoming proactive. Often, business teams don’t just need one more number: they need an outside view to rethink the way they work. And in our case, the job is huge: it’s on this platform that the BI team will help transform all those processes that are still manual.
 
-#### Slide 43 · The village of analysts already exists: it’s your business teams · `22:36`
+#### Slide 43 · The village of analysts already exists: it’s your business teams · `22:35`
 
 *On screen: Blue slide: the key sentence, then the question to take home.*
 
@@ -329,17 +329,17 @@ In order of preference:
 3. **Slide 20**: keep only one of the two examples.
 4. **Slide 8, the agenda**: go through it in one sentence.
 
-Do not cut: slides 6 and 7 (the reversal), 18 (the village), 22 (the objection), 34 (the golden rule), 39 (who this model is for) and 43 (the message).
+Do not cut: slides 6 and 7 (the reversal), 18 (the village), 22 (the objection), 34 (the golden rule), 39 (a trend bigger than our case) and 43 (the message).
 
 ## Likely questions
 
 **“Doesn’t pull request review become the new bottleneck?”**
 
-Yes, it’s our critical path. Three answers. Contributions are configuration: there is no plumbing to review. The machine checks before the human: checks on write, CI, reviewer agents that return a “merge” or “no merge” verdict and recompute the numbers. And every comment becomes a rule: the same remark doesn’t come back. Every pull request is still approved by a human.
+Yes, it’s our critical path. Three answers. Contributions are configuration: there is no plumbing to review. The machine checks before the human: checks on write, CI, then a reviewer agent that returns a “merge” or “no merge” verdict before the pull request is even opened. And every comment becomes a rule: the same remark doesn’t come back. Every pull request is still approved by a human.
 
 **“How does a business user validate code they don’t read?”**
 
-They don’t validate the code, they validate its result: their numbers, their app. The dictionary diff is the summary of the change: three lines of definitions before three hundred lines of SQL. The pull request builds its models in a separate schema, comparable with production, and the reviewer agent recomputes every number with independent queries.
+They don’t validate the code, they validate its result: their numbers, their app. The dictionary diff is the summary of the change: three lines of definitions before three hundred lines of SQL. Before the pull request is even opened, the reviewer agent’s verdict speaks to them in plain language. Then the pull request builds its models in a separate schema, comparable with production.
 
 **“Do your apps write to SAP?”**
 
@@ -347,4 +347,4 @@ Not yet: today, they read. That’s the next step, and it will need guardrails t
 
 **“Isn’t this only possible with a mono-repo?”**
 
-Our setup is specific: everything is in one repo, and that’s what lets an agent connect everything. You can start with the dbt repo, then bring the rest into it. And it isn’t for every company: see slide 39.
+Our setup is specific: everything is in one repo, and that’s what lets an agent connect everything. You can start with the dbt repo, then bring the rest into it. And the trend goes beyond our case: see slide 39.

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Platform That Learns: Every Review Comment Becomes a Rule | Unytics Blog</title>
+    <meta name="description" content="At Optic 2000, four people can't review everything 25 contributors and their agents produce. Review holds because a correction is only made once — it becomes a rule — and because a Pull Request arrives already reviewed by an agent before a human opens it.">
+    <link rel="canonical" href="https://unytics.io/blog/the-platform-that-learns/">
+
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://unytics.io/blog/the-platform-that-learns/">
+    <link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/the-platform-that-learns/">
+    <link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/the-platform-that-learns/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://unytics.io/blog/the-platform-that-learns/">
+    <meta property="og:title" content="The Platform That Learns: Every Review Comment Becomes a Rule | Unytics Blog">
+    <meta property="og:description" content="At Optic 2000, four people can't review everything 25 contributors and their agents produce. Review holds because a correction is only made once — it becomes a rule — and because a Pull Request arrives already reviewed by an agent before a human opens it.">
+    <meta property="og:site_name" content="Unytics">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://unytics.io/blog/the-platform-that-learns/">
+    <meta name="twitter:title" content="The Platform That Learns: Every Review Comment Becomes a Rule | Unytics Blog">
+    <meta name="twitter:description" content="At Optic 2000, four people can't review everything 25 contributors and their agents produce. Review holds because a correction is only made once — it becomes a rule — and because a Pull Request arrives already reviewed by an agent before a human opens it.">
+    <meta name="twitter:image" content="https://unytics.io/assets/unytics_social_image.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="https://unytics.io/assets/unytics_social_image.png">
+    <meta property="og:image:width" content="960">
+    <meta property="og:image:height" content="540">
+
+    <!-- Additional SEO -->
+    <meta name="author" content="Paul Marcombes">
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-YHunZhK65WvaJpQXfwUD_.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
+    
+</head>
+
+<body>
+    <a href="#content" class="skip-link">Skip to main content</a>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Unytics</a>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">About Unytics</a></li>
+                <li><a href="https://unytics.io/book-meeting/" target="_blank" class="btn-primary">Free Data Call</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="content">
+        
+        <article class="blog-post">
+            <div class="container">
+                <div class="blog-post-topbar">
+                    <a href="/blog/" class="blog-back-link">&larr; Blog</a>
+                    <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+                </div>
+                <div class="blog-post-header">
+                    <p class='blog-post-date'>2026-11-13</p>
+                    <h1>The Platform That Learns: Every Review Comment Becomes a Rule</h1>
+                </div>
+                <div class="blog-post-content">
+                    <p>In <a href="https://unytics.io/blog/nobody-codes-by-hand/">Nobody Codes by Hand</a>, I told how 25 people, most of them business people, contribute to Optic 2000's data platform through a coding agent. The consequence is immediate: <strong>review becomes the critical path</strong>. Four people can't review everything that twenty-five contributors and their agents produce.</p>
+<p><a href="https://unytics.io/blog/boringly-simple-data-platform/">Boringly Simple</a> gives the first half of the answer: a contribution only expresses configuration, so there is little left to review. Here is the second half, for what is left — SQL, Python, data apps: <strong>a correction is only made once</strong>, and a Pull Request reaches us already reviewed.</p>
+<hr />
+<h2>A Correction Is Only Made Once</h2>
+<p>A rule is added to the platform in three situations.</p>
+<ol>
+<li><strong>The agent doesn't get it right the first time</strong>, and we have to explain. The explanation doesn't stay in the conversation: the agent writes it into the right instructions file, with its reason, before going on.</li>
+<li><strong>We have to comment on a Pull Request.</strong> Before fixing it, we ask ourselves why the AI let it through, and we update the skill, immediately. The comment becomes a rule.</li>
+<li><strong>Something reached production that should have been blocked</strong>, or that failed. The incident becomes a rule, or a check run by the machine.</li>
+</ol>
+<p>In all three cases, the correction doesn't just fix the case at hand: it fixes all the next ones. That's how our Pull Requests become almost instant to approve.</p>
+<p>The rule still has to reach the agent at the moment it acts. So it's written where the agent works: in an instructions file next to the code it governs, or in the skill the agent loads before that kind of task.</p>
+<details>
+<summary><strong>Going further: where our rules live</strong></summary>
+
+<ul>
+<li><strong>Instructions next to the code they govern.</strong> A root instructions file (<code>CLAUDE.md</code>, for Claude Code) describes the platform and its non-negotiable rules. Each main folder — ingestion, functions, infrastructure, web apps — has its own, which the agent loads when it works there. Rules for a type of file — YAML, Terraform, Python, Markdown — load only when the agent touches such a file. The agent's context holds the rules of what it's doing, not the whole rulebook.</li>
+<li><strong>A skill for each kind of task.</strong> Before touching a dbt model, the agent loads the dbt skill: layers, naming, tests, SQL style, and an exit gate before it hands back. Same for data apps and for the style guide.</li>
+</ul>
+
+<pre><code>CLAUDE.md                          platform overview and non-negotiable rules
+load/CLAUDE.md                     ingestion conventions
+functions/CLAUDE.md                function conventions
+infra/CLAUDE.md                    infrastructure conventions
+data_portal/CLAUDE.md              web app conventions
+.claude/rules/yml.md               loaded when the agent touches a YAML file
+.claude/rules/terraform.md         loaded when it touches a Terraform file
+.claude/rules/python-standards.md  loaded when it touches a Python file
+.claude/skills/dbt-model/          loaded before creating or changing a dbt model
+.claude/skills/streamlit/          loaded before creating or changing a data app
+.claude/skills/publish-pr/         commit, push and open the Pull Request in one command
+.claude/skills/review-*/           review a Pull Request, verdict MERGE or NO MERGE
+.claude/settings.json              hooks</code></pre>
+
+<p>A rule file declares the files it applies to in a header:</p>
+
+<pre><code class="language-markdown">---
+paths:
+  - "**/*.tf"
+---
+
+# Terraform Style
+…</code></pre>
+
+</details>
+
+<hr />
+<h2>Seven Rules This Loop Gave Us</h2>
+<ul>
+<li><strong>Never break what someone still uses.</strong> Before stopping a source or deleting a table, find out who uses it — a model, a data app, an export — switch them over, then delete.</li>
+<li><strong>A shared business rule lives in the semantic layer, not in a data app.</strong> A data app can do clever things, but a definition others need belongs to the shared metrics engine. A store-facing data app coded its own rule for recognizing connected glasses: stores that asked their AI the same question, through our MCP server, got different figures. Since then, those data apps only read the semantic layer, and recode no business rule.</li>
+<li><strong>A Pull Request does one thing.</strong> A mistake spotted along the way is fixed separately. Otherwise, the reviewer of a new table unknowingly approves a change to existing figures.</li>
+<li><strong>Every metric, every domain, every data app has an owner.</strong> A metric had been merged without the BI team validating it. The Pull Request is now assigned automatically to whoever answers for what it changes.</li>
+<li><strong>An aggregate matches the total of its fact table.</strong> Null values had skewed a total. The skill now requires that check, and highlights any gap.</li>
+<li><strong>A certified figure from the past no longer moves.</strong> One had changed. Certified measures are now checked on past data.</li>
+<li><strong>A data app isn't built twice.</strong> It happened. The skill now checks that it doesn't already exist.</li>
+</ul>
+<p>None of these shows up in a SQL diff: that's why they're written where the agent works.</p>
+<hr />
+<h2>A Pull Request Arrives Already Reviewed</h2>
+<p>These rules apply before a human looks at anything.</p>
+<p><strong>While the agent writes</strong>, checks run: when it edits the business dictionary or the semantic layer, a hook sends any violation back to it, and it fixes it in the same session. I detail this in <a href="https://unytics.io/blog/one-name-one-definition/">One Name, One Definition</a>.</p>
+<p><strong>Before the Pull Request is opened</strong>, the contributor runs a single command. The publishing skill goes through the compliance checklist, then has the work reviewed by a review agent: one for dbt models, one for data apps. The rule files are its checklist, and it reports only what blocks — whatever changes a figure, a grain or a column name, crashes in production, touches access rights, or duplicates an existing data app. Style never blocks. And if a check can't run, the verdict is never "merge".</p>
+<p>The verdict is addressed to the contributor, in plain language, before any technical detail (figures made up):</p>
+<pre><code>MERGE: NO, the &quot;active stores&quot; card shows 120 stores where the definition gives 100.
+
+1. Duplicate: no.
+2. Against our practices or a business rule: yes, 1 point:
+   - the card counts every store with a sale; the definition counts stores open over the period.
+3. Reinvents the wheel: partly — the cards are drawn by hand instead of using the style guide.
+4. Merge: NO.
+</code></pre>
+<p><strong>Only then is the Pull Request opened.</strong> The skill writes its description — including what a reviewer must not miss, such as a data source being stopped — and assigns it to the owners of what it changes.</p>
+<p>The order matters. We could have plugged the review agent in after the Pull Request is opened, to comment on it. The human reviewer would then discover work that is still rough, under a pile of automated comments. Here, when they open a Pull Request, most of it is already clean.</p>
+<hr />
+<h2>What's Left for Humans</h2>
+<p><strong>The contributor validates a result, not code.</strong> Our business contributors don't read the code their agent writes. They validate what they know: their figures, their data app. The verdict speaks to them in plain language, and the business dictionary diff sums up the change: three lines of definitions are read before three hundred lines of SQL.</p>
+<p><strong>The reviewer answers one question.</strong> Every Pull Request is still approved by a person, and every owner answers for their domain. But the conventions have already been checked. What's left is the question no machine can settle: <strong>is this the right thing to build?</strong></p>
+<hr />
+<h2>What It Costs</h2>
+<ul>
+<li><strong>Rules need gardening.</strong> Instructions grow with every correction. Keeping each rule in one place, with its reason and without stale examples, is a job in itself.</li>
+<li><strong>The loop takes discipline.</strong> Fixing the Pull Request is quicker than fixing the skill. Anthropic's data team reports that <a href="https://claude.com/blog/how-anthropic-enables-self-service-data-analytics-with-claude">roughly 90% of its data-model Pull Requests</a> now include a skill change in the same diff: that's the price of a context that doesn't go stale.</li>
+</ul>
+<hr />
+<h2>Key Takeaways</h2>
+<p>With agents writing the code, review capacity doesn't grow by adding reviewers. It grows when a correction is only made once, and when a Pull Request arrives already reviewed. What's left for the reviewer is the only question that matters.</p>
+<p>Ask yourself the question about your own team: <strong>of this week's review comments, how many had you already written before?</strong> Each one is a rule waiting to be written.</p>
+<p><em>This article details one part of a larger story: <a href="https://unytics.io/blog/self-service-analytics-builders/">Why Your Business Teams Shouldn't Just Be AI Consumers (But Builders Too)</a>.</em></p>
+<hr />
+<p><em>Is review becoming the bottleneck for your coding agents? <a href="https://unytics.io/book-meeting/">Let's talk about it in a 30-minute data chat</a>.</em></p>
+                </div>
+                <button class="btn-secondary newsletter-open-btn">Subscribe to Newsletter</button>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/#pain-points">Pitfalls</a>
+                    <a href="/#services">Solutions</a>
+                    <a href="/#data-applications">Case Studies</a>
+                    <a href="/#about">Offers</a>
+                    <a href="/blog/">Blog</a>
+                </div>
+                <div class="footer-contact">
+                    <a href="#" class="copy-email" data-email="contact@unytics.io">contact@unytics.io</a>
+                    <a href="https://www.linkedin.com/in/paul-marcombes" target="_blank" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/unytics" target="_blank" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <p class="footer-copyright">&copy; 2026 Unytics. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Email copied to clipboard!</div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletter-modal" class="newsletter-modal">
+        <div class="newsletter-modal-content">
+            <button class="newsletter-modal-close" aria-label="Close">&times;</button>
+            <iframe src="https://cdn.forms-content.sg-form.com/aebe3f17-38d0-11f1-b0e1-1649d933d8bb" title="Subscribe to Newsletter" scrolling="no"></iframe>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

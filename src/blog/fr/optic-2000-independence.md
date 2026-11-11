@@ -33,14 +33,13 @@ Toute la logique métier d'Optic 2000 vit dans **un seul repository Git** : les 
 Par exemple, voici comment on déclare les besoins d'une fonction de traitement :
 
 ```yaml
-compute:
-  cpu: 256
-  memory: 512
-  timeout: 300
-schedule: "0 6 * * *"
+get_crm:
+  schedule: cron(0 4 * * ? *)
+  timeout: 600
+  memory: 2048
 ```
 
-Ce fichier décrit *ce que* l'on veut. Il ne dit rien du *comment* : aujourd'hui, il est déployé sur AWS ; demain, il pourrait l'être ailleurs sans être modifié.
+Ces quelques lignes décrivent *ce que* l'on veut. Elles ne disent rien du *comment* : aujourd'hui, la fonction est déployée sur AWS ; demain, elle pourrait l'être ailleurs sans être modifiée.
 
 Les fournisseurs ne fournissent que le moteur. La logique métier — ce qui a de la valeur et ce qui coûte cher à reconstruire — reste chez nous.
 
@@ -70,7 +69,7 @@ Changer de fournisseur d'infrastructure devient un chantier circonscrit — ré�
 
 ## Étage 2 — Zéro BI propriétaire
 
-Nous avons débranché l'outil de BI historique sans le remplacer par un autre.
+Nous avons débranché l'outil de BI historique et, après un passage par Tableau, nous ne l'avons remplacé par aucun autre outil de BI propriétaire.
 
 Nos métriques sont définies une seule fois, dans une **couche sémantique** qui vit dans le repository. Nos dashboards sont des **applications Streamlit open source**, connectées à cette couche sémantique. Résultat : plus de licence par utilisateur — donner ses KPIs à un gérant de magasin ne coûte rien de plus — et des apps qui vont au-delà du dashboard. *Les dashboards sont passifs. Les Data Apps agissent.*
 

@@ -6,7 +6,7 @@ date: 2026-11-05
 
 # Boringly Simple: How 25 Contributors Change Our Data Platform With Almost No Review
 
-In [Nobody Codes by Hand](https://unytics.io/blog/nobody-codes-by-hand/), I told how the number of people contributing to our data platform at Optic 2000 went from 4 to 25 — most of them business people, working through a coding agent. I ended with a lesson we were still learning: with 25 contributors, **review becomes the critical path**. A platform team of four can't read everything 25 people and their agents produce.
+In [Nobody Codes by Hand](https://unytics.io/blog/nobody-codes-by-hand/), I told how the number of people contributing to our data platform at Optic 2000 went from 4 to 25 — most of them business people, working through a coding agent. I ended on an observation: with 25 contributors, **review becomes the critical path**. A platform team of four can't read everything 25 people and their agents produce.
 
 Every change still goes through a Pull Request approved by a human. But in most of them, there's almost nothing left for us to review. Not because we trust agents more than we used to, but because we designed the platform so that a contribution can hardly express a mistake.
 
@@ -23,6 +23,8 @@ A data platform contains two kinds of code. The **configuration** says *what* th
 In most platforms, the two are intertwined. Adding a source means copying a Terraform module, adding a cloud permission, wiring a notification, declaring an alert. Every contribution touches the glue, so every review has to check the glue: is this permission too broad? Will this rule collide with another? Is the alert wired? That's specialist review. It doesn't scale to 25 contributors, let alone to their agents, which will happily write a perfectly plausible policy granting access to every bucket.
 
 We made the opposite choice: **contributors only write configuration, and the configuration can only say what the glue lets it say.** What a contribution can't express, a reviewer doesn't have to check.
+
+Data teams already know a tool built this way: dbt. You write a SQL model, and dbt handles incremental loading and execution order for you. We built the whole repository that way.
 
 It matters even more with coding agents. An agent reproduces what it sees in the repository. In a platform where each pipeline is deployed a little differently, it has a dozen patterns to choose from, and picks one without telling you which. In a boring platform, the thirtieth source looks exactly like the twenty-ninth: the agent copies the previous one, and it's right.
 
@@ -222,72 +224,14 @@ Whenever the configuration changes, the data portal is regenerated from it: a pa
 
 Configuration and glue remove most of the room for error. What's left — SQL, Python, data apps — is written by agents. For that part, the rules have to reach the agent at the moment it acts, and the machine has to check them.
 
-* **Instructions next to the code they govern.** A root instructions file (`CLAUDE.md`, for Claude Code) describes the platform and its non-negotiable rules. Each main folder — ingestion, functions, infrastructure, web apps — has its own, which the agent loads when it works there. Rules for a type of file — YAML, Terraform, Python, Markdown — load only when the agent touches such a file. The agent's context holds the rules of what it's doing, not the whole rulebook.
-* **A skill for each kind of task.** Before touching a dbt model, the agent loads the dbt skill: layers, naming, tests, SQL style, and an exit gate before it hands back. Same for data apps and for the style guide. And contributors publish with a single command: a skill commits their work, pushes it, opens the Pull Request with its reviewers and writes its description — including what a reviewer must not miss, such as a data feed being cut.
-* **Checks at write time.** When the agent edits the business dictionary or the semantic layer, a hook re-runs their check and sends any violation back to the agent, which fixes it before a human ever sees the diff — as described in [One Name, One Definition](https://unytics.io/blog/one-name-one-definition/).
+* **Instructions next to the code they govern**, and a skill for each kind of task: the agent's context holds the rules of what it's doing, not the whole rulebook.
+* **Checks at write time**, which send any violation back to the agent before a human ever sees the diff.
+* **Review agents before the Pull Request is even opened**: when a human receives it, most of it is already clean.
+* **One golden rule**: every review comment becomes a rule, so the same remark doesn't come back.
 
-<details>
-<summary><strong>Going further: how the instructions are organized</strong></summary>
+I detail these mechanisms, and the rules our incidents taught us, in [The Platform That Learns](https://unytics.io/blog/the-platform-that-learns/).
 
-<pre><code>CLAUDE.md                          platform overview and non-negotiable rules
-load/CLAUDE.md                     ingestion conventions
-functions/CLAUDE.md                function conventions
-infra/CLAUDE.md                    infrastructure conventions
-data_portal/CLAUDE.md              web app conventions
-.claude/rules/yml.md               loaded when the agent touches a YAML file
-.claude/rules/terraform.md         loaded when it touches a Terraform file
-.claude/rules/python-standards.md  loaded when it touches a Python file
-.claude/skills/dbt-model/          loaded before creating or changing a dbt model
-.claude/skills/streamlit/          loaded before creating or changing a data app
-.claude/skills/publish-pr/         commit, push and open the Pull Request in one command
-.claude/skills/review-*/           review a Pull Request, verdict MERGE or NO MERGE
-.claude/settings.json              hooks</code></pre>
-
-<p>A rule file declares the files it applies to in a header:</p>
-
-<pre><code class="language-markdown">---
-paths:
-  - "**/*.tf"
----
-
-# Terraform Style
-…</code></pre>
-
-</details>
-
-### Rules about rules
-
-Instructions files drift like any documentation. Two meta-rules keep them sharp. **Every correction becomes a rule**: when we correct the agent, it writes the lesson into the right instructions file, with its technical reason, before going on, so the same mistake doesn't happen twice. And **each rule lives in one place**: a business rule is written once, in the data portal's guides, and instructions only point to it, because two copies end up contradicting each other and the agent follows the wrong one.
-
-### Rules learned the hard way
-
-Several of our sharpest rules come from something that went wrong. They're worth stealing:
-
-* **Never cut a feed that's still read.** Removing a function's schedule stops every table it feeds at once — and readers aren't only dbt models: some data apps read raw tables directly. Search the whole repository, switch the readers first, then cut.
-* **A mute never comes with a cut.** Silencing a table's freshness alert at the same time as you stop feeding it hides exactly the signal that would reveal the mistake.
-* **A model only reads data that's already in production.** Ingestion ships in a first Pull Request, and the models that read it in a second, once the data has landed.
-* **No write to production as a side effect of a code change.** A data migration runs after the code that needs it is deployed, on an explicit go, after a dry run: until then, production still reads the old format.
-* **A change that adds something leaves everything else as it was.** A fix noticed along the way is proposed separately, never slipped into the same diff: a reviewer approving a new table shouldn't unknowingly approve a change to existing figures.
-
-None of these shows up in a SQL diff. That's precisely why they're written where the agent works, and why the publishing skill flags any cut feed in the Pull Request description.
-
-### Review agents before human reviewers
-
-Finally, a contribution meets review agents before it meets us. Two review skills, one for dbt models and one for data apps, read a Pull Request the way we would: the rule files are their checklist, and they report only what blocks — whatever changes a figure, a grain or a column name, crashes in production, touches access rights or a file shared by every data app, or duplicates an existing data app. Style never blocks. They also check the data: the dbt reviewer queries the models the Pull Request built, and the data app reviewer recomputes, with independent queries, every figure the data app displays — the real bugs of our past data app reviews were all found in the data, not in the code. If a check can't run, the verdict is never "merge".
-
-A verdict opens with a summary in plain language, written for the contributor, before the technical details and the comments to post on the Pull Request (figures made up):
-
-```
-MERGE: NO, the "active stores" card shows 120 stores where the definition gives 100.
-
-1. Duplicate: no.
-2. Against our practices or a business rule: yes, 1 point:
-   - the card counts every store with a sale; the definition counts stores open over the period.
-3. Reinvents the wheel: partly — the cards are drawn by hand instead of using the style guide.
-4. Merge: NO.
-```
-
-Human approval doesn't disappear. Every Pull Request is still approved by a person, and business owners still answer for their domain: that's governance, the subject of [Nobody Codes by Hand](https://unytics.io/blog/nobody-codes-by-hand/). But the approval now rests on a verdict that has already checked the conventions and the figures. What's left for the human is the question no machine can settle: is this the right thing to build?
+Human approval doesn't disappear: every Pull Request is still approved by a person. But it comes after a first review, which has already checked the conventions. What's left for the human is the question no machine can settle: is this the right thing to build?
 
 ---
 
@@ -309,7 +253,6 @@ Boring for contributors isn't free for the platform team.
 * **The glue is harder to write.** Deriving everything, supporting every optional field, closing every unsafe path: our Terraform is denser than a module per pipeline would be. It's written once, but it has to be written well. And when a derivation is needed outside Terraform — the portal also needs to know where a function runs — both implementations must change together.
 * **You have to say no.** Every "just this once" exception is a second pattern for agents to copy. When a need doesn't fit, the answer is to extend the configuration for everyone, or to decline.
 * **The configuration must stay declarative.** A YAML file that grows conditions and loops is a programming language without a debugger. Ours only says *what*; anything that needs logic goes into the glue, as a derivation.
-* **Rules need gardening.** Instructions grow with every correction. Keeping each rule in one place, with its reason and without stale examples, is a job in itself.
 
 ---
 

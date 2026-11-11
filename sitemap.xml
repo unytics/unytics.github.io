@@ -46,6 +46,38 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/self-service-analytics-builders/"/>
   </url>
   <url>
+    <loc>https://unytics.io/blog/the-platform-that-learns/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/the-platform-that-learns/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/the-platform-that-learns/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/the-platform-that-learns/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/fr/the-platform-that-learns/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/the-platform-that-learns/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/the-platform-that-learns/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/the-platform-that-learns/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/data-apps-beyond-dashboards/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/data-apps-beyond-dashboards/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/data-apps-beyond-dashboards/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/data-apps-beyond-dashboards/"/>
+  </url>
+  <url>
+    <loc>https://unytics.io/blog/fr/data-apps-beyond-dashboards/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://unytics.io/blog/data-apps-beyond-dashboards/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/data-apps-beyond-dashboards/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/data-apps-beyond-dashboards/"/>
+  </url>
+  <url>
     <loc>https://unytics.io/blog/boringly-simple-data-platform/</loc>
     <lastmod>2026-11-05</lastmod>
     <priority>0.7</priority>

@@ -104,13 +104,12 @@
 <h2>The Principle: Configuration Is an Asset, the Metal Is a Commodity</h2>
 <p>All of Optic 2000's business logic lives in <strong>a single Git repository</strong>: data sources, transformations, metric definitions, apps, schedules. It is described declaratively, in YAML and code, independently of the technology that runs it.</p>
 <p>For example, here is how we declare the needs of a processing function:</p>
-<pre><code class="language-yaml">compute:
-  cpu: 256
-  memory: 512
-  timeout: 300
-schedule: &quot;0 6 * * *&quot;
+<pre><code class="language-yaml">get_crm:
+  schedule: cron(0 4 * * ? *)
+  timeout: 600
+  memory: 2048
 </code></pre>
-<p>This file describes <em>what</em> we want. It says nothing about <em>how</em>: today it is deployed on AWS; tomorrow it could be deployed elsewhere without being modified.</p>
+<p>These few lines describe <em>what</em> we want. They say nothing about <em>how</em>: today the function is deployed on AWS; tomorrow it could be deployed elsewhere without being modified.</p>
 <p>Vendors only provide the engine. The business logic — what has value and what is expensive to rebuild — stays with us.</p>
 <pre><code>┌────────────────────────────────────────────────────────┐
 │ AI: OpenWebUI, Claude, ChatGPT, Dust, local model      │  ← your choice
@@ -129,7 +128,7 @@ schedule: &quot;0 6 * * *&quot;
 <p>Changing infrastructure vendors becomes a contained piece of work — rewriting a deployment module — rather than a platform migration.</p>
 <hr />
 <h2>Floor 2 — Zero Proprietary BI</h2>
-<p>We switched off the legacy BI tool without replacing it with another one.</p>
+<p>We switched off the legacy BI tool and, after a spell with Tableau, didn't replace it with any other proprietary BI tool.</p>
 <p>Our metrics are defined once, in a <strong>semantic layer</strong> that lives in the repository. Our dashboards are <strong>open-source Streamlit applications</strong> connected to that semantic layer. The result: no more per-seat licenses — giving a store manager access to their KPIs costs nothing extra — and apps that go beyond dashboards. <em>Dashboards are passive. Data Apps act.</em></p>
 <p>Our metrics don't depend on the warehouse either. Depending on the query, the semantic layer runs on Snowflake or on DuckDB, which loads a single store's data into memory to answer in milliseconds. Same definitions, two engines: concrete proof that our metrics aren't locked in anywhere.</p>
 <p>If every dashboard has to be coded, haven't we just recreated a ticket queue to the data team? No: 25 contributors vibe-code these apps, and many needs are handled directly by AI agents. I tell that story in <a href="https://unytics.io/blog/nobody-codes-by-hand/">Nobody Codes by Hand</a>.</p>

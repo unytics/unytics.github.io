@@ -17,7 +17,7 @@ Contenu oral du talk : 44 slides, 3 031 mots à dire. C'est le même texte que l
 2. Chez Optic 2000, le conversationnel est **au début de la chaîne**, dans l'éditeur de code : ceux qui analysent construisent la plateforme en même temps.
 3. Résultat : de 4 à 25 contributeurs, en majorité des métiers, et des applications que l'équipe data n'aurait pas imaginées.
 4. Ça ne tourne pas au chaos, parce que la contribution est ennuyeuse (un seul repo, une seule façon de faire) et que la plateforme apprend de chaque revue.
-5. Le conversationnel pour ceux qui consomment reste indispensable, pour les magasins. Et ce modèle convient surtout aux entreprises aux opérations complexes, où l'équipe data est le goulot du build.
+5. Le conversationnel pour ceux qui consomment reste indispensable, pour les magasins. Et des métiers qui arrivent dans les repos de code, c'est une tendance qui dépasse notre cas : seul change ce qu'on y construit.
 
 La phrase à faire retenir : **le village d'analystes existe déjà, ce sont vos métiers.**
 
@@ -256,7 +256,7 @@ Chez nous, la règle est stricte : un concept métier n'a qu'un seul nom de colo
 
 *À l'écran : Quatre étapes qui apparaissent une à une, puis la question finale.*
 
-Ensuite, la revue. La machine vérifie avant le relecteur. Dès qu'un modèle dbt est modifié, un contrôle vérifie que chaque colonne est déclarée dans le dictionnaire. **[clic]** Ce sont ensuite nos skills qui préparent la pull request : ils cochent la checklist de conformité avant même d'envoyer le code. **[clic]** Ils assignent automatiquement la pull request aux owners métiers des domaines ou des métriques modifiés. **[clic]** Et des agents relecteurs passent avant nous, et recalculent les chiffres. **[clic]** Ce qui reste à l'humain, c'est la seule question qu'aucune machine ne peut trancher : est-ce la bonne chose à construire ?
+Ensuite, la revue. La machine vérifie avant le relecteur. Dès qu'un modèle dbt est modifié, un contrôle vérifie que chaque colonne est déclarée dans le dictionnaire. **[clic]** Ce sont ensuite nos skills qui préparent la pull request : ils cochent la checklist de conformité avant même d'envoyer le code. **[clic]** Un agent relecteur relit le travail, avant l'ouverture de la pull request. **[clic]** Elle arrive déjà relue, assignée aux owners métiers des domaines ou des métriques modifiés. **[clic]** Ce qui reste à l'humain, c'est la seule question qu'aucune machine ne peut trancher : est-ce la bonne chose à construire ?
 
 #### Slide 34 · Chaque commentaire de revue devient une règle · `18:36`
 
@@ -290,11 +290,11 @@ Pour les magasins, l'IA prend deux formes. D'abord, des agents spécialisés, em
 
 Si je résume. Dans une organisation data, il y a trois rôles : ceux qui construisent la plateforme, ceux qui construisent dessus, et ceux qui consomment. Dans le modèle habituel, la frontière passe entre l'équipe data, qui construit, et les métiers, qui consomment. **[clic]** Nous, nous avons déplacé cette frontière. L'équipe plateforme construit le cadre. Et parmi ceux qui construisent dessus, il y a désormais plus de métiers que de data. **[clic]** Notre conviction : il faut mettre le plus de monde possible du côté des builders. Une équipe centrale ne détiendra jamais toute la connaissance de l'entreprise. Ce sont les métiers qui connaissent leurs données et leurs processus.
 
-#### Slide 39 · À qui s'adresse ce modèle ? · `21:28`
+#### Slide 39 · Une tendance qui dépasse notre cas · `21:28`
 
-*À l'écran : Deux cartes : quand ce modèle a du sens, puis quand il en a moins.*
+*À l'écran : Deux cartes : ce qui s'installe (des métiers dans les repos de code), puis ce qui change d'une entreprise à l'autre.*
 
-Et soyons honnêtes : cette façon de faire n'est pas universelle. Elle convient très bien à une entreprise d'une certaine taille, aux opérations complexes, où l'équipe data est devenue le goulot d'étranglement du build. Chez nous, elle sert aussi à transformer des processus encore très manuels. **[clic]** Dans une entreprise digital native, une petite équipe data qui sert tout le monde en conversationnel fait souvent très bien le travail. Et la transformation de processus manuels n'y a pas lieu d'être.
+Ce n'est pas propre à une entreprise comme la nôtre. Des métiers qui n'ont jamais codé arrivent dans les repos de code. Ils ouvrent un ticket depuis Slack, et un agent le code. Ils font une pull request dans le repo d'une autre équipe. Ou ils créent leur propre repo. **[clic]** Les digital natives aussi : chez Supabase, le marketing ouvre des pull requests dans le repo data. Seul change ce qu'on y construit : chez nous, des processus encore manuels.
 
 ### Partie 8 · Le shift humain
 
@@ -337,7 +337,7 @@ Par ordre de préférence :
 3. **Slide 20** : ne garde qu'un des deux exemples.
 4. **Slide 8, le plan** : passe-le en une phrase.
 
-À ne pas couper : les slides 6 et 7 (le contre-pied), 18 (le village), 22 (l'objection), 34 (la règle d'or), 39 (à qui s'adresse ce modèle) et 43 (le message).
+À ne pas couper : les slides 6 et 7 (le contre-pied), 18 (le village), 22 (l'objection), 34 (la règle d'or), 39 (une tendance qui dépasse notre cas) et 43 (le message).
 
 ## Si tu es en avance
 
@@ -352,11 +352,11 @@ Des débuts de réponse, rédigés comme tu les dirais, et appuyés sur tes arti
 
 **« La revue des pull requests ne devient-elle pas le nouveau goulot d'étranglement ? »**
 
-Oui, c'est notre chemin critique. Trois réponses. La contribution est de la configuration : il n'y a pas de plomberie à relire. La machine vérifie avant l'humain : contrôles à l'écriture, CI, agents relecteurs qui rendent un verdict « merge » ou « no merge » et recalculent les chiffres. Et chaque commentaire devient une règle : la même remarque ne revient pas. Chaque pull request reste validée par un humain.
+Oui, c'est notre chemin critique. Trois réponses. La contribution est de la configuration : il n'y a pas de plomberie à relire. La machine vérifie avant l'humain : contrôles à l'écriture, CI, puis un agent relecteur qui rend un verdict « merge » ou « no merge » avant même l'ouverture de la pull request. Et chaque commentaire devient une règle : la même remarque ne revient pas. Chaque pull request reste validée par un humain.
 
 **« Comment un métier valide-t-il un code qu'il ne lit pas ? »**
 
-Il ne valide pas le code, il valide son résultat : ses chiffres, son application. Le diff du dictionnaire métier est le résumé du changement : trois lignes de définitions avant trois cents lignes de SQL. La pull request construit ses modèles dans un schéma à part, comparable à la production, et l'agent relecteur recalcule chaque chiffre par des requêtes indépendantes.
+Il ne valide pas le code, il valide son résultat : ses chiffres, son application. Le diff du dictionnaire métier est le résumé du changement : trois lignes de définitions avant trois cents lignes de SQL. Avant même l'ouverture de la pull request, le verdict de l'agent relecteur lui parle en langage courant. Puis la pull request construit ses modèles dans un schéma à part, comparable à la production.
 
 **« Qui est responsable quand le contributeur change de poste ? »**
 
@@ -384,7 +384,7 @@ Nous le faisons aussi, pour ceux qui consomment, et ça fonctionne très bien po
 
 **« Est-ce généralisable ? »**
 
-Pas partout, et c'est la slide 39. Dans une entreprise digital native, une petite équipe data qui sert tout le monde en conversationnel suffit souvent. Notre configuration est aussi particulière : tout est dans un seul repo, et c'est ce qui permet à un agent de tout relier. On peut commencer par le repo dbt, puis y ramener le reste.
+Je le crois, et c'est la slide 39. Des métiers qui n'ont jamais codé arrivent dans les repos de code, y compris dans les entreprises digital native. C'est l'une d'elles qui m'a inspiré : Taha Le Bras, chez Supabase, me racontait qu'un matin, le marketing avait fait une pull request dans son repo data, et que lui-même, le même jour, en avait fait une dans celui du produit. Ce qui change d'une entreprise à l'autre, c'est ce qu'on y construit. Notre particularité, c'est le mono-repo : il permet à un agent de tout relier. Mais on peut ouvrir d'abord le repo dbt, puis y ramener le reste.
 
 **« Pourquoi tout le monde n'est-il pas builder ? »**
 
@@ -407,8 +407,8 @@ C'est un continuum. Pour l'exploratoire et le léger, les artefacts suffisent, e
 ## À vérifier avant le jour J
 
 - **Le titre.** « Et si vos métiers construisaient la data platform ? » est une proposition : aligne-le sur celui du programme officiel.
-- **Les chiffres d'Anthropic** (21 %, 95 %, 65 %, juin 2026) viennent de ton article : revérifie la source.
-- **La phrase du village** (slide 3) est une traduction, attribuée « d'après Olga Berezovsky, *Data Analysis Journal* ». L'original, dans tes notes : « you need a village of analysts to make self-service work and keep it going ».
+- **Les chiffres d'Anthropic** (21 %, 95 %, 65 %) : vérifiés le 11 novembre dans l'article d'origine, « How Anthropic enables self-service data analytics with Claude » (3 juin 2026, claude.com/blog/how-anthropic-enables-self-service-data-analytics-with-claude). Formulations exactes : pas plus de 21 % sans skills ; plus de 95 % avec ; une dérive d'environ 95 % à environ 65 % en un mois.
+- **La phrase du village** (slide 3) est une traduction, attribuée « d'après Olga Berezovsky, *Data Analysis Journal* ». Vérifiée le 11 novembre : n° 329, « Self-Service Analytics Is Not Self-Service. But Don't Tell Anyone » (19 août 2026, dataanalysis.substack.com/p/self-service-analytics-is-not). L'original : « you need a village of analysts to make self-service work and keep it going ».
 - **Le nombre de magasins** n'apparaît plus nulle part, ni à l'écran ni dans le script. Attention à ne pas le citer à l'oral.
 - **Les 25 contributeurs.** Le graphique de la slide 18 montre 4 + 4 + 17.
 - **« Dix fois mieux »** (slide 11) est ta formule, pas une mesure.

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un dashboard montre, une data app agit : ce que nos métiers construisent sur la data platform | Unytics Blog</title>
+    <meta name="description" content="Chez Optic 2000, nous pensions que Streamlit servirait à afficher des graphiques. Les métiers en ont fait autre chose : des outils qui remplacent des SaaS, des front-ends au-dessus de SAP et de Salesforce, des agents embarqués. Ce que font ces data apps, ce qu'elles lisent et ce qu'elles écrivent, et ce qui les garde homogènes.">
+    <link rel="canonical" href="https://unytics.io/blog/fr/data-apps-beyond-dashboards/">
+
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://unytics.io/blog/data-apps-beyond-dashboards/">
+    <link rel="alternate" hreflang="fr" href="https://unytics.io/blog/fr/data-apps-beyond-dashboards/">
+    <link rel="alternate" hreflang="x-default" href="https://unytics.io/blog/data-apps-beyond-dashboards/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://unytics.io/blog/fr/data-apps-beyond-dashboards/">
+    <meta property="og:title" content="Un dashboard montre, une data app agit : ce que nos métiers construisent sur la data platform | Unytics Blog">
+    <meta property="og:description" content="Chez Optic 2000, nous pensions que Streamlit servirait à afficher des graphiques. Les métiers en ont fait autre chose : des outils qui remplacent des SaaS, des front-ends au-dessus de SAP et de Salesforce, des agents embarqués. Ce que font ces data apps, ce qu'elles lisent et ce qu'elles écrivent, et ce qui les garde homogènes.">
+    <meta property="og:site_name" content="Unytics">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://unytics.io/blog/fr/data-apps-beyond-dashboards/">
+    <meta name="twitter:title" content="Un dashboard montre, une data app agit : ce que nos métiers construisent sur la data platform | Unytics Blog">
+    <meta name="twitter:description" content="Chez Optic 2000, nous pensions que Streamlit servirait à afficher des graphiques. Les métiers en ont fait autre chose : des outils qui remplacent des SaaS, des front-ends au-dessus de SAP et de Salesforce, des agents embarqués. Ce que font ces data apps, ce qu'elles lisent et ce qu'elles écrivent, et ce qui les garde homogènes.">
+    <meta name="twitter:image" content="https://unytics.io/assets/unytics_social_image.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="https://unytics.io/assets/unytics_social_image.png">
+    <meta property="og:image:width" content="960">
+    <meta property="og:image:height" content="540">
+
+    <!-- Additional SEO -->
+    <meta name="author" content="Paul Marcombes">
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-YHunZhK65WvaJpQXfwUD_.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
+    
+</head>
+
+<body>
+    <a href="#content" class="skip-link">Aller au contenu principal</a>
+    <header>
+        <nav class="container">
+            <a href="/fr/" class="logo">Unytics</a>
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn active" data-lang="fr">FR</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/fr/">A propos d'Unytics</a></li>
+                <li><a href="https://unytics.io/book-meeting/" target="_blank" class="btn-primary">Appel Data Gratuit</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="content">
+        
+        <article class="blog-post">
+            <div class="container">
+                <div class="blog-post-topbar">
+                    <a href="/blog/fr/" class="blog-back-link">&larr; Blog</a>
+                    <button class="btn-secondary newsletter-open-btn">S'abonner à la Newsletter</button>
+                </div>
+                <div class="blog-post-header">
+                    <p class='blog-post-date'>2026-11-12</p>
+                    <h1>Un dashboard montre, une data app agit : ce que nos métiers construisent sur la data platform</h1>
+                </div>
+                <div class="blog-post-content">
+                    <p>Dans <a href="https://unytics.io/blog/fr/nobody-codes-by-hand/">Personne ne code à la main</a>, je racontais comment 25 personnes, en majorité des métiers, contribuent aujourd'hui à la data platform d'Optic 2000 sans écrire une ligne de code.</p>
+<p>Au départ, nous pensions qu'elles construiraient des dashboards : des graphiques au-dessus de Snowflake. Elles ont construit autre chose. Des outils qui remplacent des logiciels que nous payions. Des interfaces au-dessus de SAP et de Salesforce. Des data apps qui embarquent un agent conversationnel. C'est l'usage que nous avions le moins imaginé, et peut-être celui qui changera le plus la donne.</p>
+<p>Cet article décrit ce que sont ces <em>data apps</em>, ce qu'elles font exactement — ce qu'elles lisent, et ce qu'elles écrivent —, et ce qui les empêche de tourner au patchwork.</p>
+<hr />
+<h2>Pourquoi des data apps plutôt qu'un outil de BI</h2>
+<p>Nos data apps sont écrites en Python, avec Streamlit, dans le repository de la data platform. Ce choix n'allait pas de soi : en quittant son outil de BI historique, Optic 2000 avait d'abord retenu Tableau. Trois raisons nous ont fait changer.</p>
+<ul>
+<li><strong>Le temps passé.</strong> Notre équipe BI passait un temps phénoménal sur des tâches de clic-bouton, répétitives et laborieuses. En <em>vibe-codant</em> ses tableaux de bord avec un agent, elle obtient une bien meilleure expérience pour l'utilisateur final, en une fraction du temps.</li>
+<li><strong>Un produit, pas un outil interne.</strong> Nos utilisateurs sont d'abord des milliers de personnes en magasin, opticiens et directeurs de magasin. Un magasin doit être servi comme un client : nous lui devons un produit fini, pas un accès à un outil d'analyse.</li>
+<li><strong>Pas de licence par utilisateur.</strong> Donner ses indicateurs à un gérant de magasin ne coûte rien de plus, comme je l'expliquais dans <a href="https://unytics.io/blog/fr/optic-2000-independence/">mon article sur l'indépendance</a>.</li>
+</ul>
+<p>Une quatrième raison s'est imposée ensuite : une data app est du code, dans le même repository que les données qu'elle affiche. Un agent peut donc la construire, et la faire évoluer dans la même Pull Request que le modèle dbt ou la métrique dont elle a besoin.</p>
+<hr />
+<h2>Ce que les métiers ont construit</h2>
+<h3>Des outils qui remplacent des SaaS</h3>
+<ul>
+<li><strong>Le géomarketing.</strong> Nous payions un logiciel propriétaire, assez rigide, pour visualiser les zones de chalandise et de concession sur la carte de France. La personne qui en a la charge a entièrement recréé son outil. Il répond enfin à tous ses besoins, et nous supprimons une licence coûteuse.</li>
+<li><strong>Les liasses fiscales des magasins.</strong> Il fallait les ressaisir à la main chaque année, ou payer très cher un logiciel d'OCR. Une data app les lit désormais automatiquement, et un humain valide. Avec la même qualité.</li>
+</ul>
+<h3>Des front-ends pour nos back-ends</h3>
+<p>Nous n'avons aucune envie de remplacer SAP ou Salesforce : ce sont des back-ends robustes et standards. Mais leurs interfaces sont arides. Optic 2000 a été créé en 1969, et beaucoup de processus y reposent encore sur un export Excel, suivi d'heures de manipulations répétitives, avec un vrai risque d'erreur.</p>
+<p>Les métiers construisent donc des front-ends taillés pour leurs processus :</p>
+<ul>
+<li><strong>le suivi des équipes logistiques</strong>, construit par un chef de projet AMOA à partir des données de SAP ;</li>
+<li><strong>le cockpit du référentiel magasins</strong>, construit par son responsable pour repérer les incohérences dans Salesforce, comme deux dates d'ouverture qui se chevauchent lors d'un rachat ;</li>
+<li><strong>l'enrichissement du référentiel magasins</strong>, où un algorithme aide à compléter la fiche d'un magasin.</li>
+</ul>
+<p>Nous n'en sommes qu'au début, et les prochains mois serviront à transformer l'essai.</p>
+<h3>Des data apps qui embarquent des agents spécialisés</h3>
+<ul>
+<li><strong>Le bilan financier d'un magasin.</strong> Le directeur consulte son bilan et en discute avec un agent spécialisé en finance de l'optique, dont le <em>system prompt</em> est écrit pour ce sujet. Il se compare aux magasins similaires, apporte son contexte local, obtient des recommandations.</li>
+<li><strong>Un playground.</strong> Les utilisateurs y génèrent leurs propres analyses et leurs propres dashboards, en conversant, puis les enregistrent. La data app en héberge aujourd'hui des dizaines, créés par les utilisateurs eux-mêmes : durables, découvrables, partageables, et réunis au même endroit.</li>
+<li><strong>La planification d'alertes.</strong> Les utilisateurs configurent et planifient des alertes automatiques, branchées sur les indicateurs de la couche sémantique.</li>
+</ul>
+<p>Ces mêmes expertises sont aussi exposées par un serveur MCP et des skills : les magasins peuvent interroger leurs données depuis leur propre Claude ou leur propre ChatGPT. Dans tous les cas, les chiffres viennent de la même couche sémantique, et chacun ne voit que ses propres données.</p>
+<h3>Des outils pour la plateforme elle-même</h3>
+<p>La plateforme sert aussi à s'outiller elle-même :</p>
+<ul>
+<li><strong>un cockpit de suivi des Pull Requests</strong>, au-dessus de Bitbucket : qui doit relire quoi, et quelles exigences restent à satisfaire ;</li>
+<li><strong>un éditeur visuel de la couche sémantique</strong>, plus digeste que le YAML brut ;</li>
+<li><strong>un gestionnaire des droits d'accès</strong>, depuis lequel une poignée de managers décident qui peut ouvrir quelle data app.</li>
+</ul>
+<hr />
+<h2>« Agir » : ce que les data apps lisent, et ce qu'elles écrivent</h2>
+<p>« Une data app agit » ne veut pas dire que chaque data app écrit dans les systèmes de l'entreprise. Voici où nous en sommes, système par système.</p>
+<ul>
+<li><strong>Dans SAP, les data apps lisent.</strong> Elles n'y écrivent pas encore. Ce sera la prochaine étape, et elle demandera des garde-fous à la hauteur : des tests, des droits, une validation humaine.</li>
+<li><strong>Dans Salesforce, c'est la plateforme qui écrit, pas la data app.</strong> La data app d'enrichissement ne pousse rien elle-même dans Salesforce. C'est une fonction de la plateforme, planifiée chaque jour, qui y reporte un enrichissement quand il n'y figure pas encore. Un post-hook dbt écrit lui aussi dans Salesforce. Dans les deux cas, l'écriture passe par du code versionné, relu en Pull Request, et non par un bouton dans une interface.</li>
+<li><strong>Dans la plateforme elle-même, les data apps agissent déjà.</strong> Valider la lecture d'une liasse fiscale, planifier une alerte, enregistrer un dashboard, accorder un accès : ce sont des gestes de travail, pas des chiffres à lire.</li>
+</ul>
+<p>C'est le sens de la formule : un dashboard donne un chiffre à lire ; une data app prend en charge un morceau de processus.</p>
+<hr />
+<h2>Ce qui empêche le patchwork</h2>
+<p>Des data apps écrites par des personnes différentes, avec des agents : sans précaution, chacune aurait son style, ses chiffres et ses droits. Quatre choses l'évitent.</p>
+<ul>
+<li><strong>Des composants communs.</strong> L'équipe BI a créé elle-même une bibliothèque de composants — cartes d'indicateurs, tableaux, graphiques —, et nos skills imposent à l'agent de les utiliser. Des data apps écrites par des personnes différentes ressemblent à un seul et même produit.</li>
+<li><strong>Des chiffres définis ailleurs.</strong> Les data apps destinées aux magasins s'appuient à 100 % sur la couche sémantique : la logique d'une mesure est définie à un seul endroit, et la data app ne fait que l'appeler et l'afficher. Les mêmes chiffres partout, et une IA qui n'invente rien.</li>
+<li><strong>Une sécurité que la data app n'écrit pas.</strong> L'authentification est exigée avant qu'une requête n'atteigne la data app, le périmètre de chaque utilisateur est appliqué par la couche sémantique, et les accès se décident hors du repository. Un contributeur ne peut pas oublier un contrôle : il n'y en a aucun à écrire.</li>
+<li><strong>Une relecture avant la Pull Request.</strong> Avant même qu'une Pull Request soit ouverte, un agent relecteur vérifie que la data app respecte ces règles, et signale tout doublon avec une data app existante.</li>
+</ul>
+<p>Je détaille ces mécanismes dans <a href="https://unytics.io/blog/fr/boringly-simple-data-platform/">Ennuyeusement simple</a>, et la revue dans <a href="https://unytics.io/blog/fr/the-platform-that-learns/">La plateforme qui apprend</a>. L'IA ne conçoit pas chaque data app : elle assemble des briques.</p>
+<hr />
+<h2>Artefacts ou data apps dans Git : où placer le curseur ?</h2>
+<p>Un artefact, c'est une petite application — un dashboard, un tableau interactif, une page HTML — que l'assistant d'IA génère directement dans la conversation, à partir d'une simple demande. Claude, ChatGPT et la plupart des outils d'analyse conversationnelle en produisent désormais, et la pratique se répand vite chez les métiers : plus besoin d'attendre une équipe data pour avoir son propre écran.</p>
+<p>Ces artefacts progressent vite : ils se conservent, se partagent, et se brancheront demain sur les systèmes de l'entreprise. Aura-t-on encore besoin que des métiers vibe-codent des data apps dans un repository ?</p>
+<p>Nous y voyons un continuum plutôt qu'une alternative.</p>
+<ul>
+<li><strong>Pour l'exploratoire et le léger</strong>, un artefact suffit, et il est imbattable en vitesse. C'est le rôle de notre playground, qui donne en plus à ces artefacts un endroit où vivre : un dashboard né dans une conversation privée n'existe pour personne d'autre.</li>
+<li><strong>Pour ce qui touche aux processus critiques</strong> — ce qui doit être testé, gouverné, déployé sur l'infrastructure de l'entreprise, et à plus forte raison ce qui écrira un jour dans SAP —, nous voulons du code versionné dans Git et validé par Pull Request.</li>
+</ul>
+<hr />
+<h2>Ce qu'il faut en retenir</h2>
+<p>Nous pensions donner aux métiers un outil de dashboarding. Ils en ont fait un atelier : ils y remplacent des logiciels, y habillent SAP et Salesforce, y installent des agents. Une équipe data centrale n'aurait pas eu ces idées, parce qu'elle ne vit pas ces processus.</p>
+<p>Cela ne tient que parce que les data apps reposent sur le même socle que le reste de la plateforme : un seul repository, des composants communs, des chiffres définis une seule fois, et des écritures qui passent par du code relu.</p>
+<p>Posez-vous la question pour votre propre entreprise : <strong>combien de vos processus tiennent encore dans un export Excel ?</strong> Chacun est une data app qui attend son auteur.</p>
+<p><em>Cet article détaille une partie d'un récit plus large : <a href="https://unytics.io/blog/fr/self-service-analytics-builders/">Pourquoi vos métiers ne doivent pas être que des consommateurs d'IA (mais aussi des builders)</a>.</em></p>
+<hr />
+<p><em>Vos métiers jonglent entre un ERP, un CRM et des fichiers Excel ? <a href="https://unytics.io/book-meeting/">Parlons-en lors d'un échange data de 30 minutes</a>.</em></p>
+                </div>
+                <button class="btn-secondary newsletter-open-btn">S'abonner à la Newsletter</button>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/fr/#pain-points">Pièges</a>
+                    <a href="/fr/#services">Solutions</a>
+                    <a href="/fr/#data-applications">Cas Clients</a>
+                    <a href="/fr/#about">Offres</a>
+                    <a href="/blog/fr/">Blog</a>
+                </div>
+                <div class="footer-contact">
+                    <a href="#" class="copy-email" data-email="contact@unytics.io">contact@unytics.io</a>
+                    <a href="https://www.linkedin.com/in/paul-marcombes" target="_blank" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/unytics" target="_blank" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <p class="footer-copyright">&copy; 2026 Unytics. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Email copié dans le presse-papier !</div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletter-modal" class="newsletter-modal">
+        <div class="newsletter-modal-content">
+            <button class="newsletter-modal-close" aria-label="Close">&times;</button>
+            <iframe src="https://cdn.forms-content.sg-form.com/7a15104f-38d2-11f1-b0e1-1649d933d8bb" title="S'abonner à la Newsletter" scrolling="no"></iframe>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

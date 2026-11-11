@@ -33,14 +33,13 @@ All of Optic 2000's business logic lives in **a single Git repository**: data so
 For example, here is how we declare the needs of a processing function:
 
 ```yaml
-compute:
-  cpu: 256
-  memory: 512
-  timeout: 300
-schedule: "0 6 * * *"
+get_crm:
+  schedule: cron(0 4 * * ? *)
+  timeout: 600
+  memory: 2048
 ```
 
-This file describes *what* we want. It says nothing about *how*: today it is deployed on AWS; tomorrow it could be deployed elsewhere without being modified.
+These few lines describe *what* we want. They say nothing about *how*: today the function is deployed on AWS; tomorrow it could be deployed elsewhere without being modified.
 
 Vendors only provide the engine. The business logic — what has value and what is expensive to rebuild — stays with us.
 
@@ -70,7 +69,7 @@ Changing infrastructure vendors becomes a contained piece of work — rewriting 
 
 ## Floor 2 — Zero Proprietary BI
 
-We switched off the legacy BI tool without replacing it with another one.
+We switched off the legacy BI tool and, after a spell with Tableau, didn't replace it with any other proprietary BI tool.
 
 Our metrics are defined once, in a **semantic layer** that lives in the repository. Our dashboards are **open-source Streamlit applications** connected to that semantic layer. The result: no more per-seat licenses — giving a store manager access to their KPIs costs nothing extra — and apps that go beyond dashboards. *Dashboards are passive. Data Apps act.*
 

@@ -104,13 +104,12 @@
 <h2>Le principe : la configuration est un actif, le métal est une commodité</h2>
 <p>Toute la logique métier d'Optic 2000 vit dans <strong>un seul repository Git</strong> : les sources de données, les transformations, les définitions de métriques, les apps, les planifications. Elle y est décrite de façon déclarative, en YAML et en code, indépendamment de la technologie qui l'exécute.</p>
 <p>Par exemple, voici comment on déclare les besoins d'une fonction de traitement :</p>
-<pre><code class="language-yaml">compute:
-  cpu: 256
-  memory: 512
-  timeout: 300
-schedule: &quot;0 6 * * *&quot;
+<pre><code class="language-yaml">get_crm:
+  schedule: cron(0 4 * * ? *)
+  timeout: 600
+  memory: 2048
 </code></pre>
-<p>Ce fichier décrit <em>ce que</em> l'on veut. Il ne dit rien du <em>comment</em> : aujourd'hui, il est déployé sur AWS ; demain, il pourrait l'être ailleurs sans être modifié.</p>
+<p>Ces quelques lignes décrivent <em>ce que</em> l'on veut. Elles ne disent rien du <em>comment</em> : aujourd'hui, la fonction est déployée sur AWS ; demain, elle pourrait l'être ailleurs sans être modifiée.</p>
 <p>Les fournisseurs ne fournissent que le moteur. La logique métier — ce qui a de la valeur et ce qui coûte cher à reconstruire — reste chez nous.</p>
 <pre><code>┌────────────────────────────────────────────────────────┐
 │ IA : OpenWebUI, Claude, ChatGPT, Dust, modèle local    │  ← au choix
@@ -129,7 +128,7 @@ schedule: &quot;0 6 * * *&quot;
 <p>Changer de fournisseur d'infrastructure devient un chantier circonscrit — réécrire un module de déploiement — et non une migration de plateforme.</p>
 <hr />
 <h2>Étage 2 — Zéro BI propriétaire</h2>
-<p>Nous avons débranché l'outil de BI historique sans le remplacer par un autre.</p>
+<p>Nous avons débranché l'outil de BI historique et, après un passage par Tableau, nous ne l'avons remplacé par aucun autre outil de BI propriétaire.</p>
 <p>Nos métriques sont définies une seule fois, dans une <strong>couche sémantique</strong> qui vit dans le repository. Nos dashboards sont des <strong>applications Streamlit open source</strong>, connectées à cette couche sémantique. Résultat : plus de licence par utilisateur — donner ses KPIs à un gérant de magasin ne coûte rien de plus — et des apps qui vont au-delà du dashboard. <em>Les dashboards sont passifs. Les Data Apps agissent.</em></p>
 <p>Nos métriques ne dépendent pas non plus du warehouse. Selon la requête, la couche sémantique s'exécute sur Snowflake ou sur DuckDB, qui charge en mémoire les données d'un magasin pour répondre en quelques millisecondes. Les mêmes définitions, deux moteurs : la preuve concrète que nos métriques ne sont enfermées nulle part.</p>
 <p>Si chaque dashboard doit être codé, n'a-t-on pas recréé une file de tickets vers l'équipe data ? Non : 25 contributeurs vibe-codent ces apps, et beaucoup de besoins passent directement par des agents d'IA. Je le raconte dans <a href="https://unytics.io/blog/fr/nobody-codes-by-hand/">Personne ne code à la main</a>.</p>

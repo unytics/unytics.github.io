@@ -6,7 +6,7 @@ date: 2026-11-05
 
 # Ennuyeusement simple : comment 25 contributeurs modifient notre data platform presque sans relecture
 
-Dans [Personne ne code à la main](https://unytics.io/blog/fr/nobody-codes-by-hand/), je racontais comment le nombre de personnes contribuant à notre data platform chez Optic 2000 était passé de 4 à 25 — pour la plupart des profils métier, qui travaillent avec un agent de code. Je concluais sur une leçon que nous apprenions encore : avec 25 contributeurs, **la revue devient le chemin critique**. Une équipe plateforme de quatre personnes ne peut pas relire tout ce que produisent 25 personnes et leurs agents.
+Dans [Personne ne code à la main](https://unytics.io/blog/fr/nobody-codes-by-hand/), je racontais comment le nombre de personnes contribuant à notre data platform chez Optic 2000 était passé de 4 à 25 — pour la plupart des profils métier, qui travaillent avec un agent de code. Je concluais sur un constat : avec 25 contributeurs, **la revue devient le chemin critique**. Une équipe plateforme de quatre personnes ne peut pas relire tout ce que produisent 25 personnes et leurs agents.
 
 Chaque modification passe toujours par une Pull Request validée par un humain. Mais dans la plupart d'entre elles, il ne nous reste presque rien à relire. Non pas parce que nous faisons davantage confiance aux agents qu'avant, mais parce que nous avons conçu la plateforme pour qu'une erreur soit presque impossible à exprimer dans une contribution.
 
@@ -23,6 +23,8 @@ Une data platform contient deux sortes de code. La **configuration** dit *de quo
 Dans la plupart des plateformes, les deux sont entremêlées. Ajouter une source, c'est copier un module Terraform, ajouter une permission cloud, brancher une notification, déclarer une alerte. Chaque contribution touche à la plomberie, donc chaque revue doit vérifier la plomberie : cette permission est-elle trop large ? Cette règle va-t-elle entrer en collision avec une autre ? L'alerte est-elle branchée ? C'est une revue de spécialiste. Elle ne passe pas à l'échelle de 25 contributeurs, encore moins de leurs agents, qui écriront volontiers une policy parfaitement plausible donnant accès à tous les buckets.
 
 Nous avons fait le choix inverse : **les contributeurs n'écrivent que de la configuration, et la configuration ne peut dire que ce que la plomberie lui permet de dire.** Ce qu'une contribution ne peut pas exprimer, un relecteur n'a pas à le vérifier.
+
+Les équipes data connaissent déjà un outil construit ainsi : dbt. Vous écrivez un modèle SQL, et dbt gère pour vous l'incrémental et l'ordre d'exécution. Nous avons construit tout le repository de cette façon.
 
 C'est encore plus vrai avec les agents de code. Un agent reproduit ce qu'il voit dans le repository. Dans une plateforme où chaque pipeline est déployé un peu différemment, il a une douzaine de patterns au choix, et en prend un sans vous dire lequel. Dans une plateforme ennuyeuse, la trentième source ressemble exactement à la vingt-neuvième : l'agent copie la précédente, et il a raison.
 
@@ -222,72 +224,14 @@ Un contributeur obtient tout cela pour sa fonction sans en écrire une ligne.
 
 La configuration et la plomberie éliminent l'essentiel de la marge d'erreur. Ce qui reste — SQL, Python, data apps — est écrit par des agents. Pour cette partie, les règles doivent atteindre l'agent au moment où il agit, et la machine doit les vérifier.
 
-* **Des instructions à côté du code qu'elles régissent.** Un fichier d'instructions à la racine (`CLAUDE.md`, pour Claude Code) décrit la plateforme et ses règles non négociables. Chaque dossier principal — ingestion, fonctions, infrastructure, apps web — a le sien, que l'agent charge quand il y travaille. Les règles propres à un type de fichier — YAML, Terraform, Python, Markdown — ne se chargent que quand l'agent touche un tel fichier. Le contexte de l'agent contient les règles de ce qu'il fait, pas tout le règlement.
-* **Un skill pour chaque type de tâche.** Avant de toucher à un modèle dbt, l'agent charge le skill dbt : couches, nommage, tests, style SQL, et une porte de sortie avant de rendre la main. De même pour les data apps et pour la charte graphique. Et les contributeurs publient en une seule commande : un skill commite leur travail, le pousse, ouvre la Pull Request avec ses relecteurs et en rédige la description — y compris ce qu'un relecteur ne doit pas manquer, comme l'arrêt d'une alimentation de données.
-* **Des contrôles à l'écriture.** Quand l'agent modifie le dictionnaire métier ou la couche sémantique, un hook relance leur contrôle et renvoie toute violation à l'agent, qui la corrige avant qu'un humain ne voie le diff — comme décrit dans [Un nom, une définition](https://unytics.io/blog/fr/one-name-one-definition/).
+* **Des instructions à côté du code qu'elles régissent**, et un skill pour chaque type de tâche : le contexte de l'agent contient les règles de ce qu'il fait, pas tout le règlement.
+* **Des contrôles à l'écriture**, qui renvoient toute violation à l'agent avant qu'un humain ne voie le diff.
+* **Des agents relecteurs avant même l'ouverture de la Pull Request** : quand un humain la reçoit, l'essentiel est déjà propre.
+* **Une règle d'or** : chaque commentaire de revue devient une règle, pour que la même remarque ne revienne pas.
 
-<details>
-<summary><strong>Pour aller plus loin : comment les instructions sont organisées</strong></summary>
+Je détaille ces mécanismes, et les règles que nos incidents nous ont apprises, dans [La plateforme qui apprend](https://unytics.io/blog/fr/the-platform-that-learns/).
 
-<pre><code>CLAUDE.md                          vue d'ensemble de la plateforme et règles non négociables
-load/CLAUDE.md                     conventions d'ingestion
-functions/CLAUDE.md                conventions des fonctions
-infra/CLAUDE.md                    conventions d'infrastructure
-data_portal/CLAUDE.md              conventions des apps web
-.claude/rules/yml.md               chargé quand l'agent touche un fichier YAML
-.claude/rules/terraform.md         chargé quand il touche un fichier Terraform
-.claude/rules/python-standards.md  chargé quand il touche un fichier Python
-.claude/skills/dbt-model/          chargé avant de créer ou de modifier un modèle dbt
-.claude/skills/streamlit/          chargé avant de créer ou de modifier une data app
-.claude/skills/publish-pr/         commit, push et Pull Request en une seule commande
-.claude/skills/review-*/           revue d'une Pull Request, verdict MERGE ou NO MERGE
-.claude/settings.json              hooks</code></pre>
-
-<p>Un fichier de règles déclare dans un en-tête les fichiers auxquels il s'applique :</p>
-
-<pre><code class="language-markdown">---
-paths:
-  - "**/*.tf"
----
-
-# Terraform Style
-…</code></pre>
-
-</details>
-
-### Des règles sur les règles
-
-Les fichiers d'instructions dérivent comme toute documentation. Deux méta-règles les gardent affûtés. **Chaque correction devient une règle** : quand nous corrigeons l'agent, il inscrit la leçon dans le bon fichier d'instructions, avec sa raison technique, avant de continuer, et la même erreur ne se reproduit pas. Et **chaque règle vit à un seul endroit** : une règle métier est écrite une fois, dans les guides du portail data, et les instructions ne font qu'y renvoyer, car deux copies finissent par se contredire et l'agent suit la mauvaise.
-
-### Des règles apprises à la dure
-
-Plusieurs de nos règles les plus affûtées sont nées d'un incident. Volez-les sans scrupule :
-
-* **Ne jamais couper une alimentation encore lue.** Retirer la planification d'une fonction arrête d'un coup toutes les tables qu'elle alimente — et les lecteurs ne sont pas que des modèles dbt : certaines data apps lisent directement des tables brutes. Cherchez dans tout le repository, basculez d'abord les lecteurs, puis coupez.
-* **Jamais de sourdine avec une coupure.** Mettre en sourdine l'alerte de fraîcheur d'une table au moment où l'on cesse de l'alimenter masque précisément le signal qui révélerait l'erreur.
-* **Un modèle ne lit que des données déjà en production.** L'ingestion part dans une première Pull Request, et les modèles qui la lisent dans une seconde, une fois les données arrivées.
-* **Pas d'écriture en production comme effet de bord d'un changement de code.** Une migration de données se lance après le déploiement du code qui en a besoin, sur un feu vert explicite, après un essai à blanc : jusque-là, la production lit encore l'ancien format.
-* **Un changement qui ajoute quelque chose laisse tout le reste en l'état.** Un correctif repéré en chemin est proposé à part, jamais glissé dans le même diff : un relecteur qui approuve une nouvelle table ne doit pas approuver sans le savoir une modification de chiffres existants.
-
-Aucune de ces règles ne se voit dans un diff SQL. C'est précisément pour cela qu'elles sont écrites là où travaille l'agent, et que le skill de publication signale toute alimentation coupée dans la description de la Pull Request.
-
-### Des agents relecteurs avant les relecteurs humains
-
-Enfin, une contribution passe devant des agents relecteurs avant de passer devant nous. Deux skills de revue, l'un pour les modèles dbt, l'autre pour les data apps, lisent une Pull Request comme nous le ferions : les fichiers de règles sont leur checklist, et ils ne remontent que ce qui bloque — ce qui change un chiffre, un grain ou un nom de colonne, plante en production, touche aux droits d'accès ou à un fichier partagé par toutes les data apps, ou fait doublon avec une data app existante. Le style ne bloque jamais. Ils vérifient aussi les données : le relecteur dbt interroge les modèles construits par la Pull Request, et le relecteur des data apps recalcule par des requêtes indépendantes chaque chiffre qu'affiche la data app — les vrais bugs de nos revues de data apps passées ont tous été trouvés dans les données, pas dans le code. Si un contrôle ne peut pas tourner, le verdict n'est jamais un feu vert.
-
-Un verdict commence par un résumé en langage courant, écrit pour le contributeur, avant les détails techniques et les commentaires à poster sur la Pull Request (chiffres inventés) :
-
-```
-MERGE : NON, la carte « magasins actifs » affiche 120 magasins là où la définition en donne 100.
-
-1. Doublon : non.
-2. Contraire à nos pratiques ou à une règle métier : oui, 1 point :
-   - la carte compte tous les magasins ayant une vente ; la définition compte les magasins ouverts sur la période.
-3. Réinvente la roue : en partie — les cartes sont dessinées à la main au lieu d'utiliser la charte graphique.
-4. Merger : NON.
-```
-
-L'approbation humaine ne disparaît pas. Chaque Pull Request est toujours validée par une personne, et les responsables métier répondent toujours de leur domaine : c'est la gouvernance, le sujet de [Personne ne code à la main](https://unytics.io/blog/fr/nobody-codes-by-hand/). Mais la validation repose désormais sur un verdict qui a déjà vérifié les conventions et les chiffres. Ce qui reste à l'humain, c'est la question qu'aucune machine ne peut trancher : est-ce la bonne chose à construire ?
+L'approbation humaine ne disparaît pas : chaque Pull Request est toujours validée par une personne. Mais elle arrive après une première relecture, qui a déjà vérifié les conventions. Ce qui reste à l'humain, c'est la question qu'aucune machine ne peut trancher : est-ce la bonne chose à construire ?
 
 ---
 
@@ -309,7 +253,6 @@ Cet ennui a un prix, et c'est l'équipe plateforme qui le paie.
 * **La plomberie est plus difficile à écrire.** Tout déduire, prendre en charge chaque champ optionnel, fermer chaque chemin risqué : notre Terraform est plus dense que ne le serait un module par pipeline. Il est écrit une fois, mais il doit être bien écrit. Et quand une déduction sert aussi hors de Terraform — le portail a lui aussi besoin de savoir où tourne une fonction — les deux implémentations doivent changer ensemble.
 * **Il faut savoir dire non.** Chaque exception « juste pour cette fois » est un second pattern que les agents copieront. Quand un besoin ne rentre pas dans le cadre, la réponse est d'étendre la configuration pour tout le monde, ou de refuser.
 * **La configuration doit rester déclarative.** Un fichier YAML qui se met à contenir des conditions et des boucles devient un langage de programmation sans débogueur. La nôtre ne dit que *quoi* ; tout ce qui demande de la logique va dans la plomberie, sous forme de déduction.
-* **Les règles demandent du jardinage.** Les instructions grossissent à chaque correction. Garder chaque règle à un seul endroit, avec sa raison et sans exemple périmé, est un travail à part entière.
 
 ---
 
