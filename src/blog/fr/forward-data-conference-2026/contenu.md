@@ -256,7 +256,7 @@ Chez nous, la règle est stricte : un concept métier n'a qu'un seul nom de colo
 
 *À l'écran : Quatre étapes qui apparaissent une à une, puis la question finale.*
 
-Ensuite, la revue. La machine vérifie avant le relecteur. Dès qu'un modèle dbt est modifié, un contrôle vérifie que chaque colonne est déclarée dans le dictionnaire. **[clic]** Ce sont ensuite nos skills qui préparent la pull request : ils cochent la checklist de conformité avant même d'envoyer le code. **[clic]** Un agent relecteur relit le travail, avant l'ouverture de la pull request. **[clic]** Elle arrive déjà relue, assignée aux owners métiers des domaines ou des métriques modifiés. **[clic]** Ce qui reste à l'humain, c'est la seule question qu'aucune machine ne peut trancher : est-ce la bonne chose à construire ?
+Ensuite, la revue. La machine vérifie avant le relecteur. D'abord, l'agent code avec tous nos skills. **[clic]** Des hooks lui évitent les oublis : à chaque sauvegarde d'un modèle dbt, un script extrait les colonnes avec sqlglot et les cherche dans le dictionnaire métier. **[clic]** Le skill de PR lance deux revues, dbt et Streamlit, et itère avec l'utilisateur jusqu'au feu vert. **[clic]** La pull request arrive propre : le relecteur ne voit que ce que nos règles n'avaient pas prévu. **[clic]** Il lui reste la seule question qu'aucune machine ne peut trancher : est-ce la bonne chose à construire ?
 
 #### Slide 34 · Chaque commentaire de revue devient une règle · `18:36`
 
@@ -352,7 +352,7 @@ Des débuts de réponse, rédigés comme tu les dirais, et appuyés sur tes arti
 
 **« La revue des pull requests ne devient-elle pas le nouveau goulot d'étranglement ? »**
 
-Oui, c'est notre chemin critique. Trois réponses. La contribution est de la configuration : il n'y a pas de plomberie à relire. La machine vérifie avant l'humain : contrôles à l'écriture, CI, puis un agent relecteur qui rend un verdict « merge » ou « no merge » avant même l'ouverture de la pull request. Et chaque commentaire devient une règle : la même remarque ne revient pas. Chaque pull request reste validée par un humain.
+Oui, c'est notre chemin critique. Trois réponses. La contribution est de la configuration : il n'y a pas de plomberie à relire. La machine vérifie avant l'humain : des hooks à chaque sauvegarde, la CI, puis le skill de PR, qui fait tourner les agents de revue dbt et Streamlit jusqu'au feu vert, avant même l'ouverture de la pull request. Et chaque commentaire devient une règle : la même remarque ne revient pas. Chaque pull request reste validée par un humain.
 
 **« Comment un métier valide-t-il un code qu'il ne lit pas ? »**
 

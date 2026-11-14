@@ -2,12 +2,12 @@
 
 **Forward Data Conference · 16 November 2026 · 25 minutes · Paul Marcombes**
 
-English version of the talk script: 44 slides, 2,893 words to say. It is the same text as the speaker notes of the English deck, slide by slide. The talk itself is given in French: the French script (`src/blog/fr/forward-data-conference-2026/contenu.md`) is the reference.
+English version of the talk script: 44 slides, 2,894 words to say. It is the same text as the speaker notes of the English deck, slide by slide. The talk itself is given in French: the French script (`src/blog/fr/forward-data-conference-2026/contenu.md`) is the reference.
 
 ## How to use it
 
 - **[click]**: bring in the next element of the slide. The progressive builds exist in the HTML version; in the Google Slides backup, everything is shown at once.
-- The timestamps (`m:ss`) show when you reach each slide. They assume 140 words per minute, two seconds per slide change and a second and a half per click: **23:21 in total**. At 125 words per minute, count 25:50; at 155, 21:21.
+- The timestamps (`m:ss`) show when you reach each slide. They assume 140 words per minute, two seconds per slide change and a second and a half per click: **23:22 in total**. At 125 words per minute, count 25:51; at 155, 21:22.
 
 ## The storyline
 
@@ -31,10 +31,10 @@ The question to leave with the room: *in your company, who could become a builde
 | 3 · Business users become builders | 13–18 | 6:42 | 3:05 | 379 |
 | 4 · Beyond the dashboard | 19–21 | 9:46 | 1:57 | 248 |
 | 5 · The anti-chaos architecture | 22–28 | 11:43 | 3:41 | 465 |
-| 6 · The learning platform | 29–34 | 15:24 | 2:56 | 347 |
+| 6 · The learning platform | 29–34 | 15:24 | 2:56 | 348 |
 | 7 · Builders and consumers | 35–39 | 18:20 | 2:49 | 346 |
 | 8 · The human shift | 40–44 | 21:09 | 2:13 | 269 |
-| **Total** | **1–44** | | **23:21** | **2,893** |
+| **Total** | **1–44** | | **23:22** | **2,894** |
 
 ## Script
 
@@ -248,9 +248,9 @@ In our platform, the rule is strict: a business concept has only one column name
 
 *On screen: Four steps appearing one by one, then the final question.*
 
-Next, review. The machine checks before the reviewer. As soon as a dbt model changes, a check verifies that every column is declared in the dictionary. **[click]** Then our skills prepare the pull request: they tick the compliance checklist before the code is even pushed. **[click]** A reviewer agent reviews the work, before the pull request is opened. **[click]** It arrives already reviewed, assigned to the business owners of the domains or metrics that changed. **[click]** What’s left for the human is the one question no machine can settle: is this the right thing to build?
+Next, review. The machine checks before the reviewer. First, the agent codes with all our skills. **[click]** Hooks keep it from forgetting anything: every time a dbt model is saved, a script extracts the columns with sqlglot and looks them up in the business dictionary. **[click]** The PR skill runs two reviews, dbt and Streamlit, and iterates with the user until all is green. **[click]** The pull request arrives clean: the reviewer only sees what our rules didn’t foresee. **[click]** What’s left is the one question no machine can settle: is this the right thing to build?
 
-#### Slide 34 · Every review comment becomes a rule · `17:43`
+#### Slide 34 · Every review comment becomes a rule · `17:44`
 
 *On screen: A four-step loop, built click by click.*
 
@@ -276,7 +276,7 @@ We need to distinguish two populations. At headquarters, analytical profiles use
 
 For stores, AI comes in two forms. First, specialised agents, embedded in their applications. For example, a store manager looks at the store’s financial statement, and talks it through with an agent that is an expert in optical retail finance: they compare themselves with similar stores, bring in their local context, and get recommendations. **[click]** Second, the same expertise is exposed through an MCP server and skills: stores can query their data from their own Claude or their own ChatGPT. **[click]** In both cases, the numbers come from the same semantic layer, and everyone sees only their own data.
 
-#### Slide 38 · We moved the boundary · `19:43`
+#### Slide 38 · We moved the boundary · `19:44`
 
 *On screen: Three columns (Platformers, Builders, Consumers) and two rows: who holds each role. The orange line (the boundary) steps to the left. Under the Optic 2000 row, the 25 contributors as dots. Then the closing line.*
 
@@ -308,7 +308,7 @@ The first: start small, and iterate. Don’t open your Git repo to a hundred bus
 
 The second: the key isn’t technology, it’s people. Of our four data engineers, one works full time onboarding and coaching business users. **[click]** And our BI team’s job is changing. Freed from ticketing and point-and-click, it is becoming proactive. Often, business teams don’t just need one more number: they need an outside view to rethink the way they work. And in our case, the job is huge: it’s on this platform that the BI team will help transform all those processes that are still manual.
 
-#### Slide 43 · The village of analysts already exists: it’s your business teams · `22:35`
+#### Slide 43 · The village of analysts already exists: it’s your business teams · `22:36`
 
 *On screen: Blue slide: the key sentence, then the question to take home.*
 
@@ -335,7 +335,7 @@ Do not cut: slides 6 and 7 (the reversal), 18 (the village), 22 (the objection),
 
 **“Doesn’t pull request review become the new bottleneck?”**
 
-Yes, it’s our critical path. Three answers. Contributions are configuration: there is no plumbing to review. The machine checks before the human: checks on write, CI, then a reviewer agent that returns a “merge” or “no merge” verdict before the pull request is even opened. And every comment becomes a rule: the same remark doesn’t come back. Every pull request is still approved by a human.
+Yes, it’s our critical path. Three answers. Contributions are configuration: there is no plumbing to review. The machine checks before the human: hooks on every save, CI, then the PR skill, which runs the dbt and Streamlit review agents until all is green, before the pull request is even opened. And every comment becomes a rule: the same remark doesn’t come back. Every pull request is still approved by a human.
 
 **“How does a business user validate code they don’t read?”**
 
