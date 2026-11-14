@@ -2,12 +2,12 @@
 
 **Forward Data Conference · 16 November 2026 · 25 minutes · Paul Marcombes**
 
-English version of the talk script: 44 slides, 2,894 words to say. It is the same text as the speaker notes of the English deck, slide by slide. The talk itself is given in French: the French script (`src/blog/fr/forward-data-conference-2026/contenu.md`) is the reference.
+English version of the talk script: 44 slides, 2,896 words to say. It is the same text as the speaker notes of the English deck, slide by slide. The talk itself is given in French: the French script (`src/blog/fr/forward-data-conference-2026/contenu.md`) is the reference.
 
 ## How to use it
 
 - **[click]**: bring in the next element of the slide. The progressive builds exist in the HTML version; in the Google Slides backup, everything is shown at once.
-- The timestamps (`m:ss`) show when you reach each slide. They assume 140 words per minute, two seconds per slide change and a second and a half per click: **23:22 in total**. At 125 words per minute, count 25:51; at 155, 21:22.
+- The timestamps (`m:ss`) show when you reach each slide. They assume 140 words per minute, two seconds per slide change and a second and a half per click: **23:26 in total**. At 125 words per minute, count 25:55; at 155, 21:26.
 
 ## The storyline
 
@@ -32,9 +32,9 @@ The question to leave with the room: *in your company, who could become a builde
 | 4 · Beyond the dashboard | 19–21 | 9:46 | 1:57 | 248 |
 | 5 · The anti-chaos architecture | 22–28 | 11:43 | 3:41 | 465 |
 | 6 · The learning platform | 29–34 | 15:24 | 2:56 | 348 |
-| 7 · Builders and consumers | 35–39 | 18:20 | 2:49 | 346 |
-| 8 · The human shift | 40–44 | 21:09 | 2:13 | 269 |
-| **Total** | **1–44** | | **23:22** | **2,894** |
+| 7 · Builders and consumers | 35–39 | 18:20 | 2:53 | 348 |
+| 8 · The human shift | 40–44 | 21:13 | 2:13 | 269 |
+| **Total** | **1–44** | | **23:26** | **2,896** |
 
 ## Script
 
@@ -284,37 +284,37 @@ To sum up. In a data organisation, there are three roles: those who build the pl
 
 #### Slide 39 · A trend bigger than our case · `20:35`
 
-*On screen: Two cards: what is taking hold (business teams in code repos), then what changes from one company to the next.*
+*On screen: Three cards appearing one by one (product teams, marketing and GTM, every team), then the closing line.*
 
-This isn’t specific to a company like ours. Business users who have never written code are arriving in code repos. They open a ticket from Slack, and an agent codes it. They open a pull request in another team’s repo. Or they create their own repo. **[click]** Digital natives too: at Supabase, marketing opens pull requests in the data repo. Only what gets built changes: for us, processes that are still manual.
+This isn’t specific to a company like ours. In product teams, a Linear ticket gets created from Slack, and when it’s simple, an agent codes it on its own. **[click]** Digital marketing and go-to-market teams, who had never written code, are starting to have their own repo. **[click]** And teams also work in each other’s repos: at Supabase, marketing opens pull requests in the data repo. **[click]** Everywhere, the repo is becoming the whole company’s workshop.
 
 ### Part 8 · The human shift
 
-#### Slide 40 · To conclude, two messages · `21:09`
+#### Slide 40 · To conclude, two messages · `21:13`
 
 *On screen: Dark slide: the sentence alone.*
 
 To conclude, I’d like to share two messages with you.
 
-#### Slide 41 · First message: start small, and iterate · `21:15`
+#### Slide 41 · First message: start small, and iterate · `21:19`
 
 *On screen: A four-step staircase, built click by click.*
 
 The first: start small, and iterate. Don’t open your Git repo to a hundred business users on Monday morning. We started with our BI team. **[click]** Then a project manager, on a low-stakes topic. **[click]** Every guardrail I told you about was built step by step, with the first successes, and the first failures. **[click]** And we ourselves are at the beginning of the story on some topics, like the SAP front-ends: the coming months are about turning the attempt into a success.
 
-#### Slide 42 · Second message: the key is human · `21:56`
+#### Slide 42 · Second message: the key is human · `22:00`
 
 *On screen: “1 in 4”, four dots, one of them blue. Then the card about the BI team.*
 
 The second: the key isn’t technology, it’s people. Of our four data engineers, one works full time onboarding and coaching business users. **[click]** And our BI team’s job is changing. Freed from ticketing and point-and-click, it is becoming proactive. Often, business teams don’t just need one more number: they need an outside view to rethink the way they work. And in our case, the job is huge: it’s on this platform that the BI team will help transform all those processes that are still manual.
 
-#### Slide 43 · The village of analysts already exists: it’s your business teams · `22:36`
+#### Slide 43 · The village of analysts already exists: it’s your business teams · `22:39`
 
 *On screen: Blue slide: the key sentence, then the question to take home.*
 
 People say you need a whole village of analysts to make self-service work. I believe that village already exists, in each of your companies: it’s your business teams. So keep conversational AI for those who consume. **[click]** But when you get back, ask yourself one question: in your company, who could become a builder tomorrow? Today, our data team no longer builds simple dashboards. It co-builds the operational transformation of the company.
 
-#### Slide 44 · Thank you · `23:09`
+#### Slide 44 · Thank you · `23:13`
 
 *On screen: Thank you, your contact details, the QR code to LinkedIn, the four articles.*
 

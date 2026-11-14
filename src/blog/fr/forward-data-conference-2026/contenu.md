@@ -292,9 +292,9 @@ Si je résume. Dans une organisation data, il y a trois rôles : ceux qui constr
 
 #### Slide 39 · Une tendance qui dépasse notre cas · `21:28`
 
-*À l'écran : Deux cartes : ce qui s'installe (des métiers dans les repos de code), puis ce qui change d'une entreprise à l'autre.*
+*À l'écran : Trois cartes qui apparaissent une à une (équipes produit, marketing et GTM, toutes les équipes), puis la phrase de conclusion.*
 
-Ce n'est pas propre à une entreprise comme la nôtre. Des métiers qui n'ont jamais codé arrivent dans les repos de code. Ils ouvrent un ticket depuis Slack, et un agent le code. Ils font une pull request dans le repo d'une autre équipe. Ou ils créent leur propre repo. **[clic]** Les digital natives aussi : chez Supabase, le marketing ouvre des pull requests dans le repo data. Seul change ce qu'on y construit : chez nous, des processus encore manuels.
+Ce n'est pas propre à une entreprise comme la nôtre. Dans les équipes produit, un ticket Linear se crée depuis Slack, et quand c'est simple, un agent le code tout seul. **[clic]** Le marketing digital et le go-to-market, qui n'avaient jamais codé, se mettent à avoir leur propre repo. **[clic]** Et les équipes travaillent aussi dans les repos des autres : chez Supabase, le marketing ouvre des pull requests dans le repo data. **[clic]** Partout, le repo devient l'atelier de toute l'entreprise.
 
 ### Partie 8 · Le shift humain
 
