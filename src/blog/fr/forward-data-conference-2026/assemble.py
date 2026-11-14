@@ -31,6 +31,7 @@ DESCRIPTION = ("Talk de Paul Marcombes à la Forward Data Conference 2026 : chez
 UI = {
     "prev": "Slide précédente", "next": "Slide suivante", "notes": "Notes", "notes_aria": "Afficher les notes",
     "fullscreen": "Plein écran", "slide": "Slide",
+    "official_show": "Afficher le titre officiel", "official_hide": "Retirer le titre officiel",
     "hint": "&larr; &rarr; ou clic pour avancer &middot; N : notes de l’orateur &middot; F : plein écran",
 }
 # --- end of language-specific settings ---
@@ -80,6 +81,7 @@ html,body{margin:0;height:100%;background:#0B1120;overflow:hidden;font-family:'I
 #deck h1,#deck h2,#deck h3,#deck p,#deck ul,#deck ol{margin:0}
 #deck img{display:block}
 #deck aside{display:none}
+#deck section[data-optional]:not(.on){display:none}
 #deck [data-build-in]{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
 #deck [data-build-in].shown{opacity:1;transform:none}
 #deck .magic{transition:transform .7s cubic-bezier(.4,0,.2,1)}
@@ -106,6 +108,7 @@ __SLIDES__
 <button id="prev" aria-label="__UI_prev__">&larr;</button>
 <button id="next" aria-label="__UI_next__">&rarr;</button>
 <button id="nbtn" aria-label="__UI_notes_aria__">__UI_notes__</button>
+<button id="obtn" aria-pressed="false">__UI_official_show__</button>
 <button id="fbtn" aria-label="__UI_fullscreen__">__UI_fullscreen__</button>
 <a href="__ALT_URL__" hreflang="__ALT_LANG__">__ALT_LABEL__</a>
 <a href="__BLOG_URL__">Blog</a>
@@ -113,7 +116,8 @@ __SLIDES__
 <div id="hint">__UI_hint__</div>
 <script>
 (function(){
-  var deck=document.getElementById('deck'),S=[].slice.call(deck.querySelectorAll(':scope > section'));
+  var deck=document.getElementById('deck'),ALL=[].slice.call(deck.querySelectorAll(':scope > section'));
+  var OPT=ALL.filter(function(s){return s.hasAttribute('data-optional')}),S=ALL.filter(function(s){return OPT.indexOf(s)<0});
   var cur=0,step=0,notes=document.getElementById('notes');
   function builds(s){var o={};[].forEach.call(s.querySelectorAll('[data-build-in]'),function(e){var n=parseInt((e.getAttribute('data-build-in').match(/\\d+/)||[1])[0],10);(o[n]=o[n]||[]).push(e)});return Object.keys(o).map(Number).sort(function(a,b){return a-b}).map(function(k){return o[k]})}
   var B=S.map(builds);
@@ -155,6 +159,15 @@ __SLIDES__
   });
   document.getElementById('stage').addEventListener('click',function(e){if(e.target.closest('a'))return;(e.clientX<innerWidth/4?prev:next)();hideHint()});
   document.getElementById('next').onclick=function(){next()};document.getElementById('prev').onclick=function(){prev()};
+  var obtn=document.getElementById('obtn');if(!OPT.length)obtn.style.display='none';
+  obtn.onclick=function(){
+    var on=obtn.getAttribute('aria-pressed')!=='true';
+    OPT.forEach(function(s){s.classList.toggle('on',on)});
+    ALL.forEach(function(s){s.classList.remove('active')});
+    S=ALL.filter(function(s){return on||OPT.indexOf(s)<0});B=S.map(builds);
+    S[0].classList.add('active');cur=0;show(0,0,0);
+    obtn.setAttribute('aria-pressed',String(on));obtn.textContent=on?'__UI_official_hide__':'__UI_official_show__';
+  };
   document.getElementById('nbtn').onclick=toggleNotes;document.getElementById('fbtn').onclick=fs;
   var tx=null;addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
   addEventListener('touchend',function(e){if(tx===null)return;var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>40)(d<0?next:prev)();tx=null},{passive:true});
@@ -180,6 +193,10 @@ def main() -> None:
         if "/_blob/" in s:
             raise SystemExit(f"{sid}: image uploaded to the artifact with no copy in /assets/ (add it to BLOBS)")
         slides.append(s)
+    # Optional slide: the talk's official title, inserted before slide 1 by the "official title" button.
+    optional = DECK / "titre-officiel.html"
+    if optional.exists():
+        slides.insert(0, optional.read_text(encoding="utf-8").strip())
 
     page = PAGE
     for key, value in UI.items():
