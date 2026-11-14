@@ -2,12 +2,12 @@
 
 **Forward Data Conference · 16 novembre 2026 · 25 minutes · Paul Marcombes**
 
-Contenu oral du talk : 44 slides, 3 031 mots à dire. C'est le même texte que les notes de présentation du deck (version HTML et backup Google Slides), slide par slide.
+Contenu oral du talk : 45 slides, 3 072 mots à dire. C'est le même texte que les notes de présentation du deck (version HTML et backup Google Slides), slide par slide.
 
 ## Mode d'emploi
 
 - **[clic]** : fais apparaître l'élément suivant de la slide. Les apparitions progressives existent dans la version HTML ; dans le backup Google Slides, tout est affiché d'emblée.
-- Les repères de temps (`m:ss`) indiquent le moment où tu arrives sur la slide. Ils supposent 140 mots par minute, deux secondes par changement de slide et une seconde et demie par clic : **24:20 au total**. À 125 mots par minute, compte 26:56 ; à 155, 22:15.
+- Les repères de temps (`m:ss`) indiquent le moment où tu arrives sur la slide. Ils supposent 140 mots par minute, deux secondes par changement de slide et une seconde et demie par clic : **24:43 au total**. À 125 mots par minute, compte 27:21 ; à 155, 22:36.
 - Chronomètre une répétition à voix haute avant de couper ou d'ajouter quoi que ce soit : ton débit réel compte plus que ces estimations.
 - *(coupe possible)* : slide à sauter si tu es en retard. Voir « Si tu dépasses ».
 
@@ -16,7 +16,7 @@ Contenu oral du talk : 44 slides, 3 031 mots à dire. C'est le même texte que l
 1. Tout le monde veut du conversationnel pour **consommer** la donnée. Mais une IA ne répond juste que si le contexte est préparé et entretenu : l'équipe data reste le goulot d'étranglement.
 2. Chez Optic 2000, le conversationnel est **au début de la chaîne**, dans l'éditeur de code : ceux qui analysent construisent la plateforme en même temps.
 3. Résultat : de 4 à 25 contributeurs, en majorité des métiers, et des applications que l'équipe data n'aurait pas imaginées.
-4. Ça ne tourne pas au chaos, parce que la contribution est ennuyeuse (un seul repo, une seule façon de faire) et que la plateforme apprend de chaque revue.
+4. Ça ne tourne pas au chaos, parce que la plateforme est AI-ready : un agent n'a rien à y deviner, et une correction ne s'y fait qu'une fois. Six piliers : un seul repo, une contribution ennuyeuse, des briques standard, une seule définition par concept, une revue par les agents et une boucle d'apprentissage.
 5. Le conversationnel pour ceux qui consomment reste indispensable, pour les magasins. Et des métiers qui arrivent dans les repos de code, c'est une tendance qui dépasse notre cas : seul change ce qu'on y construit.
 
 La phrase à faire retenir : **le village d'analystes existe déjà, ce sont vos métiers.**
@@ -25,24 +25,30 @@ La question à laisser à la salle : *chez vous, qui pourrait devenir builder d�
 
 ### La structure
 
-- Une slide de plan (slide 8) après le premier acte : elle annonce trois temps, « ce qui s'est passé », « comment ça tient », « ce que nous en retenons ».
-- Chaque partie, de 02 à 08, s'ouvre sur une slide sombre : slides 9, 13, 19, 22, 29, 35 et 40. L'étiquette en haut de chaque slide rappelle le numéro de la partie.
+- Trois grands temps, annoncés par la slide de plan (slide 8) : A, « ce qui s'est passé » ; B, « comment ça tient » ; C, « ce que nous en retenons ». Le plan revient avant B et avant C (slides 22 et 35) : la partie qui commence est en bleu, celles qui sont terminées sont grisées.
+- Les sous-parties sont numérotées à l'intérieur de chaque temps : A1 à A3, B1 à B6, C1 et C2. L'étiquette en haut de chaque slide rappelle ce numéro. Celles de A et de C s'ouvrent sur une slide sombre : slides 9, 13, 19, 36 et 41.
+- La partie B s'ouvre sur l'objection (slide 23, sombre) : le chaos, et pourquoi la salle a raison de le craindre. La slide 24 y répond par une notion, la plateforme AI-ready, définie par deux promesses (l'agent n'a rien à deviner ; une correction ne se fait qu'une fois) et tenue par six piliers. Le terme revient une fois, slide 42 (« on ne naît pas AI-ready »). Chaque pilier est une sous-partie, de B1 à B6, que tu annonces à voix haute (« premier pilier », « deuxième pilier »…). En haut à droite de ses slides, six pastilles montrent où l'on en est.
 
 
 ## Plan et minutage
 
 | Partie | Slides | Début | Durée | Mots |
 | --- | --- | --- | --- | --- |
-| 0 · Ouverture | 1 | 0:00 | 0:36 | 80 |
-| 1 · Le paradoxe conversationnel | 2–8 | 0:36 | 3:58 | 491 |
-| 2 · La fin des silos | 9–12 | 4:34 | 2:19 | 295 |
-| 3 · Le métier devient builder | 13–18 | 6:53 | 3:20 | 414 |
-| 4 · Au-delà du dashboard | 19–21 | 10:13 | 2:04 | 265 |
-| 5 · L'architecture anti-chaos | 22–28 | 12:17 | 3:55 | 499 |
-| 6 · La plateforme qui apprend | 29–34 | 16:13 | 3:00 | 357 |
-| 7 · Builders et consumers | 35–39 | 19:13 | 2:52 | 354 |
-| 8 · Le shift humain | 40–44 | 22:05 | 2:16 | 276 |
-| **Total** | **1–44** | | **24:20** | **3 031** |
+| Ouverture | 1 | 0:00 | 0:36 | 80 |
+| Le paradoxe conversationnel | 2–8 | 0:36 | 3:58 | 491 |
+| A1 · La fin des silos | 9–12 | 4:34 | 2:19 | 295 |
+| A2 · Le métier devient builder | 13–18 | 6:53 | 3:20 | 414 |
+| A3 · Au-delà du dashboard | 19–21 | 10:13 | 2:04 | 265 |
+| B · Comment ça tient | 22–24 | 12:17 | 1:12 | 151 |
+| B1 · Un seul repo | 25 | 13:29 | 0:35 | 73 |
+| B2 · Une contribution ennuyeuse | 26–29 | 14:04 | 2:07 | 270 |
+| B3 · Des briques standard | 30 | 16:11 | 0:42 | 87 |
+| B4 · Une seule définition | 31–32 | 16:53 | 0:54 | 112 |
+| B5 · Une revue par les agents | 33 | 17:47 | 1:00 | 121 |
+| B6 · Une boucle d'apprentissage | 34 | 18:47 | 0:40 | 74 |
+| C1 · Builders et consumers | 35–40 | 19:26 | 3:01 | 363 |
+| C2 · Le shift humain | 41–45 | 22:27 | 2:16 | 276 |
+| **Total** | **1–45** | | **24:43** | **3 072** |
 
 ## Script
 
@@ -54,7 +60,7 @@ La question à laisser à la salle : *chez vous, qui pourrait devenir builder d�
 
 Bonjour à tous. Je m'appelle Paul Marcombes. J'ai passé six ans à construire la data chez Nickel, où l'équipe est passée de trois à plus de quarante personnes. Et depuis janvier, je suis Head of Data Platform chez Optic 2000, en indépendant. En dix mois, nous y avons reconstruit toute la plateforme data. Et je voudrais vous raconter ce qui nous a le plus surpris en chemin : ceux qui construisent aujourd'hui cette plateforme ne sont pas ceux que vous imaginez.
 
-### Partie 1 · Le paradoxe conversationnel
+### Le paradoxe conversationnel
 
 #### Slide 2 · Tout le monde veut parler à ses données · `0:36`
 
@@ -94,11 +100,11 @@ Nous, nous l'avons mis au tout début : directement dans l'éditeur de code, là
 
 #### Slide 8 · Au programme · `4:15`
 
-*À l'écran : Trois colonnes : ce qui s'est passé, comment ça tient, ce que nous en retenons.*
+*À l'écran : Trois cartes, A, B et C : ce qui s'est passé, comment ça tient, ce que nous en retenons.*
 
 Voici comment nous en sommes arrivés là. D'abord, ce qui s'est passé : notre équipe BI, puis les métiers, puis des applications que nous n'attendions pas. Ensuite, comment tout cela tient sans tourner au chaos. Et enfin, ce que nous en retenons.
 
-### Partie 2 · La fin des silos
+### A1 · La fin des silos
 
 #### Slide 9 · « Laisser des non-développeurs coder dans le repo ? » · `4:34`
 
@@ -124,7 +130,7 @@ En quittant MicroStrategy, Optic 2000 avait d'abord choisi Tableau. Et l'équipe
 
 Aujourd'hui, nous sommes passés à deux équipes : quatre data engineers, quatre BI, et plus de couche intermédiaire. La BI maîtrise toute la chaîne, du modèle dbt jusqu'à l'application. Et Streamlit est devenu notre outil de dashboarding, y compris pour des milliers d'utilisateurs en magasin. Les data engineers, eux, posent le cadre et accompagnent ceux qui construisent. Retenez ce déplacement : nous allons le retrouver, en plus grand.
 
-### Partie 3 · Le métier devient builder
+### A2 · Le métier devient builder
 
 #### Slide 13 · Pourquoi s'arrêter à l'équipe BI ? · `6:53`
 
@@ -162,7 +168,7 @@ Puis la confiance s'est installée, et la complexité a bondi. Exemple : le resp
 
 Résultat : en dix mois, le nombre de personnes qui contribuent à notre repo data est passé de 4 à 25. **[clic]** Quatre à la plateforme. **[clic]** Quatre à la BI. **[clic]** Et tous les autres sont des métiers. Aucune de ces vingt-cinq personnes ne code à la main. Vous vous souvenez du village d'analystes qu'il faudrait pour faire vivre le self-service ? Le voilà. Sauf que nous ne l'avons pas recruté : il était déjà dans l'entreprise.
 
-### Partie 4 · Au-delà du dashboard
+### A3 · Au-delà du dashboard
 
 #### Slide 19 · Plus de contributeurs, ce sont plus d'idées · `10:13`
 
@@ -182,147 +188,163 @@ La première, c'est le remplacement de SaaS. Au géomarketing, nous payions un l
 
 La seconde dynamique est encore plus stratégique : sublimer nos back-ends. Nous n'avons aucune envie de remplacer SAP ou Salesforce : ce sont des back-ends robustes et standards. En revanche, leurs interfaces sont arides. Optic 2000 a été créé en 1969, et nous avons encore énormément de processus manuels, notamment par-dessus SAP : des exports Excel, puis des heures de manipulations, répétitives, avec un vrai risque d'erreur. **[clic]** Aujourd'hui, nos métiers créent des front-ends Streamlit ergonomiques, branchés directement sur SAP et Salesforce, et taillés pour leurs processus. Nous n'en sommes qu'au début. Mais c'est l'usage que nous avions le moins imaginé, et peut-être celui qui changera le plus la donne. **[clic]** Un dashboard montre. Une data app agit.
 
-### Partie 5 · L'architecture anti-chaos
+### B · Comment ça tient
 
-#### Slide 22 · « C'est génial sur le papier. Mais… » · `12:17`
+#### Slide 22 · Au programme : deuxième temps · `12:17`
 
-*À l'écran : Slide sombre : l'objection de la salle.*
+*À l'écran : Le plan, de nouveau : la carte A est grisée, la carte B est en bleu.*
 
-À ce stade, je sais ce que pense la moitié de la salle. « C'est génial sur le papier. Mais laisser vingt ou trente métiers coder dans la data platform, ça va créer un plat de spaghettis impossible à maintenir. Et on passera plus de temps à relire leur code qu'à l'écrire nous-mêmes. » Vous avez raison de poser la question : c'est exactement celle que je me posais. Voici comment nous évitons le chaos.
+Voilà pour ce qui s'est passé. Deuxième temps : comment tout cela tient.
 
-#### Slide 23 · Premier pilier : un seul repo · `12:50`
+#### Slide 23 · « C'est génial sur le papier. Mais… » · `12:24`
+
+*À l'écran : Slide sombre : l'objection de la salle. Au clic, « Et elle a raison », et trois conséquences.*
+
+À ce stade, je sais ce que pense la moitié de la salle. « C'est génial sur le papier. Mais laisser vingt ou trente métiers coder dans la data platform, c'est le chaos assuré. » **[clic]** Et vous avez raison de le craindre. Partout, des équipes non techniques se sont mises à vibe-coder. Et souvent, cela a mal fini : du code que plus personne ne maintient, des risques de sécurité, et pour certaines entreprises, un retour en arrière payé au prix fort. C'était exactement ma crainte. Voici comment nous évitons le chaos.
+
+#### Slide 24 · Une plateforme AI-ready, en six piliers · `13:06`
+
+*À l'écran : Une liste de six lignes, de B1 à B6, sous les deux promesses d'une plateforme AI-ready : l'agent n'a rien à deviner (B1 à B4), une correction ne se fait qu'une fois (B5 et B6).*
+
+On parle partout de données AI-ready : prêtes à être consommées par une IA. Nous, nous parlons d'une plateforme AI-ready : prête à être construite par des métiers et leurs agents. Concrètement : un agent n'a rien à y deviner, et une correction ne s'y fait qu'une fois. Cela tient en six piliers.
+
+### B1 · Un seul repo
+
+#### Slide 25 · Toute la plateforme vit dans un seul repo · `13:29`
 
 *À l'écran : Un grand cadre « Mono-repo Git » qui contient les quatre briques, puis le trait « une conversation, une pull request ».*
 
 Premier pilier : le mono-repo. L'intégralité de notre plateforme — l'ingestion, les transformations dbt, la couche sémantique, les applications Streamlit — vit dans un seul et unique dépôt Git. Si nos outils étaient éclatés, aucun agent ne pourrait comprendre le contexte de bout en bout. **[clic]** Là, pendant qu'un métier analyse une donnée, l'IA peut remonter à la source, enrichir la transformation, ajouter la mesure et créer l'écran. Dans le même mouvement. Dans la même pull request.
 
-#### Slide 24 · Second pilier : une contribution ennuyeuse · `13:25`
+### B2 · Une contribution ennuyeuse
+
+#### Slide 26 · La configuration d'un côté, la plomberie de l'autre · `14:04`
 
 *À l'écran : Deux cartes : la configuration (claire), la plomberie (sombre). Puis la phrase du bas.*
 
-Second pilier : rendre le code le plus simple, le plus bête, le plus ennuyeux possible. Nous séparons radicalement deux choses. La configuration, qui dit de quoi le métier a besoin. Et la plomberie — le déploiement, la sécurité, la supervision — qui est écrite une seule fois, par l'équipe plateforme. Vous connaissez tous un outil qui fait ça : dbt. Vous écrivez un modèle SQL, et dbt gère pour vous l'incrémental et l'ordre d'exécution. Eh bien, dans notre repo, nous avons tout construit comme ça. **[clic]** Et ce qu'une contribution ne peut pas exprimer, un relecteur n'a pas à le vérifier.
+Deuxième pilier : rendre le code le plus simple, le plus bête, le plus ennuyeux possible. Nous séparons radicalement deux choses. La configuration, qui dit de quoi le métier a besoin. Et la plomberie — le déploiement, la sécurité, la supervision — qui est écrite une seule fois, par l'équipe plateforme. Vous connaissez tous un outil qui fait ça : dbt. Vous écrivez un modèle SQL, et dbt gère pour vous l'incrémental et l'ordre d'exécution. Eh bien, dans notre repo, nous avons tout construit comme ça. **[clic]** Et ce qu'une contribution ne peut pas exprimer, un relecteur n'a pas à le vérifier.
 
-#### Slide 25 · Une fonction : trois lignes de configuration · `14:10`
+#### Slide 27 · Une fonction : trois lignes de configuration · `14:49`
 
 *À l'écran : Le YAML de la fonction (timeout: 600) → « AWS Lambda ».*
 
 Un exemple. Pour créer une fonction, un contributeur écrit un script Python, sous un décorateur, et trois lignes de configuration : la planification, le timeout, la mémoire. C'est tout. Ici, le timeout est de dix minutes : la plateforme déploie la fonction sur une Lambda.
 
-#### Slide 26 · Une fonction : trois lignes de configuration (suite) · `14:30`
+#### Slide 28 · Une fonction : trois lignes de configuration (suite) · `15:10`
 
 *À l'écran : La même slide : le timeout passe à 3600, la cible devient « ECS Fargate » (transition animée). Puis la question à la salle.*
 
 Si le timeout dépasse quinze minutes, elle la déploie sur une tâche Fargate. Même script, même décorateur. Le contributeur n'a même pas à le savoir. Il n'existe pas de champ « backend » : ce qu'on ne peut pas déclarer, on ne peut pas le déclarer faux. **[clic]** Posez-vous la question pour votre propre plateforme : quand quelqu'un ajoute une source ou un traitement, combien de lignes de plomberie écrit-il ?
 
-#### Slide 27 · Une seule façon de faire chaque chose · `15:02`
+#### Slide 29 · Une seule façon de faire chaque chose · `15:41`
 
-*À l'écran : Slide sombre : la phrase seule.*
+*À l'écran : Trois cartes identiques, les sources n° 28, 29 et 30, puis la phrase.*
 
 Cet ennui a un effet direct sur l'IA. Dans un repo où chaque pipeline est écrit différemment, un agent doit deviner : il invente, il mélange les conventions. Dans un repo où il n'existe qu'une seule façon de faire chaque chose, il n'a qu'à copier le bon modèle. Chez nous, la trentième source ressemble exactement à la vingt-neuvième. L'agent copie la précédente. Et il a raison.
 
-#### Slide 28 · Dans les apps, l'IA assemble des briques · `15:32`
+### B3 · Des briques standard
+
+#### Slide 30 · Dans les apps, l'IA assemble des briques · `16:11`
 
 *À l'écran : À gauche, une app en blocs (cartes, graphique, tableau). À droite, deux cartes qui apparaissent.*
 
-Même logique dans les applications. **[clic]** L'équipe BI a créé elle-même une bibliothèque de composants standardisés — des cartes d'indicateurs, des tableaux, des graphiques — et nos skills imposent à l'IA de les utiliser. **[clic]** Quant aux chiffres, les applications destinées aux magasins s'appuient à 100 % sur la couche sémantique : la logique des mesures est définie à un seul endroit, et l'application ne fait que les appeler et les afficher. Résultat : des applications homogènes, les mêmes chiffres partout, et une IA qui n'invente rien. Elle assemble des briques.
+Troisième pilier, dans les applications : des briques standard. **[clic]** L'équipe BI a créé elle-même une bibliothèque de composants standardisés — des cartes d'indicateurs, des tableaux, des graphiques — et nos skills imposent à l'IA de les utiliser. **[clic]** Quant aux chiffres, les applications destinées aux magasins s'appuient à 100 % sur la couche sémantique : la logique des mesures est définie à un seul endroit, et l'application ne fait que les appeler et les afficher. Résultat : des applications homogènes, les mêmes chiffres partout, et une IA qui n'invente rien. Elle assemble des briques.
 
-### Partie 6 · La plateforme qui apprend
+### B4 · Une seule définition
 
-#### Slide 29 · Il faut aussi tenir dans la durée · `16:13`
-
-*À l'écran : Slide sombre : la phrase seule.*
-
-Éviter le chaos au premier jour, c'est une chose. Mais il faut aussi tenir dans la durée.
-
-#### Slide 30 · Restent deux dangers : la dérive et la revue · `16:22`
-
-*À l'écran : Deux cartes : la dérive, puis la revue.*
-
-Deux vrais dangers guettent. Le premier, c'est la dérive : dès qu'une même chose est décrite à plusieurs endroits, les versions finissent par diverger, et l'IA suit la mauvaise. **[clic]** Le second, c'est la revue. Quatre personnes ne peuvent pas relire tout ce que produisent vingt-cinq contributeurs et leurs agents. Si nous n'y prenons pas garde, nous avons juste déplacé le goulot d'étranglement, des tickets vers les pull requests.
-
-#### Slide 31 · Trois noms pour un même concept · `16:54`
+#### Slide 31 · Trois noms pour un même concept · `16:53`
 
 *À l'écran : Trois noms de colonnes, trois modèles dbt, trois descriptions.*
 
-Contre la dérive, nous avons des règles d'ingénierie draconiennes. Regardez ce que produit un projet dbt classique : « email » dans le staging, « email_client » dans la dimension, « customer_email » dans l'export. Trois noms, trois descriptions, pour un seul concept. Laquelle est la bonne ? Et laquelle l'agent recopiera-t-il dans le quatrième modèle ?
+Quatrième pilier : une seule définition par concept. Regardez ce que produit un projet dbt classique : « email » dans le staging, « email_client » dans la dimension, « customer_email » dans l'export. Trois noms, trois descriptions, pour un seul concept. Laquelle est la bonne ? Et laquelle l'agent recopiera-t-il dans le quatrième modèle ?
 
-#### Slide 32 · Un concept, un nom, une définition · `17:17`
+#### Slide 32 · Un concept, un nom, une définition · `17:15`
 
 *À l'écran : Il ne reste qu'un nom (transition animée) et sa définition. Puis trois chiffres : 1 800, 350, 0.*
 
 Chez nous, la règle est stricte : un concept métier n'a qu'un seul nom de colonne dans tout l'entrepôt, et un nom ne désigne qu'un seul concept. Du coup, nous ne documentons plus les modèles dbt un par un : nous documentons les noms, une seule fois, dans un dictionnaire unique. **[clic]** 1 800 noms de colonnes, 350 modèles dbt, et pas une seule description de colonne dans dbt.
 
-#### Slide 33 · La machine vérifie avant le relecteur · `17:48`
+### B5 · Une revue par les agents
+
+#### Slide 33 · La machine vérifie avant le relecteur · `17:47`
 
 *À l'écran : Quatre étapes qui apparaissent une à une, puis la question finale.*
 
-Ensuite, la revue. La machine vérifie avant le relecteur. D'abord, l'agent code avec tous nos skills. **[clic]** Des hooks lui évitent les oublis : à chaque sauvegarde d'un modèle dbt, un script extrait les colonnes avec sqlglot et les cherche dans le dictionnaire métier. **[clic]** Le skill de PR lance deux revues, dbt et Streamlit, et itère avec l'utilisateur jusqu'au feu vert. **[clic]** La pull request arrive propre : le relecteur ne voit que ce que nos règles n'avaient pas prévu. **[clic]** Il lui reste la seule question qu'aucune machine ne peut trancher : est-ce la bonne chose à construire ?
+Cinquième pilier : la revue par les agents. À quatre, nous ne pouvons pas relire vingt-cinq contributeurs et leurs agents : le goulot d'étranglement se déplacerait, des tickets vers les pull requests. Alors la machine vérifie avant le relecteur. D'abord, l'agent code avec tous nos skills. **[clic]** Des hooks lui évitent les oublis : à chaque sauvegarde d'un modèle dbt, un script extrait les colonnes avec sqlglot et les cherche dans le dictionnaire métier. **[clic]** Le skill de PR lance deux revues, dbt et Streamlit, et itère avec l'utilisateur jusqu'au feu vert. **[clic]** La pull request arrive propre : le relecteur ne voit que ce que nos règles n'avaient pas prévu. **[clic]** Il lui reste la seule question qu'aucune machine ne peut trancher : est-ce la bonne chose à construire ?
 
-#### Slide 34 · Chaque commentaire de revue devient une règle · `18:36`
+### B6 · Une boucle d'apprentissage
+
+#### Slide 34 · Chaque commentaire de revue devient une règle · `18:47`
 
 *À l'écran : Une boucle en quatre temps, qui se construit clic après clic.*
 
-Et voici notre règle d'or. Chaque fois qu'un ingénieur écrit un commentaire dans une pull request, **[clic]** il doit se demander : pourquoi l'IA a-t-elle laissé passer ça ? **[clic]** Et mettre à jour le skill, immédiatement. **[clic]** Le commentaire ne corrige pas seulement cette pull request : il corrige toutes les suivantes. **[clic]** Grâce à cette boucle, la plateforme apprend de chaque revue. Et nos pull requests deviennent quasiment instantanées à valider.
+Sixième pilier, pour tenir dans la durée : une boucle d'apprentissage. Notre règle d'or : chaque fois qu'un ingénieur écrit un commentaire dans une pull request, **[clic]** il doit se demander : pourquoi l'IA a-t-elle laissé passer ça ? **[clic]** Et mettre à jour le skill, immédiatement. **[clic]** Le commentaire ne corrige pas seulement cette pull request : il corrige toutes les suivantes. **[clic]** Grâce à cette boucle, la plateforme apprend de chaque revue. Et nos pull requests deviennent quasiment instantanées à valider.
 
-### Partie 7 · Builders et consumers
+### C1 · Builders et consumers
 
-#### Slide 35 · Faut-il mettre tout le monde dans VS Code ? · `19:13`
+#### Slide 35 · Au programme : troisième temps · `19:26`
+
+*À l'écran : Le plan, une dernière fois : les cartes A et B sont grisées, la carte C est en bleu.*
+
+Troisième et dernier temps : ce que nous en retenons.
+
+#### Slide 36 · Faut-il mettre tout le monde dans VS Code ? · `19:32`
 
 *À l'écran : Slide sombre : la question, puis la réponse au clic.*
 
 Est-ce que tout cela veut dire qu'il faut jeter l'analytique conversationnelle classique, et mettre tout le monde dans VS Code ? **[clic]** Absolument pas. La preuve : nous faisons les deux.
 
-#### Slide 36 · Deux populations, deux visages de l'IA · `19:28`
+#### Slide 37 · Deux populations, deux visages de l'IA · `19:48`
 
 *À l'écran : Deux cartes : au siège (ils construisent), puis en magasin (ils consomment).*
 
 Il faut distinguer deux populations. Au siège, les profils analytiques utilisent l'IA pour construire des actifs durables, dans le repo. **[clic]** Mais un opticien, dans l'un de nos magasins, n'ouvrira jamais un éditeur de code. Ça n'aurait aucun sens. Lui, il doit être servi comme un client.
 
-#### Slide 37 · En magasin, l'IA se consomme sous deux formes · `19:51`
+#### Slide 38 · En magasin, l'IA se consomme sous deux formes · `20:11`
 
 *À l'écran : Deux cartes reliées à une barre « Couche sémantique ».*
 
 Pour les magasins, l'IA prend deux formes. D'abord, des agents spécialisés, embarqués dans leurs applications. Par exemple, un directeur de magasin consulte son bilan financier, et dialogue avec un agent expert en finance de l'optique : il se compare aux magasins similaires, il apporte son contexte local, il obtient des recommandations. **[clic]** Ensuite, ces mêmes expertises sont exposées par un serveur MCP et des skills : les magasins peuvent interroger leurs données depuis leur propre Claude ou leur propre ChatGPT. **[clic]** Dans les deux cas, les chiffres viennent de la même couche sémantique, et chacun ne voit que ses propres données.
 
-#### Slide 38 · Nous avons déplacé la frontière · `20:38`
+#### Slide 39 · Nous avons déplacé la frontière · `20:57`
 
 *À l'écran : Trois colonnes (Platformers, Builders, Consumers) et deux lignes : qui tient chaque rôle. La ligne orange (la frontière) se décale vers la gauche. Sous la ligne Optic 2000, les 25 contributeurs en points. Puis la phrase finale.*
 
 Si je résume. Dans une organisation data, il y a trois rôles : ceux qui construisent la plateforme, ceux qui construisent dessus, et ceux qui consomment. Dans le modèle habituel, la frontière passe entre l'équipe data, qui construit, et les métiers, qui consomment. **[clic]** Nous, nous avons déplacé cette frontière. L'équipe plateforme construit le cadre. Et parmi ceux qui construisent dessus, il y a désormais plus de métiers que de data. **[clic]** Notre conviction : il faut mettre le plus de monde possible du côté des builders. Une équipe centrale ne détiendra jamais toute la connaissance de l'entreprise. Ce sont les métiers qui connaissent leurs données et leurs processus.
 
-#### Slide 39 · Une tendance qui dépasse notre cas · `21:28`
+#### Slide 40 · Une tendance qui dépasse notre cas · `21:47`
 
 *À l'écran : Trois cartes qui apparaissent une à une (équipes produit, marketing et GTM, toutes les équipes), puis la phrase de conclusion.*
 
 Ce n'est pas propre à une entreprise comme la nôtre. Dans les équipes produit, un ticket Linear se crée depuis Slack, et quand c'est simple, un agent le code tout seul. **[clic]** Le marketing digital et le go-to-market, qui n'avaient jamais codé, se mettent à avoir leur propre repo. **[clic]** Et les équipes travaillent aussi dans les repos des autres : chez Supabase, le marketing ouvre des pull requests dans le repo data. **[clic]** Partout, le repo devient l'atelier de toute l'entreprise.
 
-### Partie 8 · Le shift humain
+### C2 · Le shift humain
 
-#### Slide 40 · Pour conclure, deux messages · `22:05`
+#### Slide 41 · Pour conclure, deux messages · `22:27`
 
 *À l'écran : Slide sombre : la phrase seule.*
 
 Pour conclure, j'aimerais partager deux messages avec vous.
 
-#### Slide 41 · Premier message : commencer petit, et itérer · `22:10`
+#### Slide 42 · Premier message : commencer petit, et itérer · `22:33`
 
 *À l'écran : Un escalier de quatre marches, qui se construit clic après clic.*
 
-Le premier : commencez petit, et itérez. N'ouvrez pas votre dépôt Git à cent métiers lundi matin. Nous avons commencé par notre équipe BI. **[clic]** Puis une cheffe de projet, sur un sujet sans enjeu. **[clic]** Chaque garde-fou dont je vous ai parlé a été construit pas à pas, au fil des premiers succès, et des premiers ratés. **[clic]** Et nous sommes nous-mêmes au début de l'histoire sur certains sujets, comme les front-ends SAP : les prochains mois vont servir à transformer l'essai.
+Le premier : commencez petit, et itérez. N'ouvrez pas votre dépôt Git à cent métiers lundi matin. Nous avons commencé par notre équipe BI. **[clic]** Puis une cheffe de projet, sur un sujet sans enjeu. **[clic]** On ne naît pas AI-ready : chaque pilier a été construit pas à pas, au fil des premiers succès, et des premiers ratés. **[clic]** Et nous sommes nous-mêmes au début de l'histoire sur certains sujets, comme les front-ends SAP : les prochains mois vont servir à transformer l'essai.
 
-#### Slide 42 · Second message : la clé est humaine · `22:50`
+#### Slide 43 · Second message : la clé est humaine · `23:13`
 
 *À l'écran : « 1 sur 4 », quatre points dont un bleu. Puis la carte sur l'équipe BI.*
 
 Le second : la clé n'est pas technologique, elle est humaine. Sur nos quatre data engineers, une personne travaille à plein temps pour embarquer et accompagner les métiers. **[clic]** Et le métier de notre équipe BI est en train de muter. Libérée du ticketing et du clic-bouton, elle devient proactive. Souvent, les métiers n'ont pas juste besoin d'un chiffre de plus : ils ont besoin d'un regard extérieur pour repenser leur façon de travailler. Et chez nous, le chantier est immense : c'est sur cette plateforme que l'équipe BI va aider à transformer tous ces processus encore manuels.
 
-#### Slide 43 · Le village d'analystes existe déjà : ce sont vos métiers · `23:34`
+#### Slide 44 · Le village d'analystes existe déjà : ce sont vos métiers · `23:56`
 
 *À l'écran : Slide bleue : la phrase à retenir, puis la question à emporter.*
 
 On dit qu'il faut tout un village d'analystes pour faire vivre le self-service. Je crois que ce village existe déjà, dans chacune de vos entreprises : ce sont vos métiers. Alors gardez le conversationnel pour ceux qui consomment. **[clic]** Mais en rentrant, posez-vous une question : chez vous, qui pourrait devenir builder dès demain ? Aujourd'hui, notre équipe data ne construit plus de simples tableaux de bord. Elle co-construit la transformation opérationnelle de l'entreprise.
 
-#### Slide 44 · Merci · `24:07`
+#### Slide 45 · Merci · `24:30`
 
 *À l'écran : Merci, tes coordonnées, les quatre articles.*
 
@@ -333,15 +355,15 @@ Merci beaucoup. Tout ce que je vous ai raconté est détaillé dans quatre artic
 Par ordre de préférence :
 
 1. **Slide 16, « Tout commence par un petit sujet »** : sautable (gain : 0:20). Dis alors « tout a commencé par de petits sujets annexes » en arrivant sur la slide 17.
-2. **Slide 28, « des briques »** : sautable (gain : 0:41). La couche sémantique revient slide 37.
+2. **Slides 27 et 28, l'exemple de la fonction** : sautables ensemble (gain : 0:52). Le pilier B2 tient avec les slides 26 et 29.
 3. **Slide 20** : ne garde qu'un des deux exemples.
-4. **Slide 8, le plan** : passe-le en une phrase.
+4. **Slide 8, le plan** : passe-le en une phrase. Les slides 22 et 35 se disent déjà en une phrase.
 
-À ne pas couper : les slides 6 et 7 (le contre-pied), 18 (le village), 22 (l'objection), 34 (la règle d'or), 39 (une tendance qui dépasse notre cas) et 43 (le message).
+À ne pas couper : les slides 6 et 7 (le contre-pied), 18 (le village), 23 (l'objection), 24 (les six piliers), 34 (la règle d'or), 40 (une tendance qui dépasse notre cas) et 44 (le message). Ne saute pas non plus un pilier entier : la liste en annonce six. La slide 30, « des briques », n'est donc plus sautable ; au besoin, dis-la en deux phrases, la couche sémantique revient slide 38.
 
 ## Si tu es en avance
 
-- **Après la slide 33** : dis que cet ennui a un prix, payé par l'équipe plateforme. La plomberie est plus difficile à écrire, il faut savoir refuser les exceptions « juste pour cette fois », et les règles demandent un jardinage permanent (ton article *Ennuyeusement simple*). La slide correspondante a été retirée pour tenir les 25 minutes.
+- **Après la slide 34**, une fois les six piliers passés : dis que cet ennui a un prix, payé par l'équipe plateforme. La plomberie est plus difficile à écrire, il faut savoir refuser les exceptions « juste pour cette fois », et les règles demandent un jardinage permanent (ton article *Ennuyeusement simple*). La slide correspondante a été retirée pour tenir les 25 minutes.
 - **Slide 3** : chez Anthropic, près de 90 % des pull requests qui touchent un modèle de données embarquent une mise à jour de skill dans le même diff (ton article *Un nom, une définition*).
 - **Slide 21** : cite d'autres apps nées sur la plateforme, comme le cockpit de suivi des pull requests au-dessus de Bitbucket, ou l'éditeur visuel de la couche sémantique.
 - **Slide 34** : raconte une règle « apprise à la dure », par exemple « ne jamais couper une alimentation encore lue » (ton article *Ennuyeusement simple*).
@@ -384,7 +406,7 @@ Nous le faisons aussi, pour ceux qui consomment, et ça fonctionne très bien po
 
 **« Est-ce généralisable ? »**
 
-Je le crois, et c'est la slide 39. Des métiers qui n'ont jamais codé arrivent dans les repos de code, y compris dans les entreprises digital native. C'est l'une d'elles qui m'a inspiré : Taha Le Bras, chez Supabase, me racontait qu'un matin, le marketing avait fait une pull request dans son repo data, et que lui-même, le même jour, en avait fait une dans celui du produit. Ce qui change d'une entreprise à l'autre, c'est ce qu'on y construit. Notre particularité, c'est le mono-repo : il permet à un agent de tout relier. Mais on peut ouvrir d'abord le repo dbt, puis y ramener le reste.
+Je le crois, et c'est la slide 40. Des métiers qui n'ont jamais codé arrivent dans les repos de code, y compris dans les entreprises digital native. C'est l'une d'elles qui m'a inspiré : Taha Le Bras, chez Supabase, me racontait qu'un matin, le marketing avait fait une pull request dans son repo data, et que lui-même, le même jour, en avait fait une dans celui du produit. Ce qui change d'une entreprise à l'autre, c'est ce qu'on y construit. Notre particularité, c'est le mono-repo : il permet à un agent de tout relier. Mais on peut ouvrir d'abord le repo dbt, puis y ramener le reste.
 
 **« Pourquoi tout le monde n'est-il pas builder ? »**
 
@@ -398,11 +420,11 @@ C'est un continuum. Pour l'exploratoire et le léger, les artefacts suffisent, e
 
 À utiliser seulement si le talk est passé avant le tien, et s'il a bien dit ce que tes notes en retiennent.
 
-- **Juliette Duizabo**, une plateforme « boringly reliable », une seule façon de faire : à citer slide 24 ou 27.
+- **Juliette Duizabo**, une plateforme « boringly reliable », une seule façon de faire : à citer slide 26 ou 29.
 - **Steve Buckingham** (Back Market), « the business builds things you never planned » : à citer slide 19.
 - **Nicolas Martignole** (Back Market), 300 personnes qui codent dans VS Code, mais surtout des développeurs : à citer slide 14, pour marquer la différence. Chez vous, ce sont des métiers.
 - **Medhi Ouazza**, des agents qui construisent en plus de consommer : à citer slide 7.
-- **Alexis Blandin** (Jolimoi), « on n'a plus de titres, on prend des responsabilités » : à citer slide 38.
+- **Alexis Blandin** (Jolimoi), « on n'a plus de titres, on prend des responsabilités » : à citer slide 39.
 
 ## À vérifier avant le jour J
 
@@ -412,4 +434,6 @@ C'est un continuum. Pour l'exploratoire et le léger, les artefacts suffisent, e
 - **Le nombre de magasins** n'apparaît plus nulle part, ni à l'écran ni dans le script. Attention à ne pas le citer à l'oral.
 - **Les 25 contributeurs.** Le graphique de la slide 18 montre 4 + 4 + 17.
 - **« Dix fois mieux »** (slide 11) est ta formule, pas une mesure.
+- **Le chaos chez les autres** (slide 23) : tu dis que des équipes non techniques ont vibe-codé partout, que cela a souvent mal fini, et que certaines entreprises ont fait machine arrière au prix fort. C'est ton constat, sans source à l'écran : aie un exemple précis en tête, on te le demandera.
+- **« AI-ready »** (slide 24) : tu donnes au terme un sens différent de celui du marché. Dis la définition telle quelle, en deux promesses, sinon la salle entend le mot des éditeurs.
 - **Les exemples internes** (géomarketing, liasses fiscales, logistique et SAP, référentiel magasins) : vérifie qu'Optic 2000 est d'accord pour qu'ils soient cités.

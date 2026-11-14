@@ -29,19 +29,20 @@
   "idees",
   "saas",
   "backends",
+  "plan-b",
   "objection",
+  "piliers",
   "monorepo",
   "ennui",
   "lambda",
   "fargate",
   "pattern",
   "briques",
-  "div-apprend",
-  "dangers",
   "noms",
   "dictionnaire",
   "machine",
   "regle-or",
+  "plan-c",
   "div-consumers",
   "deux-ia",
   "magasins",
@@ -75,16 +76,12 @@
    "start": "idees"
   },
   "anti-chaos": {
-   "description": "L’architecture anti-chaos : un seul repo, une contribution ennuyeuse.",
-   "start": "objection"
-  },
-  "apprend": {
-   "description": "La plateforme qui apprend : un nom par concept, la machine vérifie, chaque commentaire devient une règle.",
-   "start": "div-apprend"
+   "description": "Comment ça tient : une plateforme AI-ready en six piliers, du repo unique à la boucle d’apprentissage.",
+   "start": "plan-b"
   },
   "consumers": {
    "description": "Builders et consumers : deux populations, deux usages de l’IA.",
-   "start": "div-consumers"
+   "start": "plan-c"
   },
   "humain": {
    "description": "Le shift humain : commencer petit, accompagner, et la question à emporter.",
